@@ -1,0 +1,40 @@
+@import '../../scss/variables.scss';
+
+.block {
+    background-color: $white;
+    width: 100%;
+    box-shadow: 0px 4px 4px rgba(230, 230, 230, 0.25);
+    border-radius: 10px;
+
+    &__content {
+        padding: 18px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            h2 {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 135%;
+                color: $primary;
+            }
+
+            &__icon {
+                width: 28px;
+                height: 28px;
+                background-color: $primary;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        &__right {}
+    }
+}

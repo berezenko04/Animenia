@@ -64,12 +64,12 @@ const Footer: React.FC = () => {
                             ))}
                         </div>
                     </div>
-                    <button className={styles.footer__up}>
-                        <ArrowTopIcon />
-                    </button>
-                </div>
+                    <button className={styles.footer__up} onClick={() => window.scrollTo(0, 0)}>
+                    <ArrowTopIcon />
+                </button>
             </div>
-        </footer>
+        </div>
+        </footer >
     )
 }
 

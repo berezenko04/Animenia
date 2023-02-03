@@ -1,5 +1,9 @@
 @import './scss/reset.scss';
 
+html {
+    scroll-behavior: smooth;
+}
+
 .container {
     max-width: 1240px;
     width: 100%;
