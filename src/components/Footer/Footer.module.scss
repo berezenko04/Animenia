@@ -1,0 +1,104 @@
+@import '../../scss/variables';
+
+.footer {
+    padding: 50px 0 60px;
+    background-color: $white;
+
+    h3 {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        color: $primary;
+    }
+
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        &__copyright {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            p {
+                font-weight: 300;
+                font-size: 14px;
+                line-height: 16px;
+                color: $thirty;
+            }
+        }
+
+        &__socials {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+    }
+
+    &__categories {
+        display: flex;
+        justify-content: space-between;
+        gap: 120px;
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            ul {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                a {
+                    color: $secondary;
+                    font-size: 16px;
+                    line-height: 18px;
+                    transition: all .2s ease-in-out;
+
+                    &:hover {
+                        color: $primary;
+                    }
+                }
+            }
+        }
+    }
+
+    &__about {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 350px;
+        width: 100%;
+
+        &__text {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            p {
+                font-size: 14px;
+                line-height: 18px;
+                color: $secondary;
+            }
+        }
+    }
+
+    &__up {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $primary;
+        border-radius: 10px;
+    }
+}

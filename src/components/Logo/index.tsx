@@ -1,8 +1,10 @@
-import { ReactComponent as LogoIcon } from '../../assets/icons/logo.svg'
+import { Link } from 'react-router-dom'
+
+import styles from './Logo.module.scss'
 
 const Logo: React.FC = () => {
     return (
-        <LogoIcon />
+        <Link to='/Animenia/' className={styles.logo}>Animenia</Link>
     )
 }
 
