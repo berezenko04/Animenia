@@ -4,6 +4,7 @@ import './App.scss'
 
 import Layout from './layouts/MainLayout'
 import Home from './pages/Home'
+import Login from './pages/Login'
 import Register from './pages/Register'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path='/Animenia/' element={<Layout />}>
           <Route path='' element={<Home />} />
           <Route path='register' element={<Register />} />
+          <Route path='login' element={<Login />} />
         </Route>
       </Routes>
     </div>

@@ -93,6 +93,11 @@
         a {
             line-height: 135%;
             color: $secondary;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                color: $primary;
+            }
         }
     }
 }
