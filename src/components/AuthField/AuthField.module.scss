@@ -1,0 +1,24 @@
+@import '../../scss/variables.scss';
+
+.input {
+    background-color: $white;
+    border-radius: 10px;
+    width: 100%;
+
+    &__content {
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    input {
+        width: 100%;
+    }
+}

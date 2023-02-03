@@ -1,0 +1,38 @@
+@import '../../scss/variables.scss';
+
+.page {
+    background-image: url('../../assets/img/bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &__wrapper {
+        height: calc(100vh - 90px);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__form {
+        padding: 40px 95px 60px;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        max-width: 540px;
+        width: 100%;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        h1 {
+            font-size: 38px;
+            line-height: 135%;
+            color: $secondary;
+            font-weight: 400;
+        }
+    }
+}

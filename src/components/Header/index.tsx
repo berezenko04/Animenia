@@ -17,30 +17,32 @@ const Header: React.FC = () => {
 
     return (
         <header className={styles.header}>
-            <div className={styles.header__wrapper}>
-                <Link to='/Animenia'>
-                    <Logo />
-                </Link>
-                <nav>
-                    <ul className={styles.nav__links}>
-                        {links.map((link, index) => (
-                            <li key={index} className={styles.nav__links__item}>
-                                <Link to=''>{link}</Link>
-                                {links.slice(1, 4).includes(link) && <ArrowDownIcon />}
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-                <div className={styles.header__search}>
-                    <div className={styles.header__search__content}>
-                        <SearchIcon />
-                        <input type="text" placeholder='Search...' />
+            <div className='container'>
+                <div className={styles.header__wrapper}>
+                    <Link to='/Animenia'>
+                        <Logo />
+                    </Link>
+                    <nav>
+                        <ul className={styles.nav__links}>
+                            {links.map((link, index) => (
+                                <li key={index} className={styles.nav__links__item}>
+                                    <Link to=''>{link}</Link>
+                                    {links.slice(1, 4).includes(link) && <ArrowDownIcon />}
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                    <div className={styles.header__search}>
+                        <div className={styles.header__search__content}>
+                            <SearchIcon />
+                            <input type="text" placeholder='Search...' />
+                        </div>
                     </div>
-                </div>
-                <div className={styles.header__userBlock}>
-                    <div className={styles.header__userBlock__buttons}>
-                        <button className={styles.header__userBlock__buttons__theme}><MoonIcon /></button>
-                        {auth ? '' : <Link to='/Animenia/login' className={styles.header__userBlock__buttons__auth}><ProfileIcon /></Link>}
+                    <div className={styles.header__userBlock}>
+                        <div className={styles.header__userBlock__buttons}>
+                            <button className={styles.header__userBlock__buttons__theme}><MoonIcon /></button>
+                            {auth ? '' : <Link to='/Animenia/login' className={styles.header__userBlock__buttons__auth}><ProfileIcon /></Link>}
+                        </div>
                     </div>
                 </div>
             </div>
