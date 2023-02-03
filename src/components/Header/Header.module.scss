@@ -1,0 +1,97 @@
+@import '../../scss/variables.scss';
+
+.header {
+    background-color: $white;
+    padding: 25px 0;
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+    }
+
+    &__search {
+        background: #F6F6F6;
+        border-radius: 10px;
+
+        &__content {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            input {
+                font-size: 14px;
+                line-height: 135%;
+                color: $secondary;
+
+                &::placeholder {
+                    font-size: 12px;
+                    line-height: 135%;
+                    color: $secondary;
+                }
+
+                &:focus::placeholder {
+                    color: transparent;
+                }
+            }
+
+        }
+    }
+
+    &__userBlock {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        &__buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            &__theme {
+                width: 22px;
+                height: 22px;
+            }
+
+            &__auth {
+                background-color: $mainBg;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+    }
+}
+
+
+.nav__links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        a {
+            line-height: 135%;
+            color: $secondary;
+        }
+    }
+}
