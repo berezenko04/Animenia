@@ -1,0 +1,62 @@
+@import '../../scss/variables.scss';
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    &__main {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        &__head {
+
+            &__title {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 10px;
+
+                h3 {
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 135%;
+                    max-width: 190px;
+                    width: 100%;
+                }
+
+                &__default {
+                    color: $secondary;
+                }
+
+                &__active {
+                    color: $primary;
+                }
+
+                .icon {
+                    height: 20px;
+                    width: 20px;
+                    transition: transform .3s ease-in;
+
+                    &__active {
+                        path {
+                            fill: $primary;
+                        }
+
+                        transform: rotate(180deg);
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 135%;
+        color: $thirty;
+    }
+}

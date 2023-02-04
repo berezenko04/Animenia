@@ -19,9 +19,7 @@ const Header: React.FC = () => {
         <header className={styles.header}>
             <div className='container'>
                 <div className={styles.header__wrapper}>
-                    <Link to='/Animenia'>
-                        <Logo />
-                    </Link>
+                    <Logo />
                     <nav>
                         <ul className={styles.nav__links}>
                             {links.map((link, index) => (

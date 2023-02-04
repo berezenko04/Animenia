@@ -18,13 +18,11 @@ const AuthField: React.FC<AuthFieldProps> = ({ type, placeholder, icon }) => {
 
     return (
         <div className={styles.input}>
-            <div className={styles.input__content}>
-                <div className={styles.input__content__icon}>
-                    {icon}
-                </div>
-                <input type={type === 'password' ? (visible ? 'text' : 'password') : type} placeholder={placeholder} required />
-                {type === 'password' && <button type='button' onClick={() => setVisible(!visible)}>{visible ? <VisibleIcon /> : <HideIcon />}</button>}
+            <div className={styles.input__icon}>
+                {icon}
             </div>
+            <input type={type === 'password' ? (visible ? 'text' : 'password') : type} placeholder={placeholder} required />
+            {type === 'password' && <button type='button' onClick={() => setVisible(!visible)}>{visible ? <VisibleIcon /> : <HideIcon />}</button>}
         </div>
     )
 }

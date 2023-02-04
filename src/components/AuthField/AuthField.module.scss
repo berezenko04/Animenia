@@ -4,23 +4,20 @@
     background-color: $white;
     border-radius: 10px;
     width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
 
-    &__content {
-        padding: 15px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        width: 100%;
+    button {
+        width: 24px;
+        height: 24px;
+    }
 
-        button {
-            width: 24px;
-            height: 24px;
-        }
-
-        &__icon {
-            width: 24px;
-            height: 24px;
-        }
+    &__icon {
+        width: 24px;
+        height: 24px;
     }
 
     input {

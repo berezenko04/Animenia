@@ -6,10 +6,12 @@ import AuthField from '../../components/AuthField'
 import { ReactComponent as UserIcon } from '../../assets/icons/profile.svg'
 import { ReactComponent as UnlockIcon } from '../../assets/icons/unlock.svg'
 import AuthButton from '../../components/AuthButton'
+import Header from '../../components/Header'
 
 const Login: React.FC = () => {
     return (
         <div className={styles.page}>
+            <Header />
             <div className="container">
                 <div className={styles.page__wrapper}>
                     <div className={styles.page__form}>
