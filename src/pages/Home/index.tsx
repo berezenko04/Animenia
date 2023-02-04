@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import styles from './Home.module.scss'
 
@@ -16,6 +17,7 @@ import { useAppDispatch } from '../../redux/store'
 //icons
 import { ReactComponent as PlugIcon } from '../../assets/icons/plug.svg'
 import { ReactComponent as DocumentIcon } from '../../assets/icons/document.svg'
+import { ReactComponent as VideoIcon } from '../../assets/icons/video-camera.svg'
 
 
 const Home: React.FC = () => {
@@ -66,6 +68,21 @@ const Home: React.FC = () => {
                                     </Accordion>
                                 ))}
                             </div>
+                        </div>
+                        <div className={styles.page__aside__reviews}>
+                            <HeadingBlock title='Reviews' slider={false} icon={<VideoIcon />} />
+                            <div className={styles.page__aside__reviews__items}>
+                                {[...Array(3)].map((_, index) => (
+                                    <Link to='' key={index}>
+                                        <img src={`review${index + 1}.webp`} alt="review" />
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                        <div className={styles.page__aside__socials}>
+                            <Link to='' className={styles.page__aside__socials__instagram}>Instagram</Link>
+                            <Link to='' className={styles.page__aside__socials__telegram}>Telegram</Link>
+                            <Link to='' className={styles.page__aside__socials__youtube}>Youtube</Link>
                         </div>
                     </aside>
                 </div>

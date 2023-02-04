@@ -1,11 +1,14 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import './App.scss'
 
 import Layout from './layouts/MainLayout'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Register from './pages/Register'
+import Loading from './components/Loading'
+
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
+const Home = lazy(() => import('./pages/Home'))
 
 function App() {
 
@@ -13,10 +16,10 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/Animenia/' element={<Layout />}>
-          <Route path='' element={<Home />} />
+          <Route path='' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
         </Route>
-        <Route path='/Animenia/register' element={<Register />} />
-        <Route path='/Animenia/login' element={<Login />} />
+        <Route path='/Animenia/register' element={<Suspense fallback={<Loading />}><Register /></Suspense>} />
+        <Route path='/Animenia/login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
       </Routes>
     </div>
   )

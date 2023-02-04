@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import styles from './AnimeCard.module.scss'
 
 import { ReactComponent as StarIcon } from '../../assets/icons/star.svg'
@@ -32,26 +34,27 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ imageUrl, title, rating, genre, s
 
 
     return (
-        <article className={styles.card}>
-            <img src={imageUrl} alt={title} />
-            <div className={styles.card__rating}>
-                <div className={styles.card__rating__content}>
-                    <StarIcon />
-                    <span>{rating}</span>
+        <Link to=''>
+            <article className={styles.card}>
+                <img src={imageUrl} alt={title} />
+                <div className={styles.card__rating}>
+                    <div className={styles.card__rating__content}>
+                        <StarIcon />
+                        <span>{rating}</span>
+                    </div>
                 </div>
-            </div>
-            <div className={styles.card__info}>
-                {status &&
-                    <div className={`${styles.card__info__status} ${getStatus(status)}`}>
-                        <p>{status}</p>
-                    </div>}
-                <div className={styles.card__info__content}>
-                    <h3>{title}</h3>
-                    <p>{genre}</p>
+                <div className={styles.card__info}>
+                    {status &&
+                        <div className={`${styles.card__info__status} ${getStatus(status)}`}>
+                            <p>{status}</p>
+                        </div>}
+                    <div className={styles.card__info__content}>
+                        <h3>{title}</h3>
+                        <p>{genre}</p>
+                    </div>
                 </div>
-            </div>
-
-        </article>
+            </article>
+        </Link>
     )
 }
 
