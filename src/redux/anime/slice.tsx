@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { getAnime } from '../../API/AnimeService';
+import { getAnime } from '@/API/AnimeService';
 import { AnimeItem, AnimeSliceState } from './types';
 
 const initialState: AnimeSliceState = {

@@ -5,27 +5,38 @@ import { Link } from 'react-router-dom'
 import styles from './Home.module.scss'
 
 //Components
-import HeadingBlock from '../../components/HeadingBlock'
-import AnimeCard from '../../components/AnimeCard'
-import Accordion from '../../components/Accordion'
+import HeadingBlock from '@/components/HeadingBlock'
+import AnimeCard from '@/components/AnimeCard'
+import Accordion from '@/components/Accordion'
 
 //Redux
-import { animeItemsSelector } from '../../redux/anime/selectors'
-import { fetchAnime } from '../../redux/anime/slice'
-import { useAppDispatch } from '../../redux/store'
+import { animeItemsSelector } from '@/redux/anime/selectors'
+import { fetchAnime } from '@/redux/anime/slice'
+import { useAppDispatch } from '@/redux/store'
 
 //icons
-import { ReactComponent as PlugIcon } from '../../assets/icons/plug.svg'
-import { ReactComponent as DocumentIcon } from '../../assets/icons/document.svg'
-import { ReactComponent as VideoIcon } from '../../assets/icons/video-camera.svg'
+import { ReactComponent as PlugIcon } from '@/assets/icons/plug.svg'
+import { ReactComponent as DocumentIcon } from '@/assets/icons/document.svg'
+import { ReactComponent as VideoIcon } from '@/assets/icons/video-camera.svg'
+import { newsItemsSelector } from '@/redux/news/selectors'
+import { getNews } from '@/API/AnimeService'
+import { setItems } from '@/redux/news/slice'
 
 
 const Home: React.FC = () => {
     const items = useSelector(animeItemsSelector);
+    const news = useSelector(newsItemsSelector);
     const dispatch = useAppDispatch();
     const [limit, setLimit] = useState(9);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true);
+        (async () => {
+            const news = await getNews();
+            dispatch(setItems(news));
+            setIsLoading(false);
+        })();
         dispatch(fetchAnime());
     }, [])
 
@@ -62,8 +73,11 @@ const Home: React.FC = () => {
                         <div className={styles.page__aside__news}>
                             <HeadingBlock title='News' slider={false} icon={<DocumentIcon />} />
                             <div className={styles.page__aside__news__items}>
-                                {items.slice(0, 5).map((item, index) => (
-                                    <Accordion key={index} {...item}>
+                                {news.map((item, index) => (
+                                    <Accordion
+                                        key={index}
+                                        {...item}
+                                    >
                                         <img src={item.imageUrl} alt={item.title} />
                                     </Accordion>
                                 ))}

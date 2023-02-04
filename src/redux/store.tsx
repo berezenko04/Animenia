@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
 import anime from './anime/slice'
+import news from './news/slice'
 
 export const store = configureStore({
     reducer: {
-        anime
+        anime,
+        news
     }
 
 })

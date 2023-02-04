@@ -1,6 +1,6 @@
 import styles from './Loading.module.scss'
 
-import { ReactComponent as LoadingIcon } from '../../assets/icons/loading.svg'
+import { ReactComponent as LoadingIcon } from '@/assets/icons/loading.svg'
 
 const Loading: React.FC = () => {
     return (

@@ -5,10 +5,10 @@ import styles from './Header.module.scss'
 import Logo from '../Logo'
 
 //Icons
-import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
-import { ReactComponent as MoonIcon } from '../../assets/icons/moon.svg'
-import { ReactComponent as ProfileIcon } from '../../assets/icons/profile.svg'
-import { ReactComponent as ArrowDownIcon } from '../../assets/icons/arrow-down.svg'
+import { ReactComponent as SearchIcon } from '@/assets/icons/search.svg'
+import { ReactComponent as MoonIcon } from '@/assets/icons/moon.svg'
+import { ReactComponent as ProfileIcon } from '@/assets/icons/profile.svg'
+import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 
 
 const Header: React.FC = () => {

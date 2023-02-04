@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import styles from './AuthField.module.scss'
 
-import { ReactComponent as HideIcon } from '../../assets/icons/hide.svg'
-import { ReactComponent as VisibleIcon } from '../../assets/icons/visible.svg'
+import { ReactComponent as HideIcon } from '@/assets/icons/hide.svg'
+import { ReactComponent as VisibleIcon } from '@/assets/icons/visible.svg'
 
 type AuthFieldProps = {
     type: string,

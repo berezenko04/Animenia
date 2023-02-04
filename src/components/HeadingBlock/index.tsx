@@ -1,6 +1,6 @@
 import styles from './HeadingBlock.module.scss'
 
-import { ReactComponent as ArrowIcon } from '../../assets/icons/arrow-left.svg'
+import { ReactComponent as ArrowIcon } from '@/assets/icons/arrow-left.svg'
 
 type HeadingBlockProps = {
     icon: React.ReactElement,

@@ -1,4 +1,4 @@
-@import '../../scss/variables';
+@import '@/scss/variables.scss';
 
 .footer {
     padding: 50px 0 60px;
@@ -100,5 +100,18 @@
         justify-content: center;
         background-color: $primary;
         border-radius: 10px;
+        border: 1px solid $primary;
+        transition: all .3s ease-in;
+
+        &:hover {
+            background-color: transparent;
+
+            svg {
+                path {
+                    fill: $primary;
+                }
+            }
+        }
+
     }
 }

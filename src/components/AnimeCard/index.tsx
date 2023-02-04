@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 import styles from './AnimeCard.module.scss'
 
-import { ReactComponent as StarIcon } from '../../assets/icons/star.svg'
+import { ReactComponent as StarIcon } from '@/assets/icons/star.svg'
 
 type AnimeCardProps = {
     imageUrl: string,
