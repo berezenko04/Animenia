@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux'
 import styles from './Home.module.scss'
 
 import HeadingBlock from '../../components/HeadingBlock'
-import { ReactComponent as ArrowTopIcon } from '../../assets/icons/arrow-top.svg'
 import { animeItemsSelector } from '../../redux/anime/selectors'
 import { fetchAnime } from '../../redux/anime/slice'
 import { useAppDispatch } from '../../redux/store'
+import AnimeCard from '../../components/AnimeCard'
 
 const Home: React.FC = () => {
     const items = useSelector(animeItemsSelector);
@@ -20,10 +20,22 @@ const Home: React.FC = () => {
     return (
         <div className="container">
             <div className={styles.page}>
-                <HeadingBlock title='Spring Season' icon={<ArrowTopIcon />} slider={false} />
-                {items.map((item, index) => (
-                    <p key={index}>{item.title}</p>
-                ))}
+                <div className={styles.page__wrapper}>
+                    <div className={styles.test}>
+                        <HeadingBlock title='Spring Season' slider={false} />
+                        <div className={styles.items}>
+                            {items.map((item) => (
+                                <AnimeCard
+                                    key={item.id}
+                                    {...item}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <aside>
+
+                    </aside>
+                </div>
             </div>
         </div>
     )

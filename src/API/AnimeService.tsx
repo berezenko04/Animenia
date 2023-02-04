@@ -6,6 +6,6 @@ const ANIME = 'anime';
 
 
 export const getAnime = async () => {
-    const { data } = await axios.get(`${DEFAULT__API__PATH}/${ANIME}`);
+    const { data } = await axios.get(`${DEFAULT__API__PATH}/${ANIME}?sortBy=rating&order=desc`);
     return data as AnimeItem[];
 }

@@ -1,3 +1,20 @@
 .page {
-    
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 9fr 3fr;
+        gap: 30px;
+    }
+
+    .test {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .items {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
 }
