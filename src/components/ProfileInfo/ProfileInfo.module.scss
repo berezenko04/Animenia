@@ -1,0 +1,72 @@
+@import '@/scss/variables.scss';
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__head {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        &__title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            h2 {
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 135%;
+                color: $primary;
+            }
+
+            &__edit {
+                width: 25px;
+                height: 25px;
+                background-color: $primary-100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 5px;
+                cursor: pointer;
+
+                svg {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
+
+        &__status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            p {
+                font-size: 16px;
+                line-height: 135%;
+                color: $thirty;
+            }
+        }
+    }
+
+    &__socials {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            a {
+                font-size: 14px;
+                line-height: 135%;
+                color: $thirty;
+            }
+        }
+    }
+}

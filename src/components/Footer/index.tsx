@@ -5,11 +5,11 @@ import styles from './Footer.module.scss'
 import Logo from '../Logo'
 
 //icons
-import { ReactComponent as FacebookIcon } from '@/assets/icons/facebook-negative.svg'
-import { ReactComponent as TwitterIcon } from '@/assets/icons/twitter-negative.svg'
-import { ReactComponent as InstagramIcon } from '@/assets/icons/instagram-negative.svg'
-import { ReactComponent as YoutubeIcon } from '@/assets/icons/youtube-negative.svg'
-import { ReactComponent as TelegramIcon } from '@/assets/icons/telegram-negative.svg'
+import { ReactComponent as FacebookIcon } from '@/assets/icons/socials/facebook-negative.svg'
+import { ReactComponent as TwitterIcon } from '@/assets/icons/socials/twitter-negative.svg'
+import { ReactComponent as InstagramIcon } from '@/assets/icons/socials/instagram-negative.svg'
+import { ReactComponent as YoutubeIcon } from '@/assets/icons/socials/youtube-negative.svg'
+import { ReactComponent as TelegramIcon } from '@/assets/icons/socials/telegram-negative.svg'
 import { ReactComponent as ArrowTopIcon } from '@/assets/icons/arrow-top.svg'
 
 const Footer: React.FC = () => {

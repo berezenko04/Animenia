@@ -1,7 +1,7 @@
 import styles from './AuthButton.module.scss'
 
-import { ReactComponent as FacebookIcon } from '@/assets/icons/facebook.svg'
-import { ReactComponent as GoogleIcon } from '@/assets/icons/google.svg'
+import { ReactComponent as FacebookIcon } from '@/assets/icons/socials/facebook.svg'
+import { ReactComponent as GoogleIcon } from '@/assets/icons/socials/google.svg'
 
 type AuthButtonsProps = {
     variation: string
