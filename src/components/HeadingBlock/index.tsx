@@ -5,7 +5,7 @@ import { ReactComponent as ArrowIcon } from '@/assets/icons/arrow-left.svg'
 type HeadingBlockProps = {
     icon: React.ReactElement,
     title: string,
-    slider: boolean,
+    slider?: boolean,
     children?: React.ReactNode
 }
 

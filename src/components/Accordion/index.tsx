@@ -14,7 +14,7 @@ type AccordionProps = {
 }
 
 
-const Accordion: React.FC<AccordionProps> = ({ title, genre, date, children}) => {
+const Accordion: React.FC<AccordionProps> = ({ title, genre, date, children }) => {
 
     const [isActive, setIsActive] = useState(false);
 

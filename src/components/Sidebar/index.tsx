@@ -44,12 +44,14 @@ const Sidebar: React.FC = () => {
     return (
         <aside className={styles.aside}>
             <div className={styles.aside__news}>
-                <HeadingBlock title='News' slider={false} icon={<DocumentIcon />} />
+                <HeadingBlock title='News' icon={<DocumentIcon />} />
                 <div className={styles.aside__news__items}>
                     {news.map((item, index) => (
                         <Accordion
                             key={index}
-                            {...item}
+                            title={item.title}
+                            genre={item.genre}
+                            date={item.date}
                         >
                             <img src={item.imageUrl} alt={item.title} />
                         </Accordion>
@@ -57,7 +59,7 @@ const Sidebar: React.FC = () => {
                 </div>
             </div>
             <div className={styles.aside__reviews}>
-                <HeadingBlock title='Reviews' slider={false} icon={<VideoIcon />} />
+                <HeadingBlock title='Reviews' icon={<VideoIcon />} />
                 <div className={styles.aside__reviews__items}>
                     {[...Array(3)].map((_, index) => (
                         <Link to='' key={index}>
@@ -68,7 +70,7 @@ const Sidebar: React.FC = () => {
             </div>
             <div className={styles.aside__socials}>
                 <Link to='' className={styles.aside__socials__instagram}>Instagram</Link>
-                <Link to='' className={styles.aside__socials__telegram}>Telegram</Link>
+                <Link to='https://t.me/dissxlutxn' target='_blank' className={styles.aside__socials__telegram}>Telegram</Link>
                 <Link to='' className={styles.aside__socials__youtube}>Youtube</Link>
             </div>
         </aside>

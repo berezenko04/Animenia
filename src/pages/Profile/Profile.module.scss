@@ -1,0 +1,25 @@
+.page {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    gap: 30px;
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        &__profile {
+
+            &__wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            &__content {
+
+
+            }
+        }
+    }
+}

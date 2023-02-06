@@ -1,4 +1,5 @@
 @import '@/scss/variables.scss';
+
 .block {
     width: 100%;
     display: flex;
@@ -34,6 +35,15 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                svg {
+                    width: 18px;
+                    height: 18px;
+
+                    path {
+                        fill: $white;
+                    }
+                }
             }
         }
 

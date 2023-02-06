@@ -9,11 +9,13 @@ import { ReactComponent as SearchIcon } from '@/assets/icons/search.svg'
 import { ReactComponent as MoonIcon } from '@/assets/icons/moon.svg'
 import { ReactComponent as ProfileIcon } from '@/assets/icons/profile.svg'
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
+import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.svg'
+import ProfileImage from '@/assets/img/profile.webp'
 
 
 const Header: React.FC = () => {
     const links = ['All', 'Top 100', 'Genres', 'Categories', 'Anons', 'Random'];
-    const auth = false;
+    const auth = true;
 
     return (
         <header className={styles.header}>
@@ -38,9 +40,24 @@ const Header: React.FC = () => {
                     </div>
                     <div className={styles.header__userBlock}>
                         <div className={styles.header__userBlock__buttons}>
-                            <button className={styles.header__userBlock__buttons__theme}><MoonIcon /></button>
-                            {auth ? '' : <Link to='/Animenia/login' className={styles.header__userBlock__buttons__auth}><ProfileIcon /></Link>}
+                            <button><MoonIcon /></button>
+                            {auth &&
+                                <div className={styles.header__userBlock__buttons__notification}>
+                                    <button><NotificationIcon /></button>
+                                    <div className={styles.header__userBlock__buttons__notification__overlay}>
+                                        <h3>Notifications</h3>
+                                    </div>
+                                </div>
+                            }
+                            {!auth && <Link to='/Animenia/login' className={styles.header__userBlock__buttons__auth}><ProfileIcon /></Link>}
                         </div>
+                        {auth &&
+                            <div className={styles.header__userBlock__profile}>
+                                <Link to='/Animenia/profile'>
+                                    <img src={ProfileImage} alt="profile" />
+                                </Link>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

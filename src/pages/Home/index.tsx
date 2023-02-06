@@ -7,6 +7,7 @@ import styles from './Home.module.scss'
 //Components
 import HeadingBlock from '@/components/HeadingBlock'
 import AnimeCard from '@/components/AnimeCard'
+import Sidebar from '@/components/Sidebar'
 
 //Redux
 import { animeItemsSelector } from '@/redux/anime/selectors'
@@ -15,7 +16,7 @@ import { useAppDispatch } from '@/redux/store'
 
 //icons
 import { ReactComponent as PlugIcon } from '@/assets/icons/plug.svg'
-import Sidebar from '@/components/Sidebar'
+
 
 
 const Home: React.FC = () => {
@@ -37,7 +38,7 @@ const Home: React.FC = () => {
                     <div className={styles.page__main}>
                         <div className={styles.page__main__categories}>
                             <section className={styles.page__main__categories__spring}>
-                                <HeadingBlock title='Spring Season' slider={false} icon={<PlugIcon />}>
+                                <HeadingBlock title='Spring Season' icon={<PlugIcon />}>
                                     {items.slice(0, 3).map((item) => (
                                         <AnimeCard
                                             {...item}
@@ -47,7 +48,7 @@ const Home: React.FC = () => {
                                 </HeadingBlock>
                             </section>
                             <section className={styles.page__main__categories__top}>
-                                <HeadingBlock title='Top 100' slider={false} icon={<PlugIcon />}>
+                                <HeadingBlock title='Top 100' icon={<PlugIcon />}>
                                     {items.slice(0, limit).map((item) => (
                                         <AnimeCard
                                             key={item.id}
