@@ -11,6 +11,7 @@ import { ReactComponent as SettingsIcon } from '@/assets/icons/settings.svg'
 //utils
 import { tabSelector } from '@/redux/profile/selectors'
 import { setTab } from '@/redux/profile/slice'
+import { useEffect } from 'react'
 
 
 export const links = ["General", "Security and privacy", "Notifications"];
@@ -19,6 +20,11 @@ const SettingsBlock: React.FC = () => {
 
     const tab = useSelector(tabSelector);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [tab])
+
 
     return (
         <div className={styles.block}>
@@ -30,14 +36,14 @@ const SettingsBlock: React.FC = () => {
                         <button
                             key={index}
                             className={links[index] === tab ? styles.block__content__link__active : styles.block__content__link__default}
-                            onClick={() => (dispatch(setTab(links[index])))}
+                            onClick={() => dispatch(setTab(links[index]))}
                         >
                             {link}
                         </button>
                     </div>
                 ))}
             </div>
-        </div>
+        </div >
     )
 }
 

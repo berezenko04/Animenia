@@ -15,7 +15,6 @@
             &__wrapper {
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
             }
 
             &__content {
@@ -30,7 +29,6 @@
             &__wrapper {
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
             }
 
             &__content {
@@ -42,6 +40,92 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+            }
+        }
+
+        .sessions {
+
+            &__wrapper {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__item {
+                background-color: $thirtyBg;
+                box-shadow: 0px 4px 4px rgba(230, 230, 230, 0.25);
+                border-radius: 10px;
+                width: 100%;
+                height: 140px;
+                padding-left: 30px;
+                display: grid;
+                grid-template-columns: 3fr 2fr 2fr 65px;
+                align-items: center;
+                gap: 30px;
+                overflow: hidden;
+
+                &__os {
+                    display: flex;
+                    align-items: center;
+                    gap: 30px;
+
+                    &__info {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+
+                        h3 {
+                            font-weight: 500;
+                            font-size: 16px;
+                            line-height: 135%;
+                            color: $primary;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            line-height: 135%;
+                            color: $secondary;
+                        }
+                    }
+                }
+
+                &__date {
+                    color: $thirty;
+                    font-size: 14px;
+                    line-height: 135%;
+                }
+
+                &__current {
+                    line-height: 135%;
+                    color: $primary;
+                    font-size: 14px;
+                }
+
+                &__remove {
+                    height: 100%;
+                    background-color: $primary-100;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    button {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+            }
+        }
+
+        .notifications {
+
+            &__wrapper {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__content {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
             }
         }
     }

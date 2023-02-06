@@ -62,10 +62,15 @@
             align-items: center;
             gap: 10px;
 
-            a {
+            a,
+            p {
                 font-size: 14px;
                 line-height: 135%;
                 color: $thirty;
+            }
+
+            p {
+                color: $primary;
             }
         }
     }

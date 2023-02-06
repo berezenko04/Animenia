@@ -7,13 +7,26 @@ import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg'
 import { ReactComponent as TwitterIcon } from '@/assets/icons/socials/twitter-negative.svg'
 import { ReactComponent as InstagramIcon } from '@/assets/icons/socials/instagram-negative.svg'
 import { ReactComponent as TelegramIcon } from '@/assets/icons/socials/telegram-negative.svg'
+import { ReactComponent as MessageIcon } from '@/assets/icons/message.svg'
+import { ReactComponent as LockIcon } from '@/assets/icons/lock.svg'
+import { ReactComponent as ShieldIcon } from '@/assets/icons/shield-done.svg'
 
-const ProfileInfo: React.FC = () => {
+type ProfileInfoProps = {
+    variation: 'primary' | 'secondary'
+}
+
+const ProfileInfo: React.FC<ProfileInfoProps> = ({ variation }) => {
 
     const socials = [
         { username: '@luxurypluxury28', icon: <TwitterIcon /> },
         { username: '@luxurypluxury_', icon: <InstagramIcon /> },
         { username: '@dissxlutixn', icon: <TelegramIcon /> }
+    ];
+
+    const privacy = [
+        { option: '[Change Email]', icon: <MessageIcon /> },
+        { option: 'Change password', icon: <LockIcon /> },
+        { option: 'Enable two-factor authentication', icon: <ShieldIcon /> }
     ];
 
     return (
@@ -31,12 +44,22 @@ const ProfileInfo: React.FC = () => {
                 </div>
             </div>
             <ul className={styles.profile__socials}>
-                {socials.map((social, index) => (
-                    <li key={index}>
-                        {social.icon}
-                        <Link to=''>{social.username}</Link>
-                    </li>
-                ))}
+                {variation === 'primary' ?
+                    socials.map((social, index) => (
+                        <li key={index}>
+                            {social.icon}
+                            <Link to=''>{social.username}</Link>
+                        </li>
+                    ))
+                    :
+                    privacy.map((item, index) => (
+                        <li key={index}>
+                            {item.icon}
+                            {index === 0 && <p>berezenkoroman4@gmail.com</p>}
+                            <Link to=''>{item.option}</Link>
+                        </li>
+                    ))
+                }
             </ul>
         </div>
     )
