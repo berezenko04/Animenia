@@ -18,11 +18,14 @@ import { useSelector } from 'react-redux'
 import { tabSelector } from '@/redux/profile/selectors'
 import NotificationsItem from '@/components/NotificationsItem'
 
+//utils
+import { getOS } from '@/utils/getOS'
+import { getDate } from '@/utils/formatDate'
+
 
 const Profile: React.FC = () => {
 
     const tab = useSelector(tabSelector);
-    const date = new Date().toLocaleDateString().split('.').join('/');
 
     const notifications = [
         'Push notifications',
@@ -32,6 +35,9 @@ const Profile: React.FC = () => {
         'Reviews',
         'News'
     ];
+
+    getDate();
+
 
     return (
         <div className="container">
@@ -68,12 +74,12 @@ const Profile: React.FC = () => {
                                     <div className={styles.sessions__item__os}>
                                         <DesktopIcon />
                                         <div className={styles.sessions__item__os__info}>
-                                            <h3>OS: Windows</h3>
+                                            <h3>OS: {getOS()}</h3>
                                             <p>Region: Canada, 82</p>
                                         </div>
                                     </div>
                                     <p className={styles.sessions__item__date}>
-                                        Date: {date}
+                                        Date: {getDate()}
                                     </p>
                                     <p className={styles.sessions__item__current}>
                                         Current Session
