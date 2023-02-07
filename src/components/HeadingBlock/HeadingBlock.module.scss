@@ -75,6 +75,10 @@
         }
     }
 
+    &__swiper {
+        width: 100%;
+    }
+
     &__main {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

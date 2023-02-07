@@ -6,11 +6,12 @@ export type AnimeItem = {
     genre: string
 }
 
+
 export type FetchParams = {
-    sorted: boolean,
-    limit: number
+    sort: string,
 }
 
 export interface AnimeSliceState {
     items: AnimeItem[]
+    sortedItems: AnimeItem[]
 }

@@ -58,8 +58,10 @@ const Profile: React.FC = () => {
     ];
 
     const handleLogout = () => {
-        dispatch(setIsAuth(false));
-        window.location.href = '/Animenia/';
+        if (confirm('Are you sure you want to logout?')) {
+            dispatch(setIsAuth(false));
+            window.location.href = '/Animenia/';
+        }
     }
 
     // getGeo();

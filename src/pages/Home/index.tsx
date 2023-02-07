@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { SwiperSlide } from 'swiper/react'
 
 
 import styles from './Home.module.scss'
@@ -10,8 +11,8 @@ import AnimeCard from '@/components/AnimeCard'
 import Sidebar from '@/components/Sidebar'
 
 //Redux
-import { animeItemsSelector } from '@/redux/anime/selectors'
-import { fetchAnime } from '@/redux/anime/slice'
+import { animeItemsSelector, sortedItemsSelector } from '@/redux/anime/selectors'
+import { fetchAnime, fetchSortedAnime } from '@/redux/anime/slice'
 import { useAppDispatch } from '@/redux/store'
 
 //icons
@@ -21,13 +22,19 @@ import { ReactComponent as PlugIcon } from '@/assets/icons/plug.svg'
 
 const Home: React.FC = () => {
     const items = useSelector(animeItemsSelector);
+    const sorted = useSelector(sortedItemsSelector);
     const dispatch = useAppDispatch();
     const [limit, setLimit] = useState(9);
     const [isLoading, setIsLoading] = useState(true);
 
+    console.log(sorted);
+
     useEffect(() => {
         setIsLoading(true);
         dispatch(fetchAnime());
+        dispatch(fetchSortedAnime({
+            sort: 'rating',
+        }));
         setIsLoading(false);
     }, [])
 
@@ -38,18 +45,20 @@ const Home: React.FC = () => {
                     <div className={styles.page__main}>
                         <div className={styles.page__main__categories}>
                             <section className={styles.page__main__categories__spring}>
-                                <HeadingBlock title='Spring Season' icon={<PlugIcon />}>
-                                    {items.slice(0, 3).map((item) => (
-                                        <AnimeCard
-                                            {...item}
-                                            key={item.id}
-                                        />
+                                <HeadingBlock title='Spring Season' icon={<PlugIcon />} slider>
+                                    {items.map((item) => (
+                                        <SwiperSlide>
+                                            < AnimeCard
+                                                {...item}
+                                                key={item.id}
+                                            />
+                                        </SwiperSlide>
                                     ))}
                                 </HeadingBlock>
                             </section>
                             <section className={styles.page__main__categories__top}>
                                 <HeadingBlock title='Top 100' icon={<PlugIcon />}>
-                                    {items.slice(0, limit).map((item) => (
+                                    {sorted.slice(0, limit).map((item) => (
                                         <AnimeCard
                                             key={item.id}
                                             {...item}

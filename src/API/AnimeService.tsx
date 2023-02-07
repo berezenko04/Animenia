@@ -8,11 +8,16 @@ const NEWS = 'news'
 
 
 export const getAnime = async () => {
-    const { data } = await axios.get(`${DEFAULT__API__PATH}/${ANIME}`);
+    const { data } = await axios.get(`${DEFAULT__API__PATH}/${ANIME}?sortBy=${''}&limit=10`);
     return data as AnimeItem[];
 }
 
 export const getNews = async () => {
     const { data } = await axios.get(`${DEFAULT__API__PATH}/${NEWS}`);
     return data as NewsItem[];
+}
+
+export const getSortedAnime = async (sort: string) => {
+    const { data } = await axios.get(`${DEFAULT__API__PATH}/${ANIME}?sortBy=${sort}&order=desc`);
+    return data as AnimeItem[];
 }
