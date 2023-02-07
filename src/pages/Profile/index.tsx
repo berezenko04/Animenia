@@ -1,3 +1,6 @@
+import { useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import styles from './Profile.module.scss'
 
 //components
@@ -16,16 +19,34 @@ import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.
 //redux
 import { useSelector } from 'react-redux'
 import { tabSelector } from '@/redux/profile/selectors'
+import { countrySelector } from '@/redux/geo/selectors'
 import NotificationsItem from '@/components/NotificationsItem'
+import { setIsAuth } from "@/redux/auth/slice";
+import { isAuthSelector } from "@/redux/auth/selectors";
+
 
 //utils
 import { getOS } from '@/utils/getOS'
 import { getDate } from '@/utils/formatDate'
+import { getGeo } from "@/utils/getGeo";
+
 
 
 const Profile: React.FC = () => {
 
     const tab = useSelector(tabSelector);
+    const country = useSelector(countrySelector);
+    const dispatch = useDispatch();
+    const isMounted = useRef(false);
+    const isAuth = useSelector(isAuthSelector);
+
+    useEffect(() => {
+        if (isMounted.current) {
+            const json = JSON.stringify(isAuth);
+            localStorage.setItem('auth', json);
+        }
+        isMounted.current = true;
+    }, [isAuth]);
 
     const notifications = [
         'Push notifications',
@@ -36,8 +57,24 @@ const Profile: React.FC = () => {
         'News'
     ];
 
-    getDate();
+    const handleLogout = () => {
+        dispatch(setIsAuth(false));
+        window.location.href = '/Animenia/';
+    }
 
+    // getGeo();
+
+
+    // const fetchGeo = async () => {
+    //     try {
+    //         const { data } = await axios.get('');
+    //         dispatch(setCountry(data.results[9].formatted_address));
+    //         dispatch(setCity(data.results[6].formatted_address.split(',')[0]));
+    //     } catch (error) {
+    //         alert('An error occurred while getting the location');
+    //         console.error(error);
+    //     }
+    // }
 
     return (
         <div className="container">
@@ -75,7 +112,7 @@ const Profile: React.FC = () => {
                                         <DesktopIcon />
                                         <div className={styles.sessions__item__os__info}>
                                             <h3>OS: {getOS()}</h3>
-                                            <p>Region: Canada, 82</p>
+                                            <p>Geolocation: { }</p>
                                         </div>
                                     </div>
                                     <p className={styles.sessions__item__date}>
@@ -84,11 +121,12 @@ const Profile: React.FC = () => {
                                     <p className={styles.sessions__item__current}>
                                         Current Session
                                     </p>
-                                    <div className={styles.sessions__item__remove}>
-                                        <button>
-                                            <TrashIcon />
-                                        </button>
-                                    </div>
+                                    <button
+                                        className={styles.sessions__item__remove}
+                                        onClick={handleLogout}
+                                    >
+                                        <TrashIcon />
+                                    </button>
                                 </div>
                             </div>
                         </section>

@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AuthSliceState } from "./types";
+import { getAuthFromLS } from "@/utils/getAuthFromLS";
 
 const initialState: AuthSliceState = {
-    isAuth: false
+    isAuth: getAuthFromLS()
 }
 
 export const AuthSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setIsAuth(state, action) {
+        setIsAuth(state, action: PayloadAction<boolean>) {
             state.isAuth = action.payload;
         }
     }

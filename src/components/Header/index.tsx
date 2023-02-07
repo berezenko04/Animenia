@@ -13,9 +13,22 @@ import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.
 import ProfileImage from '@/assets/img/profile.webp'
 
 
+//redux
+import { useSelector } from 'react-redux'
+import { isAuthSelector } from '@/redux/auth/selectors'
+
+
 const Header: React.FC = () => {
-    const links = ['All', 'Top 100', 'Genres', 'Categories', 'Anons', 'Random'];
-    const auth = true;
+    const links = [
+        { name: 'All', path: '/Animenia/all' },
+        { name: 'Top 100', path: '/Animenia/all' },
+        { name: 'Genres', path: '/Animenia/all' },
+        { name: 'Categories', path: '/Animenia/all' },
+        { name: 'Anons', path: '/Animenia/all' },
+        { name: 'Random', path: '/Animenia/all' }
+    ];
+
+    const auth = useSelector(isAuthSelector);
 
     return (
         <header className={styles.header}>
@@ -26,7 +39,7 @@ const Header: React.FC = () => {
                         <ul className={styles.nav__links}>
                             {links.map((link, index) => (
                                 <li key={index} className={styles.nav__links__item}>
-                                    <Link to=''>{link}</Link>
+                                    <Link to={link.path}>{link.name}</Link>
                                     {links.slice(1, 4).includes(link) && <ArrowDownIcon />}
                                 </li>
                             ))}

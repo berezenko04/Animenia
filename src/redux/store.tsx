@@ -5,13 +5,15 @@ import anime from './anime/slice'
 import news from './news/slice'
 import auth from './auth/slice'
 import profile from './profile/slice'
+import geo from './geo/slice'
 
 export const store = configureStore({
     reducer: {
         anime,
         news,
         auth,
-        profile
+        profile,
+        geo
     }
 
 })
