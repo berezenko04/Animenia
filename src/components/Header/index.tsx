@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './Header.module.scss'
@@ -7,6 +8,7 @@ import Logo from '../Logo'
 //Icons
 import { ReactComponent as SearchIcon } from '@/assets/icons/search.svg'
 import { ReactComponent as MoonIcon } from '@/assets/icons/moon.svg'
+import { ReactComponent as SunIcon } from '@/assets/icons/sun.svg'
 import { ReactComponent as ProfileIcon } from '@/assets/icons/profile.svg'
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.svg'
@@ -14,8 +16,11 @@ import ProfileImage from '@/assets/img/profile.webp'
 
 
 //redux
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { isAuthSelector } from '@/redux/auth/selectors'
+import { themeSelector } from '@/redux/theme/selectors'
+import { useRef } from 'react'
+import { setTheme } from '@/redux/theme/slice'
 
 
 const Header: React.FC = () => {
@@ -29,6 +34,21 @@ const Header: React.FC = () => {
     ];
 
     const auth = useSelector(isAuthSelector);
+    const theme = useSelector(themeSelector);
+    const isMounted = useRef(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (isMounted.current) {
+            const json = JSON.stringify(theme);
+            localStorage.setItem('theme', json);
+        }
+        isMounted.current = true;
+    }, [theme])
+
+    const handleTheme = () => {
+        dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
+    }
 
     return (
         <header className={styles.header}>
@@ -51,7 +71,7 @@ const Header: React.FC = () => {
                     </div>
                     <div className={styles.header__userBlock}>
                         <div className={styles.header__userBlock__buttons}>
-                            <button><MoonIcon /></button>
+                            <button onClick={handleTheme}>{theme === 'light' ? <MoonIcon /> : <SunIcon />}</button>
                             {auth &&
                                 <div className={styles.header__userBlock__buttons__notification}>
                                     <button><NotificationIcon /></button>

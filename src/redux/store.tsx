@@ -7,6 +7,7 @@ import auth from './auth/slice'
 import profile from './profile/slice'
 import geo from './geo/slice'
 import pagination from './pagination/slice'
+import theme from './theme/slice'
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
         auth,
         profile,
         geo,
-        pagination
+        pagination,
+        theme
     }
 
 })

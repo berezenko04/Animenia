@@ -7,6 +7,10 @@ import Layout from './layouts/MainLayout'
 import Home from './pages/Home'
 import Loading from './components/Loading'
 
+//redux
+import { useSelector } from 'react-redux'
+import { themeSelector } from './redux/theme/selectors'
+
 //pages
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
@@ -15,8 +19,10 @@ const AllAnime = lazy(() => import('./pages/AllAnime'));
 
 function App() {
 
+  const theme = useSelector(themeSelector);
+
   return (
-    <div data-theme='light' className="App">
+    <div data-theme={theme === 'light' ? 'light' : 'dark'} className="App">
       <Routes>
         <Route path='/Animenia/' element={<Layout />}>
           <Route path='' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />

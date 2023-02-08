@@ -1,6 +1,26 @@
-$primary: #DA1414;
-$primary-100: #FBD0D0;
-$secondary: #404156;
+.App[data-theme="light"] {
+    --primary: #DA1414;
+    --secondary: #404156;
+    --white: #FFFFFF;
+    --primary-100: #FBD0D0;
+    --mainBg: #F6F6F6;
+    --shadow: 0px 4px 4px rgba(230, 230, 230, 0.25);
+    --opacity-bg: rgba(255, 255, 255, 0.8);
+}
+
+.App[data-theme="dark"] {
+    --primary: #DEDEDE;
+    --secondary: #9F9F9F;
+    --white: #262626;
+    --primary-100: #121212;
+    --mainBg: #121212;
+    --shadow: ;
+    --opacity-bg: rgba(18, 18, 18, 0.8);
+}
+
+$primary: var(--primary);
+$primary-100: var(--primary-100);
+$secondary: var(--secondary);
 $thirty: #9F9F9F;
 
 $blue: #0053B5;
@@ -10,9 +30,11 @@ $watching: #CAC200;
 $thrown: #CA3000;
 $will-watch: #9500CA;
 
-$mainBg: #F6F6F6;
+$mainBg: var(--mainBg);
 $secondaryBg: #FAFAFA;
 $thirtyBg: #FCFCFC;
 
-$white: #FFFFFF;
+$shadow: var(--shadow);
+$white: var(--white);
 $black: #000000;
+$opacity-bg: var(--opacity-bg);
