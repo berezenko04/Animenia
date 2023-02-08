@@ -1,1 +1,0 @@
-import{c as e,j as a,h as s,o as i,p as l}from"./index-0ca32c16.js";const n="_page_84p86_1",c={page:n},o=()=>e("div",{className:"container",children:a("div",{className:c.page,children:[e("div",{children:e(s,{title:"All Anime",icon:e(i,{})})}),e(l,{})]})});export{o as default};
