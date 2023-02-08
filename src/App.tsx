@@ -16,7 +16,7 @@ const AllAnime = lazy(() => import('./pages/AllAnime'));
 function App() {
 
   return (
-    <div className="App">
+    <div data-theme='light' className="App">
       <Routes>
         <Route path='/Animenia/' element={<Layout />}>
           <Route path='' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />

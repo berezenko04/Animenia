@@ -1,0 +1,37 @@
+@import '@/scss/variables.scss';
+
+.block {
+    display: grid;
+    grid-template-columns: 3fr 6fr;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 20px;
+    background-color: $white;
+    box-shadow: 0px 4px 4px rgba(230, 230, 230, 0.25);
+    border-radius: 10px;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        &__title {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            h2 {
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 135%;
+                color: $primary;
+            }
+
+            p {
+                font-size: 16px;
+                line-height: 135%;
+                color: $thirty;
+            }
+        }
+    }
+}

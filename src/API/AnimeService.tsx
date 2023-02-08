@@ -7,6 +7,13 @@ const ANIME = 'anime';
 const NEWS = 'news'
 
 
+export type SortedAnimeProps = {
+    sort: string,
+    page: number,
+    order: string,
+    limit: number
+}
+
 export const getAnime = async () => {
     const { data } = await axios.get(`${DEFAULT__API__PATH}/${ANIME}?sortBy=${''}&limit=10`);
     return data as AnimeItem[];
@@ -17,7 +24,7 @@ export const getNews = async () => {
     return data as NewsItem[];
 }
 
-export const getSortedAnime = async (sort: string) => {
-    const { data } = await axios.get(`${DEFAULT__API__PATH}/${ANIME}?sortBy=${sort}&order=desc`);
+export const getSortedAnime = async (sort: string, order: string, page: number, limit: number) => {
+    const { data } = await axios.get(`${DEFAULT__API__PATH}/${ANIME}?sortBy=${sort}&order=${order}&page=${page}&limit=${limit}`);
     return data as AnimeItem[];
 }

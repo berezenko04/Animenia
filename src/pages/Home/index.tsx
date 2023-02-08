@@ -27,16 +27,20 @@ const Home: React.FC = () => {
     const [limit, setLimit] = useState(9);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log(sorted);
-
     useEffect(() => {
         setIsLoading(true);
         dispatch(fetchAnime());
+        setIsLoading(false);
+    }, [limit])
+
+    useEffect(() => {
         dispatch(fetchSortedAnime({
             sort: 'rating',
+            order: 'desc',
+            page: 1,
+            limit
         }));
-        setIsLoading(false);
-    }, [])
+    }, [limit])
 
     return (
         <div className="container">
@@ -58,7 +62,7 @@ const Home: React.FC = () => {
                             </section>
                             <section className={styles.page__main__categories__top}>
                                 <HeadingBlock title='Top 100' icon={<PlugIcon />}>
-                                    {sorted.slice(0, limit).map((item) => (
+                                    {sorted.map((item) => (
                                         <AnimeCard
                                             key={item.id}
                                             {...item}

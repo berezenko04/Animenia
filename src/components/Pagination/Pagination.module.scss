@@ -1,0 +1,46 @@
+@import '@/scss/variables.scss';
+
+.paginate {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    :global {
+        .selected {
+            a {
+                color: #FFFFFF;
+                background-color: $primary;
+            }
+        }
+
+        .disabled {
+            a:hover {
+                background-color: $primary-100;
+                color: $white;
+            }
+        }
+    }
+
+    li {
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            color: $secondary;
+            background-color: $white;
+            transition: all .3s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+            font-size: 16px;
+            line-height: 135%;
+
+            &:hover {
+                color: $white;
+                background-color: $primary;
+            }
+        }
+    }
+}

@@ -1,5 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import styles from './Profile.module.scss'
 
@@ -19,26 +21,30 @@ import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.
 //redux
 import { useSelector } from 'react-redux'
 import { tabSelector } from '@/redux/profile/selectors'
-import { countrySelector } from '@/redux/geo/selectors'
+import { citySelector, countrySelector } from '@/redux/geo/selectors'
 import NotificationsItem from '@/components/NotificationsItem'
 import { setIsAuth } from "@/redux/auth/slice";
 import { isAuthSelector } from "@/redux/auth/selectors";
+import { setCity, setCountry } from "@/redux/geo/slice";
 
 
 //utils
 import { getOS } from '@/utils/getOS'
 import { getDate } from '@/utils/formatDate'
-import { getGeo } from "@/utils/getGeo";
-
 
 
 const Profile: React.FC = () => {
 
     const tab = useSelector(tabSelector);
     const country = useSelector(countrySelector);
+    const city = useSelector(citySelector);
     const dispatch = useDispatch();
     const isMounted = useRef(false);
     const isAuth = useSelector(isAuthSelector);
+    const navigate = useNavigate();
+    const API_KEY = 'AIzaSyCYYb9ZtSS19QpJ7fvsU-Tm-x_o9rKIkzc';
+    const API_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+
 
     useEffect(() => {
         if (isMounted.current) {
@@ -60,23 +66,36 @@ const Profile: React.FC = () => {
     const handleLogout = () => {
         if (confirm('Are you sure you want to logout?')) {
             dispatch(setIsAuth(false));
-            window.location.href = '/Animenia/';
+            navigate('/Animenia/');
         }
     }
 
-    // getGeo();
 
+    const getGeo = () => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                const url = API_URL + lat + "," + lng + "&key=" + API_KEY + "&language=en";
+                fetchGeo(url);
+            });
+            return `${country}, ${city}`;
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+    getGeo();
 
-    // const fetchGeo = async () => {
-    //     try {
-    //         const { data } = await axios.get('');
-    //         dispatch(setCountry(data.results[9].formatted_address));
-    //         dispatch(setCity(data.results[6].formatted_address.split(',')[0]));
-    //     } catch (error) {
-    //         alert('An error occurred while getting the location');
-    //         console.error(error);
-    //     }
-    // }
+    const fetchGeo = async (url: string) => {
+        try {
+            const { data } = await axios.get(url);
+            dispatch(setCountry(data.results[9].formatted_address));
+            dispatch(setCity(data.results[6].formatted_address.split(',')[0]));
+        } catch (error) {
+            alert('An error occurred while getting the location');
+            console.error(error);
+        }
+    }
 
     return (
         <div className="container">
@@ -114,7 +133,7 @@ const Profile: React.FC = () => {
                                         <DesktopIcon />
                                         <div className={styles.sessions__item__os__info}>
                                             <h3>OS: {getOS()}</h3>
-                                            <p>Geolocation: { }</p>
+                                            <p>Geo: {getGeo()}</p>
                                         </div>
                                     </div>
                                     <p className={styles.sessions__item__date}>

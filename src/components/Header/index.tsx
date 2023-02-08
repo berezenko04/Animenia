@@ -46,10 +46,8 @@ const Header: React.FC = () => {
                         </ul>
                     </nav>
                     <div className={styles.header__search}>
-                        <div className={styles.header__search__content}>
-                            <SearchIcon />
-                            <input type="text" placeholder='Search...' />
-                        </div>
+                        <label htmlFor="search"><SearchIcon /></label>
+                        <input type="text" placeholder='Search...' id='search' autoComplete='off' />
                     </div>
                     <div className={styles.header__userBlock}>
                         <div className={styles.header__userBlock__buttons}>

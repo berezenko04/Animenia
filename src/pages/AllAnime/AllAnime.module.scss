@@ -2,4 +2,18 @@
     display: grid;
     grid-template-columns: 9fr 3fr;
     gap: 30px;
+
+    .all {
+        &__content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            &__items {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    }
 }

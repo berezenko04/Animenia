@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { getAnime, getSortedAnime } from '@/API/AnimeService';
+import { getAnime, getSortedAnime, SortedAnimeProps } from '@/API/AnimeService';
 import { AnimeItem, AnimeSliceState, FetchParams } from './types';
 
 const initialState: AnimeSliceState = {
@@ -17,9 +17,9 @@ export const fetchAnime = createAsyncThunk(
 
 export const fetchSortedAnime = createAsyncThunk(
     'anime/fetchSortedAnimeStatus',
-    async (params: FetchParams) => {
-        const { sort } = params;
-        const anime = await getSortedAnime(sort);
+    async (params: SortedAnimeProps) => {
+        const { sort, order, page, limit } = params;
+        const anime = await getSortedAnime(sort, order, page, limit);
         return anime;
     }
 )
@@ -28,7 +28,7 @@ export const AnimeSlice = createSlice({
     name: 'anime',
     initialState,
     reducers: {
-       
+
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAnime.pending, (state) => {
@@ -57,6 +57,6 @@ export const AnimeSlice = createSlice({
     }
 })
 
-export const {} = AnimeSlice.actions;
+export const { } = AnimeSlice.actions;
 
 export default AnimeSlice.reducer;

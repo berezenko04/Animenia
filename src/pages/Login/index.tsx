@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './Login.module.scss'
@@ -23,6 +23,7 @@ const Login: React.FC = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(isAuthSelector);
     const isMounted = useRef(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isMounted.current) {
@@ -35,7 +36,7 @@ const Login: React.FC = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(setIsAuth(true));
-        window.location.href = '/Animenia/';
+        navigate('/Animenia/');
     }
 
 
