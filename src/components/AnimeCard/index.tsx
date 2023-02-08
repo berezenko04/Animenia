@@ -1,10 +1,14 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './AnimeCard.module.scss'
 
+import RatingBlock from '../RatingBlock'
+
 //icons
-import { ReactComponent as StarIcon } from '@/assets/icons/star.svg'
 import { ReactComponent as HeartIcon } from '@/assets/icons/heart.svg'
+import { ReactComponent as FilledHeartIcon } from '@/assets/icons/heart-filled.svg'
+
 
 type AnimeCardProps = {
     imageUrl: string,
@@ -34,20 +38,21 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ imageUrl, title, rating, genre, s
             }
         }
     }
+    const [isFavorite, setIsFavorite] = useState(false);
 
 
     return (
         <Link to=''>
             <article className={styles.card}>
                 <img src={imageUrl} alt={title} />
-                {(favorite && !rating) ?
-                    <button className={styles.card__favorite}>
-                        <HeartIcon />
+                {favorite &&
+                    <button className={styles.card__favorite} onClick={() => setIsFavorite(!isFavorite)}>
+                        {isFavorite ? <FilledHeartIcon /> : <HeartIcon />}
                     </button>
-                    :
+                }
+                {rating &&
                     <div className={styles.card__rating}>
-                        <StarIcon />
-                        <span>{rating}</span>
+                        <RatingBlock rating={rating} />
                     </div>
                 }
                 {(title && genre) &&

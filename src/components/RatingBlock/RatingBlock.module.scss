@@ -1,0 +1,33 @@
+@import '@/scss/variables.scss';
+
+.rating {
+
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 71px;
+    height: 32px;
+
+    &__primary {
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+    &__secondary {
+        background-color: $mainBg;
+    }
+
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        span {
+            line-height: 135%;
+            color: $primary;
+            padding-top: 2px;
+        }
+    }
+}

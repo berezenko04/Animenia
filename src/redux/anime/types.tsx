@@ -3,7 +3,8 @@ export type AnimeItem = {
     title: string,
     imageUrl: string,
     rating: number,
-    genre: string
+    genre: string,
+    description: string
 }
 
 

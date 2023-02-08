@@ -14,19 +14,26 @@ import AnimeBlock from '@/components/AnimeBlock'
 import { ReactComponent as PlugIcon } from '@/assets/icons/plug.svg'
 
 //redux
-import { animeItemsSelector } from '@/redux/anime/selectors'
-import { fetchAnime } from '@/redux/anime/slice'
+import { sortedItemsSelector } from '@/redux/anime/selectors'
+import { fetchSortedAnime } from '@/redux/anime/slice'
 import { useAppDispatch } from '@/redux/store'
+import { pageNumberSelector } from '@/redux/pagination/selectors'
 
 
 const AllAnime: React.FC = () => {
 
-    const items = useSelector(animeItemsSelector);
+    const sorted = useSelector(sortedItemsSelector);
     const dispatch = useAppDispatch();
+    const page = useSelector(pageNumberSelector);
 
     useEffect(() => {
-        dispatch(fetchAnime());
-    }, [])
+        dispatch(fetchSortedAnime({
+            sort: 'description',
+            order: 'desc',
+            page,
+            limit: 4
+        }));
+    }, [page])
 
 
     return (
@@ -36,7 +43,7 @@ const AllAnime: React.FC = () => {
                     <HeadingBlock title='All Anime' icon={<PlugIcon />} />
                     <div className={styles.all__content}>
                         <div className={styles.all__content__items}>
-                            {items.map((item, index) => (
+                            {sorted.map((item, index) => (
                                 <AnimeBlock key={index} {...item} />
                             ))}
                         </div>

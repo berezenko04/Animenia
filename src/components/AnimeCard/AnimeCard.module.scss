@@ -19,6 +19,12 @@
         object-position: center;
     }
 
+    &__rating {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
     &__favorite {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(5px);
@@ -31,25 +37,6 @@
         justify-content: center;
         width: 34px;
         height: 34px;
-    }
-
-    &__rating {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(5px);
-        border-radius: 5px;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        padding: 5px 10px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        span {
-            line-height: 135%;
-            color: $primary;
-            padding-top: 2px;
-        }
     }
 
     &__info {
@@ -116,4 +103,5 @@
         }
 
     }
+
 }

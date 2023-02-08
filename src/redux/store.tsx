@@ -6,6 +6,7 @@ import news from './news/slice'
 import auth from './auth/slice'
 import profile from './profile/slice'
 import geo from './geo/slice'
+import pagination from './pagination/slice'
 
 export const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
         news,
         auth,
         profile,
-        geo
+        geo,
+        pagination
     }
 
 })

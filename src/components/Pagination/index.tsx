@@ -1,23 +1,30 @@
 import ReactPaginate from "react-paginate"
-import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
 import styles from './Pagination.module.scss'
 
-import { animeItemsSelector } from "@/redux/anime/selectors"
+//redux
+import { setPage } from "@/redux/pagination/slice"
 
 
 const Pagination: React.FC = () => {
-    const items = useSelector(animeItemsSelector);
+    const dispatch = useDispatch();
+
+    const handleChange = (page: number) => {
+        dispatch(setPage(page + 1));
+        window.scrollTo(0, 0);
+    }
+
     return (
         <>
             <ReactPaginate
                 className={styles.paginate}
                 breakLabel="..."
                 nextLabel=">"
-                onPageChange={(event) => ('')}
+                onPageChange={(e) => handleChange(e.selected)}
                 pageRangeDisplayed={4}
-                pageCount={items.length / 4}
-                previousLabel=""
+                pageCount={5}
+                previousLabel="<"
             />
         </>
     )
