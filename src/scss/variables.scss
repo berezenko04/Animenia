@@ -1,40 +1,53 @@
 .App[data-theme="light"] {
     --primary: #DA1414;
-    --secondary: #404156;
-    --white: #FFFFFF;
     --primary-100: #FBD0D0;
+    --primary-200: var(--secondary);
+    --secondary: #404156;
+    --secondary-100: var(--secondary);
+    --white: #FFFFFF;
     --mainBg: #F6F6F6;
+    --secondaryBg: #FAFAFA;
+    --thirtyBg: #FCFCFC;
     --shadow: 0px 4px 4px rgba(230, 230, 230, 0.25);
     --opacity-bg: rgba(255, 255, 255, 0.8);
+    --star: #DA1414;
 }
 
 .App[data-theme="dark"] {
     --primary: #DEDEDE;
-    --secondary: #9F9F9F;
-    --white: #262626;
     --primary-100: #121212;
+    --primary-200: #727272;
+    --secondary: #9F9F9F;
+    --secondary-100: #DEDEDE;
+    --white: #262626;
     --mainBg: #121212;
+    --secondaryBg: #181818;
+    --thirtyBg: #1B1B1B;
     --shadow: ;
     --opacity-bg: rgba(18, 18, 18, 0.8);
+    --star: #FBC948;
 }
 
 $primary: var(--primary);
 $primary-100: var(--primary-100);
+$primary-200: var(--primary-200);
 $secondary: var(--secondary);
+$secondary-100: var(--secondary-100);
 $thirty: #9F9F9F;
 
-$blue: #0053B5;
 
+$blue: #0053B5;
 $viewed: #00CAA6;
 $watching: #CAC200;
 $thrown: #CA3000;
 $will-watch: #9500CA;
 
 $mainBg: var(--mainBg);
-$secondaryBg: #FAFAFA;
-$thirtyBg: #FCFCFC;
+$secondaryBg: var(--secondaryBg);
+$thirtyBg: var(--thirtyBg);
 
 $shadow: var(--shadow);
 $white: var(--white);
 $black: #000000;
 $opacity-bg: var(--opacity-bg);
+$star: var(--star);

@@ -7,7 +7,7 @@
     gap: 30px;
     padding: 20px;
     background-color: $white;
-    box-shadow: 0px 4px 4px rgba(230, 230, 230, 0.25);
+    box-shadow: $shadow;
     border-radius: 10px;
 
     &__content {
@@ -45,13 +45,13 @@
             -webkit-line-clamp: 7;
             overflow: hidden;
             line-height: 135%;
-            color: $secondary;
+            color: $primary-200;
         }
 
         &__button {
             background-color: $primary;
             padding: 12px 32px;
-            box-shadow: 0px 4px 4px rgba(230, 230, 230, 0.25);
+            box-shadow: $shadow;
             border-radius: 10px;
             font-weight: 500;
             font-size: 16px;

@@ -62,6 +62,12 @@
                 align-items: center;
             }
 
+            svg {
+                path {
+                    fill: $primary;
+                }
+            }
+
             .button {
                 &__prev {}
 

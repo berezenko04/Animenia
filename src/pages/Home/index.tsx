@@ -15,8 +15,10 @@ import { animeItemsSelector, sortedItemsSelector } from '@/redux/anime/selectors
 import { fetchAnime, fetchSortedAnime } from '@/redux/anime/slice'
 import { useAppDispatch } from '@/redux/store'
 
+
 //icons
 import { ReactComponent as PlugIcon } from '@/assets/icons/plug.svg'
+
 
 
 
@@ -50,11 +52,10 @@ const Home: React.FC = () => {
                         <div className={styles.page__main__categories}>
                             <section className={styles.page__main__categories__spring}>
                                 <HeadingBlock title='Spring Season' icon={<PlugIcon />} slider>
-                                    {items.map((item) => (
-                                        <SwiperSlide>
+                                    {items.map((item, index) => (
+                                        <SwiperSlide key={index}>
                                             < AnimeCard
                                                 {...item}
-                                                key={item.id}
                                             />
                                         </SwiperSlide>
                                     ))}

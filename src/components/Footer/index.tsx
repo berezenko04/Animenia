@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import styles from './Footer.module.scss'
 
@@ -12,6 +13,9 @@ import { ReactComponent as YoutubeIcon } from '@/assets/icons/socials/youtube-ne
 import { ReactComponent as TelegramIcon } from '@/assets/icons/socials/telegram-negative.svg'
 import { ReactComponent as ArrowTopIcon } from '@/assets/icons/arrow-top.svg'
 
+//redux
+import { themeSelector } from '@/redux/theme/selectors'
+
 const Footer: React.FC = () => {
 
     const socials: React.ReactElement[] = [<FacebookIcon />, <TwitterIcon />, <InstagramIcon />, <YoutubeIcon />, <TelegramIcon />];
@@ -22,6 +26,7 @@ const Footer: React.FC = () => {
         'Technical support and assistance to users: all.site.anime@gmail.com',
         'This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.'
     ];
+    const theme = useSelector(themeSelector);
 
     return (
         <footer className={styles.footer}>
@@ -64,7 +69,10 @@ const Footer: React.FC = () => {
                             ))}
                         </div>
                     </div>
-                    <button className={styles.footer__up} onClick={() => window.scrollTo(0, 0)}>
+                    <button
+                        className={theme === 'light' ? styles.footer__up : styles.footer__up__dark}
+                        onClick={() => window.scrollTo(0, 0)}
+                    >
                         <ArrowTopIcon />
                     </button>
                 </div>

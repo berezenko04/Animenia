@@ -7,7 +7,6 @@ import RatingBlock from '../RatingBlock'
 
 //icons
 import { ReactComponent as HeartIcon } from '@/assets/icons/heart.svg'
-import { ReactComponent as FilledHeartIcon } from '@/assets/icons/heart-filled.svg'
 
 
 type AnimeCardProps = {
@@ -47,7 +46,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ imageUrl, title, rating, genre, s
                 <img src={imageUrl} alt={title} />
                 {favorite &&
                     <button className={styles.card__favorite} onClick={() => setIsFavorite(!isFavorite)}>
-                        {isFavorite ? <FilledHeartIcon /> : <HeartIcon />}
+                        <HeartIcon className={isFavorite ? styles.favorited : ''} />
                     </button>
                 }
                 {rating &&

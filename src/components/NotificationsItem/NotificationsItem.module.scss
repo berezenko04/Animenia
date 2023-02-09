@@ -35,9 +35,16 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
+
+    &__light {
+        background-color: #D1D1D6;
+    }
+
+    &__dark {
+        background-color: #9F9F9F;
+    }
 
     &::before {
         position: absolute;
@@ -46,7 +53,7 @@
         width: 16px;
         left: 2px;
         bottom: 2px;
-        background-color: white;
+        background-color: $white;
         -webkit-transition: .4s;
         transition: .4s;
     }

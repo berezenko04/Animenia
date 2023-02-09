@@ -11,7 +11,7 @@
     height: 32px;
 
     &__primary {
-        background: rgba(255, 255, 255, 0.8);
+        background: $opacity-bg;
     }
 
     &__secondary {
@@ -28,6 +28,12 @@
             line-height: 135%;
             color: $primary;
             padding-top: 2px;
+        }
+    }
+
+    svg {
+        path {
+            fill: $star;
         }
     }
 }

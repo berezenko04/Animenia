@@ -32,9 +32,25 @@
                 border-radius: 5px;
                 cursor: pointer;
 
-                svg {
-                    width: 14px;
-                    height: 14px;
+
+                &__dark {
+                    width: 25px;
+                    height: 25px;
+                    background-color: $primary-200;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+            }
+
+            svg {
+                width: 14px;
+                height: 14px;
+
+                path {
+                    fill: $primary;
                 }
             }
         }
@@ -66,11 +82,45 @@
             p {
                 font-size: 14px;
                 line-height: 135%;
-                color: $thirty;
             }
 
             p {
                 color: $primary;
+            }
+        }
+
+        &__option {
+            svg{
+                path{
+                    fill: $primary;
+                }
+            }
+
+            a {
+                color: $secondary;
+            }
+        }
+
+        &__twitter {
+            color: #1DA1F2;
+
+            svg {
+                path {
+                    fill: #1DA1F2;
+                }
+            }
+        }
+
+        &__instagram {
+            background: linear-gradient(93.38deg, #C000C4 0%, #EE7200 100%), #FAFAFA;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            svg {
+                path {
+                    fill: linear-gradient(93.38deg, #C000C4 0%, #EE7200 100%), #FAFAFA;
+                }
             }
         }
     }

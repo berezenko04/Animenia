@@ -15,7 +15,7 @@
 
     &__form {
         padding: 40px 95px 60px;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: $opacity-bg;
         backdrop-filter: blur(10px);
         border-radius: 10px;
         max-width: 540px;

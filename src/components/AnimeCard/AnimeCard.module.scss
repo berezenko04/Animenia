@@ -3,7 +3,7 @@
 
 .card {
     width: 100%;
-    box-shadow: 0px 4px 4px rgba(230, 230, 230, 0.25);
+    box-shadow: $shadow;
     overflow: hidden;
     height: 350px;
     position: relative;
@@ -26,7 +26,7 @@
     }
 
     &__favorite {
-        background: rgba(255, 255, 255, 0.8);
+        background: $opacity-bg;
         backdrop-filter: blur(5px);
         border-radius: 5px;
         position: absolute;
@@ -37,10 +37,23 @@
         justify-content: center;
         width: 34px;
         height: 34px;
+
+        svg {
+            path {
+                stroke: $primary;
+            }
+        }
+
+        .favorited {
+            path {
+                fill: $primary;
+            }
+        }
+
     }
 
     &__info {
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: $opacity-bg;
         backdrop-filter: blur(2.5px);
         position: absolute;
         bottom: 0;

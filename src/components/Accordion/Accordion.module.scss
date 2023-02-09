@@ -59,4 +59,10 @@
         line-height: 135%;
         color: $thirty;
     }
+
+    svg {
+        path {
+            fill: $secondary;
+        }
+    }
 }

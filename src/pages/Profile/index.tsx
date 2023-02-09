@@ -15,6 +15,7 @@ import ProfileInfo from '@/components/ProfileInfo'
 import { ReactComponent as ProfileIcon } from '@/assets/icons/profile.svg'
 import { ReactComponent as FolderIcon } from '@/assets/icons/folder.svg'
 import { ReactComponent as DesktopIcon } from '@/assets/icons/desktop.svg'
+import { ReactComponent as MobileIcon } from '@/assets/icons/mobile.svg'
 import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg'
 import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.svg'
 
@@ -26,6 +27,7 @@ import NotificationsItem from '@/components/NotificationsItem'
 import { setIsAuth } from "@/redux/auth/slice";
 import { isAuthSelector } from "@/redux/auth/selectors";
 import { setCity, setCountry } from "@/redux/geo/slice";
+import { themeSelector } from "@/redux/theme/selectors";
 
 
 //utils
@@ -33,11 +35,13 @@ import { getOS } from '@/utils/getOS'
 import { getDate } from '@/utils/formatDate'
 
 
+
 const Profile: React.FC = () => {
 
     const tab = useSelector(tabSelector);
     const country = useSelector(countrySelector);
     const city = useSelector(citySelector);
+    const theme = useSelector(themeSelector);
     const dispatch = useDispatch();
     const isMounted = useRef(false);
     const isAuth = useSelector(isAuthSelector);
@@ -130,7 +134,7 @@ const Profile: React.FC = () => {
                                 <HeadingBlock title='Sessions' icon={<FolderIcon />} />
                                 <div className={styles.sessions__item}>
                                     <div className={styles.sessions__item__os}>
-                                        <DesktopIcon />
+                                        {getOS() === 'Windows' || 'MacOs' ? <DesktopIcon /> : <MobileIcon />}
                                         <div className={styles.sessions__item__os__info}>
                                             <h3>OS: {getOS()}</h3>
                                             <p>Geo: {getGeo()}</p>
@@ -143,7 +147,7 @@ const Profile: React.FC = () => {
                                         Current Session
                                     </p>
                                     <button
-                                        className={styles.sessions__item__remove}
+                                        className={theme === 'light' ? styles.sessions__item__remove : styles.sessions__item__remove__dark}
                                         onClick={handleLogout}
                                     >
                                         <TrashIcon />

@@ -35,4 +35,10 @@
             color: transparent;
         }
     }
+
+    svg {
+        path {
+            fill: $secondary;
+        }
+    }
 }

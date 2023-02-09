@@ -11,17 +11,15 @@ import { ReactComponent as MessageIcon } from '@/assets/icons/message.svg'
 import { ReactComponent as LockIcon } from '@/assets/icons/lock.svg'
 import { ReactComponent as ShieldIcon } from '@/assets/icons/shield-done.svg'
 
+//redux
+import { useSelector } from 'react-redux'
+import { themeSelector } from '@/redux/theme/selectors'
+
 type ProfileInfoProps = {
     variation: 'primary' | 'secondary'
 }
 
 const ProfileInfo: React.FC<ProfileInfoProps> = ({ variation }) => {
-
-    const socials = [
-        { username: '@luxurypluxury28', icon: <TwitterIcon /> },
-        { username: '@luxurypluxury_', icon: <InstagramIcon /> },
-        { username: '@dissxlutixn', icon: <TelegramIcon /> }
-    ];
 
     const privacy = [
         { option: '[Change Email]', icon: <MessageIcon /> },
@@ -29,12 +27,14 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ variation }) => {
         { option: 'Enable two-factor authentication', icon: <ShieldIcon /> }
     ];
 
+    const theme = useSelector(themeSelector);
+
     return (
         <div className={styles.profile}>
             <div className={styles.profile__head}>
                 <div className={styles.profile__head__title}>
                     <h2>Roman Berezenko</h2>
-                    <div className={styles.profile__head__title__edit}>
+                    <div className={theme === 'light' ? styles.profile__head__title__edit : styles.profile__head__title__edit__dark}>
                         <EditIcon />
                     </div>
                 </div>
@@ -45,15 +45,23 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ variation }) => {
             </div>
             <ul className={styles.profile__socials}>
                 {variation === 'primary' ?
-                    socials.map((social, index) => (
-                        <li key={index}>
-                            {social.icon}
-                            <Link to=''>{social.username}</Link>
+                    <>
+                        <li className={styles.profile__socials__twitter}>
+                            <TwitterIcon />
+                            <Link to=''>@luxurypluxury28</Link>
                         </li>
-                    ))
+                        <li className={styles.profile__socials__instagram}>
+                            <InstagramIcon />
+                            <Link to=''>@luxurypluxury_</Link>
+                        </li>
+                        <li className={styles.profile__socials__twitter}>
+                            <TelegramIcon />
+                            <Link to=''>@dissxlutixn</Link>
+                        </li>
+                    </>
                     :
                     privacy.map((item, index) => (
-                        <li key={index}>
+                        <li key={index} className={styles.profile__socials__option}>
                             {item.icon}
                             {index === 0 && <p>berezenkoroman4@gmail.com</p>}
                             <Link to=''>{item.option}</Link>

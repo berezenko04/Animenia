@@ -112,6 +112,27 @@
                 }
             }
         }
+    }
 
+    &__up__dark {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $mainBg;
+        border-radius: 10px;
+        border: 1px solid $mainBg;
+        transition: all .3s ease-in;
+
+        &:hover {
+            background-color: transparent;
+
+            svg {
+                path {
+                    fill: $primary;
+                }
+            }
+        }
     }
 }
