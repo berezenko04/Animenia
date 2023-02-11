@@ -133,7 +133,9 @@ const Profile: React.FC = () => {
                                 <HeadingBlock title='Sessions' icon={<FolderIcon />} />
                                 <div className={styles.sessions__item}>
                                     <div className={styles.sessions__item__os}>
-                                        {!getOS()?.includes('iOS') || !getOS()?.includes('Android') ? <DesktopIcon /> : <MobileIcon />}
+                                        <div className={styles.sessions__item__os__icon}>
+                                            {getOS()?.includes('iOS') || getOS()?.includes('Android') ? <MobileIcon /> : <DesktopIcon />}
+                                        </div>
                                         <div className={styles.sessions__item__os__info}>
                                             <h3>OS: {getOS()}</h3>
                                             <p>Geo: {getGeo()}</p>
@@ -145,12 +147,11 @@ const Profile: React.FC = () => {
                                     <p className={styles.sessions__item__current}>
                                         Current Session
                                     </p>
-                                    <button
-                                        className={theme === 'light' ? styles.sessions__item__remove : styles.sessions__item__remove__dark}
-                                        onClick={handleLogout}
-                                    >
-                                        <TrashIcon />
-                                    </button>
+                                    <div className={theme === 'light' ? styles.sessions__item__remove : styles.sessions__item__remove__dark}>
+                                        <button onClick={handleLogout}>
+                                            <TrashIcon />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </section>

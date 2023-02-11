@@ -47,7 +47,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ imageUrl, title, rating, genre, s
 
         <article className={styles.card}>
             <Link to={`/Animenia/${id}`} onClick={handleClickLink}>
-                <img src={imageUrl} alt={title} />
+                <img src={imageUrl} alt={title}/>
             </Link>
             {favorite &&
                 <button className={styles.card__favorite} onClick={() => setIsFavorite(!isFavorite)}>

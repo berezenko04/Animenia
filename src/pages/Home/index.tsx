@@ -11,7 +11,7 @@ import AnimeCard from '@/components/AnimeCard'
 import Sidebar from '@/components/Sidebar'
 
 //Redux
-import { animeItemsSelector, sortedItemsSelector } from '@/redux/anime/selectors'
+import { animeItemsSelector, itemsStatusSelector, sortedItemsSelector, sortedItemsStatusSelector } from '@/redux/anime/selectors'
 import { fetchAnime, fetchSortedAnime } from '@/redux/anime/asyncActions'
 import { useAppDispatch } from '@/redux/store'
 
@@ -19,14 +19,46 @@ import { useAppDispatch } from '@/redux/store'
 //icons
 import { ReactComponent as FireIcon } from '@/assets/icons/fire.svg'
 import { ReactComponent as TrendingIcon } from '@/assets/icons/trending.svg'
-
+import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
 
 
 const Home: React.FC = () => {
     const items = useSelector(animeItemsSelector);
     const sorted = useSelector(sortedItemsSelector);
-    const dispatch = useAppDispatch();
+    const itemsStatus = useSelector(itemsStatusSelector);
+    const sortedItemsStatus = useSelector(sortedItemsStatusSelector);
     const [limit, setLimit] = useState(9);
+    const [step, setStep] = useState(9);
+    const dispatch = useAppDispatch();
+
+    // const [width, setWidth] = useState(window.innerWidth);
+    // const breakpoints = {
+    //     mobile: 480,
+    //     sm: 768,
+    //     tablet: 1024
+    // }
+
+    // const getLimit = () => {
+    //     if (width >= breakpoints.tablet) {
+    //         return 9;
+    //     }
+    //     if (width < breakpoints.tablet && width >= breakpoints.sm) {
+    //         return 6;
+    //     }
+    // }
+
+
+    // const getWidth = () => {
+    //     if (typeof (window) !== 'undefined') {
+    //         setWidth(window.innerWidth);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     window.addEventListener('resize', getWidth);
+
+    //     return () => window.removeEventListener('resize', getWidth);
+    // }, [])
 
     useEffect(() => {
         dispatch(fetchAnime());
@@ -49,27 +81,41 @@ const Home: React.FC = () => {
                         <div className={styles.page__main__categories}>
                             <section className={styles.page__main__categories__spring}>
                                 <HeadingBlock title='Spring Season' icon={<FireIcon />} slider>
-                                    {items.map((item, index) => (
-                                        <SwiperSlide key={index}>
-                                            < AnimeCard {...item} />
-                                        </SwiperSlide>
-                                    ))}
+                                    {itemsStatus === 'loading' ?
+
+                                        [...Array(3)].map((_, index) => (
+                                            <SwiperSlide>
+                                                <AnimeCardSkeleton key={index} />
+                                            </SwiperSlide>
+                                        )) :
+
+                                        items.map((item, index) => (
+                                            <SwiperSlide key={index}>
+                                                < AnimeCard {...item} />
+                                            </SwiperSlide>
+                                        ))
+                                    }
                                 </HeadingBlock>
                             </section>
                             <section className={styles.page__main__categories__top}>
                                 <HeadingBlock title='Top 100' icon={<TrendingIcon />}>
-                                    {sorted.map((item) => (
-                                        <AnimeCard key={item.id} {...item} />
-                                    ))}
+                                    {sortedItemsStatus === 'loading' ?
+                                        [...Array(9)].map((_, index) => (
+                                            <AnimeCardSkeleton key={index} />
+                                        )) :
+                                        sorted.map((item) => (
+                                            <AnimeCard key={item.id} {...item} />
+                                        ))
+                                    }
                                 </HeadingBlock>
                             </section>
                         </div>
-                        {limit < items.length && <button className={styles.page__main__load} onClick={() => setLimit(limit + 9)}>Load More</button>}
+                        {limit < items.length && <button className={styles.page__main__load} onClick={() => setLimit(limit + step)}>Load More</button>}
                     </div>
                     <Sidebar />
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

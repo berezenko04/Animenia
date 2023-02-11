@@ -64,10 +64,10 @@ const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, childr
                             swiperRef.current = swiper;
                         }}
                         breakpoints={{
-                            576: {
+                            0: {
                                 slidesPerView: 1,
                             },
-                            768: {
+                            600: {
                                 slidesPerView: 2,
                             },
                             1024: {

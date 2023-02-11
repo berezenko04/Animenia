@@ -1,8 +1,10 @@
 @import '@/scss/variables.scss';
+@import '@/scss/mixins.scss';
 
 .footer {
     padding: 50px 0 60px;
     background-color: $white;
+
 
     h3 {
         font-weight: 500;
@@ -15,6 +17,12 @@
         display: flex;
         justify-content: space-between;
         gap: 40px;
+        position: relative;
+
+        @include SmallTablet {
+            flex-direction: column;
+            gap: 30px;
+        }
     }
 
     &__left {
@@ -44,7 +52,6 @@
 
     &__categories {
         display: flex;
-        justify-content: space-between;
         gap: 120px;
 
         &__item {
@@ -101,32 +108,25 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: $primary;
         border-radius: 10px;
-        border: 1px solid $primary;
         transition: all .3s ease-in;
 
-        &:hover {
-            background-color: transparent;
 
-            svg {
-                path {
-                    fill: $primary;
-                }
-            }
+        @include SmallTablet {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
-    }
 
-    &__up__dark {
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: $mainBg;
-        border-radius: 10px;
-        border: 1px solid $mainBg;
-        transition: all .3s ease-in;
+        &__light {
+            background-color: $primary;
+            border: 1px solid $primary;
+        }
+
+        &__dark {
+            background-color: $mainBg;
+            border: 1px solid $mainBg;
+        }
 
         &:hover {
             background-color: transparent;

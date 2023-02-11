@@ -1,9 +1,16 @@
+@import '@/scss/mixins.scss';
+
 .upload {
     width: 160px;
     height: 160px;
     position: relative;
     border-radius: 50%;
     overflow: hidden;
+
+    @include SmallTablet {
+        width: 95px;
+        height: 95px;
+    }
 
     &::after {
         content: '';
@@ -33,7 +40,6 @@
         position: absolute;
         top: 0;
         left: 0;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(.jpg), #C4C4C4;
     }
 
     label {

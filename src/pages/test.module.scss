@@ -1,0 +1,17 @@
+.items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+    gap: 30px;
+}
+
+.news {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

@@ -7,7 +7,6 @@ export type AnimeItem = {
     description: string
 }
 
-
 export type FetchParams = {
     sort: string,
 }
@@ -15,4 +14,12 @@ export type FetchParams = {
 export interface AnimeSliceState {
     items: AnimeItem[]
     sortedItems: AnimeItem[],
+    itemsStatus: string,
+    sortedItemsStatus: string
+}
+
+export enum Status {
+    LOADING = 'loading',
+    SUCCESS = 'success',
+    ERROR = 'error'
 }

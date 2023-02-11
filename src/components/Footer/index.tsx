@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
                         </div>
                     </div>
                     <button
-                        className={theme === 'light' ? styles.footer__up : styles.footer__up__dark}
+                        className={`${styles.footer__up} ${theme === 'light' ? styles.footer__up__light : styles.footer__up__dark}`}
                         onClick={() => window.scrollTo(0, 0)}
                     >
                         <ArrowTopIcon />

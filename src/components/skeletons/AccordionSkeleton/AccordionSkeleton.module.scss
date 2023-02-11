@@ -1,0 +1,54 @@
+@import '@/scss/mixins.scss';
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    padding: 5px;
+
+    @include LoadAnimation;
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        &__title {
+            width: 100%;
+            height: 18px;
+            border-radius: 8px;
+            background-color: darkgray;
+            position: relative;
+            overflow: hidden;
+
+            @include Skeleton;
+        }
+
+        &__genre {
+            width: 50%;
+            height: 16px;
+            border-radius: 8px;
+            background-color: darkgray;
+            position: relative;
+            overflow: hidden;
+
+            @include Skeleton;
+        }
+
+        &__date {
+            width: 25%;
+            height: 16px;
+            border-radius: 8px;
+            background-color: darkgray;
+            position: relative;
+            overflow: hidden;
+
+            @include Skeleton;
+        }
+
+    }
+}

@@ -8,28 +8,29 @@ import styles from './Sidebar.module.scss'
 //icons
 import { ReactComponent as DocumentIcon } from '@/assets/icons/document.svg'
 import { ReactComponent as VideoIcon } from '@/assets/icons/video-camera.svg'
+import AccordionTablet from '../AccordionTablet'
+import AccordionSkeleton from '../skeletons/AccordionSkeleton'
 
 //components
 import Accordion from '@/components/Accordion'
 import HeadingBlock from '@/components/HeadingBlock'
 
 //utils
-import { newsItemsSelector } from '@/redux/news/selectors'
-import { getNews } from '@/API/AnimeService'
-import { setItems } from '@/redux/news/slice'
+import { newsItemsSelector, statusSelector } from '@/redux/news/selectors'
 import { useAppDispatch } from '@/redux/store'
-import AccordionTablet from '../AccordionTablet'
+import { fetchNews } from '@/redux/news/asyncActions'
+
 
 
 
 const Sidebar: React.FC = () => {
 
-    const [isLoading, setIsLoading] = useState(true);
     const [width, setWidth] = useState(window.innerWidth);
     const news = useSelector(newsItemsSelector);
     const dispatch = useAppDispatch();
+    const status = useSelector(statusSelector);
 
-    const breakpoint: number = 1350;
+    const breakpoint = 1350;
 
     const getWidth = () => {
         if (typeof (window) !== 'undefined') {
@@ -45,17 +46,7 @@ const Sidebar: React.FC = () => {
 
 
     useEffect(() => {
-        setIsLoading(true);
-        try {
-            (async () => {
-                const news = await getNews();
-                dispatch(setItems(news));
-                setIsLoading(false);
-            })()
-        } catch (error) {
-            alert('Sorry, there was an error loading the news');
-            console.error(error);
-        }
+        dispatch(fetchNews());
     }, [])
 
     return (
@@ -63,24 +54,30 @@ const Sidebar: React.FC = () => {
             <div className={styles.aside__news}>
                 <HeadingBlock title='Latest News' icon={<DocumentIcon />} />
                 <div className={styles.aside__news__items}>
-                    {news.map((item, index) => (
-                        width >= breakpoint ?
-                            <Accordion
-                                key={index}
-                                title={item.title}
-                                genre={item.genre}
-                                date={item.date}
-                            >
-                                <img src={item.imageUrl} alt={item.title} />
-                            </Accordion>
-                            :
-                            <AccordionTablet
-                                title={item.title}
-                                genre={item.genre}
-                                date={item.date}
-                                imageUrl={item.imageUrl}
-                            />
-                    ))}
+                    {status === 'loading' ?
+                        [...Array(5)].map((_, index) => (
+                            <AccordionSkeleton key={index} />
+                        )) :
+                        news.map((item, index) => (
+                            width >= breakpoint ?
+                                <Accordion
+                                    key={index}
+                                    title={item.title}
+                                    genre={item.genre}
+                                    date={item.date}
+                                >
+                                    <img src={item.imageUrl} alt={item.title} />
+                                </Accordion>
+                                :
+                                <AccordionTablet
+                                    key={index}
+                                    title={item.title}
+                                    genre={item.genre}
+                                    date={item.date}
+                                    imageUrl={item.imageUrl}
+                                />
+                        ))
+                    }
                 </div>
             </div>
             <div className={styles.aside__reviews}>
@@ -98,7 +95,7 @@ const Sidebar: React.FC = () => {
                 <Link to='https://t.me/dissxlutxn' target='_blank' className={styles.aside__socials__telegram}>Telegram</Link>
                 <Link to='' className={styles.aside__socials__youtube}>Youtube</Link>
             </div>
-        </aside>
+        </aside >
     )
 }
 
