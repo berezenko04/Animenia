@@ -3,7 +3,8 @@ import { AuthSliceState } from "./types";
 import { getAuthFromLS } from "@/utils/getAuthFromLS";
 
 const initialState: AuthSliceState = {
-    isAuth: getAuthFromLS()
+    isAuth: getAuthFromLS(),
+    login: ''
 }
 
 export const AuthSlice = createSlice({

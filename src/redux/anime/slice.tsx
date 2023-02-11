@@ -1,28 +1,13 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { getAnime, getSortedAnime, SortedAnimeProps } from '@/API/AnimeService';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AnimeItem, AnimeSliceState } from './types';
+
+import { fetchAnime, fetchSortedAnime } from './asyncActions';
 
 const initialState: AnimeSliceState = {
     items: [],
-    sortedItems: []
+    sortedItems: [],
 }
 
-export const fetchAnime = createAsyncThunk(
-    'anime/fetchAnimeStatus',
-    async () => {
-        const anime = await getAnime();
-        return anime;
-    }
-)
-
-export const fetchSortedAnime = createAsyncThunk(
-    'anime/fetchSortedAnimeStatus',
-    async (params: SortedAnimeProps) => {
-        const { sort, order, page, limit } = params;
-        const anime = await getSortedAnime(sort, order, page, limit);
-        return anime;
-    }
-)
 
 export const AnimeSlice = createSlice({
     name: 'anime',

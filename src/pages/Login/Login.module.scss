@@ -1,4 +1,5 @@
 @import '@/scss/variables.scss';
+@import '@/scss/mixins.scss';
 
 .page {
     background-image: url('../../assets/img/bg.webp');
@@ -11,6 +12,10 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
+
+        @include Tablet {
+            justify-content: center;
+        }
     }
 
     &__form {
@@ -20,6 +25,10 @@
         border-radius: 10px;
         max-width: 540px;
         width: 100%;
+
+        @media screen and (max-width: 600px) {
+            padding: 30px;
+        }
 
         &__main {
             width: 100%;

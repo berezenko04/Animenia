@@ -23,6 +23,10 @@
         align-items: center;
         gap: 10px;
 
+        @media screen and (max-width:1250px) {
+            display: none;
+        }
+
 
         label {
             width: 18px;
@@ -126,6 +130,16 @@
                 object-position: center;
             }
         }
+
+        &__menu {
+            display: none;
+            width: 24px;
+            height: 24px;
+
+            @media screen and (max-width:1250px) {
+                display: block;
+            }
+        }
     }
 
     svg {
@@ -140,6 +154,10 @@
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media screen and (max-width:1250px) {
+        display: none;
+    }
 
     &__item {
         display: flex;

@@ -11,23 +11,37 @@ type AnimeBlockProps = {
     title: string,
     genre: string,
     rating: number,
-    description: string
+    description: string,
+    id: string,
+    isWatch?: boolean,
 }
 
-const AnimeBlock: React.FC<AnimeBlockProps> = ({ imageUrl, title, genre, rating, description }) => {
+export const handleClickLink = () => {
+    window.scrollTo(0, 0);
+}
+
+const AnimeBlock: React.FC<AnimeBlockProps> = ({
+    imageUrl,
+    title,
+    genre,
+    rating,
+    description,
+    id,
+    isWatch = true,
+}) => {
     return (
         <article className={styles.block}>
-            <AnimeCard imageUrl={imageUrl} favorite />
+            <AnimeCard imageUrl={imageUrl} favorite id={id} />
             <div className={styles.block__content}>
                 <div className={styles.block__content__title}>
-                    <h2>{title}</h2>
+                    <Link to={`/Animenia/${id}`} onClick={handleClickLink}>{title}</Link>
                     <p>{genre}</p>
                     <RatingBlock rating={rating} variation={'secondary'} />
                 </div>
                 <p className={styles.block__content__main}>
                     {description}
                 </p>
-                <Link to='' className={styles.block__content__button}>Watch</Link>
+                {isWatch && <Link to={`/Animenia/${id}`} onClick={handleClickLink} className={styles.block__content__button}>Watch</Link>}
             </div>
         </article>
     )

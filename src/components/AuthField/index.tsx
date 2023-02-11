@@ -9,7 +9,6 @@ type AuthFieldProps = {
     type: string,
     placeholder: string,
     icon: React.ReactElement
-
 }
 
 const AuthField: React.FC<AuthFieldProps> = ({ type, placeholder, icon }) => {

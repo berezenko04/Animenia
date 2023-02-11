@@ -12,6 +12,7 @@ import { ReactComponent as SunIcon } from '@/assets/icons/sun.svg'
 import { ReactComponent as ProfileIcon } from '@/assets/icons/profile.svg'
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.svg'
+import { ReactComponent as MenuIcon } from '@/assets/icons/menu.svg'
 import ProfileImage from '@/assets/img/profile.webp'
 
 
@@ -89,6 +90,9 @@ const Header: React.FC = () => {
                                 </Link>
                             </div>
                         }
+                        <button className={styles.header__userBlock__menu}>
+                            <MenuIcon />
+                        </button>
                     </div>
                 </div>
             </div>

@@ -13,10 +13,11 @@ type HeadingBlockProps = {
     title: string,
     slider?: boolean,
     children?: React.ReactNode,
-    items?: []
+    items?: [],
+    addToList?: boolean
 }
 
-const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, children }) => {
+const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, children, addToList = false }) => {
 
 
     const swiperRef = useRef<SwiperType>();
@@ -46,10 +47,13 @@ const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, childr
                         </button>
                     </div>
                 }
+                {addToList && <button className={styles.block__add}>Add to the list</button>}
             </div>
-            {!slider && <div className={styles.block__main}>
-                {children}
-            </div>}
+            {!slider &&
+                <div className={styles.block__main}>
+                    {children}
+                </div>
+            }
             {slider &&
                 <div className={styles.block__swiper}>
                     <Swiper
@@ -58,6 +62,17 @@ const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, childr
                         modules={[Navigation]}
                         onBeforeInit={(swiper) => {
                             swiperRef.current = swiper;
+                        }}
+                        breakpoints={{
+                            576: {
+                                slidesPerView: 1,
+                            },
+                            768: {
+                                slidesPerView: 2,
+                            },
+                            1024: {
+                                slidesPerView: 3
+                            }
                         }}
                     >
                         {children}

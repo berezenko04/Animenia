@@ -11,7 +11,6 @@
         color: $primary;
     }
 
-
     &__wrapper {
         display: flex;
         justify-content: space-between;
@@ -78,6 +77,10 @@
         gap: 10px;
         max-width: 350px;
         width: 100%;
+
+        @media screen and (max-width:1200px) {
+            display: none;
+        }
 
         &__text {
             display: flex;

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -34,8 +34,6 @@ import { themeSelector } from "@/redux/theme/selectors";
 import { getOS } from '@/utils/getOS'
 import { getDate } from '@/utils/formatDate'
 
-
-
 const Profile: React.FC = () => {
 
     const tab = useSelector(tabSelector);
@@ -58,7 +56,7 @@ const Profile: React.FC = () => {
         isMounted.current = true;
     }, [isAuth]);
 
-    const notifications = [
+    const notifications: string[] = [
         'Push notifications',
         'Email notifications',
         'Messages',
@@ -88,18 +86,19 @@ const Profile: React.FC = () => {
             console.log("Geolocation is not supported by this browser.");
         }
     }
-    getGeo();
 
     const fetchGeo = async (url: string) => {
         try {
             const { data } = await axios.get(url);
-            dispatch(setCountry(data.results[9].formatted_address));
-            dispatch(setCity(data.results[6].formatted_address.split(',')[0]));
+            const dataArray = data.results[0].formatted_address.split(', ');
+            dispatch(setCountry(dataArray[4]));
+            dispatch(setCity(dataArray[2]));
         } catch (error) {
             alert('An error occurred while getting the location');
             console.error(error);
         }
     }
+
 
     return (
         <div className="container">
@@ -134,7 +133,7 @@ const Profile: React.FC = () => {
                                 <HeadingBlock title='Sessions' icon={<FolderIcon />} />
                                 <div className={styles.sessions__item}>
                                     <div className={styles.sessions__item__os}>
-                                        {getOS() === 'Windows' || 'MacOs' ? <DesktopIcon /> : <MobileIcon />}
+                                        {!getOS()?.includes('iOS') || !getOS()?.includes('Android') ? <DesktopIcon /> : <MobileIcon />}
                                         <div className={styles.sessions__item__os__info}>
                                             <h3>OS: {getOS()}</h3>
                                             <p>Geo: {getGeo()}</p>

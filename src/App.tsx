@@ -5,7 +5,7 @@ import './App.scss'
 
 import Layout from './layouts/MainLayout'
 import Home from './pages/Home'
-import Loading from './components/Loading'
+import Test from './pages/test'
 
 //redux
 import { useSelector } from 'react-redux'
@@ -16,6 +16,7 @@ const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Profile = lazy(() => import('./pages/Profile'));
 const AllAnime = lazy(() => import('./pages/AllAnime'));
+const AnimeId = lazy(() => import('./pages/AnimeId'))
 
 function App() {
 
@@ -25,14 +26,16 @@ function App() {
     <div data-theme={theme === 'light' ? 'light' : 'dark'} className="App">
       <Routes>
         <Route path='/Animenia/' element={<Layout />}>
-          <Route path='' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
-          <Route path='/Animenia/profile' element={<Suspense fallback={<Loading />}><Profile /></Suspense>} />
-          <Route path='/Animenia/all' element={<Suspense fallback={<Loading />}><AllAnime /></Suspense>} />
+          <Route path='' element={<Home />} />
+          <Route path='profile' element={<Suspense><Profile /></Suspense>} />
+          <Route path='all' element={<Suspense><AllAnime /></Suspense>} />
+          <Route path='test' element={<Test />} />
+          <Route path='/Animenia/:id' element={<Suspense><AnimeId /></Suspense>} />
         </Route>
-        <Route path='/Animenia/register' element={<Suspense fallback={<Loading />}><Register /></Suspense>} />
-        <Route path='/Animenia/login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
+        <Route path='/Animenia/register' element={<Suspense><Register /></Suspense>} />
+        <Route path='/Animenia/login' element={<Suspense><Login /></Suspense>} />
       </Routes>
-    </div>
+    </div >
   )
 }
 

@@ -14,5 +14,5 @@ export type FetchParams = {
 
 export interface AnimeSliceState {
     items: AnimeItem[]
-    sortedItems: AnimeItem[]
+    sortedItems: AnimeItem[],
 }

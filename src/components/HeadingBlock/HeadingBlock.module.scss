@@ -1,4 +1,5 @@
 @import '@/scss/variables.scss';
+@import '@/scss/mixins.scss';
 
 .block {
     width: 100%;
@@ -89,5 +90,15 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
+
+        @include Tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__add {
+        font-size: 14px;
+        line-height: 135%;
+        color: $primary;
     }
 }

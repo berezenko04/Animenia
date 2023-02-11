@@ -24,7 +24,6 @@ const Login: React.FC = () => {
     const isAuth = useSelector(isAuthSelector);
     const isMounted = useRef(false);
     const navigate = useNavigate();
-    console.log(isAuth);
 
     useEffect(() => {
         if (isMounted.current) {

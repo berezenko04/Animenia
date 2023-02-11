@@ -11,11 +11,11 @@ import AnimeBlock from '@/components/AnimeBlock'
 
 
 //icons
-import { ReactComponent as PlugIcon } from '@/assets/icons/plug.svg'
+import { ReactComponent as ListIcon } from '@/assets/icons/list.svg'
 
 //redux
 import { sortedItemsSelector } from '@/redux/anime/selectors'
-import { fetchSortedAnime } from '@/redux/anime/slice'
+import { fetchSortedAnime } from '@/redux/anime/asyncActions'
 import { useAppDispatch } from '@/redux/store'
 import { pageNumberSelector } from '@/redux/pagination/selectors'
 
@@ -40,7 +40,7 @@ const AllAnime: React.FC = () => {
         <div className="container">
             <div className={styles.page}>
                 <section className={styles.all}>
-                    <HeadingBlock title='All Anime' icon={<PlugIcon />} />
+                    <HeadingBlock title='All Anime' icon={<ListIcon />} />
                     <div className={styles.all__content}>
                         <div className={styles.all__content__items}>
                             {sorted.map((item, index) => (

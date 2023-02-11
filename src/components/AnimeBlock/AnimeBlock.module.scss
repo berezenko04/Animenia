@@ -10,6 +10,17 @@
     box-shadow: $shadow;
     border-radius: 10px;
 
+    &__secondary {
+        display: grid;
+        grid-template-columns: 3fr 6fr;
+        align-items: flex-start;
+        gap: 30px;
+        padding-right: 10px;
+        background-color: transparent;
+        box-shadow: $shadow;
+        border-radius: 10px;
+    }
+
     &__content {
         display: flex;
         flex-direction: column;
@@ -21,7 +32,7 @@
             flex-direction: column;
             gap: 10px;
 
-            h2 {
+            a {
                 font-weight: 500;
                 font-size: 24px;
                 line-height: 135%;

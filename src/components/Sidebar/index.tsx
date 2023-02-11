@@ -18,14 +18,31 @@ import { newsItemsSelector } from '@/redux/news/selectors'
 import { getNews } from '@/API/AnimeService'
 import { setItems } from '@/redux/news/slice'
 import { useAppDispatch } from '@/redux/store'
+import AccordionTablet from '../AccordionTablet'
 
 
 
 const Sidebar: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState(true);
+    const [width, setWidth] = useState(window.innerWidth);
     const news = useSelector(newsItemsSelector);
     const dispatch = useAppDispatch();
+
+    const breakpoint: number = 1350;
+
+    const getWidth = () => {
+        if (typeof (window) !== 'undefined') {
+            setWidth(window.innerWidth);
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', getWidth);
+
+        return () => window.removeEventListener('resize', getWidth);
+    }, [])
+
 
     useEffect(() => {
         setIsLoading(true);
@@ -44,17 +61,25 @@ const Sidebar: React.FC = () => {
     return (
         <aside className={styles.aside}>
             <div className={styles.aside__news}>
-                <HeadingBlock title='News' icon={<DocumentIcon />} />
+                <HeadingBlock title='Latest News' icon={<DocumentIcon />} />
                 <div className={styles.aside__news__items}>
                     {news.map((item, index) => (
-                        <Accordion
-                            key={index}
-                            title={item.title}
-                            genre={item.genre}
-                            date={item.date}
-                        >
-                            <img src={item.imageUrl} alt={item.title} />
-                        </Accordion>
+                        width >= breakpoint ?
+                            <Accordion
+                                key={index}
+                                title={item.title}
+                                genre={item.genre}
+                                date={item.date}
+                            >
+                                <img src={item.imageUrl} alt={item.title} />
+                            </Accordion>
+                            :
+                            <AccordionTablet
+                                title={item.title}
+                                genre={item.genre}
+                                date={item.date}
+                                imageUrl={item.imageUrl}
+                            />
                     ))}
                 </div>
             </div>

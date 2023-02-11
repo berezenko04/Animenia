@@ -1,3 +1,4 @@
 export type AuthSliceState = {
-    isAuth: boolean
+    isAuth: boolean,
+    login: string
 }

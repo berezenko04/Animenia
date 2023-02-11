@@ -6,6 +6,12 @@
         display: grid;
         grid-template-columns: 75% 25%;
         gap: 30px;
+
+        @media screen and (max-width:1350px) {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
     }
 
     &__main {
