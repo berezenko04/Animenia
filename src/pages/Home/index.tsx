@@ -22,6 +22,10 @@ import { ReactComponent as TrendingIcon } from '@/assets/icons/trending.svg'
 import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
 
 
+//utils
+import { useWindowResize } from '@/utils/useWindowResize'
+
+
 const Home: React.FC = () => {
     const items = useSelector(animeItemsSelector);
     const sorted = useSelector(sortedItemsSelector);
@@ -29,46 +33,27 @@ const Home: React.FC = () => {
     const sortedItemsStatus = useSelector(sortedItemsStatusSelector);
     const dispatch = useAppDispatch();
 
-    const step = 9;
-    const [limit, setLimit] = useState(9);
+    const width = useWindowResize();
+
+    const breakpoints = {
+        tablet: 1024,
+        sm: 600
+    }
+
+    useEffect(() => {
+        const { tablet, sm } = breakpoints;
+        if (width > tablet) {
+            setLimit(9);
+        } else if (width < tablet && width > sm) {
+            setLimit(6);
+        } else if (width < sm) {
+            setLimit(2);
+        }
+    }, [width])
 
 
-    // const breakpoints = {
-    //     tablet: 1024,
-    //     sm: 600,
-    // }
-    // const [width, setWidth] = useState(innerWidth);
-
-
-    // const getLimit = () => {
-    //     const { tablet, sm } = breakpoints;
-    //     if (width > tablet) {
-    //         setLimit(9);
-    //     } else if (width < tablet && width > sm) {
-    //         setLimit(6);
-    //     } else if (width < sm) {
-    //         setLimit(2);
-    //     }
-    // }
-
-
-
-    // const getWidth = () => {
-    //     if (typeof (window) !== 'undefined') {
-    //         setWidth(window.innerWidth);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     window.addEventListener('resize', getWidth);
-    //     window.addEventListener('resize', getLimit);
-
-    //     return () => {
-    //         window.removeEventListener('resize', getLimit);
-    //         window.removeEventListener('resize', getWidth);
-    //     }
-    // }, [])
-
+    const [limit, setLimit] = useState(0);
+    const [step, setStep] = useState(limit);
 
     useEffect(() => {
         dispatch(fetchAnime());

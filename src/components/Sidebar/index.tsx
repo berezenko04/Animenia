@@ -20,30 +20,19 @@ import { newsItemsSelector, statusSelector } from '@/redux/news/selectors'
 import { useAppDispatch } from '@/redux/store'
 import { fetchNews } from '@/redux/news/asyncActions'
 import AccordionTabletSkeleton from '../skeletons/AccordionTabletSkeleton'
+import { useWindowResize } from '@/utils/useWindowResize'
 
 
 
 
 const Sidebar: React.FC = () => {
 
-    const [width, setWidth] = useState(window.innerWidth);
+    const width = useWindowResize();
     const news = useSelector(newsItemsSelector);
     const dispatch = useAppDispatch();
     const status = useSelector(statusSelector);
 
     const breakpoint = 1350;
-
-    const getWidth = () => {
-        if (typeof (window) !== 'undefined') {
-            setWidth(window.innerWidth);
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', getWidth);
-
-        return () => window.removeEventListener('resize', getWidth);
-    }, [])
 
 
     useEffect(() => {

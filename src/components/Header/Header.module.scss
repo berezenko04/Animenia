@@ -1,4 +1,5 @@
 @import '@/scss/variables.scss';
+@import '@/scss/mixins.scss';
 
 .header {
     background-color: $white;
@@ -13,6 +14,10 @@
         align-items: center;
         justify-content: space-between;
         gap: 32px;
+
+        @include Mobile {
+            gap: 20px;
+        }
     }
 
     &__search {
@@ -63,6 +68,10 @@
         display: flex;
         align-items: center;
         gap: 20px;
+
+        @include Mobile {
+            gap: 15px;
+        }
 
         &__buttons {
             display: flex;

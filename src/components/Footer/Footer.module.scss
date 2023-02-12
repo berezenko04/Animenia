@@ -5,6 +5,10 @@
     padding: 50px 0 60px;
     background-color: $white;
 
+    @include Mobile {
+        padding: 30px 0 40px;
+    }
+
 
     h3 {
         font-weight: 500;
@@ -40,6 +44,11 @@
                 font-size: 14px;
                 line-height: 16px;
                 color: $thirty;
+            }
+
+            @include Mobile {
+                max-width: 160px;
+                width: 100%;
             }
         }
 
