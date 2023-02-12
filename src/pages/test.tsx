@@ -3,6 +3,7 @@ import AccordionSkeleton from "@/components/skeletons/AccordionSkeleton"
 
 import styles from './test.module.scss'
 import AnimeBlockSkeleton from "@/components/skeletons/AnimeBlockSkeleton"
+import AccordionTabletSkeleton from "@/components/skeletons/AccordionTabletSkeleton"
 
 
 const test: React.FC = () => {
@@ -24,6 +25,14 @@ const test: React.FC = () => {
                 <div className={styles.anime}>
                     {[...Array(3)].map((_, index) => (
                         <AnimeBlockSkeleton key={index} />
+                    ))}
+                </div>
+                <div>
+
+                </div>
+                <div className={styles.accordions}>
+                    {[...Array(5)].map((_, index) => (
+                        <AccordionTabletSkeleton key={index} />
                     ))}
                 </div>
             </div>

@@ -27,25 +27,30 @@ const Home: React.FC = () => {
     const sorted = useSelector(sortedItemsSelector);
     const itemsStatus = useSelector(itemsStatusSelector);
     const sortedItemsStatus = useSelector(sortedItemsStatusSelector);
-    const [limit, setLimit] = useState(9);
-    const [step, setStep] = useState(9);
     const dispatch = useAppDispatch();
 
-    // const [width, setWidth] = useState(window.innerWidth);
+    const step = 9;
+    const [limit, setLimit] = useState(9);
+
+
     // const breakpoints = {
-    //     mobile: 480,
-    //     sm: 768,
-    //     tablet: 1024
+    //     tablet: 1024,
+    //     sm: 600,
     // }
+    // const [width, setWidth] = useState(innerWidth);
+
 
     // const getLimit = () => {
-    //     if (width >= breakpoints.tablet) {
-    //         return 9;
-    //     }
-    //     if (width < breakpoints.tablet && width >= breakpoints.sm) {
-    //         return 6;
+    //     const { tablet, sm } = breakpoints;
+    //     if (width > tablet) {
+    //         setLimit(9);
+    //     } else if (width < tablet && width > sm) {
+    //         setLimit(6);
+    //     } else if (width < sm) {
+    //         setLimit(2);
     //     }
     // }
+
 
 
     // const getWidth = () => {
@@ -56,9 +61,14 @@ const Home: React.FC = () => {
 
     // useEffect(() => {
     //     window.addEventListener('resize', getWidth);
+    //     window.addEventListener('resize', getLimit);
 
-    //     return () => window.removeEventListener('resize', getWidth);
+    //     return () => {
+    //         window.removeEventListener('resize', getLimit);
+    //         window.removeEventListener('resize', getWidth);
+    //     }
     // }, [])
+
 
     useEffect(() => {
         dispatch(fetchAnime());

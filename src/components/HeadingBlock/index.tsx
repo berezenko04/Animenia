@@ -67,10 +67,10 @@ const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, childr
                             0: {
                                 slidesPerView: 1,
                             },
-                            600: {
+                            601: {
                                 slidesPerView: 2,
                             },
-                            1024: {
+                            1025: {
                                 slidesPerView: 3
                             }
                         }}

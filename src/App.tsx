@@ -10,6 +10,7 @@ import Test from './pages/test'
 //redux
 import { useSelector } from 'react-redux'
 import { themeSelector } from './redux/theme/selectors'
+import EmptyScreen from './components/EmptyScreen'
 
 //pages
 const Login = lazy(() => import('./pages/Login'));
@@ -27,13 +28,13 @@ function App() {
       <Routes>
         <Route path='/Animenia/' element={<Layout />}>
           <Route path='' element={<Home />} />
-          <Route path='profile' element={<Suspense><Profile /></Suspense>} />
-          <Route path='all' element={<Suspense><AllAnime /></Suspense>} />
+          <Route path='profile' element={<Suspense fallback={<EmptyScreen />}><Profile /></Suspense>} />
+          <Route path='all' element={<Suspense fallback={<EmptyScreen />}><AllAnime /></Suspense>} />
           <Route path='test' element={<Test />} />
-          <Route path='/Animenia/:id' element={<Suspense><AnimeId /></Suspense>} />
+          <Route path='/Animenia/:id' element={<Suspense fallback={<EmptyScreen />}><AnimeId /></Suspense>} />
         </Route>
-        <Route path='/Animenia/register' element={<Suspense><Register /></Suspense>} />
-        <Route path='/Animenia/login' element={<Suspense><Login /></Suspense>} />
+        <Route path='/Animenia/register' element={<Suspense fallback={<EmptyScreen />}><Register /></Suspense>} />
+        <Route path='/Animenia/login' element={<Suspense fallback={<EmptyScreen />}><Login /></Suspense>} />
       </Routes>
     </div >
   )

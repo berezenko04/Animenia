@@ -19,6 +19,7 @@ import HeadingBlock from '@/components/HeadingBlock'
 import { newsItemsSelector, statusSelector } from '@/redux/news/selectors'
 import { useAppDispatch } from '@/redux/store'
 import { fetchNews } from '@/redux/news/asyncActions'
+import AccordionTabletSkeleton from '../skeletons/AccordionTabletSkeleton'
 
 
 
@@ -56,7 +57,10 @@ const Sidebar: React.FC = () => {
                 <div className={styles.aside__news__items}>
                     {status === 'loading' ?
                         [...Array(5)].map((_, index) => (
-                            <AccordionSkeleton key={index} />
+                            width >= breakpoint ?
+                                < AccordionSkeleton key={index} />
+                                :
+                                <AccordionTabletSkeleton key={index} />
                         )) :
                         news.map((item, index) => (
                             width >= breakpoint ?
