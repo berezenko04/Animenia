@@ -1,6 +1,11 @@
 @import '@/scss/variables.scss';
+@import '@/scss/mixins.scss';
 
 .main {
     background-color: $mainBg;
     padding: 50px 0;
+
+    @include Mobile {
+        padding: 30px 0;
+    }
 }

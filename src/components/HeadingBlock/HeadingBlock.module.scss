@@ -105,4 +105,25 @@
         line-height: 135%;
         color: $primary;
     }
+
+    &__filter {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        svg {
+            width: 20px;
+            height: 20px;
+
+            path {
+                fill: $primary;
+            }
+        }
+
+        span {
+            font-size: 14px;
+            line-height: 135%;
+            color: $primary;
+        }
+    }
 }

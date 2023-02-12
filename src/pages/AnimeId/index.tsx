@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+import { SwiperSlide } from 'swiper/react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import styles from './AnimeId.module.scss'
@@ -10,6 +11,7 @@ import Sidebar from '@/components/Sidebar'
 import AnimeBlock from '@/components/AnimeBlock'
 import HeadingBlock from '@/components/HeadingBlock'
 import AnimeCard from '@/components/AnimeCard'
+import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
 
 //icons
 import { ReactComponent as DesktopIcon } from '@/assets/icons/desktop.svg'
@@ -19,8 +21,10 @@ import { ReactComponent as MessageIcon } from '@/assets/icons/message.svg'
 //redux
 import { useAppDispatch } from '@/redux/store'
 import { fetchAnime } from '@/redux/anime/asyncActions'
-import { animeItemsSelector } from '@/redux/anime/selectors'
-import { SwiperSlide } from 'swiper/react'
+import { animeItemsSelector, itemsStatusSelector } from '@/redux/anime/selectors'
+
+//utils
+import { useWindowResize } from '@/utils/useWindowResize'
 
 
 
@@ -28,8 +32,11 @@ import { SwiperSlide } from 'swiper/react'
 const AnimeId: React.FC = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
+    const itemsStatus = useSelector(itemsStatusSelector);
+    const width = useWindowResize();
     const items = useSelector(animeItemsSelector);
     const [isLoading, setIsLoading] = useState(true);
+    const [limit, setLimit] = useState(3);
     const [anime, setAnime] = useState<{
         id: string,
         title: string,
@@ -41,6 +48,15 @@ const AnimeId: React.FC = () => {
         videoUrl: string
     }>();
     const { id } = useParams();
+    const breakpoint = 768;
+
+    useEffect(() => {
+        if (width > breakpoint) {
+            setLimit(3);
+        } else if (width <= breakpoint) {
+            setLimit(2);
+        }
+    }, [width])
 
     useEffect(() => {
         setIsLoading(true);
@@ -71,22 +87,32 @@ const AnimeId: React.FC = () => {
                                 <div className={styles.anime__screenshots}>
                                     <p>Screenshots</p>
                                     <div className={styles.anime__screenshots__content}>
-                                        {anime.screenshots.map((item, index) => (
+                                        {anime.screenshots.slice(0, limit).map((item, index) => (
                                             <img key={index} src={`screenshots/${id}/${item}`} alt="#" />
                                         ))}
                                     </div>
                                 </div>
                                 <div className={styles.anime__video}>
-                                    <video src={anime.videoUrl} controls />
+                                    <video controls preload='auto'>
+                                        <source src={anime.videoUrl} />
+                                    </video>
                                 </div>
                             </section>
                             <section className={styles.similar}>
                                 <HeadingBlock title='Similar Anime' icon={<SwapIcon />} slider>
-                                    {items.slice(5, 20).map((item, index) => (
-                                        <SwiperSlide key={index}>
-                                            <AnimeCard {...item} />
-                                        </SwiperSlide>
-                                    ))}
+                                    {itemsStatus === 'loading' ?
+                                        [...Array(3)].map((_, index) => (
+                                            <SwiperSlide key={index}>
+                                                <AnimeCardSkeleton />
+                                            </SwiperSlide>
+                                        ))
+                                        :
+                                        items.slice(5, 20).map((item, index) => (
+                                            <SwiperSlide key={index}>
+                                                <AnimeCard {...item} />
+                                            </SwiperSlide>
+                                        ))
+                                    }
                                 </HeadingBlock>
                             </section>
                             <section className={styles.comments}>

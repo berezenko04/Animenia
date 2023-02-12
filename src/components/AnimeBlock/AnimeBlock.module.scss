@@ -1,4 +1,5 @@
 @import '@/scss/variables.scss';
+@import '@/scss/mixins.scss';
 
 .block {
     display: grid;
@@ -9,6 +10,11 @@
     background-color: $white;
     box-shadow: $shadow;
     border-radius: 10px;
+
+    @include SmallTablet{
+        display: flex;
+        flex-direction: column;
+    }
 
     &__content {
         display: flex;

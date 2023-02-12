@@ -2,11 +2,14 @@ import { useRef } from 'react';
 import { Navigation, Swiper as SwiperType } from 'swiper';
 import { Swiper } from 'swiper/react';
 
+//styles
 import styles from './HeadingBlock.module.scss'
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+//icons
 import { ReactComponent as ArrowIcon } from '@/assets/icons/arrow-left.svg'
+import { ReactComponent as FilterIcon } from '@/assets/icons/filter.svg'
 
 type HeadingBlockProps = {
     icon: React.ReactElement,
@@ -14,10 +17,11 @@ type HeadingBlockProps = {
     slider?: boolean,
     children?: React.ReactNode,
     items?: [],
-    addToList?: boolean
+    addToList?: boolean,
+    filter?: boolean
 }
 
-const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, children, addToList = false }) => {
+const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, children, addToList = false, filter = false }) => {
 
 
     const swiperRef = useRef<SwiperType>();
@@ -48,6 +52,12 @@ const HeadingBlock: React.FC<HeadingBlockProps> = ({ icon, title, slider, childr
                     </div>
                 }
                 {addToList && <button className={styles.block__add}>Add to the list</button>}
+                {filter &&
+                    <button className={styles.block__filter}>
+                        <FilterIcon />
+                        <span>Filter</span>
+                    </button>
+                }
             </div>
             {!slider &&
                 <div className={styles.block__main}>

@@ -120,7 +120,7 @@ const Profile: React.FC = () => {
                     {tab === 'General' &&
                         <section className={styles.anime}>
                             <div className={styles.anime__wrapper}>
-                                <HeadingBlock title='Anime List' icon={<FolderIcon />} />
+                                <HeadingBlock title='Anime List' icon={<FolderIcon />} filter />
                                 <div className={styles.anime__content}>
                                     <p>You don't have anything on your lists.</p>
                                 </div>
@@ -130,7 +130,7 @@ const Profile: React.FC = () => {
                     {tab === 'Security and privacy' &&
                         <section className={styles.sessions}>
                             <div className={styles.sessions__wrapper}>
-                                <HeadingBlock title='Sessions' icon={<FolderIcon />} />
+                                <HeadingBlock title='Sessions' icon={<FolderIcon />} filter />
                                 <div className={styles.sessions__item}>
                                     <div className={styles.sessions__item__os}>
                                         <div className={styles.sessions__item__os__icon}>

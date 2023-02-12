@@ -17,10 +17,9 @@ import { ReactComponent as ListIcon } from '@/assets/icons/list.svg'
 import { sortedItemsSelector, sortedItemsStatusSelector } from '@/redux/anime/selectors'
 import { fetchSortedAnime } from '@/redux/anime/asyncActions'
 import { useAppDispatch } from '@/redux/store'
-import { pageCountNumberSelector, pageNumberSelector, pageRangeSelector } from '@/redux/pagination/selectors'
+import { pageNumberSelector } from '@/redux/pagination/selectors'
 import AnimeBlockSkeleton from '@/components/skeletons/AnimeBlockSkeleton'
 import { useWindowResize } from '@/utils/useWindowResize'
-import { setPageCount, setRange } from '@/redux/pagination/slice'
 import AnimeCard from '@/components/AnimeCard'
 import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
 
@@ -51,7 +50,7 @@ const AllAnime: React.FC = () => {
         <div className="container">
             <div className={styles.page}>
                 <section className={styles.all}>
-                    <HeadingBlock title='All Anime' icon={<ListIcon />} />
+                    <HeadingBlock title='All Anime' icon={<ListIcon />} filter />
                     <div className={styles.all__content}>
                         <div className={styles.all__content__items}>
                             {sortedItemsStatus === 'loading' ?

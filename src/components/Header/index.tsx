@@ -22,6 +22,7 @@ import { isAuthSelector } from '@/redux/auth/selectors'
 import { themeSelector } from '@/redux/theme/selectors'
 import { useRef } from 'react'
 import { setTheme } from '@/redux/theme/slice'
+import { useWindowResize } from '@/utils/useWindowResize'
 
 
 const Header: React.FC = () => {
@@ -39,6 +40,8 @@ const Header: React.FC = () => {
     const isMounted = useRef(false);
     const dispatch = useDispatch();
     const [isMenu, setIsMenu] = useState(false);
+    const width = useWindowResize();
+    
 
     useEffect(() => {
         if (isMounted.current) {
@@ -97,7 +100,7 @@ const Header: React.FC = () => {
                             </button>
                         </div>
                     </div>
-                    {isMenu &&
+                    {(isMenu && width <= 1250) &&
                         <ul className={styles.header__hamburger}>
                             {links.map((link, index) => (
                                 <li key={index} className={styles.header__hamburger__link}>
