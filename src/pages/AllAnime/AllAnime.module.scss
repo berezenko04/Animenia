@@ -3,6 +3,12 @@
     grid-template-columns: 9fr 3fr;
     gap: 30px;
 
+    @media screen and (max-width:1350px) {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
     .all {
         &__content {
             display: flex;

@@ -1,3 +1,5 @@
 export type PageSliceState = {
-    pageNumber: number
+    pageNumber: number,
+    pageCount: number,
+    range: number
 }

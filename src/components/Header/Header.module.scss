@@ -11,6 +11,12 @@
 
     &__wrapper {
         display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    &__main {
+        display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 32px;
@@ -18,169 +24,191 @@
         @include Mobile {
             gap: 20px;
         }
-    }
 
-    &__search {
-        background-color: $mainBg;
-        border-radius: 10px;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        @media screen and (max-width:1250px) {
-            display: none;
-        }
-
-
-        label {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-
-            svg {
-                path {
-                    fill: $secondary;
-                }
-
-            }
-        }
-
-
-        input {
-            font-size: 14px;
-            line-height: 135%;
-            color: $secondary;
-
-            &::placeholder {
-                font-size: 12px;
-                line-height: 135%;
-                color: $secondary;
-            }
-
-            &:focus::placeholder {
-                color: transparent;
-            }
-        }
-    }
-
-    &__userBlock {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-
-        @include Mobile {
-            gap: 15px;
-        }
-
-        &__buttons {
+        &__links {
             display: flex;
             align-items: center;
             gap: 20px;
 
-            button {
-                width: 22px;
-                height: 22px;
+            @media screen and (max-width:1250px) {
+                display: none;
             }
 
-            &__auth {
-                background-color: $mainBg;
-                width: 40px;
-                height: 40px;
+            &__item {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                border-radius: 50%;
+                gap: 4px;
 
-                svg {
-                    width: 24px;
-                    height: 24px;
-                }
-            }
+                a {
+                    line-height: 135%;
+                    color: $secondary;
+                    transition: all .2s ease-in-out;
 
-            &__notification {
-                display: flex;
-                flex-direction: column;
-                position: relative;
-
-                &:hover &__overlay {
-                    display: block;
-                }
-
-                &__overlay {
-                    display: none;
-                    position: absolute;
-                    padding: 20px;
-                    top: 55px;
-                    background: rgba(255, 255, 255, 0.8);
-                    backdrop-filter: blur(10px);
-                    width: 250px;
-                    height: 300px;
-                    border-radius: 0 0 8px 8px;
-
-                    h3 {
-                        font-weight: 400;
-                        color: $secondary;
+                    &:hover {
+                        color: $primary;
                     }
                 }
             }
         }
 
-        &__profile {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-            }
-        }
-
-        &__menu {
-            display: none;
-            width: 24px;
-            height: 24px;
+        &__search {
+            background-color: $mainBg;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
 
             @media screen and (max-width:1250px) {
-                display: block;
+                display: none;
+            }
+
+
+            label {
+                width: 18px;
+                height: 18px;
+                cursor: pointer;
+
+                svg {
+                    path {
+                        fill: $secondary;
+                    }
+
+                }
+            }
+
+
+            input {
+                font-size: 14px;
+                line-height: 135%;
+                color: $secondary;
+
+                &::placeholder {
+                    font-size: 12px;
+                    line-height: 135%;
+                    color: $secondary;
+                }
+
+                &:focus::placeholder {
+                    color: transparent;
+                }
+            }
+        }
+
+        &__userBlock {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            @include Mobile {
+                gap: 15px;
+            }
+
+            &__buttons {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                button {
+                    width: 22px;
+                    height: 22px;
+                }
+
+                &__auth {
+                    background-color: $mainBg;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+
+                &__notification {
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+
+                    &:hover &__overlay {
+                        display: block;
+                    }
+
+                    &__overlay {
+                        display: none;
+                        position: absolute;
+                        padding: 20px;
+                        top: 55px;
+                        background: rgba(255, 255, 255, 0.8);
+                        backdrop-filter: blur(10px);
+                        width: 250px;
+                        height: 300px;
+                        border-radius: 0 0 8px 8px;
+
+                        h3 {
+                            font-weight: 400;
+                            color: $secondary;
+                        }
+                    }
+                }
+            }
+
+            &__profile {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+
+            &__menu {
+                display: none;
+                width: 24px;
+                height: 24px;
+
+                @media screen and (max-width:1250px) {
+                    display: block;
+                }
+            }
+        }
+
+        svg {
+            path {
+                fill: $secondary;
             }
         }
     }
 
-    svg {
-        path {
-            fill: $secondary;
-        }
-    }
-}
-
-
-.nav__links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    @media screen and (max-width:1250px) {
-        display: none;
-    }
-
-    &__item {
+    &__hamburger {
         display: flex;
-        align-items: center;
-        gap: 4px;
+        flex-direction: column;
+        gap: 5px;
 
-        a {
-            line-height: 135%;
-            color: $secondary;
-            transition: all .2s ease-in-out;
+        &__link {
+            padding: 10px 0;
 
-            &:hover {
-                color: $primary;
+            a {
+                line-height: 135%;
+                padding: 15px 0;
+                color: $secondary;
+                transition: all .2s ease-in-out;
+
+                &:hover {
+                    color: $primary;
+                }
             }
         }
     }
+
+
 }

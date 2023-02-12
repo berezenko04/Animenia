@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './Header.module.scss'
@@ -38,6 +38,7 @@ const Header: React.FC = () => {
     const theme = useSelector(themeSelector);
     const isMounted = useRef(false);
     const dispatch = useDispatch();
+    const [isMenu, setIsMenu] = useState(false);
 
     useEffect(() => {
         if (isMounted.current) {
@@ -55,45 +56,56 @@ const Header: React.FC = () => {
         <header className={styles.header}>
             <div className='container'>
                 <div className={styles.header__wrapper}>
-                    <Logo />
-                    <nav>
-                        <ul className={styles.nav__links}>
+                    <div className={styles.header__main}>
+                        <Logo />
+                        <nav>
+                            <ul className={styles.header__main__links}>
+                                {links.map((link, index) => (
+                                    <li key={index} className={styles.header__main__links__item}>
+                                        <Link to={link.path}>{link.name}</Link>
+                                        {links.slice(1, 4).includes(link) && <ArrowDownIcon />}
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
+                        <div className={styles.header__main__search}>
+                            <label htmlFor="search"><SearchIcon /></label>
+                            <input type="text" placeholder='Search...' id='search' autoComplete='off' />
+                        </div>
+                        <div className={styles.header__main__userBlock}>
+                            <div className={styles.header__main__userBlock__buttons}>
+                                <button onClick={handleTheme}>{theme === 'light' ? <MoonIcon /> : <SunIcon />}</button>
+                                {auth &&
+                                    <div className={styles.header__main__userBlock__buttons__notification}>
+                                        <button><NotificationIcon /></button>
+                                        <div className={styles.header__main__userBlock__buttons__notification__overlay}>
+                                            <h3>Notifications</h3>
+                                        </div>
+                                    </div>
+                                }
+                                {!auth && <Link to='/Animenia/login' className={styles.header__main__userBlock__buttons__auth}><ProfileIcon /></Link>}
+                            </div>
+                            {auth &&
+                                <div className={styles.header__main__userBlock__profile}>
+                                    <Link to='/Animenia/profile'>
+                                        <img src={ProfileImage} alt="profile" />
+                                    </Link>
+                                </div>
+                            }
+                            <button className={styles.header__main__userBlock__menu} onClick={() => setIsMenu(!isMenu)}>
+                                <MenuIcon />
+                            </button>
+                        </div>
+                    </div>
+                    {isMenu &&
+                        <ul className={styles.header__hamburger}>
                             {links.map((link, index) => (
-                                <li key={index} className={styles.nav__links__item}>
-                                    <Link to={link.path}>{link.name}</Link>
-                                    {links.slice(1, 4).includes(link) && <ArrowDownIcon />}
+                                <li key={index} className={styles.header__hamburger__link}>
+                                    <Link to={link.path} onClick={() => setIsMenu(false)}>{link.name}</Link>
                                 </li>
                             ))}
                         </ul>
-                    </nav>
-                    <div className={styles.header__search}>
-                        <label htmlFor="search"><SearchIcon /></label>
-                        <input type="text" placeholder='Search...' id='search' autoComplete='off' />
-                    </div>
-                    <div className={styles.header__userBlock}>
-                        <div className={styles.header__userBlock__buttons}>
-                            <button onClick={handleTheme}>{theme === 'light' ? <MoonIcon /> : <SunIcon />}</button>
-                            {auth &&
-                                <div className={styles.header__userBlock__buttons__notification}>
-                                    <button><NotificationIcon /></button>
-                                    <div className={styles.header__userBlock__buttons__notification__overlay}>
-                                        <h3>Notifications</h3>
-                                    </div>
-                                </div>
-                            }
-                            {!auth && <Link to='/Animenia/login' className={styles.header__userBlock__buttons__auth}><ProfileIcon /></Link>}
-                        </div>
-                        {auth &&
-                            <div className={styles.header__userBlock__profile}>
-                                <Link to='/Animenia/profile'>
-                                    <img src={ProfileImage} alt="profile" />
-                                </Link>
-                            </div>
-                        }
-                        <button className={styles.header__userBlock__menu}>
-                            <MenuIcon />
-                        </button>
-                    </div>
+                    }
                 </div>
             </div>
         </header>

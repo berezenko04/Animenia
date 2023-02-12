@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import styles from './AllAnime.module.scss'
@@ -17,8 +17,12 @@ import { ReactComponent as ListIcon } from '@/assets/icons/list.svg'
 import { sortedItemsSelector, sortedItemsStatusSelector } from '@/redux/anime/selectors'
 import { fetchSortedAnime } from '@/redux/anime/asyncActions'
 import { useAppDispatch } from '@/redux/store'
-import { pageNumberSelector } from '@/redux/pagination/selectors'
+import { pageCountNumberSelector, pageNumberSelector, pageRangeSelector } from '@/redux/pagination/selectors'
 import AnimeBlockSkeleton from '@/components/skeletons/AnimeBlockSkeleton'
+import { useWindowResize } from '@/utils/useWindowResize'
+import { setPageCount, setRange } from '@/redux/pagination/slice'
+import AnimeCard from '@/components/AnimeCard'
+import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
 
 
 const AllAnime: React.FC = () => {
@@ -27,6 +31,11 @@ const AllAnime: React.FC = () => {
     const dispatch = useAppDispatch();
     const page = useSelector(pageNumberSelector);
     const sortedItemsStatus = useSelector(sortedItemsStatusSelector);
+
+    const width = useWindowResize();
+
+    const breakpoint = 768;
+
 
     useEffect(() => {
         dispatch(fetchSortedAnime({
@@ -47,10 +56,16 @@ const AllAnime: React.FC = () => {
                         <div className={styles.all__content__items}>
                             {sortedItemsStatus === 'loading' ?
                                 [...Array(4)].map((_, index) => (
-                                    <AnimeBlockSkeleton key={index} />
+                                    width >= breakpoint ?
+                                        < AnimeBlockSkeleton key={index} />
+                                        :
+                                        <AnimeCardSkeleton key={index} />
                                 )) :
                                 sorted.map((item, index) => (
-                                    <AnimeBlock key={index} {...item} />
+                                    width >= breakpoint ?
+                                        <AnimeBlock key={index} {...item} />
+                                        :
+                                        <AnimeCard key={index} {...item} />
                                 ))
                             }
                         </div>

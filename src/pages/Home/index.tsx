@@ -44,16 +44,19 @@ const Home: React.FC = () => {
         const { tablet, sm } = breakpoints;
         if (width > tablet) {
             setLimit(9);
+            setStep(9);
         } else if (width < tablet && width > sm) {
             setLimit(6);
+            setStep(6);
         } else if (width < sm) {
             setLimit(2);
+            setStep(2);
         }
     }, [width])
 
 
-    const [limit, setLimit] = useState(0);
-    const [step, setStep] = useState(limit);
+    const [limit, setLimit] = useState(9);
+    const [step, setStep] = useState(9);
 
     useEffect(() => {
         dispatch(fetchAnime());
