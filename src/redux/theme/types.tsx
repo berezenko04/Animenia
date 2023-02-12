@@ -1,3 +1,3 @@
 export type ThemeSliceState = {
-    theme: 'light' | 'dark'
+    theme: string
 }

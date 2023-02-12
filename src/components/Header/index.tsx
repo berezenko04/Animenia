@@ -41,7 +41,7 @@ const Header: React.FC = () => {
 
     useEffect(() => {
         if (isMounted.current) {
-            const json = JSON.stringify(theme);
+            const json = theme;
             localStorage.setItem('theme', json);
         }
         isMounted.current = true;

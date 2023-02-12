@@ -2,6 +2,7 @@ import AnimeCardSkeleton from "@/components/skeletons/AnimeCardSkeleton"
 import AccordionSkeleton from "@/components/skeletons/AccordionSkeleton"
 
 import styles from './test.module.scss'
+import AnimeBlockSkeleton from "@/components/skeletons/AnimeBlockSkeleton"
 
 
 const test: React.FC = () => {
@@ -19,7 +20,11 @@ const test: React.FC = () => {
                     {[...Array(5)].map((_, index) => (
                         <AccordionSkeleton key={index} />
                     ))}
-
+                </div>
+                <div className={styles.anime}>
+                    {[...Array(3)].map((_, index) => (
+                        <AnimeBlockSkeleton key={index} />
+                    ))}
                 </div>
             </div>
         </div >

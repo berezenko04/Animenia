@@ -84,8 +84,8 @@ const Home: React.FC = () => {
                                     {itemsStatus === 'loading' ?
 
                                         [...Array(3)].map((_, index) => (
-                                            <SwiperSlide>
-                                                <AnimeCardSkeleton key={index} />
+                                            <SwiperSlide key={index}>
+                                                <AnimeCardSkeleton />
                                             </SwiperSlide>
                                         )) :
 
