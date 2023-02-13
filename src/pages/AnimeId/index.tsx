@@ -22,12 +22,23 @@ import { ReactComponent as MessageIcon } from '@/assets/icons/message.svg'
 import { useAppDispatch } from '@/redux/store'
 import { fetchAnime } from '@/redux/anime/asyncActions'
 import { animeItemsSelector, itemsStatusSelector } from '@/redux/anime/selectors'
+import { AnimeItem } from '@/redux/anime/types'
 
 //utils
 import { useWindowResize } from '@/utils/useWindowResize'
+import AnimeBlockSkeleton from '@/components/skeletons/AnimeBlockSkeleton'
 
 
-
+type AnimeState = {
+    id: string,
+    title: string,
+    imageUrl: string,
+    rating: number,
+    genre: string,
+    description: string,
+    screenshots: string[],
+    videoUrl: string
+}
 
 const AnimeId: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -37,66 +48,70 @@ const AnimeId: React.FC = () => {
     const items = useSelector(animeItemsSelector);
     const [isLoading, setIsLoading] = useState(true);
     const [limit, setLimit] = useState(3);
-    const [anime, setAnime] = useState<{
-        id: string,
-        title: string,
-        imageUrl: string,
-        rating: number,
-        genre: string,
-        description: string,
-        screenshots: string[],
-        videoUrl: string
-    }>();
     const { id } = useParams();
     const breakpoint = 768;
 
     useEffect(() => {
+        setIsLoading(true);
         if (width > breakpoint) {
             setLimit(3);
         } else if (width <= breakpoint) {
             setLimit(2);
         }
+        setIsLoading(false);
     }, [width])
 
     useEffect(() => {
-        setIsLoading(true);
         (async () => {
             try {
-                const { data } = await axios.get('https://63dd5ffb367aa5a7a40ed9d2.mockapi.io/api/v1/anime/' + id);
+                setIsLoading(true);
+                const { data } = await axios.get<AnimeItem>('https://63dd5ffb367aa5a7a40ed9d2.mockapi.io/api/v1/anime/' + id);
                 setAnime(data);
+                setIsLoading(false);
             } catch (error) {
                 alert('Ошибка при получении анимэ!');
                 navigate('/Animenia/');
             }
         })();
         dispatch(fetchAnime());
-        setIsLoading(false);
     }, [])
 
+    const [anime, setAnime] = useState<AnimeState>();
+
     return (
-        <>
-            {anime &&
-                <div className="container">
-                    <div className={styles.page}>
+        <div className="container">
+            <div className={styles.page}>
+                {anime &&
+                    <>
                         <div className={styles.page__main}>
                             <section className={styles.anime}>
                                 <div className={styles.anime__head}>
                                     <HeadingBlock title={'Anime'} icon={<DesktopIcon />} addToList />
-                                    <AnimeBlock {...anime} isWatch={false} />
+                                    {isLoading === false ? <AnimeBlock {...anime} isWatch={false} /> : <AnimeBlockSkeleton />}
                                 </div>
                                 <div className={styles.anime__screenshots}>
                                     <p>Screenshots</p>
                                     <div className={styles.anime__screenshots__content}>
-                                        {anime.screenshots.slice(0, limit).map((item, index) => (
-                                            <img key={index} src={`screenshots/${id}/${item}`} alt="#" />
-                                        ))}
+                                        {isLoading ?
+                                            [...Array(limit)].map((_, index) => (
+                                                <div className={styles.anime__screenshots__skeleton} key={index} />
+                                            ))
+                                            :
+                                            anime.screenshots.slice(0, limit).map((item, index) => (
+                                                <img key={index} src={`screenshots/${id}/${item}`} alt="#" />
+                                            ))
+                                        }
                                     </div>
                                 </div>
-                                <div className={styles.anime__video}>
-                                    <video controls preload='auto'>
-                                        <source src={anime.videoUrl} />
-                                    </video>
-                                </div>
+                                {isLoading ?
+                                    <div className={styles.anime__video__skeleton} />
+                                    :
+                                    <div className={styles.anime__video}>
+                                        <video playsInline controls>
+                                            <source src={anime.videoUrl} />
+                                        </video>
+                                    </div>
+                                }
                             </section>
                             <section className={styles.similar}>
                                 <HeadingBlock title='Similar Anime' icon={<SwapIcon />} slider>
@@ -126,10 +141,10 @@ const AnimeId: React.FC = () => {
                             </section>
                         </div>
                         <Sidebar />
-                    </div>
-                </div>
-            }
-        </>
+                    </>
+                }
+            </div>
+        </div>
     )
 }
 

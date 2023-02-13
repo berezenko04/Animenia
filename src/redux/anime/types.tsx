@@ -4,7 +4,9 @@ export type AnimeItem = {
     imageUrl: string,
     rating: number,
     genre: string,
-    description: string
+    description: string,
+    screenshots: string[],
+    videoUrl: string
 }
 
 export type FetchParams = {

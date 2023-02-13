@@ -54,6 +54,17 @@
                 }
             }
 
+            &__skeleton {
+                width: 100%;
+                height: 150px;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+                background-color: lightgray;
+                @include Skeleton;
+                @include LoadAnimation;
+            }
+
 
         }
 
@@ -83,6 +94,34 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+            }
+
+            &__skeleton {
+                width: 100%;
+                height: 450px;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+                background-color: lightgray;
+
+                @include Skeleton;
+                @include LoadAnimation;
+
+                @media screen and (max-width:1350px) {
+                    height: 600px;
+                }
+
+                @include Tablet {
+                    height: 450px;
+                }
+
+                @include SmallTablet {
+                    height: 350px;
+                }
+
+                @media screen and (max-width: 600px) {
+                    height: 250px;
+                }
             }
         }
     }

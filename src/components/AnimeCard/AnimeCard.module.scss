@@ -82,6 +82,9 @@
                 font-size: 14px;
                 line-height: 135%;
                 color: $secondary;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
             }
         }
 

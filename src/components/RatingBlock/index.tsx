@@ -10,10 +10,8 @@ type RatingBlockProps = {
 const RatingBlock: React.FC<RatingBlockProps> = ({ rating, variation = 'primary' }) => {
     return (
         <div className={`${styles.rating} ${variation === 'primary' ? styles.rating__primary : styles.rating__secondary}`}>
-            <div className={styles.rating__wrapper}>
-                <StarIcon />
-                <span>{rating}</span>
-            </div>
+            <StarIcon />
+            <span>{rating}</span>
         </div>
     )
 }

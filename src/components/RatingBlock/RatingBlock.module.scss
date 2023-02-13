@@ -7,8 +7,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     width: 71px;
     height: 32px;
+
+    span {
+        line-height: 135%;
+        color: $primary;
+        padding-top: 2px;
+    }
 
     &__primary {
         background: $opacity-bg;
@@ -16,19 +23,6 @@
 
     &__secondary {
         background-color: $mainBg;
-    }
-
-
-    &__wrapper {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        span {
-            line-height: 135%;
-            color: $primary;
-            padding-top: 2px;
-        }
     }
 
     svg {
