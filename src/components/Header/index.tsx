@@ -41,7 +41,7 @@ const Header: React.FC = () => {
     const dispatch = useDispatch();
     const [isMenu, setIsMenu] = useState(false);
     const width = useWindowResize();
-    
+
 
     useEffect(() => {
         if (isMounted.current) {
@@ -79,12 +79,7 @@ const Header: React.FC = () => {
                             <div className={styles.header__main__userBlock__buttons}>
                                 <button onClick={handleTheme}>{theme === 'light' ? <MoonIcon /> : <SunIcon />}</button>
                                 {auth &&
-                                    <div className={styles.header__main__userBlock__buttons__notification}>
-                                        <button><NotificationIcon /></button>
-                                        <div className={styles.header__main__userBlock__buttons__notification__overlay}>
-                                            <h3>Notifications</h3>
-                                        </div>
-                                    </div>
+                                    <button><NotificationIcon /></button>
                                 }
                                 {!auth && <Link to='/Animenia/login' className={styles.header__main__userBlock__buttons__auth}><ProfileIcon /></Link>}
                             </div>

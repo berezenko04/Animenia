@@ -1,4 +1,5 @@
 import AnimeCardSkeleton from "@/components/skeletons/AnimeCardSkeleton"
+
 import AccordionSkeleton from "@/components/skeletons/AccordionSkeleton"
 
 import styles from './test.module.scss'
@@ -34,6 +35,10 @@ const test: React.FC = () => {
                     {[...Array(5)].map((_, index) => (
                         <AccordionTabletSkeleton key={index} />
                     ))}
+                </div>
+                <div></div>
+                <div className={styles.video}>
+                    
                 </div>
             </div>
         </div >

@@ -87,9 +87,12 @@ const Profile: React.FC = () => {
         }
     }
 
+
+
     const fetchGeo = async (url: string) => {
         try {
             const { data } = await axios.get(url);
+            console.log(data);
             const dataArray = data.results[0].formatted_address.split(', ');
             dispatch(setCountry(dataArray[4]));
             dispatch(setCity(dataArray[2]));

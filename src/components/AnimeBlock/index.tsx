@@ -31,7 +31,9 @@ const AnimeBlock: React.FC<AnimeBlockProps> = ({
 }) => {
     return (
         <article className={styles.block}>
-            <AnimeCard imageUrl={imageUrl} favorite id={id} />
+            <div className={styles.block__card}>
+                <AnimeCard imageUrl={imageUrl} favorite id={id} />
+            </div>
             <div className={styles.block__content}>
                 <div className={styles.block__content__title}>
                     <Link to={`/Animenia/${id}`} onClick={handleClickLink}>{title}</Link>
