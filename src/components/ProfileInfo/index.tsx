@@ -14,6 +14,7 @@ import { ReactComponent as ShieldIcon } from '@/assets/icons/shield-done.svg'
 //redux
 import { useSelector } from 'react-redux'
 import { themeSelector } from '@/redux/theme/selectors'
+import { useWindowResize } from '@/utils/useWindowResize'
 
 type ProfileInfoProps = {
     variation: 'primary' | 'secondary'
@@ -28,6 +29,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ variation }) => {
     ];
 
     const theme = useSelector(themeSelector);
+    const width = useWindowResize();
 
     return (
         <div className={styles.profile}>
@@ -63,7 +65,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({ variation }) => {
                     privacy.map((item, index) => (
                         <li key={index} className={styles.profile__socials__option}>
                             {item.icon}
-                            {index === 0 && <p>berezenkoroman4@gmail.com</p>}
+                            {(index === 0 && width > 600) && <p>berezenkoroman4@gmail.com</p>}
                             <Link to=''>{item.option}</Link>
                         </li>
                     ))

@@ -150,7 +150,8 @@ const Profile: React.FC = () => {
                                     <p className={styles.sessions__item__current}>
                                         Current Session
                                     </p>
-                                    <div className={theme === 'light' ? styles.sessions__item__remove : styles.sessions__item__remove__dark}>
+                                    <div className={`${styles.sessions__item__remove}
+                                    ${theme === 'light' ? styles.sessions__item__remove__light : styles.sessions__item__remove__dark}`}>
                                         <button onClick={handleLogout}>
                                             <TrashIcon />
                                         </button>

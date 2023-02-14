@@ -1,5 +1,5 @@
 import AnimeCardSkeleton from "@/components/skeletons/AnimeCardSkeleton"
-
+import ReactPlayer from 'react-player/youtube'
 import AccordionSkeleton from "@/components/skeletons/AccordionSkeleton"
 
 import styles from './test.module.scss'
@@ -38,7 +38,7 @@ const test: React.FC = () => {
                 </div>
                 <div></div>
                 <div className={styles.video}>
-                    
+                    <ReactPlayer url='https://www.youtube.com/watch?v=vUO54a9YkJ8' controls width={'100%'} height={'500px'} />
                 </div>
             </div>
         </div >

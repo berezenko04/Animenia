@@ -1,4 +1,5 @@
 @import '@/scss/variables.scss';
+@import '@/scss/mixins.scss';
 
 .profile {
     display: flex;
@@ -20,6 +21,10 @@
                 font-size: 24px;
                 line-height: 135%;
                 color: $primary;
+
+                @include Mobile {
+                    font-size: 20px;
+                }
             }
 
             &__edit {
@@ -90,8 +95,8 @@
         }
 
         &__option {
-            svg{
-                path{
+            svg {
+                path {
                     fill: $primary;
                 }
             }
