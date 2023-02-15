@@ -4,7 +4,7 @@ import axios from "axios";
 import { AnimeItem } from "@/redux/anime/types";
 import { NewsItem } from "@/redux/news/types";
 
-const DEFAULT__API__PATH = `${API_KEY}`;
+const DEFAULT__API__PATH = `${secrets.API_KEY}`;
 const ANIME = 'anime';
 const NEWS = 'news'
 
