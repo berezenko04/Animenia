@@ -1,12 +1,17 @@
 import { Link } from 'react-router-dom'
 
+//styles
 import styles from './Register.module.scss'
 
+//components
 import AuthField from '@/components/AuthField'
-import { ReactComponent as UserIcon } from '@/assets/icons/profile.svg'
-import { ReactComponent as UnlockIcon } from '@/assets/icons/unlock.svg'
 import AuthButton from '@/components/AuthButton'
 import Header from '@/components/Header'
+
+//icons
+import { ReactComponent as UserIcon } from '@/assets/icons/profile.svg'
+import { ReactComponent as UnlockIcon } from '@/assets/icons/unlock.svg'
+
 
 const Register: React.FC = () => {
     return (

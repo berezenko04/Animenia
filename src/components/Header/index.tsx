@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
+//styles
 import styles from './Header.module.scss'
 
+//components
 import Logo from '../Logo'
 
 //Icons
@@ -15,13 +18,12 @@ import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.
 import { ReactComponent as MenuIcon } from '@/assets/icons/menu.svg'
 import ProfileImage from '@/assets/img/profile.webp'
 
-
 //redux
-import { useDispatch, useSelector } from 'react-redux'
 import { isAuthSelector } from '@/redux/auth/selectors'
 import { themeSelector } from '@/redux/theme/selectors'
-import { useRef } from 'react'
 import { setTheme } from '@/redux/theme/slice'
+
+//utils
 import { useWindowResize } from '@/utils/useWindowResize'
 
 
@@ -72,7 +74,7 @@ const Header: React.FC = () => {
                             </ul>
                         </nav>
                         <div className={styles.header__main__search}>
-                            <label htmlFor="search"><SearchIcon /></label>
+                            <label htmlFor="search" className={styles.header__main__search__label}><SearchIcon /></label>
                             <input type="text" placeholder='Search...' id='search' autoComplete='off' />
                         </div>
                         <div className={styles.header__main__userBlock}>

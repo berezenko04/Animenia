@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
+//styles
 import styles from './ProfileInfo.module.scss'
 
 //icons
@@ -12,8 +14,9 @@ import { ReactComponent as LockIcon } from '@/assets/icons/lock.svg'
 import { ReactComponent as ShieldIcon } from '@/assets/icons/shield-done.svg'
 
 //redux
-import { useSelector } from 'react-redux'
 import { themeSelector } from '@/redux/theme/selectors'
+
+//utils
 import { useWindowResize } from '@/utils/useWindowResize'
 
 type ProfileInfoProps = {

@@ -2,25 +2,23 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { SwiperSlide } from 'swiper/react'
 
-
+//styles
 import styles from './Home.module.scss'
 
 //Components
 import HeadingBlock from '@/components/HeadingBlock'
 import AnimeCard from '@/components/AnimeCard'
 import Sidebar from '@/components/Sidebar'
+import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
 
 //Redux
 import { animeItemsSelector, itemsStatusSelector, sortedItemsSelector, sortedItemsStatusSelector } from '@/redux/anime/selectors'
 import { fetchAnime, fetchSortedAnime } from '@/redux/anime/asyncActions'
 import { useAppDispatch } from '@/redux/store'
 
-
 //icons
 import { ReactComponent as FireIcon } from '@/assets/icons/fire.svg'
 import { ReactComponent as TrendingIcon } from '@/assets/icons/trending.svg'
-import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
-
 
 //utils
 import { useWindowResize } from '@/utils/useWindowResize'
@@ -80,7 +78,6 @@ const Home: React.FC = () => {
                             <section className={styles.page__main__categories__spring}>
                                 <HeadingBlock title='Spring Season' icon={<FireIcon />} slider>
                                     {itemsStatus === 'loading' ?
-
                                         [...Array(3)].map((_, index) => (
                                             <SwiperSlide key={index}>
                                                 <AnimeCardSkeleton />

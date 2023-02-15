@@ -11,6 +11,11 @@
         flex-direction: column;
         gap: 5px;
 
+        &:hover &__head__title h3,
+        p {
+            color: $primary;
+        }
+
         &__head {
 
             &__title {
@@ -25,6 +30,7 @@
                     line-height: 135%;
                     max-width: 190px;
                     width: 100%;
+                    transition: all .3s ease-in;
                 }
 
                 &__default {
@@ -38,14 +44,19 @@
                 .icon {
                     height: 20px;
                     width: 20px;
-                    transition: transform .3s ease-in;
 
                     &__active {
+                        transition: transform .3s ease-in;
+                        transform: rotate(180deg);
+
                         path {
                             fill: $primary;
                         }
+                    }
 
-                        transform: rotate(180deg);
+                    &__default {
+                        transition: transform .3s ease-in;
+                        transform: rotate(0deg);
                     }
                 }
 
@@ -54,10 +65,28 @@
         }
     }
 
+    &__content {
+        a {
+            opacity: 0;
+            animation: Visible 1.5s forwards;
+        }
+
+        @keyframes Visible {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    }
+
     p {
         font-size: 14px;
         line-height: 135%;
         color: $thirty;
+        transition: all .3s ease-in;
     }
 
     svg {

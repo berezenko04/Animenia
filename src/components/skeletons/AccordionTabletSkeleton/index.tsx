@@ -1,3 +1,4 @@
+//styles
 import styles from './AccordionTabletSkeleton.module.scss'
 
 const AccordionTabletSkeleton: React.FC = () => {

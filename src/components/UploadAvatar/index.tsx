@@ -1,5 +1,7 @@
+//styles
 import styles from './UploadAvatar.module.scss'
 
+//icons
 import { ReactComponent as CameraIcon } from '@/assets/icons/camera.svg'
 import ProfileImage from '@/assets/img/profile.webp'
 

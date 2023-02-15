@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+//styles
 import styles from './AnimeBlock.module.scss'
 
 //components
@@ -29,6 +30,7 @@ const AnimeBlock: React.FC<AnimeBlockProps> = ({
     id,
     isWatch = true,
 }) => {
+
     return (
         <article className={styles.block}>
             <div className={styles.block__card}>
@@ -40,7 +42,7 @@ const AnimeBlock: React.FC<AnimeBlockProps> = ({
                     <p>{genre}</p>
                     <RatingBlock rating={rating} variation={'secondary'} />
                 </div>
-                <p className={styles.block__content__main}>
+                <p className={`${styles.block__content__main}`}>
                     {description}
                 </p>
                 {isWatch && <Link to={`/Animenia/${id}`} onClick={handleClickLink} className={styles.block__content__button}>Watch</Link>}

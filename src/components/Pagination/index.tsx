@@ -1,13 +1,11 @@
 import ReactPaginate from "react-paginate"
 import { useDispatch } from "react-redux"
 
+//styles
 import styles from './Pagination.module.scss'
 
 //redux
 import { setPage } from "@/redux/pagination/slice"
-
-
-
 
 const Pagination: React.FC = () => {
     const dispatch = useDispatch();

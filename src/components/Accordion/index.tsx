@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+//styles
 import styles from './Accordion.module.scss'
 
+//icons
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 
 
@@ -13,8 +15,7 @@ type AccordionProps = {
     children: React.ReactNode,
 }
 
-
-const Accordion: React.FC<AccordionProps> = ({ title, genre, date, children}) => {
+const Accordion: React.FC<AccordionProps> = ({ title, genre, date, children }) => {
 
     const [isActive, setIsActive] = useState(false);
 
@@ -28,7 +29,7 @@ const Accordion: React.FC<AccordionProps> = ({ title, genre, date, children}) =>
                         >
                             {title}
                         </h3>
-                        <ArrowDownIcon className={isActive ? styles.icon__active : ''} />
+                        <ArrowDownIcon className={isActive ? styles.icon__active : styles.icon__default} />
                     </div>
                     <p>{genre}</p>
                 </div>

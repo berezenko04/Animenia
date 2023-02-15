@@ -9,6 +9,12 @@
     position: relative;
     border-radius: 8px;
 
+    &:hover {
+        img {
+            transform: scale(1.04);
+        }
+    }
+
     img {
         position: absolute;
         top: 0;
@@ -17,6 +23,7 @@
         height: 100%;
         object-fit: cover;
         object-position: center;
+        transition: transform .3s ease-in;
     }
 
     &__rating {
@@ -90,30 +97,27 @@
 
         &__status {
             text-align: center;
+            padding: 3px 20px;
 
             p {
                 font-size: 16px;
                 line-height: 135%;
-                color: $white;
+                color: #FFFFFF;
             }
 
             &__viewed {
-                padding: 3px 20px;
                 background-color: $viewed;
             }
 
             &__watching {
-                padding: 3px 20px;
                 background-color: $watching;
             }
 
             &__thrown {
-                padding: 3px 20px;
                 background-color: $thrown;
             }
 
             &__willWatch {
-                padding: 3px 20px;
                 background-color: $will-watch;
             }
         }

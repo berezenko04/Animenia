@@ -1,3 +1,4 @@
+//styles
 import styles from './AccordionSkeleton.module.scss'
 
 const AccordionSkeleton: React.FC = () => {

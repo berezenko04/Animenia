@@ -10,7 +10,6 @@ const initialState: AnimeSliceState = {
     sortedItemsStatus: Status.LOADING
 }
 
-
 export const AnimeSlice = createSlice({
     name: 'anime',
     initialState,
@@ -49,7 +48,5 @@ export const AnimeSlice = createSlice({
         })
     }
 })
-
-export const { } = AnimeSlice.actions;
 
 export default AnimeSlice.reducer;

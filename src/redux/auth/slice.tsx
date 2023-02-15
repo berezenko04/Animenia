@@ -4,7 +4,6 @@ import { getAuthFromLS } from "@/utils/getAuthFromLS";
 
 const initialState: AuthSliceState = {
     isAuth: getAuthFromLS(),
-    login: ''
 }
 
 export const AuthSlice = createSlice({

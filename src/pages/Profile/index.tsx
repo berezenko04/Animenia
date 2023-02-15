@@ -1,8 +1,9 @@
-import { useRef, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+//styles
 import styles from './Profile.module.scss'
 
 //components
@@ -10,6 +11,7 @@ import SettingsBlock from '@/components/SettingsBlock'
 import HeadingBlock from '@/components/HeadingBlock'
 import UploadAvatar from '@/components/UploadAvatar'
 import ProfileInfo from '@/components/ProfileInfo'
+import NotificationsItem from '@/components/NotificationsItem'
 
 //icons
 import { ReactComponent as ProfileIcon } from '@/assets/icons/profile.svg'
@@ -20,15 +22,12 @@ import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg'
 import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.svg'
 
 //redux
-import { useSelector } from 'react-redux'
 import { tabSelector } from '@/redux/profile/selectors'
 import { citySelector, countrySelector } from '@/redux/geo/selectors'
-import NotificationsItem from '@/components/NotificationsItem'
 import { setIsAuth } from "@/redux/auth/slice";
 import { isAuthSelector } from "@/redux/auth/selectors";
 import { setCity, setCountry } from "@/redux/geo/slice";
 import { themeSelector } from "@/redux/theme/selectors";
-
 
 //utils
 import { getOS } from '@/utils/getOS'
@@ -45,7 +44,7 @@ const Profile: React.FC = () => {
     const isAuth = useSelector(isAuthSelector);
     const navigate = useNavigate();
     const API_KEY = 'AIzaSyCYYb9ZtSS19QpJ7fvsU-Tm-x_o9rKIkzc';
-    const API_URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+    const API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
 
 
     useEffect(() => {
@@ -65,13 +64,12 @@ const Profile: React.FC = () => {
         'News'
     ];
 
-    const handleLogout = () => {
+    const handleLogout = (): void => {
         if (confirm('Are you sure you want to logout?')) {
             dispatch(setIsAuth(false));
             navigate('/Animenia/');
         }
     }
-
 
     const getGeo = () => {
         if ("geolocation" in navigator) {
@@ -83,19 +81,17 @@ const Profile: React.FC = () => {
             });
             return `${country}, ${city}`;
         } else {
+            alert("Geolocation is not supported by this browser.");
             console.log("Geolocation is not supported by this browser.");
         }
     }
 
-
-
     const fetchGeo = async (url: string) => {
         try {
             const { data } = await axios.get(url);
-            console.log(data);
             const dataArray = data.results[0].formatted_address.split(', ');
-            dispatch(setCountry(dataArray[4]));
-            dispatch(setCity(dataArray[2]));
+            dispatch(setCountry(dataArray[3]));
+            dispatch(setCity(dataArray[1]));
         } catch (error) {
             alert('An error occurred while getting the location');
             console.error(error);

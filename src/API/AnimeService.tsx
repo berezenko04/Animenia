@@ -1,4 +1,6 @@
 import axios from "axios";
+
+//redux
 import { AnimeItem } from "@/redux/anime/types";
 import { NewsItem } from "@/redux/news/types";
 

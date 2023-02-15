@@ -1,3 +1,4 @@
+//styles
 import styles from './AnimeBlockSkeleton.module.scss'
 
 const AnimeBlockSkeleton: React.FC = () => {

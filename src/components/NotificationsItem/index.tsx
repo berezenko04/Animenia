@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux'
 
+//styles
 import styles from './NotificationsItem.module.scss'
 
+//redux
 import { themeSelector } from '@/redux/theme/selectors'
 
 type NotificationsItemProps = {

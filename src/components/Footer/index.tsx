@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+//styles
 import styles from './Footer.module.scss'
 
+//components
 import Logo from '../Logo'
 
 //icons

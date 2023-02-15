@@ -1,7 +1,10 @@
 import { useState } from 'react'
 
+//styles
 import styles from './AuthField.module.scss'
 
+
+//icons
 import { ReactComponent as HideIcon } from '@/assets/icons/hide.svg'
 import { ReactComponent as VisibleIcon } from '@/assets/icons/visible.svg'
 

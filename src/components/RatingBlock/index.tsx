@@ -1,5 +1,7 @@
+//styles
 import styles from './RatingBlock.module.scss'
 
+//icons
 import { ReactComponent as StarIcon } from '@/assets/icons/star.svg'
 
 type RatingBlockProps = {

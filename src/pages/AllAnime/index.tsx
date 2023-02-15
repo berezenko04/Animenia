@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
+//styles
 import styles from './AllAnime.module.scss'
 
 //components
@@ -8,7 +9,9 @@ import HeadingBlock from '@/components/HeadingBlock'
 import Sidebar from '@/components/Sidebar'
 import Pagination from '@/components/Pagination'
 import AnimeBlock from '@/components/AnimeBlock'
-
+import AnimeCard from '@/components/AnimeCard'
+import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
+import AnimeBlockSkeleton from '@/components/skeletons/AnimeBlockSkeleton'
 
 //icons
 import { ReactComponent as ListIcon } from '@/assets/icons/list.svg'
@@ -18,10 +21,10 @@ import { sortedItemsSelector, sortedItemsStatusSelector } from '@/redux/anime/se
 import { fetchSortedAnime } from '@/redux/anime/asyncActions'
 import { useAppDispatch } from '@/redux/store'
 import { pageNumberSelector } from '@/redux/pagination/selectors'
-import AnimeBlockSkeleton from '@/components/skeletons/AnimeBlockSkeleton'
+
+//utils
 import { useWindowResize } from '@/utils/useWindowResize'
-import AnimeCard from '@/components/AnimeCard'
-import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
+
 
 
 const AllAnime: React.FC = () => {

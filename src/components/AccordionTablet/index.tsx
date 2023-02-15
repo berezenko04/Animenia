@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+//styles
 import styles from './AccordionTablet.module.scss'
 
 type AccordionTabletProps = {
@@ -8,7 +9,6 @@ type AccordionTabletProps = {
     date: string,
     imageUrl: string
 }
-
 
 const AccordionTablet: React.FC<AccordionTabletProps> = ({ title, genre, date, imageUrl }) => {
     return (

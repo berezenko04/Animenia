@@ -1,25 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-
+//styles
 import styles from './Sidebar.module.scss'
 
 //icons
 import { ReactComponent as DocumentIcon } from '@/assets/icons/document.svg'
 import { ReactComponent as VideoIcon } from '@/assets/icons/video-camera.svg'
-import AccordionTablet from '../AccordionTablet'
-import AccordionSkeleton from '../skeletons/AccordionSkeleton'
 
 //components
 import Accordion from '@/components/Accordion'
 import HeadingBlock from '@/components/HeadingBlock'
+import AccordionTablet from '../AccordionTablet'
+import AccordionSkeleton from '../skeletons/AccordionSkeleton'
+import AccordionTabletSkeleton from '../skeletons/AccordionTabletSkeleton'
 
-//utils
+//redux
 import { newsItemsSelector, statusSelector } from '@/redux/news/selectors'
 import { useAppDispatch } from '@/redux/store'
 import { fetchNews } from '@/redux/news/asyncActions'
-import AccordionTabletSkeleton from '../skeletons/AccordionTabletSkeleton'
+
+//utils
 import { useWindowResize } from '@/utils/useWindowResize'
 
 
@@ -59,7 +61,7 @@ const Sidebar: React.FC = () => {
                                     genre={item.genre}
                                     date={item.date}
                                 >
-                                    <img src={item.imageUrl} alt={item.title} />
+                                    <img src={`posters/${item.imageUrl}`} alt={item.title} />
                                 </Accordion>
                                 :
                                 <AccordionTablet
@@ -78,7 +80,7 @@ const Sidebar: React.FC = () => {
                 <div className={styles.aside__reviews__items}>
                     {[...Array(3)].map((_, index) => (
                         <Link to='' key={index}>
-                            <img src={`review${index + 1}.webp`} alt="review" />
+                            <img src={`reviews/${index + 1}.webp`} alt="review" />
                         </Link>
                     ))}
                 </div>

@@ -96,6 +96,9 @@
 
         &__option {
             svg {
+                width: 16px;
+                height: 16px;
+
                 path {
                     fill: $primary;
                 }
@@ -103,6 +106,11 @@
 
             a {
                 color: $secondary;
+                transition: all .3s ease-in;
+
+                &:hover {
+                    color: $primary;
+                }
             }
         }
 

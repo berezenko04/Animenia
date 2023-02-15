@@ -5,6 +5,7 @@ import { SwiperSlide } from 'swiper/react'
 import ReactPlayer from 'react-player/youtube'
 import { useNavigate, useParams } from 'react-router-dom'
 
+//styles
 import styles from './AnimeId.module.scss'
 
 //components
@@ -13,6 +14,7 @@ import AnimeBlock from '@/components/AnimeBlock'
 import HeadingBlock from '@/components/HeadingBlock'
 import AnimeCard from '@/components/AnimeCard'
 import AnimeCardSkeleton from '@/components/skeletons/AnimeCardSkeleton'
+import AnimeBlockSkeleton from '@/components/skeletons/AnimeBlockSkeleton'
 
 //icons
 import { ReactComponent as DesktopIcon } from '@/assets/icons/desktop.svg'
@@ -27,7 +29,7 @@ import { AnimeItem } from '@/redux/anime/types'
 
 //utils
 import { useWindowResize } from '@/utils/useWindowResize'
-import AnimeBlockSkeleton from '@/components/skeletons/AnimeBlockSkeleton'
+
 
 
 const AnimeId: React.FC = () => {
@@ -59,7 +61,7 @@ const AnimeId: React.FC = () => {
             }
         })();
         dispatch(fetchAnime());
-    }, [])
+    }, [id])
 
     const [anime, setAnime] = useState<AnimeItem>();
 

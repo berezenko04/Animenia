@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+//styles
 import styles from './SettingsBlock.module.scss'
 
 //components
@@ -11,7 +13,6 @@ import { ReactComponent as SettingsIcon } from '@/assets/icons/settings.svg'
 //utils
 import { tabSelector } from '@/redux/profile/selectors'
 import { setTab } from '@/redux/profile/slice'
-import { useEffect } from 'react'
 
 
 export const links = ["General", "Security and privacy", "Notifications"];
