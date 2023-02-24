@@ -40,14 +40,18 @@
                 gap: 4px;
                 transition: all .2s ease-in-out;
 
-                a {
+                a,
+                button {
                     line-height: 135%;
                     color: $secondary;
                     transition: all .2s ease-in-out;
+                    font-size: 16px;
                 }
 
                 &:hover {
-                    a {
+
+                    a,
+                    button {
                         color: $primary;
                     }
 

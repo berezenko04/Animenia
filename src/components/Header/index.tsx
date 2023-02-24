@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 //styles
@@ -28,13 +28,15 @@ import { useWindowResize } from '@/utils/useWindowResize'
 
 
 const Header: React.FC = () => {
+    const navigate = useNavigate();
+
     const links = [
         { name: 'All', path: '/Animenia/all' },
-        { name: 'Top 100', path: '/Animenia/all' },
-        { name: 'Genres', path: '/Animenia/all' },
-        { name: 'Categories', path: '/Animenia/all' },
-        { name: 'Anons', path: '/Animenia/all' },
-        { name: 'Random', path: '/Animenia/all' }
+        { name: 'Top 100', path: '' },
+        { name: 'Genres', path: '' },
+        { name: 'Categories', path: '' },
+        { name: 'Anons', path: '' },
+        { name: 'Random', path: '' }
     ];
 
     const auth = useSelector(isAuthSelector);
@@ -47,11 +49,16 @@ const Header: React.FC = () => {
 
     useEffect(() => {
         if (isMounted.current) {
-            const json = theme;
-            localStorage.setItem('theme', json);
+            localStorage.setItem('theme', theme);
         }
         isMounted.current = true;
     }, [theme])
+
+    const handleClickRandom = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const rand = Math.floor(Math.random() * 20);
+        console.log(rand);
+        navigate(`/Animenia/${rand}`)
+    }
 
     const handleTheme = () => {
         dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
@@ -67,7 +74,13 @@ const Header: React.FC = () => {
                             <ul className={styles.header__main__links}>
                                 {links.map((link, index) => (
                                     <li key={index} className={styles.header__main__links__item}>
-                                        <Link to={link.path}>{link.name}</Link>
+                                        {link.name === 'Random' ?
+                                            <button onClick={(e) => handleClickRandom(e)}>{link.name}</button>
+                                            :
+                                            <Link to={link.path}>
+                                                {link.name}
+                                            </Link>
+                                        }
                                         {links.slice(1, 4).includes(link) && <ArrowDownIcon />}
                                     </li>
                                 ))}

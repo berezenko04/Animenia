@@ -69,7 +69,7 @@ const Sidebar: React.FC = () => {
                                     title={item.title}
                                     genre={item.genre}
                                     date={item.date}
-                                    imageUrl={item.imageUrl}
+                                    imageUrl={`posters/${item.imageUrl}`}
                                 />
                         ))
                     }

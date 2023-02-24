@@ -1,4 +1,3 @@
-import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -23,10 +22,9 @@ import { ReactComponent as NotificationIcon } from '@/assets/icons/notification.
 
 //redux
 import { tabSelector } from '@/redux/profile/selectors'
-import { citySelector, countrySelector } from '@/redux/geo/selectors'
+import { countrySelector } from '@/redux/geo/selectors'
 import { setIsAuth } from "@/redux/auth/slice";
-import { isAuthSelector } from "@/redux/auth/selectors";
-import { setCity, setCountry } from "@/redux/geo/slice";
+import { setCountry } from "@/redux/geo/slice";
 import { themeSelector } from "@/redux/theme/selectors";
 
 //utils
@@ -37,23 +35,11 @@ const Profile: React.FC = () => {
 
     const tab = useSelector(tabSelector);
     const country = useSelector(countrySelector);
-    const city = useSelector(citySelector);
     const theme = useSelector(themeSelector);
     const dispatch = useDispatch();
-    const isMounted = useRef(false);
-    const isAuth = useSelector(isAuthSelector);
     const navigate = useNavigate();
     const API_KEY = 'AIzaSyCYYb9ZtSS19QpJ7fvsU-Tm-x_o9rKIkzc';
     const API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-
-
-    useEffect(() => {
-        if (isMounted.current) {
-            const json = JSON.stringify(isAuth);
-            localStorage.setItem('auth', json);
-        }
-        isMounted.current = true;
-    }, [isAuth]);
 
     const notifications: string[] = [
         'Push notifications',
@@ -65,10 +51,8 @@ const Profile: React.FC = () => {
     ];
 
     const handleLogout = (): void => {
-        if (confirm('Are you sure you want to logout?')) {
-            dispatch(setIsAuth(false));
-            navigate('/Animenia/');
-        }
+        dispatch(setIsAuth(false));
+        navigate('/Animenia/');
     }
 
     const getGeo = () => {
@@ -79,7 +63,7 @@ const Profile: React.FC = () => {
                 const url = API_URL + lat + "," + lng + "&key=" + API_KEY + "&language=en";
                 fetchGeo(url);
             });
-            return `${country}, ${city}`;
+            return `${country}`;
         } else {
             alert("Geolocation is not supported by this browser.");
             console.log("Geolocation is not supported by this browser.");
@@ -89,9 +73,7 @@ const Profile: React.FC = () => {
     const fetchGeo = async (url: string) => {
         try {
             const { data } = await axios.get(url);
-            const dataArray = data.results[0].formatted_address.split(', ');
-            dispatch(setCountry(dataArray[3]));
-            dispatch(setCity(dataArray[1]));
+            dispatch(setCountry(data.results[0].formatted_address.split(', ')[4]));
         } catch (error) {
             alert('An error occurred while getting the location');
             console.error(error);
