@@ -198,3 +198,33 @@
         }
     }
 }
+
+.notAuth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 500px);
+    flex-direction: column;
+    gap: 32px;
+
+    h1 {
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 135%;
+        color: $primary;
+    }
+
+    a {
+        color: $white;
+        background-color: $primary;
+        border: 1px solid $primary;
+        transition: all .3s ease-in;
+        padding: 10px 24px;
+        border-radius: 10px;
+
+        &:hover {
+            color: $primary;
+            background-color: transparent;
+        }
+    }
+}

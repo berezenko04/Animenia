@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 
 import styles from './Login.module.scss'
 
@@ -15,27 +14,17 @@ import Header from '@/components/Header'
 
 //redux
 import { setIsAuth } from '@/redux/auth/slice'
-import { isAuthSelector } from '@/redux/auth/selectors'
-
 
 const Login: React.FC = () => {
 
     const dispatch = useDispatch();
-    const isAuth = useSelector(isAuthSelector);
-    const isMounted = useRef(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isMounted.current) {
-            const json = JSON.stringify(isAuth);
-            localStorage.setItem('auth', json);
-        }
-        isMounted.current = true;
-    }, [isAuth]);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(setIsAuth(true));
+        localStorage.setItem('auth', 'true');
         navigate('/Animenia/');
     }
 

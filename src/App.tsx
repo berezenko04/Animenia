@@ -14,6 +14,7 @@ import EmptyScreen from './components/EmptyScreen'
 //pages
 import Layout from './layouts/MainLayout'
 import Home from './pages/Home'
+
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Profile = lazy(() => import('./pages/Profile'));

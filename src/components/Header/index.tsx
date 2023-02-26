@@ -55,8 +55,7 @@ const Header: React.FC = () => {
     }, [theme])
 
     const handleClickRandom = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const rand = Math.floor(Math.random() * 20);
-        console.log(rand);
+        const rand = Math.floor(Math.random() * 20 + 1);
         navigate(`/Animenia/${rand}`)
     }
 
