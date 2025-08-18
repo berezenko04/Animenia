@@ -1,6 +1,8 @@
+import 'express';
+
 declare module 'express-serve-static-core' {
   interface Request {
     cookies?: { accessToken: string; refreshToken: string };
-    sup?: { userId: string };
+    user?: { sub: string; email: string };
   }
 }
