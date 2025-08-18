@@ -35,8 +35,8 @@ export class AuthService {
     return user;
   }
 
-  private async generateTokens(userId: string, email: string) {
-    const payload = { sub: userId, email };
+  private async generateTokens(userId: string) {
+    const payload = { sub: userId };
     const accessToken = await this.jwtService.signAsync(payload, {
       secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
       expiresIn: '15m',
@@ -82,7 +82,7 @@ export class AuthService {
     const user = await this.validateUser(email, password);
     if (!user) throw new UnauthorizedException('Invalid email or password');
 
-    const tokens = await this.generateTokens(user.id, user.email);
+    const tokens = await this.generateTokens(user.id);
 
     return { ...tokens, userId: user.id };
   }
@@ -92,8 +92,31 @@ export class AuthService {
   }
 
   async logoutAll(userId: string) {
-    const deleted = await this.prisma.session.deleteMany({ where: { userId } });
-    console.log('Deleted sessions:', deleted.count);
-    return deleted;
+    return this.prisma.session.deleteMany({ where: { userId } });
+  }
+
+  async refreshTokens(userId: string, oldRefreshToken: string) {
+    const session = await this.prisma.session.findUnique({
+      where: { refreshToken: oldRefreshToken },
+    });
+
+    if (!session || session.userId !== userId) {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+
+    const { accessToken, refreshToken } = await this.generateTokens(userId);
+
+    await this.prisma.session.update({
+      where: { id: session.id },
+      data: {
+        refreshToken,
+        expiresAt: new Date(
+          Date.now() +
+            parseInt(this.configService.get<string>('JWT_REFRESH_EXPIRY')!),
+        ),
+      },
+    });
+
+    return { accessToken, refreshToken };
   }
 }

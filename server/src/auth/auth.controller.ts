@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, Post, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 
@@ -12,6 +20,7 @@ import { LoginDto } from './dto/login.dto';
 // decorators
 import { Auth } from './decorators/auth.decorator';
 import { User } from 'src/common/decorators/user.decorator';
+import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -19,9 +28,6 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly configService: ConfigService,
   ) {}
-
-  private readonly JWT_ACCESS_EXPIRY = 15 * 60 * 1000;
-  private readonly JWT_REFRESH_EXPIRY = 7 * 24 * 60 * 60 * 1000;
 
   @Post('register')
   async register(@Body() dto: RegisterDto) {
@@ -45,7 +51,10 @@ export class AuthController {
       refreshToken: refreshToken,
       ipAddress: String(ip),
       userAgent,
-      expiresAt: new Date(Date.now() + this.JWT_REFRESH_EXPIRY),
+      expiresAt: new Date(
+        Date.now() +
+          parseInt(this.configService.get<string>('JWT_REFRESH_EXPIRY')!),
+      ),
     });
 
     res.cookie('accessToken', accessToken, {
@@ -54,7 +63,7 @@ export class AuthController {
       sameSite: 'strict',
       maxAge:
         this.configService.get<string>('NODE_ENV') === 'production'
-          ? this.JWT_ACCESS_EXPIRY
+          ? parseInt(this.configService.get<string>('JWT_ACCESS_EXPIRY')!)
           : 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -62,7 +71,7 @@ export class AuthController {
       httpOnly: true,
       secure: true,
       sameSite: 'strict',
-      maxAge: this.JWT_REFRESH_EXPIRY,
+      maxAge: parseInt(this.configService.get<string>('JWT_REFRESH_EXPIRY')!),
     });
 
     return { message: 'Login successful' };
@@ -88,7 +97,9 @@ export class AuthController {
       maxAge: 0,
     });
 
-    return this.authService.logout(refreshToken);
+    await this.authService.logout(refreshToken);
+
+    return { message: 'Successfully logged out' };
   }
 
   @Post('logout-all')
@@ -112,6 +123,14 @@ export class AuthController {
       maxAge: 0,
     });
 
-    return this.authService.logoutAll(userId);
+    await this.authService.logoutAll(userId);
+
+    return { message: 'Successfully logged out from all sessions' };
+  }
+
+  @Post('refresh')
+  @UseGuards(JwtRefreshGuard)
+  async refresh(@User('sub') userId: string, @Req() req: Request) {
+    return this.authService.refreshTokens(userId, req.cookies?.refreshToken);
   }
 }
