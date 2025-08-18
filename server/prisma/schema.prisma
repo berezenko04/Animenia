@@ -24,7 +24,7 @@ model Session {
   userId String @map("user_id") @db.Uuid
   user   User   @relation(fields: [userId], references: [id])
 
-  refreshToken String   @map("refresh_token")
+  refreshToken String   @unique @map("refresh_token")
   ipAddress    String?  @map("ip_address")
   userAgent    String?  @map("user_agent")
   expiresAt    DateTime @map("expires_at")

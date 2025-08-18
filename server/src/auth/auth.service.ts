@@ -13,6 +13,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // dto
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { CreateSessionDto } from './dto/create-session.dto';
 
 @Injectable()
 export class AuthService {
@@ -48,6 +49,10 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
+  async createSession(data: CreateSessionDto) {
+    return this.prisma.session.create({ data });
+  }
+
   async register(dto: RegisterDto) {
     const { email, password, firstName, lastName } = dto;
 
@@ -79,14 +84,14 @@ export class AuthService {
 
     const tokens = await this.generateTokens(user.id, user.email);
 
-    await this.prisma.session.create({
-      data: {
-        userId: user.id,
-        refreshToken: tokens.refreshToken,
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      },
-    });
+    return { ...tokens, userId: user.id };
+  }
 
-    return tokens;
+  async logout(refreshToken: string) {
+    return this.prisma.session.delete({ where: { refreshToken } });
+  }
+
+  async logoutAll(userId: string) {
+    return this.prisma.session.deleteMany({ where: { userId } });
   }
 }
