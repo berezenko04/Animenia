@@ -8,7 +8,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 // decorators
 import { User } from 'src/common/decorators/user.decorator';
-import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Auth } from 'src/modules/auth/decorators/auth.decorator';
 
 @Controller('users')
 @Auth()
