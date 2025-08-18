@@ -11,6 +11,7 @@ import { LoginDto } from './dto/login.dto';
 
 // decorators
 import { Auth } from './decorators/auth.decorator';
+import { User } from 'src/common/decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -95,23 +96,22 @@ export class AuthController {
   @Auth()
   async logoutAll(
     @Res({ passthrough: true }) res: Response,
-    @Req() req: Request,
+    @User('sub') userId: string,
   ) {
-    console.log();
-    // res.cookie('accessToken', '', {
-    //   httpOnly: true,
-    //   secure: true,
-    //   sameSite: 'strict',
-    //   maxAge: 0,
-    // });
+    res.cookie('accessToken', '', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      maxAge: 0,
+    });
 
-    // res.cookie('refreshToken', '', {
-    //   httpOnly: true,
-    //   secure: true,
-    //   sameSite: 'strict',
-    //   maxAge: 0,
-    // });
+    res.cookie('refreshToken', '', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      maxAge: 0,
+    });
 
-    return this.authService.logoutAll(req.user!.sub);
+    return this.authService.logoutAll(userId);
   }
 }
