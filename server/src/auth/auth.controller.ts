@@ -20,6 +20,8 @@ import { LoginDto } from './dto/login.dto';
 // decorators
 import { Auth } from './decorators/auth.decorator';
 import { User } from 'src/common/decorators/user.decorator';
+
+// guards
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 @Controller('auth')
