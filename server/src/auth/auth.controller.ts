@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 
@@ -8,7 +8,9 @@ import { AuthService } from './auth.service';
 // dto
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { JwtAuthGuard } from './jwt-auth.guard';
+
+// decorators
+import { Auth } from './decorators/auth.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -66,7 +68,8 @@ export class AuthController {
   }
 
   @Post('logout')
-  @UseGuards(JwtAuthGuard)
+  @HttpCode(200)
+  @Auth()
   async logout(@Res({ passthrough: true }) res: Response, @Req() req: Request) {
     const refreshToken = req.cookies['refreshToken'];
 
@@ -88,12 +91,13 @@ export class AuthController {
   }
 
   @Post('logout-all')
-  @UseGuards(JwtAuthGuard)
+  @HttpCode(200)
+  @Auth()
   async logoutAll(
     @Res({ passthrough: true }) res: Response,
     @Req() req: Request,
   ) {
-    console.log(req.user.sub);
+    console.log();
     // res.cookie('accessToken', '', {
     //   httpOnly: true,
     //   secure: true,
@@ -108,6 +112,6 @@ export class AuthController {
     //   maxAge: 0,
     // });
 
-    return req.user;
+    return this.authService.logoutAll(req.user!.sub);
   }
 }

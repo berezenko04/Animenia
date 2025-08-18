@@ -92,6 +92,8 @@ export class AuthService {
   }
 
   async logoutAll(userId: string) {
-    return this.prisma.session.deleteMany({ where: { userId } });
+    const deleted = await this.prisma.session.deleteMany({ where: { userId } });
+    console.log('Deleted sessions:', deleted.count);
+    return deleted;
   }
 }
