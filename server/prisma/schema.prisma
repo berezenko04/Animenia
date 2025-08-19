@@ -18,18 +18,19 @@ enum Genre {
 }
 
 model User {
-  id                String    @id @default(uuid()) @db.Uuid
-  email             String    @unique
-  hash              String    @map("password_hash")
-  firstName         String    @map("first_name")
-  lastName          String    @map("last_name")
-  twitterUsername   String?   @map("twitter_username")
-  telegramUsername  String?   @map("telegram_username")
-  instagramUsername String?   @map("instagram_username")
-  createdAt         DateTime  @default(now()) @map("created_at")
-  updatedAt         DateTime  @default(now()) @map("updated_at")
-  Session           Session[]
-  Avatar            Avatar[]
+  id                String      @id @default(uuid()) @db.Uuid
+  email             String      @unique
+  hash              String      @map("password_hash")
+  firstName         String      @map("first_name")
+  lastName          String      @map("last_name")
+  twitterUsername   String?     @map("twitter_username")
+  telegramUsername  String?     @map("telegram_username")
+  instagramUsername String?     @map("instagram_username")
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @default(now()) @map("updated_at")
+  session           Session[]
+  avatar            Avatar[]
+  likes             MovieLike[]
 
   @@map("users")
 }
@@ -68,13 +69,26 @@ model Movie {
   title       String
   description String
   rating      Int          @default(0)
-  trailerUrl  String
+  trailerUrl  String       @map("trailer_url")
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @default(now()) @map("updated_at")
   genres      Genre[]
   screenshots Screenshot[]
+  likes       MovieLike[]
 
   @@map("movies")
+}
+
+model MovieLike {
+  id      String @id @default(uuid()) @db.Uuid
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String @map("user_id") @db.Uuid
+  movie   Movie  @relation(fields: [movieId], references: [id])
+  movieId String @map("movie_id") @db.Uuid
+  value   Int
+
+  @@unique([movieId, userId])
+  @@map("movies_likes")
 }
 
 model Screenshot {
