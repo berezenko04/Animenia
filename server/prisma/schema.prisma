@@ -15,6 +15,7 @@ enum Genre {
   ACTION
   MAGIC
   SCHOOL_LIFE
+  PARANORMAL
 }
 
 model User {
@@ -69,6 +70,7 @@ model Movie {
   title       String
   description String
   rating      Int          @default(0)
+  releaseYear Int          @map("release_year")
   trailerUrl  String       @map("trailer_url")
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @default(now()) @map("updated_at")

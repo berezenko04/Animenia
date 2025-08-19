@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 // dto
 import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { CreateMovieDto } from './dto/create-movie.dto';
 
 @Injectable()
 export class MovieService {
@@ -24,6 +25,10 @@ export class MovieService {
 
   async get(id: string) {
     return await this.prisma.movie.findUnique({ where: { id } });
+  }
+
+  async create(dto: CreateMovieDto) {
+    return await this.prisma.movie.create({ data: dto });
   }
 
   async changeRating(id: string, rate: 1 | -1) {
