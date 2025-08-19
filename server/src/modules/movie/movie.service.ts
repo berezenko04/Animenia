@@ -34,10 +34,21 @@ export class MovieService {
     return await this.prisma.movie.create({ data: dto });
   }
 
-  async changeRating(id: string, rate: 1 | -1) {
+  async like(userId: string, movieId: string, rate: 1 | -1) {
+    await this.prisma.movieLike.upsert({
+      where: { movieId_userId: { movieId, userId } },
+      update: { value: rate },
+      create: { movieId, userId, value: rate },
+    });
+
+    const total = await this.prisma.movieLike.aggregate({
+      where: { movieId },
+      _sum: { value: true },
+    });
+
     return await this.prisma.movie.update({
-      where: { id },
-      data: { rating: { increment: rate } },
+      where: { id: movieId },
+      data: { rating: total._sum.value || 0 },
     });
   }
 }
