@@ -23,6 +23,7 @@ import { User } from 'src/common/decorators/user.decorator';
 
 // guards
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+import { getDeviceInfo } from 'src/utils/deviceInfo';
 
 @Controller('auth')
 export class AuthController {
@@ -48,11 +49,16 @@ export class AuthController {
     const ip = req.ip || req.headers['x-forwarded-for'];
     const userAgent = req.headers['user-agent'] || 'unknown';
 
+    const { os, deviceType, browser } = getDeviceInfo(userAgent);
+
     await this.authService.createSession({
       userId,
-      refreshToken: refreshToken,
+      refreshToken,
       ipAddress: String(ip),
       userAgent,
+      os,
+      deviceType,
+      browser,
       expiresAt: new Date(
         Date.now() +
           parseInt(this.configService.get<string>('JWT_REFRESH_EXPIRY')!),
