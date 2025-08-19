@@ -24,7 +24,10 @@ export class MovieService {
   }
 
   async get(id: string) {
-    return await this.prisma.movie.findUnique({ where: { id } });
+    return await this.prisma.movie.findUnique({
+      where: { id },
+      include: { screenshots: { take: 3 } },
+    });
   }
 
   async create(dto: CreateMovieDto) {
