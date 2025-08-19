@@ -45,7 +45,7 @@ export class MovieController {
 
   @Auth()
   @Patch('like')
-  async like(@User('sup') userId: string, @Body() dto: LikeMovieDto) {
+  async like(@User('sub') userId: string, @Body() dto: LikeMovieDto) {
     return this.movieService.like(userId, dto.movieId, dto.value);
   }
 }
