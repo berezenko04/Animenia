@@ -3,6 +3,7 @@ import { createTheme } from "@mui/material";
 const baseTheme = createTheme({
   palette: {
     primary: { main: "#DA1414", light: "#FBD0D0" },
+    secondary: { main: "#404156" },
     background: { default: "#F6F6F6" },
     text: { primary: "#404156", secondary: "#9F9F9F" },
   },
@@ -18,6 +19,12 @@ const baseTheme = createTheme({
 });
 
 const theme = createTheme(baseTheme, {
+  palette: {
+    white: baseTheme.palette.augmentColor({
+      color: { main: "#FFFFFF" },
+      name: "white",
+    }),
+  },
   components: {
     MuiButton: {
       styleOverrides: {},
@@ -87,9 +94,7 @@ const theme = createTheme(baseTheme, {
     },
     MuiLink: {
       styleOverrides: {
-        underlineAlways: {
-          color: baseTheme.palette.primary.main,
-        },
+        root: { textDecoration: "none", color: baseTheme.palette.text.primary },
       },
     },
     MuiInputBase: {
@@ -102,7 +107,7 @@ const theme = createTheme(baseTheme, {
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          color: baseTheme.palette.primary.main,
+          color: baseTheme.palette.secondary.main,
         },
       },
     },

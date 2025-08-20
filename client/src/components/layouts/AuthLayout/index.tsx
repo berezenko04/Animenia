@@ -1,13 +1,18 @@
-import { Container, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
+
+// components
+import Header from "@/components/sections/Header";
+import CustomContainer from "@/components/sections/Container";
 
 const AuthLayout: React.FC = () => {
   return (
-    <Container disableGutters sx={{ maxWidth: 1200, px: 4 }}>
-      <Stack sx={{ minHeight: "100svh", py: 2 }}>
+    <Stack sx={{ minHeight: "100svh" }}>
+      <Header />
+      <CustomContainer>
         <Outlet />
-      </Stack>
-    </Container>
+      </CustomContainer>
+    </Stack>
   );
 };
 
