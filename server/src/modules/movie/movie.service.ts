@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 // service
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -24,31 +24,44 @@ export class MovieService {
   }
 
   async get(id: string) {
-    return await this.prisma.movie.findUnique({
+    const movie = await this.prisma.movie.findUnique({
       where: { id },
       include: { screenshots: { take: 3 } },
     });
+
+    if (!movie) throw new NotFoundException('Movie is not found');
+
+    return movie;
   }
 
   async create(dto: CreateMovieDto) {
     return await this.prisma.movie.create({ data: dto });
   }
 
-  async like(userId: string, movieId: string, rate: 1 | -1) {
-    await this.prisma.movieLike.upsert({
+  async like(userId: string, movieId: string) {
+    await this.get(movieId);
+
+    const existingLike = await this.prisma.movieLike.findUnique({
       where: { movieId_userId: { movieId, userId } },
-      update: { value: rate },
-      create: { movieId, userId, value: rate },
     });
 
-    const total = await this.prisma.movieLike.aggregate({
+    if (existingLike) {
+      await this.prisma.movieLike.create({
+        data: { movieId, userId },
+      });
+    } else {
+      await this.prisma.movieLike.delete({
+        where: { movieId_userId: { movieId, userId } },
+      });
+    }
+
+    const likeCount = await this.prisma.movieLike.count({
       where: { movieId },
-      _sum: { value: true },
     });
 
     return await this.prisma.movie.update({
       where: { id: movieId },
-      data: { rating: total._sum.value || 0 },
+      data: { rating: likeCount },
     });
   }
 }

@@ -15,7 +15,6 @@ import { MovieService } from './movie.service';
 // dto
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { CreateMovieDto } from './dto/create-movie.dto';
-import { LikeMovieDto } from './dto/like-movie.dto';
 
 // decorators
 import { User } from 'src/common/decorators/user.decorator';
@@ -44,8 +43,8 @@ export class MovieController {
   }
 
   @Auth()
-  @Patch('like')
-  async like(@User('sup') userId: string, @Body() dto: LikeMovieDto) {
-    return this.movieService.like(userId, dto.movieId, dto.value);
+  @Patch(':id/like')
+  async like(@User('sub') userId: string, @Param('id') movieId: string) {
+    return this.movieService.like(userId, movieId);
   }
 }

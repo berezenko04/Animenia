@@ -19,16 +19,16 @@ enum Genre {
 }
 
 model User {
-  id                String      @id @default(uuid()) @db.Uuid
-  email             String      @unique
+  id                String                                 @id @default(uuid()) @db.Uuid
+  email             String                                 @unique
   hash              String      @map("password_hash")
   firstName         String      @map("first_name")
   lastName          String      @map("last_name")
   twitterUsername   String?     @map("twitter_username")
   telegramUsername  String?     @map("telegram_username")
   instagramUsername String?     @map("instagram_username")
-  createdAt         DateTime    @default(now()) @map("created_at")
-  updatedAt         DateTime    @default(now()) @map("updated_at")
+  createdAt         DateTime    @map("created_at")         @default(now())
+  updatedAt         DateTime    @map("updated_at")         @default(now())
   session           Session[]
   avatar            Avatar[]
   likes             MovieLike[]
@@ -37,43 +37,43 @@ model User {
 }
 
 model Session {
-  id           String   @id @default(uuid()) @db.Uuid
-  userId       String   @map("user_id") @db.Uuid
+  id           String                         @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id")       @db.Uuid
   user         User     @relation(fields: [userId], references: [id])
-  refreshToken String   @unique @map("refresh_token")
+  refreshToken String   @map("refresh_token") @unique
   ipAddress    String?  @map("ip_address")
   userAgent    String?  @map("user_agent")
   deviceType   String?  @map("device_type")
   os           String?
   browser      String?
   expiresAt    DateTime @map("expires_at")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @default(now()) @map("updated_at")
+  createdAt    DateTime @map("created_at")    @default(now())
+  updatedAt    DateTime @map("updated_at")    @default(now())
 
   @@map("sessions")
 }
 
 model Avatar {
-  id        String   @id @default(uuid()) @db.Uuid
+  id        String                      @id @default(uuid()) @db.Uuid
   url       String
   user      User     @relation(fields: [userId], references: [id])
-  userId    String   @map("user_id") @db.Uuid
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
+  userId    String   @map("user_id")    @db.Uuid
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime @map("updated_at") @default(now())
 
   @@map("avatars")
 }
 
 model Movie {
-  id          String       @id @default(uuid()) @db.Uuid()
+  id          String                            @id @default(uuid()) @db.Uuid()
   posterUrl   String       @map("poster_url")
   title       String
   description String
-  rating      Int          @default(0)
+  rating      Int                               @default(0)
   releaseYear Int          @map("release_year")
   trailerUrl  String       @map("trailer_url")
-  createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime     @default(now()) @map("updated_at")
+  createdAt   DateTime     @map("created_at")   @default(now())
+  updatedAt   DateTime     @map("updated_at")   @default(now())
   genres      Genre[]
   screenshots Screenshot[]
   likes       MovieLike[]
@@ -82,19 +82,18 @@ model Movie {
 }
 
 model MovieLike {
-  id      String @id @default(uuid()) @db.Uuid
+  id      String                  @id @default(uuid()) @db.Uuid
   user    User   @relation(fields: [userId], references: [id])
-  userId  String @map("user_id") @db.Uuid
+  userId  String @map("user_id")  @db.Uuid
   movie   Movie  @relation(fields: [movieId], references: [id])
   movieId String @map("movie_id") @db.Uuid
-  value   Int
 
   @@unique([movieId, userId])
   @@map("movies_likes")
 }
 
 model Screenshot {
-  id      String @id @default(uuid()) @db.Uuid
+  id      String                  @id @default(uuid()) @db.Uuid
   url     String
   movie   Movie  @relation(fields: [movieId], references: [id])
   movieId String @map("movie_id") @db.Uuid()
