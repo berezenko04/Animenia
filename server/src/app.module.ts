@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MovieModule } from './modules/movie/movie.module';
 import { UserModule } from './modules/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { WishlistModule } from './modules/wishlist/wishlist.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { PrismaModule } from './prisma/prisma.module';
     AuthModule,
     UserModule,
     MovieModule,
+    WishlistModule,
   ],
   controllers: [],
   providers: [],

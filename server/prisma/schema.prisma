@@ -48,7 +48,7 @@ model Session {
   os           String?
   browser      String?
   expiresAt    DateTime @map("expires_at")
-  
+
   createdAt    DateTime @map("created_at")    @default(now())
   updatedAt    DateTime @map("updated_at")    @default(now())
 
