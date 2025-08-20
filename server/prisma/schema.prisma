@@ -32,6 +32,7 @@ model User {
   session           Session[]
   avatar            Avatar[]
   likes             MovieLike[]
+  wishes            WishList[]
 
   @@map("users")
 }
@@ -47,6 +48,7 @@ model Session {
   os           String?
   browser      String?
   expiresAt    DateTime @map("expires_at")
+  
   createdAt    DateTime @map("created_at")    @default(now())
   updatedAt    DateTime @map("updated_at")    @default(now())
 
@@ -56,12 +58,29 @@ model Session {
 model Avatar {
   id        String                      @id @default(uuid()) @db.Uuid
   url       String
-  user      User     @relation(fields: [userId], references: [id])
   userId    String   @map("user_id")    @db.Uuid
+
+  user      User     @relation(fields: [userId], references: [id])
+
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @default(now())
 
   @@map("avatars")
+}
+
+model WishList {
+  id        String                      @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id" )   @db.Uuid
+  movieId   String   @map("movie_id")   @db.Uuid
+
+  user      User     @relation(fields: [userId], references: [id])
+  movie     Movie    @relation(fields: [movieId], references: [id])
+
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime @map("updated_at") @default(now())
+
+  @@map("wish_list")
+  @@unique([userId, movieId])
 }
 
 model Movie {
@@ -77,26 +96,35 @@ model Movie {
   genres      Genre[]
   screenshots Screenshot[]
   likes       MovieLike[]
+  wishes      WishList[]
 
   @@map("movies")
 }
 
 model MovieLike {
-  id      String                  @id @default(uuid()) @db.Uuid
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String @map("user_id")  @db.Uuid
-  movie   Movie  @relation(fields: [movieId], references: [id])
-  movieId String @map("movie_id") @db.Uuid
+  id        String                      @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id")    @db.Uuid
+  movieId   String   @map("movie_id")   @db.Uuid
+
+  user      User     @relation(fields: [userId], references: [id])
+  movie     Movie    @relation(fields: [movieId], references: [id])
+
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime @map("updated_at") @default(now())
 
   @@unique([movieId, userId])
   @@map("movies_likes")
 }
 
 model Screenshot {
-  id      String                  @id @default(uuid()) @db.Uuid
-  url     String
-  movie   Movie  @relation(fields: [movieId], references: [id])
-  movieId String @map("movie_id") @db.Uuid()
+  id        String                      @id @default(uuid()) @db.Uuid
+  url       String
+  movieId   String   @map("movie_id")   @db.Uuid()
+
+  movie     Movie    @relation(fields: [movieId], references: [id])
+
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime @map("updated_at") @default(now())
 
   @@map("screenshots")
 }

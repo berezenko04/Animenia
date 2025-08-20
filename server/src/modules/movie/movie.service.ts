@@ -45,7 +45,7 @@ export class MovieService {
       where: { movieId_userId: { movieId, userId } },
     });
 
-    if (existingLike) {
+    if (!existingLike) {
       await this.prisma.movieLike.create({
         data: { movieId, userId },
       });
