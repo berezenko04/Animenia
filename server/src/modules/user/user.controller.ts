@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
 
 // services
 import { UserService } from './user.service';
@@ -20,9 +20,18 @@ export class UserController {
     return this.userService.get(userId);
   }
 
-  @Patch('update')
+  @Post('set-avatar')
+  async setAvatar(
+    @User('sub') userId: string,
+    @Body('image') fileBase64: string,
+  ) {
+    await this.userService.setAvatar(userId, fileBase64);
+    return { message: 'Avatar has been successfully updated', success: true };
+  }
+
+  @Patch()
   async update(@User('sup') userId: string, @Body() dto: UpdateUserDto) {
     await this.userService.update(userId, dto);
-    return { message: 'User has been successfully updated' };
+    return { message: 'User has been successfully updated', success: true };
   }
 }

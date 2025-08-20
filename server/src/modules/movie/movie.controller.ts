@@ -24,7 +24,7 @@ import { Auth } from '../auth/decorators/auth.decorator';
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
-  @Get('all')
+  @Get()
   async all(@Query() query: PaginationDto) {
     return this.movieService.all(query);
   }
@@ -36,7 +36,7 @@ export class MovieController {
 
   @Auth()
   @HttpCode(200)
-  @Post('create')
+  @Post()
   async create(@Body() dto: CreateMovieDto) {
     await this.movieService.create(dto);
     return { message: 'Movie is successfully created' };

@@ -66,6 +66,7 @@ model Avatar {
   updatedAt DateTime @map("updated_at") @default(now())
 
   @@map("avatars")
+  @@unique([userId])
 }
 
 model WishList {
