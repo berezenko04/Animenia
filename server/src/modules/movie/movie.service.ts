@@ -38,21 +38,36 @@ export class MovieService {
     return await this.prisma.movie.create({ data: dto });
   }
 
-  async like(userId: string, movieId: string) {
+  async addLike(userId: string, movieId: string) {
+    await this.get(movieId);
+
+    await this.prisma.movieLike.create({
+      data: { movieId, userId },
+    });
+
+    const likeCount = await this.prisma.movieLike.count({
+      where: { movieId },
+    });
+
+    return await this.prisma.movie.update({
+      where: { id: movieId },
+      data: { rating: likeCount },
+    });
+  }
+
+  async deleteLike(userId: string, movieId: string) {
     await this.get(movieId);
 
     const existingLike = await this.prisma.movieLike.findUnique({
       where: { movieId_userId: { movieId, userId } },
     });
 
-    if (!existingLike) {
-      await this.prisma.movieLike.create({
-        data: { movieId, userId },
-      });
-    } else {
+    if (existingLike) {
       await this.prisma.movieLike.delete({
         where: { movieId_userId: { movieId, userId } },
       });
+    } else {
+      throw new NotFoundException('Like is not found');
     }
 
     const likeCount = await this.prisma.movieLike.count({

@@ -1,10 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Param,
-  Patch,
   Post,
   Query,
 } from '@nestjs/common';
@@ -43,8 +43,14 @@ export class MovieController {
   }
 
   @Auth()
-  @Patch(':id/like')
-  async like(@User('sub') userId: string, @Param('id') movieId: string) {
-    return this.movieService.like(userId, movieId);
+  @Post(':id/like')
+  async addLike(@User('sub') userId: string, @Param('id') movieId: string) {
+    return this.movieService.addLike(userId, movieId);
+  }
+
+  @Auth()
+  @Delete(':id/like')
+  async deleteLike(@User('sub') userId: string, @Param('id') movieId: string) {
+    return this.movieService.deleteLike(userId, movieId);
   }
 }

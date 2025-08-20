@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 // services
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -13,8 +17,18 @@ export class WishlistService {
 
   async addWish(userId: string, movieId: string) {
     await this.movieService.get(movieId);
-    await this.prisma.wishList.create({ data: { userId, movieId } });
-    return true;
+
+    const isWishExist = await this.prisma.wishList.findUnique({
+      where: { userId_movieId: { userId, movieId } },
+    });
+
+    if (!isWishExist) {
+      await this.prisma.wishList.create({ data: { userId, movieId } });
+    } else {
+      throw new ConflictException('Wish already created');
+    }
+
+    return { success: true };
   }
 
   async deleteWish(userId: string, movieId: string) {
@@ -28,8 +42,10 @@ export class WishlistService {
       await this.prisma.wishList.delete({
         where: { userId_movieId: { userId, movieId } },
       });
+    } else {
+      throw new NotFoundException('Wish is not found');
     }
 
-    return true;
+    return { success: true };
   }
 }
