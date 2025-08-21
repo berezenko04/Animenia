@@ -10,10 +10,10 @@ const AuthLayout: React.FC = () => {
     <Stack
       sx={{
         minHeight: "100svh",
-        backgroundImage: `url("/image.png")`,
-        backgroundSize: "100%",
+        backgroundImage: `url("/wallpaper.webp")`,
+        backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "-300pcenter",
+        backgroundPosition: "center",
       }}
     >
       <Header />
