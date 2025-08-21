@@ -8,68 +8,66 @@ const baseTheme = createTheme({
     text: { primary: "#404156", secondary: "#9F9F9F" },
   },
   breakpoints: {
-    values: {
-      xs: 0,
-      sm: 480,
-      md: 768,
-      lg: 1024,
-      xl: 1440,
-    },
+    values: { xs: 0, sm: 480, md: 768, lg: 1024, xl: 1440 },
   },
 });
 
+const extendedPalette = {
+  white: baseTheme.palette.augmentColor({ color: { main: "#FFFFFF" }, name: "white" }),
+  gray: baseTheme.palette.augmentColor({ color: { main: "#D9D9D9" }, name: "gray" }),
+};
+
 const theme = createTheme(baseTheme, {
   palette: {
-    white: baseTheme.palette.augmentColor({
-      color: { main: "#FFFFFF" },
-      name: "white",
-    }),
+    ...extendedPalette,
   },
   components: {
-    MuiButton: {
-      styleOverrides: {},
-    },
     MuiTextField: {
       defaultProps: {
-        inputProps: {
-          autoComplete: "new-password",
-        },
+        inputProps: { autoComplete: "new-password" },
       },
       styleOverrides: {
         root: {
-          "& input[readonly]": {
-            pointerEvents: "none",
-            cursor: "default",
-          },
-        },
-      },
-    },
-    MuiSelect: {
-      styleOverrides: {
-        root: {
-          "&.MuiInputBase-readOnly": {
-            // backgroundColor: baseTheme.palette.divider,
-            cursor: "default",
-            pointerEvents: "none",
-          },
-        },
-        select: {
-          "&:focus": {
-            backgroundColor: baseTheme.palette.divider,
-          },
+          "& input[readonly]": { pointerEvents: "none", cursor: "default" },
         },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderWidth: "1px",
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderWidth: "1px",
-          },
+          height: 52,
+          backgroundColor: baseTheme.palette.background.default,
+          borderRadius: "10px",
+          "& .MuiOutlinedInput-notchedOutline": { borderWidth: 0 },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderWidth: 0 },
         },
+        input: {
+          padding: "15px",
+        },
+      },
+    },
+    MuiInputAdornment: {
+      styleOverrides: {
+        root: {
+          marginRight: 0,
+          marginLeft: 0,
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: { textTransform: "none", fontWeight: 400, fontSize: 16 },
+        contained: { borderRadius: "10px" },
+
+        sizeLarge: { paddingTop: "12px", paddingBottom: "12px" },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          "&.MuiInputBase-readOnly": { cursor: "default", pointerEvents: "none" },
+        },
+        select: { "&:focus": { backgroundColor: baseTheme.palette.divider } },
       },
     },
     MuiTypography: {
@@ -80,36 +78,23 @@ const theme = createTheme(baseTheme, {
               color: baseTheme.palette.primary.main,
             },
         },
-        h1: {
-          fontSize: 24,
-        },
-        h2: {
-          fontSize: 18,
-        },
-        h3: {
-          fontSize: 16,
-        },
+        h1: { fontSize: 24 },
+        h2: { fontSize: 18 },
+        h3: { fontSize: 16 },
         paragraph: { fontSize: 16, lineHeight: "135%" },
       },
     },
     MuiLink: {
       styleOverrides: {
-        root: { textDecoration: "none", color: baseTheme.palette.text.primary },
-      },
-    },
-    MuiInputBase: {
-      defaultProps: {
-        inputProps: {
-          autoComplete: "off",
+        root: {
+          textDecoration: "none",
+          color: baseTheme.palette.text.primary,
+          "&:hover": { color: baseTheme.palette.primary.main, transition: "all 0.2s ease-in-out" },
         },
       },
     },
     MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          color: baseTheme.palette.secondary.main,
-        },
-      },
+      styleOverrides: { root: { color: baseTheme.palette.secondary.main } },
     },
   },
 });

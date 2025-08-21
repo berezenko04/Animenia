@@ -3,6 +3,7 @@ import { Stack } from "@mui/material";
 // components
 import CustomContainer from "../Container";
 import ThemeSwitchButton from "@/components/ui/buttons/ThemeSwitchButton";
+import UnderlinedLink from "@/components/ui/UnderlinedLink";
 import CustomLink from "@/components/common/CustomLink";
 
 // data
@@ -21,9 +22,9 @@ const Header: React.FC = () => {
           </CustomLink>
           <Stack component="nav" sx={{ flexDirection: "row", alignItems: "center", gap: 2 }}>
             {menu.map(({ title, href }, idx) => (
-              <CustomLink key={idx} to={href}>
+              <UnderlinedLink sx={{ fontWeight: 500 }} key={idx} to={href}>
                 {title}
-              </CustomLink>
+              </UnderlinedLink>
             ))}
           </Stack>
           <Stack sx={{ flexDirection: "row", gap: 1 }}>
@@ -38,6 +39,10 @@ const Header: React.FC = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+
+                "&:hover": {
+                  backgroundColor: "gray.main",
+                },
               }}
             >
               <PersonOutlineOutlined />

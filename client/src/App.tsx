@@ -10,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
+        <Routes>4
           <Route path="/">
             <Route path="/" />
             <Route path="/all" />

@@ -6,7 +6,10 @@ type ContainerProps = {
 
 const CustomContainer: React.FC<ContainerProps> = ({ children }) => {
   return (
-    <Container disableGutters sx={{ maxWidth: 1200, px: 4 }}>
+    <Container
+      disableGutters
+      sx={{ maxWidth: "1200px !important", height: "100%", display: "flex", flexDirection: "column", px: 4 }}
+    >
       {children}
     </Container>
   );
