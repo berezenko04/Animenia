@@ -6,6 +6,8 @@ import AuthLayout from "./components/layouts/AuthLayout";
 import LoginPage from "./pages/Login";
 import { useAppDispatch } from "./redux/store";
 import { refresh } from "./redux/auth/auth.actions";
+import PublicRoute from "./components/providers/PublicRoute";
+import PrivateRoute from "./components/providers/PrivateRoute";
 
 const RegisterPage = lazy(() => import("@/pages/Register"));
 
@@ -25,12 +27,18 @@ function App() {
             <Route path="/all" />
             <Route path="/by-genres" />
 
-            <Route path="/profile" />
+            <Route element={<PrivateRoute />}>
+              <Route path="/profile" />
+            </Route>
           </Route>
+
           <Route element={<AuthLayout />}>
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route element={<PublicRoute />}>
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<LoginPage />} />
+            </Route>
           </Route>
+
           <Route path="*" />
         </Routes>
       </Suspense>
