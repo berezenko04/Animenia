@@ -20,7 +20,7 @@ export const login = createAsyncThunk<boolean, LoginBody, { rejectValue: { messa
   }
 );
 
-export const refresh = createAsyncThunk<boolean, { rejectValue: { message: string } }>(
+export const refresh = createAsyncThunk<boolean, void, { rejectValue: { message: string } }>(
   "auth/refresh",
   async (_, { rejectWithValue }) => {
     try {
