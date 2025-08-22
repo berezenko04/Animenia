@@ -9,9 +9,11 @@ import PrivateRoute from "./components/providers/PrivateRoute";
 
 // redux
 import { refresh } from "./redux/auth/auth.actions";
+import PrimaryLayout from "./components/layouts/PrimaryLayout";
 
 const RegisterPage = lazy(() => import("@/pages/Register"));
 const LoginPage = lazy(() => import("@/pages/Login"));
+const HomePage = lazy(() => import("@/pages/Home"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -24,8 +26,8 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/">
-            <Route path="/" />
+          <Route element={<PrimaryLayout />}>
+            <Route path="/" element={<HomePage />} />
             <Route path="/all" />
             <Route path="/by-genres" />
 

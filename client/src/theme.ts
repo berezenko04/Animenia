@@ -76,12 +76,14 @@ const theme = createTheme(baseTheme, {
           "&.MuiTypography-h1, &.MuiTypography-h2, &.MuiTypography-h3, &.MuiTypography-h4, &.MuiTypography-h5, &.MuiTypography-h6":
             {
               color: baseTheme.palette.primary.main,
+              fontWeight: 500,
             },
         },
         h1: { fontSize: 24 },
         h2: { fontSize: 18 },
         h3: { fontSize: 16 },
-        paragraph: { fontSize: 16, lineHeight: "135%" },
+        body1: { fontSize: 14, lineHeight: "135%" },
+        body2: { fontSize: 13, lineHeight: "130%" },
       },
     },
     MuiLink: {

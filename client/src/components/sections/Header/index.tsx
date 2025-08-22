@@ -15,7 +15,10 @@ import { PersonOutlineOutlined } from "@mui/icons-material";
 
 const Header: React.FC = () => {
   return (
-    <Stack component="header" sx={{ py: 2.5, backgroundColor: "white.main" }}>
+    <Stack
+      component="header"
+      sx={{ py: 2.5, backgroundColor: "white.main", boxShadow: "0 4px 4px 0 rgba(229, 229, 229, 0.25)" }}
+    >
       <CustomContainer>
         <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 4 }}>
           <Logo />
