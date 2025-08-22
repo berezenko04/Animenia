@@ -10,5 +10,5 @@ export class PaginationDto {
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  perPage: number = 10;
+  limit: number = 10;
 }

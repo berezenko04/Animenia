@@ -4,20 +4,39 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 // dto
-import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { GetAllMoviesDto } from './dto/get-all-movies.dto';
 
 @Injectable()
 export class MovieService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async all({ page, perPage }: PaginationDto) {
+  async all({ page, limit, genre, year }: GetAllMoviesDto) {
+    const where: any = {};
+
+    if (genre) {
+      where.genres = { has: genre };
+    }
+
+    if (year) {
+      where.releaseYear = +year;
+    }
+
     const [movies, total] = await this.prisma.$transaction([
       this.prisma.movie.findMany({
-        skip: (page - 1) * perPage,
-        take: perPage,
+        skip: (page - 1) * limit,
+        take: limit,
+        where,
+        select: {
+          id: true,
+          posterUrl: true,
+          title: true,
+          description: true,
+          rating: true,
+          genres: true,
+        },
       }),
-      this.prisma.movie.count(),
+      this.prisma.movie.count({ where }),
     ]);
 
     return { data: movies, total };

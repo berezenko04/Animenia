@@ -13,8 +13,8 @@ import {
 import { MovieService } from './movie.service';
 
 // dto
-import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { GetAllMoviesDto } from './dto/get-all-movies.dto';
 
 // decorators
 import { User } from 'src/common/decorators/user.decorator';
@@ -25,7 +25,7 @@ export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
   @Get()
-  async all(@Query() query: PaginationDto) {
+  async all(@Query() query: GetAllMoviesDto) {
     return this.movieService.all(query);
   }
 

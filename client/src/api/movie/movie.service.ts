@@ -6,7 +6,7 @@ const MovieService = {
     return data;
   },
   async get(movieId: string) {
-    const { data } = await instance.get(`/mlovies/${movieId}`);
+    const { data } = await instance.get(`/movies/${movieId}`);
     return data;
   },
 };
