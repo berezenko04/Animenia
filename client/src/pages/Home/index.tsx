@@ -1,7 +1,11 @@
-import React from "react";
+import MovieCard from "@/components/ui/MovieCard";
 
 const HomePage: React.FC = () => {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      <MovieCard />
+    </div>
+  );
 };
 
 export default HomePage;
