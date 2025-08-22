@@ -17,6 +17,7 @@ import theme from "@/theme";
 
 // utils
 import { catchError } from "@/utils/catchError";
+import toast from "react-hot-toast";
 
 type RegisterFormFields = {
   email: string;
@@ -38,9 +39,13 @@ const RegisterForm: React.FC = () => {
 
   const password = watch("password");
 
-  const onSubmit = async (data: RegisterFormFields) => {
+  const onSubmit = async (formData: RegisterFormFields) => {
+    const { repeatPassword, ...data } = formData;
+    void repeatPassword;
+
     try {
       await AuthService.register(data);
+      toast.success("Registration successful");
       navigate("/login");
     } catch (err) {
       catchError(err);

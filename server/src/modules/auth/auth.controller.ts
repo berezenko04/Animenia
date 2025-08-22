@@ -87,7 +87,6 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(200)
-  @Auth()
   async logout(@Res({ passthrough: true }) res: Response, @Req() req: Request) {
     const refreshToken = req.cookies['refreshToken'];
 

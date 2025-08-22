@@ -1,28 +1,47 @@
 import { alpha, Button, InputAdornment, Stack, TextField, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { useAppDispatch } from "@/redux/store";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
+import PasswordInput from "@/components/common/PasswordInput";
+
+// redux
+import { login } from "@/redux/auth/auth.actions";
 
 // icons
-import { LockOpenOutlined, PersonOutlineOutlined } from "@mui/icons-material";
+import { PersonOutlineOutlined } from "@mui/icons-material";
 
 // theme
 import theme from "@/theme";
- 
+
 type LoginFormFields = {
   email: string;
   password: string;
 };
 
 const LoginForm: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     register,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormFields>();
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: LoginFormFields) => {
+    const result = await dispatch(login(data));
+
+    if (login.rejected.match(result)) {
+      return toast.error(result?.payload?.message?.message);
+    }
+
+    navigate("/");
+  };
 
   return (
     <Stack
@@ -62,27 +81,22 @@ const LoginForm: React.FC = () => {
             }}
           />
           <Stack sx={{ gap: 1 }}>
-            <TextField
-              {...register("password", {
+            <Controller
+              name="password"
+              control={control}
+              rules={{
                 required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password is too short (minimum 8 characters)",
-                },
-              })}
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              placeholder="Password"
-              type="password"
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <LockOpenOutlined />
-                    </InputAdornment>
-                  ),
-                },
+                minLength: { value: 8, message: "Password is too short (minimum 8 characters)" },
               }}
+              render={({ field }) => (
+                <PasswordInput
+                  placeholder="Password"
+                  value={field.value || ""}
+                  setValue={field.onChange}
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                />
+              )}
             />
             <CustomLink to="/forgot-password" sx={{ fontSize: 14, textDecoration: "underline" }}>
               Forgot Password?
