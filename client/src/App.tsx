@@ -1,15 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy, Suspense, useEffect } from "react";
+import { useAppDispatch } from "./redux/store";
 
 // components
 import AuthLayout from "./components/layouts/AuthLayout";
-import LoginPage from "./pages/Login";
-import { useAppDispatch } from "./redux/store";
-import { refresh } from "./redux/auth/auth.actions";
 import PublicRoute from "./components/providers/PublicRoute";
 import PrivateRoute from "./components/providers/PrivateRoute";
 
+// redux
+import { refresh } from "./redux/auth/auth.actions";
+
 const RegisterPage = lazy(() => import("@/pages/Register"));
+const LoginPage = lazy(() => import("@/pages/Login"));
 
 function App() {
   const dispatch = useAppDispatch();

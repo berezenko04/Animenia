@@ -1,14 +1,22 @@
 import { alpha, Button, InputAdornment, Stack, TextField, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
+import PasswordInput from "@/components/common/PasswordInput";
+
+// api
+import AuthService from "@/api/auth/auth.service";
 
 // icons
-import { BadgeOutlined, LockOpenOutlined, PersonOutlineOutlined } from "@mui/icons-material";
+import { BadgeOutlined, PersonOutlineOutlined } from "@mui/icons-material";
 
 // theme
 import theme from "@/theme";
+
+// utils
+import { catchError } from "@/utils/catchError";
 
 type RegisterFormFields = {
   email: string;
@@ -19,16 +27,25 @@ type RegisterFormFields = {
 };
 
 const RegisterForm: React.FC = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
+    control,
     watch,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormFields>();
 
   const password = watch("password");
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: RegisterFormFields) => {
+    try {
+      await AuthService.register(data);
+      navigate("/login");
+    } catch (err) {
+      catchError(err);
+    }
+  };
 
   return (
     <Stack
@@ -117,46 +134,39 @@ const RegisterForm: React.FC = () => {
               },
             }}
           />
-          <TextField
-            {...register("password", {
+          <Controller
+            name="password"
+            control={control}
+            rules={{
               required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password is too short (minimum 8 characters)",
-              },
-            })}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-            placeholder="Password"
-            type="password"
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockOpenOutlined />
-                  </InputAdornment>
-                ),
-              },
+              minLength: { value: 8, message: "Password is too short (minimum 8 characters)" },
             }}
+            render={({ field }) => (
+              <PasswordInput
+                placeholder="Password"
+                value={field.value || ""}
+                setValue={field.onChange}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+            )}
           />
-          <TextField
-            {...register("repeatPassword", {
+          <Controller
+            name="repeatPassword"
+            control={control}
+            rules={{
               required: "Please confirm your password",
               validate: (value) => value === password || "Passwords do not match",
-            })}
-            error={!!errors.repeatPassword}
-            helperText={errors.repeatPassword?.message}
-            placeholder="Repeat Password"
-            type="password"
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockOpenOutlined />
-                  </InputAdornment>
-                ),
-              },
             }}
+            render={({ field }) => (
+              <PasswordInput
+                placeholder="Repeat Password"
+                value={field.value || ""}
+                setValue={field.onChange}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+            )}
           />
           <Button type="submit" variant="contained" size="large" disabled={isSubmitting}>
             Register
