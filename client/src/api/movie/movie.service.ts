@@ -1,8 +1,11 @@
 import { instance } from "@/middlewares/axios.middleware";
 
+// types
+import type { GetAllMoviesParams } from "./movie.types";
+
 const MovieService = {
-  async all() {
-    const { data } = await instance.get("/movies");
+  async all(params: GetAllMoviesParams) {
+    const { data } = await instance.get("/movies", { params });
     return data;
   },
   async get(movieId: string) {

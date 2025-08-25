@@ -10,7 +10,7 @@ const PrimaryLayout: React.FC = () => {
   return (
     <Stack sx={{ minHeight: "100svh" }}>
       <Header />
-      <CustomContainer sx={{ flex: 1, display: "flex", flexDirection: "column", py: 3 }}>
+      <CustomContainer sx={{ flex: 1, display: "flex", flexDirection: "column", py: 6 }}>
         <Outlet />
       </CustomContainer>
       <Footer />
