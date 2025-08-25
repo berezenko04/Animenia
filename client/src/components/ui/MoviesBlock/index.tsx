@@ -1,4 +1,4 @@
-import { Grid, Stack } from "@mui/material";
+import { Button, darken, Grid, Stack } from "@mui/material";
 
 // components
 import MoviesBlockHead, { type MoviesBlockHeadProps } from "../MoviesBlockHead";
@@ -8,11 +8,15 @@ import MovieCard from "@/components/ui/MovieCard";
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 
+// theme
+import theme from "@/theme";
+
 interface MoviesBlockProps extends MoviesBlockHeadProps {
   movies: MovieCardType[];
+  isLazyLoad?: boolean;
 }
 
-const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, isSwipe, movies }) => {
+const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe, isLazyLoad }) => {
   return (
     <Stack sx={{ gap: 2.5 }}>
       <MoviesBlockHead title={title} icon={icon} isSwipe={isSwipe} />
@@ -26,6 +30,25 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, isSwipe, movies 
             </Grid>
           ))}
         </Grid>
+      )}
+      {isLazyLoad && (
+        <Button
+          sx={{
+            backgroundColor: "white.main",
+            py: 1.5,
+            color: "primary.main",
+            fontSize: 18,
+            fontWeight: 500,
+            borderRadius: "10px",
+            boxShadow: "0 4px 4px 0 rgba(229, 229, 229, 0.25)",
+            "&:hover": {
+              backgroundColor: darken(theme.palette.white.main, 0.07),
+            },
+          }}
+          fullWidth
+        >
+          Load More
+        </Button>
       )}
     </Stack>
   );

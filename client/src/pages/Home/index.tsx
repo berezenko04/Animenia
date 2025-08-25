@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
       {movies && (
         <>
           <MoviesBlock title="Popular" icon={LocalFireDepartmentOutlined} movies={movies} isSwipe />
-          <MoviesBlock title="Top 100" icon={LeaderboardOutlined} movies={movies} />
+          <MoviesBlock title="Top 100" icon={LeaderboardOutlined} movies={movies} isLazyLoad />
         </>
       )}
     </Stack>
