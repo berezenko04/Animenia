@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
+import { Stack } from "@mui/material";
 
 // components
-import MovieCard from "@/components/ui/MovieCard";
+import MoviesBlock from "@/components/common/MoviesBlock";
 
 // service
 import MovieService from "@/api/movie/movie.service";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
+
+// icons
+import { LocalFireDepartmentOutlined } from "@mui/icons-material";
 
 const HomePage: React.FC = () => {
   const [movies, setMovies] = useState<MovieCardType[]>();
@@ -20,11 +24,9 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      {movies?.map((movie) => (
-        <MovieCard key={movie.id} {...movie} />
-      ))}
-    </div>
+    <Stack>
+      <MoviesBlock title="Popular" icon={LocalFireDepartmentOutlined} cards={movies} isSwipe />
+    </Stack>
   );
 };
 

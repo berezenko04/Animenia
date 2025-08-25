@@ -1,12 +1,12 @@
 import { alpha, Box, Stack, Typography } from "@mui/material";
 
 // types
-import type { MovieCard } from "@/api/movie/movie.types";
+import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 
 // theme
 import theme from "@/theme";
 
-const MovieCard: React.FC<MovieCard> = ({ posterUrl, title, rating, genres }) => {
+const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, rating, genres }) => {
   return (
     <Box
       sx={{
