@@ -15,9 +15,9 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, isSwipe, cards }
   return (
     <Stack sx={{ gap: 2.5 }}>
       <MoviesBlockHead title={title} icon={icon} isSwipe={isSwipe} />
-      <Grid container>
+      <Grid container spacing={4}>
         {cards?.map((card) => (
-          <Grid size={{ xs: 4 }} spacing={4}>
+          <Grid size={{ xs: 4 }}>
             <MovieCard {...card} />
           </Grid>
         ))}

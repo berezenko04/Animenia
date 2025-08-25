@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 // components
@@ -11,7 +11,12 @@ const PrimaryLayout: React.FC = () => {
     <Stack sx={{ minHeight: "100svh" }}>
       <Header />
       <CustomContainer sx={{ flex: 1, display: "flex", flexDirection: "column", py: 6 }}>
-        <Outlet />
+        <Grid container>
+          <Grid size={{ xs: 9 }}>
+            <Outlet />
+          </Grid>
+          <Grid size={{ xs: 3 }}></Grid>
+        </Grid>
       </CustomContainer>
       <Footer />
     </Stack>
