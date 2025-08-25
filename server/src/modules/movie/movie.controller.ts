@@ -29,6 +29,11 @@ export class MovieController {
     return this.movieService.all(query);
   }
 
+  @Get('news')
+  async getNews() {
+    return this.movieService.getNews();
+  }
+
   @Get(':id')
   async get(@Param('id') movieId: string) {
     return this.movieService.get(movieId);

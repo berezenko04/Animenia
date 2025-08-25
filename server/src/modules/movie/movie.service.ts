@@ -57,6 +57,20 @@ export class MovieService {
     return movie;
   }
 
+  // News Emulation
+  async getNews() {
+    return this.prisma.movie.findMany({
+      select: {
+        title: true,
+        releaseYear: true,
+        genres: true,
+        slug: true,
+      },
+      orderBy: {},
+      take: 6,
+    });
+  }
+
   async create(dto: CreateMovieDto) {
     return await this.prisma.movie.create({
       data: { ...dto, slug: createSlug(dto.title) },

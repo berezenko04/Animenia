@@ -5,17 +5,20 @@ import { Outlet } from "react-router-dom";
 import Header from "@/components/sections/Header";
 import CustomContainer from "@/components/sections/Container";
 import Footer from "@/components/sections/Footer";
+import Sidebar from "@/components/sections/Sidebar";
 
 const PrimaryLayout: React.FC = () => {
   return (
     <Stack sx={{ minHeight: "100svh" }}>
       <Header />
       <CustomContainer sx={{ flex: 1, display: "flex", flexDirection: "column", py: 6 }}>
-        <Grid container>
+        <Grid container spacing={4}>
           <Grid size={{ xs: 9 }}>
             <Outlet />
           </Grid>
-          <Grid size={{ xs: 3 }}></Grid>
+          <Grid size={{ xs: 3 }}>
+            <Sidebar />
+          </Grid>
         </Grid>
       </CustomContainer>
       <Footer />
