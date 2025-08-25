@@ -11,7 +11,7 @@ import MovieService from "@/api/movie/movie.service";
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 
 // icons
-import { LocalFireDepartmentOutlined } from "@mui/icons-material";
+import { LeaderboardOutlined, LocalFireDepartmentOutlined } from "@mui/icons-material";
 
 const HomePage: React.FC = () => {
   const [movies, setMovies] = useState<MovieCardType[]>();
@@ -24,8 +24,9 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <Stack>
+    <Stack sx={{ gap: 6 }}>
       <MoviesBlock title="Popular" icon={LocalFireDepartmentOutlined} cards={movies} isSwipe />
+      <MoviesBlock title="Top 100" icon={LeaderboardOutlined} cards={movies} />
     </Stack>
   );
 };

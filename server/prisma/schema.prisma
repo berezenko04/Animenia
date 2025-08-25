@@ -90,6 +90,7 @@ model Movie {
   title       String
   description String
   rating      Int                               @default(0)
+  slug        String                            @unique
   releaseYear Int          @map("release_year")
   trailerUrl  String       @map("trailer_url")
   createdAt   DateTime     @map("created_at")   @default(now())

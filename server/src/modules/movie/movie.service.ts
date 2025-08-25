@@ -7,6 +7,9 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { GetAllMoviesDto } from './dto/get-all-movies.dto';
 
+// utils
+import { createSlug } from 'src/utils/createSlug';
+
 @Injectable()
 export class MovieService {
   constructor(private readonly prisma: PrismaService) {}
@@ -54,7 +57,9 @@ export class MovieService {
   }
 
   async create(dto: CreateMovieDto) {
-    return await this.prisma.movie.create({ data: dto });
+    return await this.prisma.movie.create({
+      data: { ...dto, slug: createSlug(dto.title) },
+    });
   }
 
   async addLike(userId: string, movieId: string) {
