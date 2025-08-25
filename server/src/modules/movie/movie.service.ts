@@ -61,6 +61,7 @@ export class MovieService {
   async getNews() {
     return this.prisma.movie.findMany({
       select: {
+        id: true,
         title: true,
         releaseYear: true,
         genres: true,
