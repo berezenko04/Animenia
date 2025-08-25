@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Stack } from "@mui/material";
 
 // components
-import MoviesBlock from "@/components/common/MoviesBlock";
+import MoviesBlock from "@/components/ui/MoviesBlock";
 
 // service
 import MovieService from "@/api/movie/movie.service";
@@ -25,8 +25,12 @@ const HomePage: React.FC = () => {
 
   return (
     <Stack sx={{ gap: 6 }}>
-      <MoviesBlock title="Popular" icon={LocalFireDepartmentOutlined} cards={movies} isSwipe />
-      <MoviesBlock title="Top 100" icon={LeaderboardOutlined} cards={movies} />
+      {movies && (
+        <>
+          <MoviesBlock title="Popular" icon={LocalFireDepartmentOutlined} movies={movies} isSwipe />
+          <MoviesBlock title="Top 100" icon={LeaderboardOutlined} movies={movies} />
+        </>
+      )}
     </Stack>
   );
 };

@@ -9,6 +9,7 @@ export interface GetAllMoviesParams extends Pagination {
 export type MovieCard = {
   id: string;
   posterUrl: string;
+  slug: string;
   title: string;
   description: string;
   rating: number;

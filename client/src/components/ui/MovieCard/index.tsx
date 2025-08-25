@@ -1,4 +1,5 @@
 import { alpha, Box, Stack, Typography } from "@mui/material";
+import { Link } from "react-router";
 
 // theme
 import theme from "@/theme";
@@ -9,11 +10,14 @@ import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 // icons
 import { FavoriteOutlined } from "@mui/icons-material";
 
-const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, rating, genres }) => {
+const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres }) => {
   return (
     <Box
+      to={`/movies/${slug}`}
+      component={Link}
       sx={{
         position: "relative",
+        display: "block",
         backgroundImage: `url(${posterUrl})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",

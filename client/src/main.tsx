@@ -5,6 +5,9 @@ import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { ReactLenis } from "@studio-freight/react-lenis";
 
+// styles
+import "swiper/css";
+
 // app
 import App from "./App.tsx";
 

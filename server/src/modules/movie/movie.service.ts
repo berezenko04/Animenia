@@ -33,6 +33,7 @@ export class MovieService {
         select: {
           id: true,
           posterUrl: true,
+          slug: true,
           title: true,
           description: true,
           rating: true,
