@@ -1,5 +1,17 @@
 import { createTheme } from "@mui/material";
 
+declare module "@mui/material/styles" {
+  interface Palette {
+    white: Palette["primary"];
+    gray: Palette["primary"];
+  }
+
+  interface PaletteOptions {
+    white?: PaletteOptions["primary"];
+    gray?: PaletteOptions["primary"];
+  }
+}
+
 const baseTheme = createTheme({
   palette: {
     primary: { main: "#DA1414", light: "#FBD0D0" },
