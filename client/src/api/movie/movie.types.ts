@@ -10,8 +10,9 @@ export type MovieNewsItem = {
   id: string;
   slug: string;
   title: string;
+  posterUrl: string;
   releaseYear: number;
-  genres: Array<Genre>;
+  genres: Genre[];
 };
 
 export type MovieCard = {
@@ -21,5 +22,5 @@ export type MovieCard = {
   title: string;
   description: string;
   rating: number;
-  genres: Array<Genre>;
+  genres: Genre[];
 };

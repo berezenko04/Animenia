@@ -63,12 +63,13 @@ export class MovieService {
       select: {
         id: true,
         title: true,
+        posterUrl: true,
         releaseYear: true,
         genres: true,
         slug: true,
       },
       orderBy: {},
-      take: 6,
+      take: 5,
     });
   }
 
