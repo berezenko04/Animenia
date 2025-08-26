@@ -18,28 +18,30 @@ import { FavoriteOutlined } from "@mui/icons-material";
 const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres }) => {
   return (
     <Box
-      to={`/movies/${slug}`}
-      style={{ color: "inherit" }}
       component={CustomLink}
+      to={`/movies/${slug}`}
       sx={{
         position: "relative",
-        display: "block",
-        backgroundImage: `url(${posterUrl})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
         borderRadius: "10px",
         overflow: "hidden",
-        minHeight: 350,
-        maxWidth: 270,
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        "&:hover": {
-          transform: "scale(1.04)",
-          boxShadow: 6,
-          zIndex: 10,
-          position: "relative",
-        },
+        display: "block",
       }}
     >
+      <Box
+        sx={{
+          backgroundImage: `url(${posterUrl})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          minHeight: 350,
+          maxWidth: 270,
+          transition: "transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease",
+          "&:hover": {
+            transform: "scale(1.06) translateY(-5px)",
+            boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+          },
+          willChange: "transform, box-shadow",
+        }}
+      />
       <Stack
         sx={{
           position: "absolute",
@@ -48,6 +50,7 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
           right: 0,
           p: 2.5,
           gap: 1.5,
+          zIndex: 10,
           width: "100%",
           backgroundColor: alpha(theme.palette.white.main, 0.9),
           backdropFilter: "blur(2.5px)",
@@ -55,7 +58,7 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
       >
         <Typography
           variant="h3"
-          sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "97%" }}
+          sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%" }}
         >
           {title}
         </Typography>
