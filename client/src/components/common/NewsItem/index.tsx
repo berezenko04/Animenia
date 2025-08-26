@@ -1,5 +1,7 @@
 import { Stack, Typography } from "@mui/material";
-import { Link } from "react-router";
+
+// components
+import CustomLink from "../CustomLink";
 
 // types
 import type { Genre } from "@/types/enums.types";
@@ -7,13 +9,13 @@ import type { Genre } from "@/types/enums.types";
 type NewsItemProps = {
   title: string;
   slug: string;
-  genres: Array<Genre>;
+  genres: Genre[];
   releaseYear: number;
 };
 
 const NewsItem: React.FC<NewsItemProps> = ({ title, slug, genres, releaseYear }) => {
   return (
-    <Link to={`/movies/${slug}`}>
+    <CustomLink to={`/movies/${slug}`} style={{ color: "inherit" }}>
       <Stack sx={{ gap: 0.5 }}>
         <Stack>
           <Typography color="primary">{title}</Typography>
@@ -21,7 +23,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ title, slug, genres, releaseYear })
         </Stack>
         <Typography fontSize={12}>{releaseYear}</Typography>
       </Stack>
-    </Link>
+    </CustomLink>
   );
 };
 
