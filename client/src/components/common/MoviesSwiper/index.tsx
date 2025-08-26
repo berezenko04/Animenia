@@ -1,18 +1,29 @@
 import { Swiper as SwiperInitial, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
 // components
 import MovieCard from "@/components/ui/MovieCard";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
+import type { Swiper } from "swiper/types";
 
 type MoviesSwiperProps = {
   data: MovieCardType[];
+  swiperRef: React.RefObject<Swiper | null>;
 };
 
-const MoviesSwiper: React.FC<MoviesSwiperProps> = ({ data }) => {
+const MoviesSwiper: React.FC<MoviesSwiperProps> = ({ swiperRef, data }) => {
   return (
-    <SwiperInitial spaceBetween={32} slidesPerView={3} style={{ width: "100%", padding: "0 8px" }}>
+    <SwiperInitial
+      spaceBetween={32}
+      slidesPerView={3}
+      modules={[Navigation]}
+      onBeforeInit={(swiper) => {
+        swiperRef.current = swiper;
+      }}
+      style={{ width: "100%", padding: "0 8px" }}
+    >
       {data?.map((i, idx) => (
         <SwiperSlide style={{ width: "100%", height: "100%" }} key={idx}>
           <MovieCard {...i} />

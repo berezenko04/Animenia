@@ -7,6 +7,7 @@ import { ReactLenis } from "@studio-freight/react-lenis";
 
 // styles
 import "swiper/css";
+import "swiper/css/navigation";
 
 // app
 import App from "./App.tsx";

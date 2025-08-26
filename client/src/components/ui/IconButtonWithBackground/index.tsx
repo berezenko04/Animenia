@@ -2,9 +2,10 @@ import { Button, type SvgIconProps } from "@mui/material";
 
 type IconButtonWithBackgroundProps = {
   icon: React.ElementType<SvgIconProps>;
+  onClick: () => void;
 };
 
-const IconButtonWithBackground: React.FC<IconButtonWithBackgroundProps> = ({ icon: Icon }) => {
+const IconButtonWithBackground: React.FC<IconButtonWithBackgroundProps> = ({ icon: Icon, onClick }) => {
   return (
     <Button
       sx={{
@@ -16,6 +17,7 @@ const IconButtonWithBackground: React.FC<IconButtonWithBackgroundProps> = ({ ico
         justifyContent: "center",
         alignItems: "center",
       }}
+      onClick={onClick}
     >
       <Icon sx={{ width: 20, height: 20, color: "primary.main" }} />
     </Button>

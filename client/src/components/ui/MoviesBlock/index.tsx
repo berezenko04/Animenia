@@ -1,4 +1,5 @@
 import { Button, darken, Grid, Stack } from "@mui/material";
+import { useRef } from "react";
 
 // components
 import MoviesBlockHead, { type MoviesBlockHeadProps } from "../MoviesBlockHead";
@@ -7,6 +8,7 @@ import MovieCard from "@/components/ui/MovieCard";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
+import type { Swiper } from "swiper/types";
 
 // theme
 import theme from "@/theme";
@@ -17,11 +19,13 @@ interface MoviesBlockProps extends MoviesBlockHeadProps {
 }
 
 const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe, isLazyLoad }) => {
+  const swiperRef = useRef<Swiper | null>(null);
+
   return (
     <Stack sx={{ gap: !isSwipe ? 2.5 : 1.5 }}>
-      <MoviesBlockHead title={title} icon={icon} isSwipe={isSwipe} />
+      <MoviesBlockHead swiperRef={swiperRef} title={title} icon={icon} isSwipe={isSwipe} />
       {isSwipe ? (
-        <MoviesSwiper data={movies} />
+        <MoviesSwiper swiperRef={swiperRef} data={movies} />
       ) : (
         <Grid container spacing={4}>
           {movies?.map((card) => (
