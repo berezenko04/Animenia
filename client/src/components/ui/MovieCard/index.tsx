@@ -1,11 +1,16 @@
 import { alpha, Box, Stack, Typography } from "@mui/material";
-import { Link } from "react-router";
+
+// components
+import CustomLink from "@/components/common/CustomLink";
 
 // theme
 import theme from "@/theme";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
+
+// utils
+import { formatGenres } from "@/utils/formatGenres";
 
 // icons
 import { FavoriteOutlined } from "@mui/icons-material";
@@ -14,7 +19,8 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
   return (
     <Box
       to={`/movies/${slug}`}
-      component={Link}
+      style={{ color: "inherit" }}
+      component={CustomLink}
       sx={{
         position: "relative",
         display: "block",
@@ -27,8 +33,10 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
         maxWidth: 270,
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
-          transform: "scale(1.05)",
+          transform: "scale(1.04)",
           boxShadow: 6,
+          zIndex: 10,
+          position: "relative",
         },
       }}
     >
@@ -51,7 +59,7 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
         >
           {title}
         </Typography>
-        <Typography fontSize={12}>{genres.join(", ")}</Typography>
+        <Typography fontSize={12}>{formatGenres(genres)}</Typography>
       </Stack>
       <Stack
         sx={{

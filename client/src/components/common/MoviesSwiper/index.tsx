@@ -12,13 +12,7 @@ type MoviesSwiperProps = {
 
 const MoviesSwiper: React.FC<MoviesSwiperProps> = ({ data }) => {
   return (
-    <SwiperInitial
-      spaceBetween={50}
-      slidesPerView={3}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
-      style={{ width: "100%" }}
-    >
+    <SwiperInitial spaceBetween={32} slidesPerView={3} style={{ width: "100%", padding: "0 8px" }}>
       {data?.map((i, idx) => (
         <SwiperSlide style={{ width: "100%", height: "100%" }} key={idx}>
           <MovieCard {...i} />

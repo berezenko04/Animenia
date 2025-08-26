@@ -18,7 +18,7 @@ interface MoviesBlockProps extends MoviesBlockHeadProps {
 
 const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe, isLazyLoad }) => {
   return (
-    <Stack sx={{ gap: 2.5 }}>
+    <Stack sx={{ gap: !isSwipe ? 2.5 : 1.5 }}>
       <MoviesBlockHead title={title} icon={icon} isSwipe={isSwipe} />
       {isSwipe ? (
         <MoviesSwiper data={movies} />
@@ -31,7 +31,7 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe,
           ))}
         </Grid>
       )}
-      {isLazyLoad && (
+      {isLazyLoad && movies.length > 9 && (
         <Button
           sx={{
             backgroundColor: "white.main",

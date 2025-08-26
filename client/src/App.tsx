@@ -6,10 +6,10 @@ import { useAppDispatch } from "./redux/store";
 import AuthLayout from "./components/layouts/AuthLayout";
 import PublicRoute from "./components/providers/PublicRoute";
 import PrivateRoute from "./components/providers/PrivateRoute";
+import PrimaryLayout from "./components/layouts/PrimaryLayout";
 
 // redux
 import { refresh } from "./redux/auth/auth.actions";
-import PrimaryLayout from "./components/layouts/PrimaryLayout";
 
 const RegisterPage = lazy(() => import("@/pages/Register"));
 const LoginPage = lazy(() => import("@/pages/Login"));
