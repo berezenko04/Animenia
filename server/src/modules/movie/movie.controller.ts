@@ -34,14 +34,14 @@ export class MovieController {
     return this.movieService.getNews();
   }
 
+  @Get('by-slug/:slug')
+  async getBySlug(@Param('slug') slug: string) {
+    return this.movieService.getBySlug(slug);
+  }
+
   @Get(':id')
   async get(@Param('id') movieId: string) {
     return this.movieService.get(movieId);
-  }
-
-  @Get('by-slug/:slug')
-  async getBySlug(@Param('slug') slug: string) {
-    return this.movieService.get(slug);
   }
 
   @Auth()

@@ -10,7 +10,7 @@ import { formatGenres } from "@/utils/formatGenres";
 // types
 import type { Genre } from "@/types/enums.types";
 
-type MovieistItemProps = {
+type MovieListItemProps = {
   id: string;
   slug: string;
   posterUrl: string;
@@ -18,18 +18,28 @@ type MovieistItemProps = {
   genres: Genre[];
   rating: number;
   description: string;
+  isListItem?: boolean;
 };
 
-const MovieListItem: React.FC<MovieistItemProps> = ({ id, slug, posterUrl, title, genres, rating, description }) => {
+const MovieListItem: React.FC<MovieListItemProps> = ({
+  id,
+  slug,
+  posterUrl,
+  title,
+  genres,
+  rating,
+  description,
+  isListItem = true,
+}) => {
   return (
     <Stack
       sx={{
         flexDirection: "row",
         gap: 4,
-        padding: 2.5,
-        backgroundColor: "white.main",
-        borderRadius: "10px",
-        boxShadow: "0 4px 4px 0 rgba(229, 229, 229, 0.25)",
+        padding: isListItem ? 2.5 : 0,
+        backgroundColor: isListItem ? "white.main" : "transparent",
+        borderRadius: isListItem ? "10px" : 0,
+        boxShadow: isListItem ? "0 4px 4px 0 rgba(229, 229, 229, 0.25)" : "none",
       }}
     >
       <Box
@@ -64,7 +74,7 @@ const MovieListItem: React.FC<MovieistItemProps> = ({ id, slug, posterUrl, title
         <Stack sx={{ gap: 1 }}>
           <Typography variant="h1">{title}</Typography>
           <Typography color="text.secondary">{formatGenres(genres)}</Typography>
-          <Rating sx={{ backgroundColor: "background.default" }} rating={rating} />
+          <Rating sx={{ backgroundColor: isListItem ? "background.default" : "white.main" }} rating={rating} />
         </Stack>
         <Typography
           sx={{
@@ -77,9 +87,11 @@ const MovieListItem: React.FC<MovieistItemProps> = ({ id, slug, posterUrl, title
         >
           {description}
         </Typography>
-        <Button href={`/movies/${slug}`} variant="contained" color="primary">
-          Watch
-        </Button>
+        {isListItem && (
+          <Button href={`/movies/${slug}`} variant="contained" color="primary">
+            Watch
+          </Button>
+        )}
       </Stack>
     </Stack>
   );

@@ -24,3 +24,15 @@ export type MovieCard = {
   rating: number;
   genres: Genre[];
 };
+
+export interface MovieFullInfo extends MovieCard {
+  releaseYear: number;
+  trailerUrl: string;
+  screenshots: MovieScreenshot[];
+}
+
+export type MovieScreenshot = {
+  id: string;
+  movieId: string;
+  url: string;
+};

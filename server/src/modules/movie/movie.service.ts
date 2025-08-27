@@ -85,9 +85,20 @@ export class MovieService {
   }
 
   async create(dto: CreateMovieDto) {
-    return await this.prisma.movie.create({
-      data: { ...dto, slug: createSlug(dto.title) },
+    const { screenshots, ...rest } = dto;
+
+    const result = await this.prisma.movie.create({
+      data: { ...rest, slug: createSlug(rest.title) },
     });
+
+    await this.prisma.screenshot.createMany({
+      data: screenshots.map(url => ({
+        movieId: result.id,
+        url,
+      })),
+    });
+
+    return true;
   }
 
   async addLike(userId: string, movieId: string) {

@@ -1,5 +1,6 @@
 import { Genre } from '@prisma/client';
 import {
+  ArrayNotEmpty,
   IsArray,
   IsEnum,
   IsInt,
@@ -30,4 +31,9 @@ export class CreateMovieDto {
   @Min(2000)
   @Max(new Date().getFullYear())
   releaseYear: number;
+
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsString({ each: true })
+  screenshots: string[];
 }

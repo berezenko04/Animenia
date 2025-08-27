@@ -12,6 +12,10 @@ const MovieService = {
     const { data } = await instance.get(`/movies/${movieId}`);
     return data;
   },
+  async getBySlug(slug: string) {
+    const { data } = await instance.get(`/movies/by-slug/${slug}`);
+    return data;
+  },
   async getNews() {
     const { data } = await instance.get(`/movies/news`);
     return data;
