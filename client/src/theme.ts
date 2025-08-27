@@ -113,11 +113,29 @@ const theme = createTheme(baseTheme, {
     },
     MuiPagination: {
       styleOverrides: {
+        root: {},
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
         root: {
-          
-        }
-      }
-    }
+          width: 40,
+          height: 40,
+          borderRadius: "10px",
+          backgroundColor: extendedPalette.white.main,
+          fontSize: 16,
+
+          "&.Mui-selected": {
+            backgroundColor: extendedPalette.white.main,
+            color: baseTheme.palette.primary.main,
+          },
+
+          "&:hover": {
+            backgroundColor: `${extendedPalette.white.main} !important`,
+          },
+        },
+      },
+    },
   },
 });
 

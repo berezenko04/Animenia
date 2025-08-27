@@ -1,7 +1,7 @@
 import { Stack, Typography, type SxProps } from "@mui/material";
 
 // icons
-import { FavoriteOutlined } from "@mui/icons-material";
+import { Favorite } from "@mui/icons-material";
 
 type RatingProps = {
   rating: number;
@@ -21,7 +21,7 @@ const Rating: React.FC<RatingProps> = ({ rating, sx }) => {
         ...sx,
       }}
     >
-      <FavoriteOutlined sx={{ color: "primary.main", width: 18, height: 18 }} />
+      <Favorite sx={{ color: "primary.main", width: 18, height: 18 }} />
       <Typography color="primary">{rating}</Typography>
     </Stack>
   );
