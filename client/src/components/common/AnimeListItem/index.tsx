@@ -2,6 +2,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 
 // components
 import Rating from "@/components/ui/Rating";
+import LikeButton from "@/components/ui/buttons/LikeButton";
 
 // utils
 import { formatGenres } from "@/utils/formatGenres";
@@ -55,7 +56,8 @@ const AnimeListItem: React.FC<AnimeListItemProps> = ({ id, slug, posterUrl, titl
               boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
             },
           }}
-        ></Box>
+        />
+        <LikeButton />
       </Box>
       <Stack sx={{ gap: 2.5, alignItems: "flex-start" }}>
         <Stack sx={{ gap: 1 }}>

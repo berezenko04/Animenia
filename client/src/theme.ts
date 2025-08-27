@@ -111,6 +111,13 @@ const theme = createTheme(baseTheme, {
     MuiSvgIcon: {
       styleOverrides: { root: { color: baseTheme.palette.secondary.main } },
     },
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          
+        }
+      }
+    }
   },
 });
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Stack } from "@mui/material";
+import { Pagination, Stack } from "@mui/material";
 
 // components
 import AnimeListItem from "../AnimeListItem";
@@ -21,12 +21,13 @@ const AnimeList: React.FC = () => {
   }, []);
 
   return (
-    <Stack>
+    <Stack sx={{ gap: 4 }}>
       <Stack sx={{ gap: 4 }}>
         {movies.map((m) => (
           <AnimeListItem key={m.id} {...m} />
         ))}
       </Stack>
+      <Pagination />
     </Stack>
   );
 };
