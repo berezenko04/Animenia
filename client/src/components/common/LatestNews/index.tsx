@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 // components
-import MoviesBlockHead from "@/components/ui/MoviesBlockHead";
+import MoviesBlockHead from "@/components/common/MoviesBlockHead";
 import NewsItem from "../NewsItem";
 
 // api

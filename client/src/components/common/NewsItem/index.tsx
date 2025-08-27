@@ -39,7 +39,9 @@ const NewsItem: React.FC<NewsItemProps> = ({ title, slug, genres, posterUrl, rel
         <Stack sx={{ gap: 0.5 }}>
           <Stack>
             <Typography sx={expanded ? { color: "primary.main" } : {}}>{title}</Typography>
-            <Typography fontSize={12}>{formatGenres(genres)}</Typography>
+            <Typography fontSize={12} color="text.secondary">
+              {formatGenres(genres)}
+            </Typography>
           </Stack>
           <Typography fontSize={12}>{releaseYear}</Typography>
         </Stack>

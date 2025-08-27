@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 
 // components
-import MoviesBlockHead from "@/components/ui/MoviesBlockHead";
+import MoviesBlockHead from "@/components/common/MoviesBlockHead";
 
 // icons
 import { ReviewsOutlined } from "@mui/icons-material";

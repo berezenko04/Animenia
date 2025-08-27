@@ -14,6 +14,7 @@ import { refresh } from "./redux/auth/auth.actions";
 const RegisterPage = lazy(() => import("@/pages/Register"));
 const LoginPage = lazy(() => import("@/pages/Login"));
 const HomePage = lazy(() => import("@/pages/Home"));
+const AllAnimePage = lazy(() => import("@/pages/All"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -28,7 +29,7 @@ function App() {
         <Routes>
           <Route element={<PrimaryLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/all" />
+            <Route path="/all" element={<AllAnimePage />} />
             <Route path="/by-genres" />
 
             <Route element={<PrivateRoute />}>

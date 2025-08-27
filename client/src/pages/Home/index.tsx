@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Stack } from "@mui/material";
 
 // components
-import MoviesBlock from "@/components/ui/MoviesBlock";
+import MoviesBlock from "@/components/common/MoviesBlock";
 
 // service
 import MovieService from "@/api/movie/movie.service";

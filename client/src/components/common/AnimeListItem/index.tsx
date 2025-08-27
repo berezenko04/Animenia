@@ -1,0 +1,75 @@
+import { Box, Button, Stack, Typography } from "@mui/material";
+
+// components
+import Rating from "@/components/ui/Rating";
+
+// utils
+import { formatGenres } from "@/utils/formatGenres";
+
+// types
+import type { Genre } from "@/types/enums.types";
+
+type AnimeListItemProps = {
+  id: string;
+  slug: string;
+  posterUrl: string;
+  title: string;
+  genres: Genre[];
+  rating: number;
+  description: string;
+};
+
+const AnimeListItem: React.FC<AnimeListItemProps> = ({ id, slug, posterUrl, title, genres, rating, description }) => {
+  return (
+    <Stack
+      sx={{
+        flexDirection: "row",
+        gap: 4,
+        padding: 2.5,
+        backgroundColor: "white.main",
+        borderRadius: "10px",
+        boxShadow: "0 4px 4px 0 rgba(229, 229, 229, 0.25)",
+      }}
+    >
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          minWidth: 270,
+          minHeight: 350,
+          width: "100%",
+          borderRadius: "10px",
+        }}
+      >
+        <Box
+          sx={{
+            position: "relative",
+            backgroundImage: `url(${posterUrl})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            width: "100%",
+            height: "100%",
+            transition: "transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease",
+            "&:hover": {
+              transform: "scale(1.06) translateY(-5px)",
+              boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+            },
+          }}
+        ></Box>
+      </Box>
+      <Stack sx={{ gap: 2.5, alignItems: "flex-start" }}>
+        <Stack sx={{ gap: 1 }}>
+          <Typography variant="h1">{title}</Typography>
+          <Typography color="text.secondary">{formatGenres(genres)}</Typography>
+          <Rating sx={{ backgroundColor: "background.default" }} rating={rating} />
+        </Stack>
+        <Typography fontSize={16}>{description}</Typography>
+        <Button href={`/movies/${slug}`} variant="contained" color="primary">
+          Watch
+        </Button>
+      </Stack>
+    </Stack>
+  );
+};
+
+export default AnimeListItem;

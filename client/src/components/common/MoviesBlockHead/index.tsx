@@ -14,7 +14,7 @@ export type MoviesBlockHeadProps = {
   title: string;
   icon: React.ElementType<SvgIconProps>;
   isSwipe?: boolean;
-  swiperRef: React.RefObject<Swiper | null>;
+  swiperRef?: React.RefObject<Swiper | null>;
 };
 
 const MoviesBlockHead: React.FC<MoviesBlockHeadProps> = ({ title, icon, isSwipe, swiperRef }) => {
@@ -27,8 +27,8 @@ const MoviesBlockHead: React.FC<MoviesBlockHeadProps> = ({ title, icon, isSwipe,
         </Stack>
         {isSwipe && (
           <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
-            <IconButtonWithBackground onClick={() => swiperRef.current?.slidePrev()} icon={ArrowBackOutlined} />
-            <IconButtonWithBackground onClick={() => swiperRef.current?.slideNext()} icon={ArrowForwardOutlined} />
+            <IconButtonWithBackground onClick={() => swiperRef!.current?.slidePrev()} icon={ArrowBackOutlined} />
+            <IconButtonWithBackground onClick={() => swiperRef!.current?.slideNext()} icon={ArrowForwardOutlined} />
           </Stack>
         )}
       </Stack>

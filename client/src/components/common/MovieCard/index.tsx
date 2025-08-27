@@ -2,6 +2,7 @@ import { alpha, Box, Stack, Typography } from "@mui/material";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
+import Rating from "@/components/ui/Rating";
 
 // theme
 import theme from "@/theme";
@@ -11,9 +12,6 @@ import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 
 // utils
 import { formatGenres } from "@/utils/formatGenres";
-
-// icons
-import { FavoriteOutlined } from "@mui/icons-material";
 
 const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres }) => {
   return (
@@ -39,7 +37,6 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
             transform: "scale(1.06) translateY(-5px)",
             boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
           },
-          willChange: "transform, box-shadow",
         }}
       />
       <Stack
@@ -64,23 +61,16 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
         </Typography>
         <Typography fontSize={12}>{formatGenres(genres)}</Typography>
       </Stack>
-      <Stack
+      <Rating
         sx={{
           position: "absolute",
           top: 16,
           right: 16,
           backgroundColor: alpha(theme.palette.white.main, 0.8),
           backdropFilter: "blur(5px)",
-          borderRadius: "5px",
-          p: "5px 10px",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 1,
         }}
-      >
-        <FavoriteOutlined sx={{ color: "primary.main", width: 18, height: 18 }} />
-        <Typography color="primary">{rating}</Typography>
-      </Stack>
+        rating={rating}
+      />
     </Box>
   );
 };

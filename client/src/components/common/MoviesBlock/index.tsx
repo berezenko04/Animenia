@@ -4,7 +4,7 @@ import { useRef } from "react";
 // components
 import MoviesBlockHead, { type MoviesBlockHeadProps } from "../MoviesBlockHead";
 import MoviesSwiper from "@/components/common/MoviesSwiper";
-import MovieCard from "@/components/ui/MovieCard";
+import MovieCard from "@/components/common/MovieCard";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
@@ -13,7 +13,7 @@ import type { Swiper } from "swiper/types";
 // theme
 import theme from "@/theme";
 
-interface MoviesBlockProps extends MoviesBlockHeadProps {
+interface MoviesBlockProps extends Omit<MoviesBlockHeadProps, "swiperRef"> {
   movies: MovieCardType[];
   isLazyLoad?: boolean;
 }

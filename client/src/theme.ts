@@ -71,7 +71,8 @@ const theme = createTheme(baseTheme, {
         root: { textTransform: "none", fontWeight: 400, fontSize: 16 },
         contained: { borderRadius: "10px" },
 
-        sizeLarge: { paddingTop: "12px", paddingBottom: "12px" },
+        sizeMedium: { padding: "8px 32px" },
+        sizeLarge: { padding: "12px inherit" },
       },
     },
     MuiSelect: {

@@ -17,6 +17,7 @@ const IconButtonWithBackground: React.FC<IconButtonWithBackgroundProps> = ({ ico
         justifyContent: "center",
         alignItems: "center",
       }}
+      size="small"
       onClick={onClick}
     >
       <Icon sx={{ width: 20, height: 20, color: "primary.main" }} />
