@@ -10,7 +10,7 @@ import { formatGenres } from "@/utils/formatGenres";
 // types
 import type { Genre } from "@/types/enums.types";
 
-type AnimeListItemProps = {
+type MovieistItemProps = {
   id: string;
   slug: string;
   posterUrl: string;
@@ -20,7 +20,7 @@ type AnimeListItemProps = {
   description: string;
 };
 
-const AnimeListItem: React.FC<AnimeListItemProps> = ({ id, slug, posterUrl, title, genres, rating, description }) => {
+const MovieListItem: React.FC<MovieistItemProps> = ({ id, slug, posterUrl, title, genres, rating, description }) => {
   return (
     <Stack
       sx={{
@@ -43,11 +43,12 @@ const AnimeListItem: React.FC<AnimeListItemProps> = ({ id, slug, posterUrl, titl
         }}
       >
         <Box
+          component="img"
+          src={posterUrl}
           sx={{
             position: "relative",
-            backgroundImage: `url(${posterUrl})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
+            objectFit: "cover",
+            objectPosition: "center",
             width: "100%",
             height: "100%",
             transition: "transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease",
@@ -65,7 +66,17 @@ const AnimeListItem: React.FC<AnimeListItemProps> = ({ id, slug, posterUrl, titl
           <Typography color="text.secondary">{formatGenres(genres)}</Typography>
           <Rating sx={{ backgroundColor: "background.default" }} rating={rating} />
         </Stack>
-        <Typography fontSize={16}>{description}</Typography>
+        <Typography
+          sx={{
+            display: "-webkit-box",
+            overflow: "hidden",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 10,
+            fontSize: 16,
+          }}
+        >
+          {description}
+        </Typography>
         <Button href={`/movies/${slug}`} variant="contained" color="primary">
           Watch
         </Button>
@@ -74,4 +85,4 @@ const AnimeListItem: React.FC<AnimeListItemProps> = ({ id, slug, posterUrl, titl
   );
 };
 
-export default AnimeListItem;
+export default MovieListItem;

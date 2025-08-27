@@ -22,7 +22,7 @@ const MoviesSwiper: React.FC<MoviesSwiperProps> = ({ swiperRef, data }) => {
       onBeforeInit={(swiper) => {
         swiperRef.current = swiper;
       }}
-      style={{ width: "100%", padding: "0 8px" }}
+      style={{ width: "100%" }}
     >
       {data?.map((i, idx) => (
         <SwiperSlide style={{ width: "100%", height: "100%" }} key={idx}>

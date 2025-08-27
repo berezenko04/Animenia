@@ -39,6 +39,11 @@ export class MovieController {
     return this.movieService.get(movieId);
   }
 
+  @Get('by-slug/:slug')
+  async getBySlug(@Param('slug') slug: string) {
+    return this.movieService.get(slug);
+  }
+
   @Auth()
   @HttpCode(200)
   @Post()

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Pagination, Stack } from "@mui/material";
 
 // components
-import AnimeListItem from "../AnimeListItem";
+import MovieListItem from "../MovieListItem";
 
 // api
 import MovieService from "@/api/movie/movie.service";
@@ -10,7 +10,7 @@ import MovieService from "@/api/movie/movie.service";
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 
-const AnimeList: React.FC = () => {
+const MovieList: React.FC = () => {
   const [movies, setMovies] = useState<MovieCardType[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
@@ -29,7 +29,7 @@ const AnimeList: React.FC = () => {
     <Stack sx={{ gap: 4, alignItems: "center" }}>
       <Stack sx={{ gap: 4 }}>
         {movies.map((m) => (
-          <AnimeListItem key={m.id} {...m} />
+          <MovieListItem key={m.id} {...m} />
         ))}
       </Stack>
       <Pagination page={page} onChange={(_, val) => setPage(val)} count={Math.ceil(total / limit)} />
@@ -37,4 +37,4 @@ const AnimeList: React.FC = () => {
   );
 };
 
-export default AnimeList;
+export default MovieList;

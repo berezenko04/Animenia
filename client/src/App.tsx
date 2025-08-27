@@ -10,6 +10,7 @@ import PrimaryLayout from "./components/layouts/PrimaryLayout";
 
 // redux
 import { refresh } from "./redux/auth/auth.actions";
+import MoviePage from "./pages/Movie";
 
 const RegisterPage = lazy(() => import("@/pages/Register"));
 const LoginPage = lazy(() => import("@/pages/Login"));
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/all" element={<AllAnimePage />} />
             <Route path="/by-genres" />
+            <Route path="/movies/:slug" element={<MoviePage />} />
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" />

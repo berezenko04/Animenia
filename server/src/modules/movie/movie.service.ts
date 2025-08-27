@@ -57,6 +57,17 @@ export class MovieService {
     return movie;
   }
 
+  async getBySlug(slug: string) {
+    const movie = await this.prisma.movie.findUnique({
+      where: { slug },
+      include: { screenshots: { take: 3 } },
+    });
+
+    if (!movie) throw new NotFoundException('Movie is not found');
+
+    return movie;
+  }
+
   // News Emulation
   async getNews() {
     return this.prisma.movie.findMany({
