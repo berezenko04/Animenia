@@ -6,6 +6,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // dto
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { GetAllMoviesDto } from './dto/get-all-movies.dto';
+import { CreateCommentDto } from './dto/create-comment.dto';
 
 // utils
 import { createSlug } from 'src/utils/createSlug';
@@ -141,5 +142,14 @@ export class MovieService {
       where: { id: movieId },
       data: { rating: likeCount },
     });
+  }
+
+  async createComment(dto: CreateCommentDto) {
+    await this.get(dto.movieId);
+    return this.prisma.comment.create({ data: dto });
+  }
+
+  async getMovieComments(movieId: string) {
+    return this.prisma.comment.findMany({ where: { id: movieId } });
   }
 }

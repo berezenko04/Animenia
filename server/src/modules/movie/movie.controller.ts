@@ -63,4 +63,21 @@ export class MovieController {
   async deleteLike(@User('sub') userId: string, @Param('id') movieId: string) {
     return this.movieService.deleteLike(userId, movieId);
   }
+
+  @Auth()
+  @HttpCode(200)
+  @Post(':id/comments')
+  async createComment(
+    @User('sub') userId: string,
+    @Param('id') movieId: string,
+    @Body('text') text: string,
+  ) {
+    await this.movieService.createComment({ userId, movieId, text });
+    return { message: 'Comment has been created' };
+  }
+
+  @Get(':id/comments')
+  async getMovieComments(movieId: string) {
+    return this.movieService.getMovieComments(movieId);
+  }
 }
