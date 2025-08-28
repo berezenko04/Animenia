@@ -34,7 +34,7 @@ const LatestNews: React.FC = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
       <MoviesBlockHead title="Latest News" icon={ArticleOutlined} />
-      <Stack sx={{ gap: 1, px: 2.5 }}>
+      <Stack sx={{ px: 2.5 }}>
         {news.map((item) => (
           <NewsItem key={item.id} {...item} />
         ))}
