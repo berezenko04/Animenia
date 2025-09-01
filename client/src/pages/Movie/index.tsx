@@ -8,6 +8,7 @@ import MovieListItem from "@/components/common/MovieListItem";
 import MovieScreenshots from "@/components/common/MovieScreenshots";
 import MoviesBlockHead from "@/components/common/MoviesBlockHead";
 import MoviesBlock from "@/components/common/MoviesBlock";
+import MovieComments from "@/components/common/MovieComments";
 
 // api
 import MovieService from "@/api/movie/movie.service";
@@ -75,6 +76,7 @@ const MoviePage: React.FC = () => {
         />
       </Stack>
       <MoviesBlock movies={similarMovies} title="Similar Anime" icon={GroupOutlined} isSwipe />
+      <MovieComments />
     </Stack>
   );
 };
