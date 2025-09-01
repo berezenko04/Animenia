@@ -79,7 +79,7 @@ export class UserService {
 
     await this.prisma.user.update({
       where: { id: userId },
-      data: { avatar: url },
+      data: { avatarUrl: url },
     });
   }
 }

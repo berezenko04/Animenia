@@ -1,16 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy, Suspense, useEffect } from "react";
 import { useAppDispatch } from "./redux/store";
+import { useSelector } from "react-redux";
 
 // components
 import AuthLayout from "./components/layouts/AuthLayout";
 import PublicRoute from "./components/providers/PublicRoute";
 import PrivateRoute from "./components/providers/PrivateRoute";
 import PrimaryLayout from "./components/layouts/PrimaryLayout";
+import MoviePage from "./pages/Movie";
 
 // redux
 import { refresh } from "./redux/auth/auth.actions";
-import MoviePage from "./pages/Movie";
+import { fetchMe } from "./redux/user/user.actions";
+import { authSelector } from "./redux/auth/auth.selectors";
 
 const RegisterPage = lazy(() => import("@/pages/Register"));
 const LoginPage = lazy(() => import("@/pages/Login"));
@@ -19,10 +22,17 @@ const AllAnimePage = lazy(() => import("@/pages/All"));
 
 function App() {
   const dispatch = useAppDispatch();
+  const { isAuth } = useSelector(authSelector);
 
   useEffect(() => {
     dispatch(refresh());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(fetchMe());
+    }
+  }, [isAuth, dispatch]);
 
   return (
     <BrowserRouter>

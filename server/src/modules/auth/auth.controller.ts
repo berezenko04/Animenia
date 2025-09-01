@@ -137,7 +137,33 @@ export class AuthController {
 
   @Post('refresh')
   @UseGuards(JwtRefreshGuard)
-  async refresh(@User('sub') userId: string, @Req() req: Request) {
-    return this.authService.refreshTokens(userId, req.cookies?.refreshToken);
+  async refresh(
+    @User('sub') userId: string,
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { accessToken, refreshToken } = await this.authService.refreshTokens(
+      userId,
+      req.cookies?.refreshToken,
+    );
+
+    res.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      maxAge:
+        this.configService.get<string>('NODE_ENV') === 'production'
+          ? parseInt(this.configService.get<string>('JWT_ACCESS_EXPIRY')!)
+          : 30 * 24 * 60 * 60 * 1000,
+    });
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      maxAge: parseInt(this.configService.get<string>('JWT_REFRESH_EXPIRY')!),
+    });
+
+    return { message: 'Refresh successful' };
   }
 }
