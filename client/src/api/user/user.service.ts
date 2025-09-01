@@ -5,6 +5,10 @@ const UserService = {
     const { data } = await instance.get("/users/get");
     return data;
   },
+  async getSessions() {
+    const { data } = await instance.get("/users/sessions");
+    return data;
+  },
   async setAvatar(imageBase64: string) {
     const { data } = await instance.post("/users/set-avatar", { image: imageBase64 });
     return data;

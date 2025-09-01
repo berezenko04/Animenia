@@ -5,7 +5,7 @@ import { KeyboardArrowUp } from "@mui/icons-material";
 
 const ScrollUpButton: React.FC = () => {
   return (
-    <Button variant="contained" sx={{ minWidth: 0, width: 40, height: 40 }} onClick={() => scrollTo(0, 0)}>
+    <Button variant="contained" size="small" sx={{ minWidth: 0, width: 40, height: 40 }} onClick={() => scrollTo(0, 0)}>
       <KeyboardArrowUp sx={{ color: "white.main" }} />
     </Button>
   );

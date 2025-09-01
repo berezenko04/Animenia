@@ -13,12 +13,12 @@ export class WishlistController {
   constructor(private readonly wishlistService: WishlistService) {}
 
   @Post(':id')
-  async addWish(@User('sub') userId: string, @Param('id') movieId: string) {
+  async addWish(@User() userId: string, @Param('id') movieId: string) {
     return this.wishlistService.addWish(userId, movieId);
   }
 
   @Delete(':id')
-  async deleteWish(@User('sub') userId: string, @Param('id') movieId: string) {
+  async deleteWish(@User() userId: string, @Param('id') movieId: string) {
     return this.wishlistService.deleteWish(userId, movieId);
   }
 }

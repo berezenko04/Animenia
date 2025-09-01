@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   Post,
   Req,
@@ -114,7 +115,7 @@ export class AuthController {
   @Auth()
   async logoutAll(
     @Res({ passthrough: true }) res: Response,
-    @User('sub') userId: string,
+    @User() userId: string,
   ) {
     res.cookie('accessToken', '', {
       httpOnly: true,
@@ -138,7 +139,7 @@ export class AuthController {
   @Post('refresh')
   @UseGuards(JwtRefreshGuard)
   async refresh(
-    @User('sub') userId: string,
+    @User() userId: string,
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -165,5 +166,11 @@ export class AuthController {
     });
 
     return { message: 'Refresh successful' };
+  }
+
+  @Get('sessions')
+  @Auth()
+  async getSessions(@User('sub') userId: string) {
+    return this.authService.getSessions(userId);
   }
 }

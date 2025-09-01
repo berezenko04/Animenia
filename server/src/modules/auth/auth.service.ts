@@ -129,4 +129,18 @@ export class AuthService {
 
     return { accessToken, refreshToken };
   }
+
+  async getSessions(userId: string) {
+    return this.prisma.session.findMany({
+      where: { userId, expiresAt: { gt: new Date() } },
+      select: {
+        id: true,
+        deviceType: true,
+        os: true,
+        browser: true,
+        userAgent: true,
+      },
+      take: 5,
+    });
+  }
 }

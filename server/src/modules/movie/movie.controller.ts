@@ -54,13 +54,13 @@ export class MovieController {
 
   @Auth()
   @Post(':id/like')
-  async addLike(@User('sub') userId: string, @Param('id') movieId: string) {
+  async addLike(@User() userId: string, @Param('id') movieId: string) {
     return this.movieService.addLike(userId, movieId);
   }
 
   @Auth()
   @Delete(':id/like')
-  async deleteLike(@User('sub') userId: string, @Param('id') movieId: string) {
+  async deleteLike(@User() userId: string, @Param('id') movieId: string) {
     return this.movieService.deleteLike(userId, movieId);
   }
 
@@ -68,7 +68,7 @@ export class MovieController {
   @HttpCode(200)
   @Post(':id/comments')
   async createComment(
-    @User('sub') userId: string,
+    @User() userId: string,
     @Param('id') movieId: string,
     @Body('text') text: string,
   ) {

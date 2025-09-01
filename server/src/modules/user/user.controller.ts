@@ -16,21 +16,18 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('get')
-  async get(@User('sub') userId: string) {
+  async get(@User() userId: string) {
     return this.userService.get(userId);
   }
 
   @Post('set-avatar')
-  async setAvatar(
-    @User('sub') userId: string,
-    @Body('image') fileBase64: string,
-  ) {
+  async setAvatar(@User() userId: string, @Body('image') fileBase64: string) {
     await this.userService.setAvatar(userId, fileBase64);
     return { message: 'Avatar has been successfully updated', success: true };
   }
 
   @Patch()
-  async update(@User('sup') userId: string, @Body() dto: UpdateUserDto) {
+  async update(@User() userId: string, @Body() dto: UpdateUserDto) {
     await this.userService.update(userId, dto);
     return { message: 'User has been successfully updated', success: true };
   }
