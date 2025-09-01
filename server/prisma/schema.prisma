@@ -146,4 +146,5 @@ model Comment {
   updatedAt DateTime @map("updated_at") @default(now())
 
   @@map("comments")
+  @@unique([movieId, userId])
 }
