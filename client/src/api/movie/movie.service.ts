@@ -20,6 +20,14 @@ const MovieService = {
     const { data } = await instance.get(`/movies/news`);
     return data;
   },
+  async getComments(movieId: string) {
+    const { data } = await instance.get(`/movies/${movieId}/comments`);
+    return data;
+  },
+  async createComment(movieId: string, text: string) {
+    const { data } = await instance.post(`/movies/${movieId}/comments`, { text });
+    return data;
+  },
 };
 
 export default MovieService;

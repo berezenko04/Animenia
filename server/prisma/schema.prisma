@@ -24,13 +24,13 @@ model User {
   hash              String      @map("password_hash")
   firstName         String      @map("first_name")
   lastName          String      @map("last_name")
+  avatarUrl         String                                 @default("/public/assets/default-avatar.png")
   twitterUsername   String?     @map("twitter_username")
   telegramUsername  String?     @map("telegram_username")
   instagramUsername String?     @map("instagram_username")
   createdAt         DateTime    @map("created_at")         @default(now())
   updatedAt         DateTime    @map("updated_at")         @default(now())
   session           Session[]
-  avatar            Avatar[]
   likes             MovieLike[]
   wishes            WishList[]
   comments          Comment[]
@@ -54,20 +54,6 @@ model Session {
   updatedAt    DateTime @map("updated_at")    @default(now())
 
   @@map("sessions")
-}
-
-model Avatar {
-  id        String                      @id @default(uuid()) @db.Uuid
-  url       String
-  userId    String   @map("user_id")    @db.Uuid
-
-  user      User     @relation(fields: [userId], references: [id])
-
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @default(now())
-
-  @@map("avatars")
-  @@unique([userId])
 }
 
 model WishList {

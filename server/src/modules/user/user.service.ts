@@ -77,10 +77,9 @@ export class UserService {
         'Failed to upload avatar to Imgbb',
       );
 
-    await this.prisma.avatar.upsert({
-      where: { userId },
-      create: { userId, url },
-      update: { url },
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { avatar: url },
     });
   }
 }

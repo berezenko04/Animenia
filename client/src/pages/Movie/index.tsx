@@ -76,7 +76,7 @@ const MoviePage: React.FC = () => {
         />
       </Stack>
       <MoviesBlock movies={similarMovies} title="Similar Anime" icon={GroupOutlined} isSwipe />
-      <MovieComments />
+      <MovieComments movieId={movie.id} />
     </Stack>
   );
 };
