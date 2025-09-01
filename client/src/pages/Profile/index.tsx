@@ -1,11 +1,13 @@
-import { Grid } from "@mui/material";
+import { Stack } from "@mui/material";
+
+// components
+import ProfileInfo from "@/components/common/ProfileComponents/ProfileInfo";
 
 const ProfilePage: React.FC = () => {
   return (
-    <Grid container>
-      <Grid size={{ xs: 3 }}></Grid>
-      <Grid size={{ xs: 9 }}></Grid>
-    </Grid>
+    <Stack>
+      <ProfileInfo />
+    </Stack>
   );
 };
 
