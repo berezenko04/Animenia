@@ -130,17 +130,25 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  async getSessions(userId: string) {
-    return this.prisma.session.findMany({
+  async getSessions(userId: string, currentRefreshToken: string) {
+    const sessions = await this.prisma.session.findMany({
       where: { userId, expiresAt: { gt: new Date() } },
       select: {
         id: true,
         deviceType: true,
         os: true,
+        ipAddress: true,
         browser: true,
         userAgent: true,
+        refreshToken: true,
+        createdAt: true,
       },
       take: 5,
     });
+
+    return sessions.map(({ refreshToken, ...s }) => ({
+      ...s,
+      isCurrent: refreshToken === currentRefreshToken,
+    }));
   }
 }

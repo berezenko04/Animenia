@@ -24,6 +24,10 @@ const AuthService = {
     const { data } = await instance.post("/auth/logout-all");
     return data;
   },
+  async getSessions() {
+    const { data } = await instance.get("/auth/sessions");
+    return data;
+  },
 };
 
 export default AuthService;

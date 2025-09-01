@@ -2,8 +2,8 @@ import { Box, Stack } from "@mui/material";
 import { useLocation } from "react-router";
 
 // components
-import MoviesBlockHead from "../MoviesBlockHead";
-import CustomLink from "../CustomLink";
+import MoviesBlockHead from "@/components/common/MoviesBlockHead";
+import CustomLink from "@/components/common/CustomLink";
 
 // icons
 import { SettingsOutlined } from "@mui/icons-material";

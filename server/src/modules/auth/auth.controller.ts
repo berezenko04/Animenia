@@ -24,6 +24,8 @@ import { User } from 'src/common/decorators/user.decorator';
 
 // guards
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+
+// utils
 import { getDeviceInfo } from 'src/utils/deviceInfo';
 
 @Controller('auth')
@@ -55,7 +57,7 @@ export class AuthController {
     await this.authService.createSession({
       userId,
       refreshToken,
-      ipAddress: String(ip),
+      ipAddress: ip === '::1' ? '127.0.0.1' : String(ip),
       userAgent,
       os,
       deviceType,
@@ -170,7 +172,9 @@ export class AuthController {
 
   @Get('sessions')
   @Auth()
-  async getSessions(@User('sub') userId: string) {
-    return this.authService.getSessions(userId);
+  async getSessions(@User('sub') userId: string, @Req() req: Request) {
+    const refreshToken = req.cookies['refreshToken'];
+
+    return this.authService.getSessions(userId, refreshToken);
   }
 }
