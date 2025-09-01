@@ -10,6 +10,7 @@ export type User = {
   email: string;
   firstName: string;
   lastName: string;
+  avatarUrl: string;
   twitterUsername: string;
   telegramUsername: string;
   instagramUsername: string;

@@ -8,6 +8,7 @@ import AuthLayout from "./components/layouts/AuthLayout";
 import PublicRoute from "./components/providers/PublicRoute";
 import PrivateRoute from "./components/providers/PrivateRoute";
 import PrimaryLayout from "./components/layouts/PrimaryLayout";
+import ProfileLayout from "./components/layouts/ProfileLayout";
 import MoviePage from "./pages/Movie";
 
 // redux
@@ -19,6 +20,7 @@ const RegisterPage = lazy(() => import("@/pages/Register"));
 const LoginPage = lazy(() => import("@/pages/Login"));
 const HomePage = lazy(() => import("@/pages/Home"));
 const AllAnimePage = lazy(() => import("@/pages/All"));
+const ProfilePage = lazy(() => import("@/pages/Profile"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -43,9 +45,11 @@ function App() {
             <Route path="/all" element={<AllAnimePage />} />
             <Route path="/by-genres" />
             <Route path="/movies/:slug" element={<MoviePage />} />
+          </Route>
 
+          <Route element={<ProfileLayout />}>
             <Route element={<PrivateRoute />}>
-              <Route path="/profile" />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
           </Route>
 

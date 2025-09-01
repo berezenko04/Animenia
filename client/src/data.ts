@@ -6,6 +6,11 @@ export const menu = [
   { title: "Random Movie", href: "#" },
 ];
 
+export const profileMenu = [
+  { title: "General", href: "/profile" },
+  { title: "Notifications", href: "/profile/notifications" },
+];
+
 export const socials = [
   { icon: Facebook, href: "#" },
   { icon: Twitter, href: "#" },

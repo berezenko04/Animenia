@@ -24,7 +24,7 @@ model User {
   hash              String      @map("password_hash")
   firstName         String      @map("first_name")
   lastName          String      @map("last_name")
-  avatarUrl         String                                 @default("/public/assets/default-avatar.png")
+  avatarUrl         String                                 @default("https://i.ibb.co/s9wmV0bt/default-avatar.png")
   twitterUsername   String?     @map("twitter_username")
   telegramUsername  String?     @map("telegram_username")
   instagramUsername String?     @map("instagram_username")

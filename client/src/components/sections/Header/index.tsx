@@ -1,4 +1,5 @@
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
+import { useSelector } from "react-redux";
 
 // components
 import CustomContainer from "../Container";
@@ -7,6 +8,10 @@ import ThemeSwitchButton from "@/components/ui/buttons/ThemeSwitchButton";
 import UnderlinedLink from "@/components/ui/UnderlinedLink";
 import CustomLink from "@/components/common/CustomLink";
 
+// redux
+import { userSelector } from "@/redux/user/user.selectors";
+import { authSelector } from "@/redux/auth/auth.selectors";
+
 // data
 import { menu } from "@/data";
 
@@ -14,6 +19,9 @@ import { menu } from "@/data";
 import { PersonOutlineOutlined } from "@mui/icons-material";
 
 const Header: React.FC = () => {
+  const { user } = useSelector(userSelector);
+  const { isAuth } = useSelector(authSelector);
+
   return (
     <Stack
       component="header"
@@ -32,7 +40,7 @@ const Header: React.FC = () => {
           <Stack sx={{ flexDirection: "row", gap: 1 }}>
             <ThemeSwitchButton />
             <CustomLink
-              to="/login"
+              to={isAuth ? "profile" : "/login"}
               sx={{
                 backgroundColor: "background.default",
                 width: 40,
@@ -41,13 +49,22 @@ const Header: React.FC = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                overflow: "hidden",
 
                 "&:hover": {
                   backgroundColor: "gray.main",
                 },
               }}
             >
-              <PersonOutlineOutlined />
+              {isAuth ? (
+                <Box
+                  component="img"
+                  src={user?.avatarUrl}
+                  sx={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+                />
+              ) : (
+                <PersonOutlineOutlined />
+              )}
             </CustomLink>
           </Stack>
         </Stack>
