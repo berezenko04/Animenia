@@ -1,8 +1,16 @@
 import { alpha, Avatar, Box } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useRef, useState, type ChangeEvent } from "react";
+import toast from "react-hot-toast";
+
+// api
+import UserService from "@/api/user/user.service";
 
 // redux
 import { userSelector } from "@/redux/user/user.selectors";
+
+// utils
+import { catchError } from "@/utils/catchError";
 
 // theme
 import theme from "@/theme";
@@ -13,8 +21,33 @@ import { CameraAltOutlined } from "@mui/icons-material";
 const ProfileAvatar: React.FC = () => {
   const { user } = useSelector(userSelector);
 
+  const [preview, setPreview] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onloadend = async () => {
+      const base64 = reader.result as string;
+      setPreview(base64);
+
+      try {
+        const result = await UserService.setAvatar(base64);
+        toast.success(result.message);
+      } catch (err) {
+        catchError(err);
+      }
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   return (
     <Box
+      onClick={() => inputRef.current?.click()}
       sx={{
         position: "relative",
         overflow: "hidden",
@@ -24,7 +57,7 @@ const ProfileAvatar: React.FC = () => {
         cursor: "pointer",
       }}
     >
-      <Avatar src={user?.avatarUrl} alt="avatar" sx={{ width: "100%", height: "100%" }} />
+      <Avatar src={preview || user?.avatarUrl} alt="avatar" sx={{ width: "100%", height: "100%" }} />
       <Box
         sx={{
           position: "absolute",
@@ -41,6 +74,7 @@ const ProfileAvatar: React.FC = () => {
       >
         <CameraAltOutlined sx={{ width: 60, height: 60, color: "white.main" }} />
       </Box>
+      <input ref={inputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
     </Box>
   );
 };

@@ -22,7 +22,7 @@ const LogoutAllButton = () => {
   };
 
   return (
-    <ButtonBase sx={{ color: "primary.main" }} onClick={handleClick}>
+    <ButtonBase sx={{ color: "primary.main", textDecoration: "underline" }} onClick={handleClick}>
       Logout All
     </ButtonBase>
   );
