@@ -1,4 +1,5 @@
 import { Box, Stack, Typography, type SvgIconProps } from "@mui/material";
+import { Fragment } from "react/jsx-runtime";
 
 // components
 import IconBoxWithBackground from "@/components/ui/IconBoxWithBackground";
@@ -13,11 +14,12 @@ import type { Swiper } from "swiper/types";
 export type MoviesBlockHeadProps = {
   title: string;
   icon: React.ElementType<SvgIconProps>;
+  additionalContent?: React.ReactNode;
   isSwipe?: boolean;
   swiperRef?: React.RefObject<Swiper | null>;
 };
 
-const MoviesBlockHead: React.FC<MoviesBlockHeadProps> = ({ title, icon, isSwipe, swiperRef }) => {
+const MoviesBlockHead: React.FC<MoviesBlockHeadProps> = ({ title, icon, additionalContent, isSwipe, swiperRef }) => {
   return (
     <Box sx={{ backgroundColor: "white.main", borderRadius: "10px", py: "18px", px: "20px" }}>
       <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 4 }}>
@@ -25,6 +27,7 @@ const MoviesBlockHead: React.FC<MoviesBlockHeadProps> = ({ title, icon, isSwipe,
           <IconBoxWithBackground icon={icon} />
           <Typography variant="h2">{title}</Typography>
         </Stack>
+        <Fragment>{additionalContent}</Fragment>
         {isSwipe && (
           <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
             <IconButtonWithBackground onClick={() => swiperRef!.current?.slidePrev()} icon={ArrowBackOutlined} />

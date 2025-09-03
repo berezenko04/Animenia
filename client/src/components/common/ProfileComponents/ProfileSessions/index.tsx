@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 // components
 import MoviesBlockHead from "../../MoviesBlockHead";
+import LogoutAllButton from "../../LogoutAllButton";
 import ProfileSessionsItem from "../ProfileSessionsItem";
 
 // api
@@ -33,7 +34,7 @@ const ProfileSessions: React.FC = () => {
 
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <MoviesBlockHead title="Sessions" icon={FolderOutlined} />
+      <MoviesBlockHead title="Sessions" icon={FolderOutlined} additionalContent={<LogoutAllButton />} />
       <Stack sx={{ gap: 1.5 }}>
         {sessions.map((session) => (
           <ProfileSessionsItem key={session.id} session={session} setSessions={setSessions} />
