@@ -36,7 +36,7 @@ const ProfileSessions: React.FC = () => {
       <MoviesBlockHead title="Sessions" icon={FolderOutlined} />
       <Stack sx={{ gap: 1.5 }}>
         {sessions.map((session) => (
-          <ProfileSessionsItem key={session.id} session={session} />
+          <ProfileSessionsItem key={session.id} session={session} setSessions={setSessions} />
         ))}
       </Stack>
     </Stack>

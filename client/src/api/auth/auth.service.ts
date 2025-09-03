@@ -28,6 +28,10 @@ const AuthService = {
     const { data } = await instance.get("/auth/sessions");
     return data;
   },
+  async deleteSession(sessionId: string) {
+    const { data } = await instance.delete(`/auth/sessions/${sessionId}`);
+    return data;
+  },
 };
 
 export default AuthService;

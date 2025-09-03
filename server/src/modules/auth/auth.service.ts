@@ -53,6 +53,10 @@ export class AuthService {
     return this.prisma.session.create({ data });
   }
 
+  async removeSession(sessionId: string) {
+    return this.prisma.session.delete({ where: { id: sessionId } });
+  }
+
   async register(dto: RegisterDto) {
     const { email, password, firstName, lastName } = dto;
 

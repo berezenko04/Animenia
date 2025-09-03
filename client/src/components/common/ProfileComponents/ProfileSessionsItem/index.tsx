@@ -1,16 +1,24 @@
 import { ButtonBase, capitalize, Grid, Stack, Typography } from "@mui/material";
+import toast from "react-hot-toast";
+
+// api
+import AuthService from "@/api/auth/auth.service";
 
 // types
 import type { Session } from "@/api/auth/auth.types";
+
+// utils
+import { catchError } from "@/utils/catchError";
 
 // icons
 import { DeleteOutlined, DesktopWindowsOutlined, PhoneAndroidOutlined, TabletMacOutlined } from "@mui/icons-material";
 
 type ProfileSessionsItemProps = {
   session: Session;
+  setSessions: React.Dispatch<React.SetStateAction<Session[]>>;
 };
 
-const ProfileSessionsItem: React.FC<ProfileSessionsItemProps> = ({ session }) => {
+const ProfileSessionsItem: React.FC<ProfileSessionsItemProps> = ({ session, setSessions }) => {
   const iconsMap: Record<string, React.ElementType> = {
     desktop: DesktopWindowsOutlined,
     mobile: PhoneAndroidOutlined,
@@ -20,6 +28,26 @@ const ProfileSessionsItem: React.FC<ProfileSessionsItemProps> = ({ session }) =>
   const getIcon = (deviceType?: string) => {
     const Icon = iconsMap[deviceType ?? "desktop"] ?? DesktopWindowsOutlined;
     return <Icon sx={{ width: 60, height: 60, color: "text.secondary" }} />;
+  };
+
+  const handleDeleteSession = async () => {
+    const ok = window.confirm("Are you sure you want to delete this session?");
+    if (!ok) return;
+
+    const { id: sessionId, isCurrent } = session;
+
+    try {
+      const result = await AuthService.deleteSession(sessionId);
+      toast.success(result.message);
+
+      if (isCurrent) {
+        window.location.href = "/login";
+      } else {
+        setSessions((prev) => prev.filter((s) => s.id !== sessionId));
+      }
+    } catch (err) {
+      catchError(err);
+    }
   };
 
   return (
@@ -56,6 +84,7 @@ const ProfileSessionsItem: React.FC<ProfileSessionsItemProps> = ({ session }) =>
         </Grid>
       </Grid>
       <ButtonBase
+        onClick={handleDeleteSession}
         sx={{
           backgroundColor: "primary.light",
           px: 3,

@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
+  Param,
   Post,
   Req,
   Res,
@@ -176,5 +178,12 @@ export class AuthController {
     const refreshToken = req.cookies['refreshToken'];
 
     return this.authService.getSessions(userId, refreshToken);
+  }
+
+  @Delete('sessions/:id')
+  @Auth()
+  async deleteSession(@Param('id') sessionId: string) {
+    await this.authService.removeSession(sessionId);
+    return { message: 'Session deleted successfully' };
   }
 }
