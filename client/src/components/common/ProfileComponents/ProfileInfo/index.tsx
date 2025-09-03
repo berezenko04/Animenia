@@ -31,7 +31,7 @@ const ProfileInfo = () => {
             <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
               <MailOutlined />
               <Typography color="primary.main">{user?.email}</Typography>
-              <ButtonBase sx={{ color: "text.secondary" }}>[Change Email]</ButtonBase>
+              {/* <ButtonBase sx={{ color: "text.secondary" }}>[Change Email]</ButtonBase> */}
             </Stack>
             <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
               <LockOutlined />

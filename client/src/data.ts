@@ -8,7 +8,7 @@ export const menu = [
 
 export const profileMenu = [
   { title: "General", href: "/profile" },
-  { title: "Notifications", href: "/profile/notifications" },
+  { title: "Notifications", href: "/notifications" },
 ];
 
 export const socials = [
@@ -28,3 +28,5 @@ export const footerMenuGenres = [
   { title: "Magic", href: "#" },
   { title: "School Life", href: "#" },
 ];
+
+export const notificationOptions = ["Email Notifications", "Reviews", "News"];

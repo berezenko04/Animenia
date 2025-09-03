@@ -21,6 +21,7 @@ const LoginPage = lazy(() => import("@/pages/Login"));
 const HomePage = lazy(() => import("@/pages/Home"));
 const AllAnimePage = lazy(() => import("@/pages/All"));
 const ProfilePage = lazy(() => import("@/pages/Profile"));
+const NotificationsPage = lazy(() => import("@/pages/Notifications"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -50,6 +51,7 @@ function App() {
           <Route element={<ProfileLayout />}>
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/notifications" element={<NotificationsPage />} />
             </Route>
           </Route>
 
