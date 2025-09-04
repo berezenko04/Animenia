@@ -15,7 +15,7 @@ import { Auth } from 'src/modules/auth/decorators/auth.decorator';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('get')
+  @Get()
   async get(@User() userId: string) {
     return this.userService.get(userId);
   }

@@ -1,8 +1,10 @@
-import { ButtonBase, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 // components
 import MoviesBlockHead from "@/components/common/MoviesBlockHead";
+import ChangeNameModal from "@/components/common/modals/ChangeNameModal";
 import EditButton from "@/components/ui/buttons/EditButton";
 import ProfileAvatar from "../ProfileAvatar";
 
@@ -13,6 +15,8 @@ import { userSelector } from "@/redux/user/user.selectors";
 import { LockOutlined, MailOutlined, PersonOutlineOutlined } from "@mui/icons-material";
 
 const ProfileInfo = () => {
+  const [isChangeNameModalOpened, setIsChangeNameModalOpened] = useState<boolean>(false);
+
   const { user } = useSelector(userSelector);
 
   return (
@@ -25,7 +29,7 @@ const ProfileInfo = () => {
             <Typography variant="h1">
               {user?.firstName} {user?.lastName}
             </Typography>
-            <EditButton />
+            <EditButton onClick={() => setIsChangeNameModalOpened(true)} />
           </Stack>
           <Stack sx={{ gap: 2, svg: { width: 20, height: 20, color: "primary.main" } }}>
             <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
@@ -40,6 +44,7 @@ const ProfileInfo = () => {
           </Stack>
         </Stack>
       </Stack>
+      <ChangeNameModal isOpened={isChangeNameModalOpened} handleClose={() => setIsChangeNameModalOpened(false)} />
     </Stack>
   );
 };

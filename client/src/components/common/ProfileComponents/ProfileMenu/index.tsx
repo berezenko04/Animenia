@@ -19,7 +19,6 @@ const ProfileMenu: React.FC = () => {
       <MoviesBlockHead title="Settings" icon={SettingsOutlined} />
       <Stack component="nav" sx={{ gap: 2.5, px: 2.5 }}>
         {profileMenu.map((i, idx) => {
-          console.log(location.pathname, i.href);
           const isActive = location.pathname === i.href;
 
           return (

@@ -1,4 +1,5 @@
 import { alpha, Button, InputAdornment, Stack, TextField, Typography } from "@mui/material";
+import toast from "react-hot-toast";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
@@ -17,7 +18,7 @@ import theme from "@/theme";
 
 // utils
 import { catchError } from "@/utils/catchError";
-import toast from "react-hot-toast";
+
 
 type RegisterFormFields = {
   email: string;

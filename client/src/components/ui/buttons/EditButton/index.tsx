@@ -3,7 +3,7 @@ import { Button, type ButtonProps } from "@mui/material";
 // icons
 import { EditOutlined } from "@mui/icons-material";
 
-const EditButton: React.FC<ButtonProps> = () => {
+const EditButton: React.FC<ButtonProps> = ({ ...props }) => {
   return (
     <Button
       sx={{
@@ -18,6 +18,7 @@ const EditButton: React.FC<ButtonProps> = () => {
         minWidth: 0,
       }}
       size="small"
+      {...props}
     >
       <EditOutlined fontSize="small" sx={{ color: "primary.main", width: 16, height: 16 }} />
     </Button>

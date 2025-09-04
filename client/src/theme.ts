@@ -136,6 +136,29 @@ const theme = createTheme(baseTheme, {
         },
       },
     },
+    MuiModal: {
+      styleOverrides: {
+        root: {
+          "&.MuiModal-root": {
+            margin: "24px",
+
+            [baseTheme.breakpoints.down("md")]: {
+              margin: "16px",
+            },
+
+            [baseTheme.breakpoints.down("sm")]: {
+              margin: 0,
+            },
+          },
+          "&.MuiMenu-root": {
+            margin: "0",
+          },
+          "& *": {
+            outline: "none !important",
+          },
+        },
+      },
+    },
   },
 });
 

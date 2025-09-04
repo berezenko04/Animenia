@@ -1,8 +1,15 @@
 import { instance } from "@/middlewares/axios.middleware";
 
+// types
+import type { UpdateUser } from "./user.types";
+
 const UserService = {
   async get() {
-    const { data } = await instance.get("/users/get");
+    const { data } = await instance.get("/users");
+    return data;
+  },
+  async update(body: UpdateUser) {
+    const { data } = await instance.patch("/users", body);
     return data;
   },
   async getSessions() {
