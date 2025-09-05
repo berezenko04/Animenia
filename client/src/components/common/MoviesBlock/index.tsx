@@ -12,6 +12,7 @@ import type { Swiper } from "swiper/types";
 
 // theme
 import theme from "@/theme";
+import MovieCardSkeleton from "@/components/ui/loaders/MovieCardSkeleton";
 
 interface MoviesBlockProps extends Omit<MoviesBlockHeadProps, "swiperRef"> {
   movies: MovieCardType[];
@@ -33,12 +34,15 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe,
               <MovieCard {...card} />
             </Grid>
           ))}
+          <Grid size={{ xs: 4 }}>
+            <MovieCardSkeleton />
+          </Grid>
         </Grid>
       )}
       {isLazyLoad && movies.length > 9 && (
         <Button
           sx={{
-            backgroundColor: "white.main",
+            backgroundColor: "backgroundPrimary.main",
             py: 1.5,
             color: "primary.main",
             fontSize: 18,
@@ -46,7 +50,7 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe,
             borderRadius: "10px",
             boxShadow: "0 4px 4px 0 rgba(229, 229, 229, 0.25)",
             "&:hover": {
-              backgroundColor: darken(theme.palette.white.main, 0.07),
+              backgroundColor: darken(theme.palette.backgroundPrimary.main, 0.07),
             },
           }}
           fullWidth

@@ -53,7 +53,7 @@ const ProfileSessionsItem: React.FC<ProfileSessionsItemProps> = ({ session, setS
   return (
     <Stack
       sx={{
-        backgroundColor: "white.main",
+        backgroundColor: "backgroundPrimary.main",
         borderRadius: "10px",
         overflow: "hidden",
         flexDirection: "row",

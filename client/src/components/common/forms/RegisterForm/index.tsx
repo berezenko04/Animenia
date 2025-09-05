@@ -57,7 +57,7 @@ const RegisterForm: React.FC = () => {
     <Stack
       sx={{
         p: "40px 60px 60px",
-        backgroundColor: alpha(theme.palette.white.main, 0.7),
+        backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.7),
         backdropFilter: "blur(10px)",
         borderRadius: "10px",
         maxWidth: 540,

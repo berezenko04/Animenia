@@ -2,13 +2,13 @@ import { createTheme, type ThemeOptions } from "@mui/material";
 
 declare module "@mui/material/styles" {
   interface Palette {
-    white: Palette["primary"];
-    gray: Palette["primary"];
+    backgroundPrimary: Palette["primary"];
+    backgroundSecondary: Palette["primary"];
   }
 
   interface PaletteOptions {
-    white?: PaletteOptions["primary"];
-    gray?: PaletteOptions["primary"];
+    backgroundPrimary?: PaletteOptions["primary"];
+    backgroundSecondary?: PaletteOptions["primary"];
   }
 }
 
@@ -18,8 +18,13 @@ const getBaseTheme = (mode: "light" | "dark") =>
   createTheme({
     palette: {
       mode,
-      primary: { main: "#DA1414", light: "#FBD0D0" },
-      secondary: { main: mode === "light" ? "#404156" : "#FFFFFF" },
+      primary: {
+        main: mode === "light" ? "#DA1414" : "#DEDEDE",
+        light: mode === "light" ? "#FBD0D0" : "#121212",
+      },
+      secondary: {
+        main: mode === "light" ? "#404156" : "#FFFFFF",
+      },
       background: mode === "light" ? { default: "#F6F6F6" } : { default: "#1E1E1E", paper: "#2A2A2A" },
       text:
         mode === "light" ? { primary: "#404156", secondary: "#9F9F9F" } : { primary: "#FFFFFF", secondary: "#B3B3B3" },
@@ -27,20 +32,20 @@ const getBaseTheme = (mode: "light" | "dark") =>
     breakpoints,
   });
 
-const getExtendedPalette = (baseTheme: ReturnType<typeof getBaseTheme>) => ({
-  white: baseTheme.palette.augmentColor({
-    color: { main: "#FFFFFF" },
-    name: "white",
+const getExtendedPalette = (mode: "light" | "dark", baseTheme: ReturnType<typeof getBaseTheme>) => ({
+  backgroundPrimary: baseTheme.palette.augmentColor({
+    color: { main: mode === "light" ? "#FFFFFF" : "#262626" },
+    name: "backgroundPrimary",
   }),
-  gray: baseTheme.palette.augmentColor({
+  backgroundSecondary: baseTheme.palette.augmentColor({
     color: { main: "#D9D9D9" },
-    name: "gray",
+    name: "backgroundSecondary",
   }),
 });
 
 const getTheme = (mode: "light" | "dark") => {
   const baseTheme = getBaseTheme(mode);
-  const extended = getExtendedPalette(baseTheme);
+  const extended = getExtendedPalette(mode, baseTheme);
 
   return createTheme(baseTheme, {
     palette: {
@@ -144,16 +149,16 @@ const getTheme = (mode: "light" | "dark") => {
             width: 40,
             height: 40,
             borderRadius: "10px",
-            backgroundColor: extended.white.main,
+            backgroundColor: extended.backgroundPrimary.main,
             fontSize: 16,
 
             "&.Mui-selected": {
-              backgroundColor: extended.white.main,
+              backgroundColor: extended.backgroundPrimary.main,
               color: baseTheme.palette.primary.main,
             },
 
             "&:hover": {
-              backgroundColor: `${extended.white.main} !important`,
+              backgroundColor: `${extended.backgroundPrimary.main} !important`,
             },
           },
         },
@@ -178,6 +183,13 @@ const getTheme = (mode: "light" | "dark") => {
             "& *": {
               outline: "none !important",
             },
+          },
+        },
+      },
+      MuiSkeleton: {
+        styleOverrides: {
+          rounded: {
+            borderRadius: "10px",
           },
         },
       },

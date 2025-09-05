@@ -72,7 +72,7 @@ const ProfileAvatar: React.FC = () => {
           justifyContent: "center",
         }}
       >
-        <CameraAltOutlined sx={{ width: 60, height: 60, color: "white.main" }} />
+        <CameraAltOutlined sx={{ width: 60, height: 60, color: "backgroundPrimary.main" }} />
       </Box>
       <input ref={inputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
     </Box>

@@ -1,11 +1,8 @@
-import { alpha, Box, Stack, Typography } from "@mui/material";
+import { alpha, Box, Stack, Typography, useTheme } from "@mui/material";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
 import Rating from "@/components/ui/Rating";
-
-// theme
-import theme from "@/theme";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
@@ -14,6 +11,8 @@ import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 import { formatGenres } from "@/utils/formatGenres";
 
 const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres }) => {
+  const theme = useTheme();
+
   return (
     <Box
       component={CustomLink}
@@ -46,10 +45,10 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
           left: 0,
           right: 0,
           p: 2.5,
-          gap: 1.5,
+          gap: 1,
           zIndex: 10,
           width: "100%",
-          backgroundColor: alpha(theme.palette.white.main, 0.9),
+          backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.9),
           backdropFilter: "blur(2.5px)",
         }}
       >
@@ -66,7 +65,7 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
           position: "absolute",
           top: 16,
           right: 16,
-          backgroundColor: alpha(theme.palette.white.main, 0.8),
+          backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.8),
           backdropFilter: "blur(5px)",
         }}
         rating={rating}

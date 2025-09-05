@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router";
 
 // components
-import Loader from "@/components/ui/Loader";
+import Loader from "@/components/ui/loaders/Loader";
 
 // redux
 import { authSelector } from "@/redux/auth/auth.selectors";

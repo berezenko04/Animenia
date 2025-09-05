@@ -21,7 +21,7 @@ export type MoviesBlockHeadProps = {
 
 const MoviesBlockHead: React.FC<MoviesBlockHeadProps> = ({ title, icon, additionalContent, isSwipe, swiperRef }) => {
   return (
-    <Box sx={{ backgroundColor: "white.main", borderRadius: "10px", py: "18px", px: "20px" }}>
+    <Box sx={{ backgroundColor: "backgroundPrimary.main", borderRadius: "10px", py: "18px", px: "20px" }}>
       <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 4 }}>
         <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
           <IconBoxWithBackground icon={icon} />

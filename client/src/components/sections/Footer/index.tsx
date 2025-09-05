@@ -12,7 +12,7 @@ import { footerMenuGenres } from "@/data";
 
 const Footer: React.FC = () => {
   return (
-    <Stack sx={{ backgroundColor: "white.main", py: "50px" }}>
+    <Stack sx={{ backgroundColor: "backgroundPrimary.main", py: "50px" }}>
       <CustomContainer>
         <Grid container spacing={5} sx={{ alignItems: "flex-start" }}>
           <Grid size={{ xs: 4 }}>

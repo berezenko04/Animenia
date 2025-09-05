@@ -1,7 +1,7 @@
 import { Box, keyframes } from "@mui/material";
 
 // components
-import Logo from "../Logo";
+import Logo from "../../Logo";
 
 // theme
 import theme from "@/theme";

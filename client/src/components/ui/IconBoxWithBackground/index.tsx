@@ -16,7 +16,7 @@ const IconBoxWithBackground: React.FC<IconBoxWithBackgroundProps> = ({ icon: Ico
         alignItems: "center",
       }}
     >
-      <Icon sx={{ width: 20, height: 20, color: "white.main" }} />
+      <Icon sx={{ width: 20, height: 20, color: "backgroundPrimary.main" }} />
     </Stack>
   );
 };

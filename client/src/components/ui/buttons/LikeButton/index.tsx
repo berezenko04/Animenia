@@ -20,7 +20,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ isLiked = false }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: alpha(theme.palette.white.main, 0.8),
+        backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.8),
         backdropFilter: "blur(5px)",
         borderRadius: "5px",
         width: 32,

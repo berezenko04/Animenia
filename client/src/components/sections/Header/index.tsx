@@ -17,15 +17,21 @@ import { menu } from "@/data";
 
 // icons
 import { PersonOutlineOutlined } from "@mui/icons-material";
+import { themeSelector } from "@/redux/theme/theme.selectors";
 
 const Header: React.FC = () => {
   const { user } = useSelector(userSelector);
+  const { mode } = useSelector(themeSelector);
   const { isAuth } = useSelector(authSelector);
 
   return (
     <Stack
       component="header"
-      sx={{ py: 2.5, backgroundColor: "white.main", boxShadow: "0 4px 4px 0 rgba(229, 229, 229, 0.25)" }}
+      sx={{
+        py: 2.5,
+        backgroundColor: "backgroundPrimary.main",
+        boxShadow: mode === "light" ? "0 4px 4px 0 rgba(229, 229, 229, 0.25)" : null,
+      }}
     >
       <CustomContainer>
         <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 4 }}>
@@ -52,7 +58,7 @@ const Header: React.FC = () => {
                 overflow: "hidden",
 
                 "&:hover": {
-                  backgroundColor: "gray.main",
+                  backgroundColor: "backgroundSecondary.main",
                 },
               }}
             >

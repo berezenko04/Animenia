@@ -8,7 +8,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ title }) => {
   return (
     <Stack
       sx={{
-        backgroundColor: "white.main",
+        backgroundColor: "backgroundPrimary.main",
         p: 2,
         borderRadius: "10px",
         flexDirection: "row",
