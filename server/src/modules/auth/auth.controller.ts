@@ -19,6 +19,7 @@ import { AuthService } from './auth.service';
 // dto
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 // decorators
 import { Auth } from './decorators/auth.decorator';
@@ -29,7 +30,6 @@ import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 // utils
 import { getDeviceInfo } from 'src/utils/deviceInfo';
-import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Controller('auth')
 export class AuthController {

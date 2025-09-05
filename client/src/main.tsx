@@ -1,8 +1,9 @@
 import { createRoot } from "react-dom/client";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { ReactLenis } from "@studio-freight/react-lenis";
+import { useMemo } from "react";
 
 // styles
 import "swiper/css";
@@ -11,14 +12,20 @@ import "swiper/css/navigation";
 // app
 import App from "./App.tsx";
 
-// theme
-import theme from "./theme.ts";
+// redux
+import { themeSelector } from "./redux/theme/theme.selectors.ts";
 
 // store
 import { store } from "./redux/store.ts";
 
-createRoot(document.getElementById("root")!).render(
-  <Provider store={store}>
+// theme
+import { getTheme } from "./theme.ts";
+
+const RootApp = () => {
+  const { mode } = useSelector(themeSelector);
+  const theme = useMemo(() => getTheme(mode), [mode]);
+
+  return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Toaster position="top-center" toastOptions={{ style: { maxWidth: 600 } }} />
@@ -33,5 +40,11 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </ReactLenis>
     </ThemeProvider>
+  );
+};
+
+createRoot(document.getElementById("root")!).render(
+  <Provider store={store}>
+    <RootApp />
   </Provider>
 );

@@ -6,11 +6,10 @@ import toast from "react-hot-toast";
 import PasswordInput from "../../PasswordInput";
 
 // api
-import UserService from "@/api/user/user.service";
+import AuthService from "@/api/auth/auth.service";
 
 // utils
 import { catchError } from "@/utils/catchError";
-import AuthService from "@/api/auth/auth.service";
 
 type ChangePasswordFormProps = {
   onSuccess: () => void;

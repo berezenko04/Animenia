@@ -4,11 +4,13 @@ import { useDispatch } from "react-redux";
 // reducers
 import authReducer from "@/redux/auth/auth.slice";
 import userReducer from "@/redux/user/user.slice";
+import themeReducer from "@/redux/theme/theme.slice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     user: userReducer,
+    theme: themeReducer,
   },
 });
 

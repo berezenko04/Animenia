@@ -35,7 +35,12 @@ const NewsItem: React.FC<NewsItemProps> = ({ title, slug, genres, posterUrl, rel
         p: 0,
       }}
     >
-      <AccordionSummary expandIcon={<ExpandMore />} sx={{ p: 0 }}>
+      <AccordionSummary
+        expandIcon={<ExpandMore />}
+        sx={{
+          p: 0,
+        }}
+      >
         <Stack sx={{ gap: 0.5 }}>
           <Stack>
             <Typography sx={expanded ? { color: "primary.main" } : {}}>{title}</Typography>

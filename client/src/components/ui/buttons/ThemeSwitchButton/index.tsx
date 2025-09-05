@@ -1,19 +1,22 @@
 import { IconButton } from "@mui/material";
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "@/redux/store";
+
+// redux
+import { themeSelector } from "@/redux/theme/theme.selectors";
+import { toggleTheme } from "@/redux/theme/theme.slice";
 
 // icons
 import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
 
 const ThemeSwitchButton: React.FC = () => {
-  const [currentTheme, setCurrentTheme] = useState<"day" | "night">("day");
+  const dispatch = useAppDispatch();
 
-  const handleChangeTheme = () => {
-    setCurrentTheme(currentTheme === "day" ? "night" : "day");
-  };
+  const { mode } = useSelector(themeSelector);
 
   return (
-    <IconButton onClick={handleChangeTheme}>
-      {currentTheme === "day" ? <DarkModeOutlined /> : <LightModeOutlined />}
+    <IconButton onClick={() => dispatch(toggleTheme())}>
+      {mode === "light" ? <DarkModeOutlined /> : <LightModeOutlined />}
     </IconButton>
   );
 };

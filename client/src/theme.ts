@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme, type ThemeOptions } from "@mui/material";
 
 declare module "@mui/material/styles" {
   interface Palette {
@@ -12,154 +12,180 @@ declare module "@mui/material/styles" {
   }
 }
 
-const baseTheme = createTheme({
-  palette: {
-    primary: { main: "#DA1414", light: "#FBD0D0" },
-    secondary: { main: "#404156" },
-    background: { default: "#F6F6F6" },
-    text: { primary: "#404156", secondary: "#9F9F9F" },
-  },
-  breakpoints: {
-    values: { xs: 0, sm: 480, md: 768, lg: 1024, xl: 1440 },
-  },
+const breakpoints = { values: { xs: 0, sm: 480, md: 768, lg: 1024, xl: 1440 } };
+
+const getBaseTheme = (mode: "light" | "dark") =>
+  createTheme({
+    palette: {
+      mode,
+      primary: { main: "#DA1414", light: "#FBD0D0" },
+      secondary: { main: mode === "light" ? "#404156" : "#FFFFFF" },
+      background: mode === "light" ? { default: "#F6F6F6" } : { default: "#1E1E1E", paper: "#2A2A2A" },
+      text:
+        mode === "light" ? { primary: "#404156", secondary: "#9F9F9F" } : { primary: "#FFFFFF", secondary: "#B3B3B3" },
+    },
+    breakpoints,
+  });
+
+const getExtendedPalette = (baseTheme: ReturnType<typeof getBaseTheme>) => ({
+  white: baseTheme.palette.augmentColor({
+    color: { main: "#FFFFFF" },
+    name: "white",
+  }),
+  gray: baseTheme.palette.augmentColor({
+    color: { main: "#D9D9D9" },
+    name: "gray",
+  }),
 });
 
-const extendedPalette = {
-  white: baseTheme.palette.augmentColor({ color: { main: "#FFFFFF" }, name: "white" }),
-  gray: baseTheme.palette.augmentColor({ color: { main: "#D9D9D9" }, name: "gray" }),
+const getTheme = (mode: "light" | "dark") => {
+  const baseTheme = getBaseTheme(mode);
+  const extended = getExtendedPalette(baseTheme);
+
+  return createTheme(baseTheme, {
+    palette: {
+      ...extended,
+    },
+    components: {
+      MuiTextField: {
+        defaultProps: {
+          inputProps: { autoComplete: "new-password" },
+        },
+        styleOverrides: {
+          root: {
+            "& input[readonly]": {
+              pointerEvents: "none",
+              cursor: "default",
+            },
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            height: 52,
+            backgroundColor: baseTheme.palette.background.default,
+            borderRadius: "10px",
+            "& .MuiOutlinedInput-notchedOutline": { borderWidth: 0 },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 0,
+            },
+          },
+          input: {
+            padding: "15px",
+          },
+        },
+      },
+      MuiInputAdornment: {
+        styleOverrides: {
+          root: {
+            marginRight: 0,
+            marginLeft: 0,
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: { textTransform: "none", fontWeight: 400, fontSize: 16 },
+          contained: { borderRadius: "10px" },
+          sizeMedium: { padding: "8px 32px" },
+          sizeLarge: { padding: "12px inherit" },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            "&.MuiInputBase-readOnly": {
+              cursor: "default",
+              pointerEvents: "none",
+            },
+          },
+          select: {
+            "&:focus": { backgroundColor: baseTheme.palette.divider },
+          },
+        },
+      },
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            "&.MuiTypography-h1, &.MuiTypography-h2, &.MuiTypography-h3, &.MuiTypography-h4, &.MuiTypography-h5, &.MuiTypography-h6":
+              {
+                color: baseTheme.palette.primary.main,
+                fontWeight: 500,
+              },
+          },
+          h1: { fontSize: 24 },
+          h2: { fontSize: 18 },
+          h3: { fontSize: 16 },
+          body1: { fontSize: 14, lineHeight: "135%" },
+          body2: { fontSize: 13, lineHeight: "130%" },
+        },
+      },
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            textDecoration: "none",
+            color: baseTheme.palette.text.primary,
+            "&:hover": {
+              color: baseTheme.palette.primary.main,
+              transition: "all 0.2s ease-in-out",
+            },
+          },
+        },
+      },
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: { color: baseTheme.palette.secondary.main },
+        },
+      },
+      MuiPaginationItem: {
+        styleOverrides: {
+          root: {
+            width: 40,
+            height: 40,
+            borderRadius: "10px",
+            backgroundColor: extended.white.main,
+            fontSize: 16,
+
+            "&.Mui-selected": {
+              backgroundColor: extended.white.main,
+              color: baseTheme.palette.primary.main,
+            },
+
+            "&:hover": {
+              backgroundColor: `${extended.white.main} !important`,
+            },
+          },
+        },
+      },
+      MuiModal: {
+        styleOverrides: {
+          root: {
+            "&.MuiModal-root": {
+              margin: "24px",
+
+              [baseTheme.breakpoints.down("md")]: {
+                margin: "16px",
+              },
+
+              [baseTheme.breakpoints.down("sm")]: {
+                margin: 0,
+              },
+            },
+            "&.MuiMenu-root": {
+              margin: "0",
+            },
+            "& *": {
+              outline: "none !important",
+            },
+          },
+        },
+      },
+    },
+  } as ThemeOptions);
 };
 
-const theme = createTheme(baseTheme, {
-  palette: {
-    ...extendedPalette,
-  },
-  components: {
-    MuiTextField: {
-      defaultProps: {
-        inputProps: { autoComplete: "new-password" },
-      },
-      styleOverrides: {
-        root: {
-          "& input[readonly]": { pointerEvents: "none", cursor: "default" },
-        },
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          height: 52,
-          backgroundColor: baseTheme.palette.background.default,
-          borderRadius: "10px",
-          "& .MuiOutlinedInput-notchedOutline": { borderWidth: 0 },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderWidth: 0 },
-        },
-        input: {
-          padding: "15px",
-        },
-      },
-    },
-    MuiInputAdornment: {
-      styleOverrides: {
-        root: {
-          marginRight: 0,
-          marginLeft: 0,
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: { textTransform: "none", fontWeight: 400, fontSize: 16 },
-        contained: { borderRadius: "10px" },
-
-        sizeMedium: { padding: "8px 32px" },
-        sizeLarge: { padding: "12px inherit" },
-      },
-    },
-    MuiSelect: {
-      styleOverrides: {
-        root: {
-          "&.MuiInputBase-readOnly": { cursor: "default", pointerEvents: "none" },
-        },
-        select: { "&:focus": { backgroundColor: baseTheme.palette.divider } },
-      },
-    },
-    MuiTypography: {
-      styleOverrides: {
-        root: {
-          "&.MuiTypography-h1, &.MuiTypography-h2, &.MuiTypography-h3, &.MuiTypography-h4, &.MuiTypography-h5, &.MuiTypography-h6":
-            {
-              color: baseTheme.palette.primary.main,
-              fontWeight: 500,
-            },
-        },
-        h1: { fontSize: 24 },
-        h2: { fontSize: 18 },
-        h3: { fontSize: 16 },
-        body1: { fontSize: 14, lineHeight: "135%" },
-        body2: { fontSize: 13, lineHeight: "130%" },
-      },
-    },
-    MuiLink: {
-      styleOverrides: {
-        root: {
-          textDecoration: "none",
-          color: baseTheme.palette.text.primary,
-          "&:hover": { color: baseTheme.palette.primary.main, transition: "all 0.2s ease-in-out" },
-        },
-      },
-    },
-    MuiSvgIcon: {
-      styleOverrides: { root: { color: baseTheme.palette.secondary.main } },
-    },
-    MuiPagination: {
-      styleOverrides: {
-        root: {},
-      },
-    },
-    MuiPaginationItem: {
-      styleOverrides: {
-        root: {
-          width: 40,
-          height: 40,
-          borderRadius: "10px",
-          backgroundColor: extendedPalette.white.main,
-          fontSize: 16,
-
-          "&.Mui-selected": {
-            backgroundColor: extendedPalette.white.main,
-            color: baseTheme.palette.primary.main,
-          },
-
-          "&:hover": {
-            backgroundColor: `${extendedPalette.white.main} !important`,
-          },
-        },
-      },
-    },
-    MuiModal: {
-      styleOverrides: {
-        root: {
-          "&.MuiModal-root": {
-            margin: "24px",
-
-            [baseTheme.breakpoints.down("md")]: {
-              margin: "16px",
-            },
-
-            [baseTheme.breakpoints.down("sm")]: {
-              margin: 0,
-            },
-          },
-          "&.MuiMenu-root": {
-            margin: "0",
-          },
-          "& *": {
-            outline: "none !important",
-          },
-        },
-      },
-    },
-  },
-});
+const theme = getTheme("light");
 
 export default theme;
+export { getTheme };
