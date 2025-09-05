@@ -6,6 +6,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 // controller
 import { AuthController } from './auth.controller';
 
+// modules
+import { UserModule } from '../user/user.module';
+
 // service
 import { AuthService } from './auth.service';
 
@@ -13,6 +16,7 @@ import { AuthService } from './auth.service';
 @Module({
   imports: [
     PassportModule,
+    UserModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

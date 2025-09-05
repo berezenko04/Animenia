@@ -1,7 +1,7 @@
 import { instance } from "@/middlewares/axios.middleware";
 
 // types
-import type { LoginBody, RegisterBody } from "./auth.types";
+import type { ChangePasswordBody, LoginBody, RegisterBody } from "./auth.types";
 
 const AuthService = {
   async register(body: RegisterBody) {
@@ -10,6 +10,10 @@ const AuthService = {
   },
   async login(body: LoginBody) {
     const { data } = await instance.post("/auth/login", body);
+    return data;
+  },
+  async changePassword(body: ChangePasswordBody) {
+    const { data } = await instance.post("/auth/change-password", body);
     return data;
   },
   async refresh() {

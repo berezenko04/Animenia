@@ -4,13 +4,13 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import axios from 'axios';
 
 // services
 import { PrismaService } from 'src/prisma/prisma.service';
 
 // dto
 import { UpdateUserDto } from './dto/update-user.dto';
-import axios from 'axios';
 
 @Injectable()
 export class UserService {

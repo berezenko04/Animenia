@@ -9,11 +9,13 @@ import { ConfigService } from '@nestjs/config';
 
 // service
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UserService } from '../user/user.service';
 
 // dto
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { CreateSessionDto } from './dto/create-session.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +23,7 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
+    private readonly userService: UserService,
   ) {}
 
   async validateUser(email: string, password: string) {
@@ -89,6 +92,31 @@ export class AuthService {
     const tokens = await this.generateTokens(user.id);
 
     return { ...tokens, userId: user.id };
+  }
+
+  async changePassword(userId: string, dto: ChangePasswordDto) {
+    await this.userService.get(userId);
+
+    const password = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { hash: true },
+    });
+
+    const isPasswordValid = await bcrypt.compare(
+      dto.currentPassword,
+      password!.hash,
+    );
+
+    if (!isPasswordValid) {
+      throw new UnauthorizedException("Current password doesn't match");
+    }
+
+    const newPasswordHash = await bcrypt.hash(dto.newPassword, 10);
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { hash: newPasswordHash },
+    });
   }
 
   async logout(refreshToken: string) {

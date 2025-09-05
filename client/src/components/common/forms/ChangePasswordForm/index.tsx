@@ -10,7 +10,7 @@ import UserService from "@/api/user/user.service";
 
 // utils
 import { catchError } from "@/utils/catchError";
-
+import AuthService from "@/api/auth/auth.service";
 
 type ChangePasswordFormProps = {
   onSuccess: () => void;
@@ -31,7 +31,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ onSuccess }) =>
 
   const onSubmit = async (data: ChangePasswordFormFields) => {
     try {
-      const result = await UserService.update(data);
+      const result = await AuthService.changePassword(data);
       toast.success(result.message);
       onSuccess();
     } catch (err) {

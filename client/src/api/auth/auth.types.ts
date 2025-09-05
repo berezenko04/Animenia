@@ -10,6 +10,11 @@ export type LoginBody = {
   password: string;
 };
 
+export type ChangePasswordBody = {
+  currentPassword: string;
+  newPassword: string;
+};
+
 export type Session = {
   id: string;
   ipAddress: string;

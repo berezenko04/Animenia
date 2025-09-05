@@ -29,6 +29,7 @@ import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 // utils
 import { getDeviceInfo } from 'src/utils/deviceInfo';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -88,6 +89,14 @@ export class AuthController {
     });
 
     return { message: 'Login successful' };
+  }
+
+  @Post('change-password')
+  @HttpCode(200)
+  @Auth()
+  async changePassword(@User() userId: string, @Body() dto: ChangePasswordDto) {
+    await this.authService.changePassword(userId, dto);
+    return { message: 'Password has been successfully changed', success: true };
   }
 
   @Post('logout')
