@@ -27,7 +27,7 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe,
     <Stack sx={{ gap: !isSwipe ? 2.5 : 1.5 }}>
       <MoviesBlockHead swiperRef={swiperRef} title={title} icon={icon} isSwipe={isSwipe} />
       {isSwipe ? (
-        <MoviesSwiper swiperRef={swiperRef} data={movies} />
+        <MoviesSwiper isLoading={isLoading} swiperRef={swiperRef} data={movies} />
       ) : (
         <Grid container spacing={4}>
           {!isLoading
@@ -36,7 +36,11 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe,
                   <MovieCard {...card} />
                 </Grid>
               ))
-            : [...Array(6)].map((_, idx) => <MovieCardSkeleton key={idx} />)}
+            : [...Array(6)].map((_, idx) => (
+                <Grid key={idx} size={{ xs: 4 }}>
+                  <MovieCardSkeleton />
+                </Grid>
+              ))}
         </Grid>
       )}
       {isLazyLoad && movies.length > 9 && (

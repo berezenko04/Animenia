@@ -8,6 +8,7 @@ import { useMemo } from "react";
 // styles
 import "swiper/css";
 import "swiper/css/navigation";
+import "yet-another-react-lightbox/styles.css";
 
 // app
 import App from "./App.tsx";

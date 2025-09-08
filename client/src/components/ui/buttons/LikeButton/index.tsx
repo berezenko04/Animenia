@@ -1,16 +1,15 @@
-import { alpha, Button } from "@mui/material";
+import { alpha, Button, useTheme } from "@mui/material";
 
 // icons
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-
-// theme
-import theme from "@/theme";
 
 type LikeButtonProps = {
   isLiked?: boolean;
 };
 
 const LikeButton: React.FC<LikeButtonProps> = ({ isLiked = false }) => {
+  const theme = useTheme();
+
   return (
     <Button
       sx={{

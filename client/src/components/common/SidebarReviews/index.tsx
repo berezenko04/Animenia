@@ -13,7 +13,7 @@ const SidebarReviews: React.FC = () => {
       <MoviesBlockHead title="Reviews" icon={ReviewsOutlined} />
       <Stack sx={{ gap: 2.5, px: 2.5 }}>
         {[...Array(3)].map((_, idx) => (
-          <CustomLink to="#">
+          <CustomLink key={idx} to="#">
             <Box
               key={idx}
               component="img"

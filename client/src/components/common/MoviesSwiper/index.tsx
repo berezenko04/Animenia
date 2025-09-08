@@ -3,6 +3,7 @@ import { Navigation } from "swiper/modules";
 
 // components
 import MovieCard from "@/components/common/MovieCard";
+import MovieCardSkeleton from "@/components/ui/loaders/MovieCardSkeleton";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
@@ -10,10 +11,11 @@ import type { Swiper } from "swiper/types";
 
 type MoviesSwiperProps = {
   data: MovieCardType[];
+  isLoading: boolean;
   swiperRef: React.RefObject<Swiper | null>;
 };
 
-const MoviesSwiper: React.FC<MoviesSwiperProps> = ({ swiperRef, data }) => {
+const MoviesSwiper: React.FC<MoviesSwiperProps> = ({ swiperRef, isLoading, data }) => {
   return (
     <SwiperInitial
       spaceBetween={32}
@@ -26,7 +28,7 @@ const MoviesSwiper: React.FC<MoviesSwiperProps> = ({ swiperRef, data }) => {
     >
       {data?.map((i, idx) => (
         <SwiperSlide style={{ width: "100%", height: "100%" }} key={idx}>
-          <MovieCard {...i} />
+          {isLoading ? <MovieCardSkeleton /> : <MovieCard {...i} />}
         </SwiperSlide>
       ))}
     </SwiperInitial>
