@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { ThemeInitialState } from "./theme.types";
 
 const initialState: ThemeInitialState = {
-  mode: (localStorage.getItem("theme") as ThemeInitialState["mode"]) || "light",
+  mode: (localStorage.getItem("theme") as ThemeInitialState["mode"]) || "dark",
 };
 
 const themeSlice = createSlice({

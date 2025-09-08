@@ -1,8 +1,12 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 
 // components
 import Rating from "@/components/ui/Rating";
 import LikeButton from "@/components/ui/buttons/LikeButton";
+
+// redux
+import { themeSelector } from "@/redux/theme/theme.selectors";
 
 // utils
 import { formatGenres } from "@/utils/formatGenres";
@@ -31,6 +35,10 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
   description,
   isListItem = true,
 }) => {
+  const { mode } = useSelector(themeSelector);
+
+  const isShadow = mode === "light" && isListItem;
+
   return (
     <Stack
       sx={{
@@ -39,7 +47,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
         padding: isListItem ? 2.5 : 0,
         backgroundColor: isListItem ? "backgroundPrimary.main" : "transparent",
         borderRadius: isListItem ? "10px" : 0,
-        boxShadow: isListItem ? "0 4px 4px 0 rgba(229, 229, 229, 0.25)" : "none",
+        boxShadow: isShadow ? "0 4px 4px 0 rgba(229, 229, 229, 0.25)" : "none",
       }}
     >
       <Box
