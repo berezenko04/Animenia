@@ -1,4 +1,4 @@
-import { alpha, Button, InputAdornment, Stack, TextField, Typography } from "@mui/material";
+import { alpha, Button, InputAdornment, Stack, TextField, Typography, useTheme } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useAppDispatch } from "@/redux/store";
 import toast from "react-hot-toast";
@@ -14,15 +14,13 @@ import { login } from "@/redux/auth/auth.actions";
 // icons
 import { PersonOutlineOutlined } from "@mui/icons-material";
 
-// theme
-import theme from "@/theme";
-
 type LoginFormFields = {
   email: string;
   password: string;
 };
 
 const LoginForm: React.FC = () => {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

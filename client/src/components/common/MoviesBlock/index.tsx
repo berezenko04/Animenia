@@ -3,6 +3,7 @@ import { useRef } from "react";
 
 // components
 import MoviesBlockHead, { type MoviesBlockHeadProps } from "../MoviesBlockHead";
+import MovieCardSkeleton from "@/components/ui/loaders/MovieCardSkeleton";
 import MoviesSwiper from "@/components/common/MoviesSwiper";
 import MovieCard from "@/components/common/MovieCard";
 
@@ -12,14 +13,14 @@ import type { Swiper } from "swiper/types";
 
 // theme
 import theme from "@/theme";
-import MovieCardSkeleton from "@/components/ui/loaders/MovieCardSkeleton";
 
 interface MoviesBlockProps extends Omit<MoviesBlockHeadProps, "swiperRef"> {
   movies: MovieCardType[];
+  isLoading: boolean;
   isLazyLoad?: boolean;
 }
 
-const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe, isLazyLoad }) => {
+const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe, isLoading = true, isLazyLoad }) => {
   const swiperRef = useRef<Swiper | null>(null);
 
   return (
@@ -29,14 +30,13 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe,
         <MoviesSwiper swiperRef={swiperRef} data={movies} />
       ) : (
         <Grid container spacing={4}>
-          {movies?.map((card) => (
-            <Grid key={card.id} size={{ xs: 4 }}>
-              <MovieCard {...card} />
-            </Grid>
-          ))}
-          <Grid size={{ xs: 4 }}>
-            <MovieCardSkeleton />
-          </Grid>
+          {!isLoading
+            ? movies?.map((card) => (
+                <Grid key={card.id} size={{ xs: 4 }}>
+                  <MovieCard {...card} />
+                </Grid>
+              ))
+            : [...Array(6)].map((_, idx) => <MovieCardSkeleton key={idx} />)}
         </Grid>
       )}
       {isLazyLoad && movies.length > 9 && (

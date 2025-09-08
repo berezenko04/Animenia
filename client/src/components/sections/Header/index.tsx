@@ -11,13 +11,13 @@ import CustomLink from "@/components/common/CustomLink";
 // redux
 import { userSelector } from "@/redux/user/user.selectors";
 import { authSelector } from "@/redux/auth/auth.selectors";
+import { themeSelector } from "@/redux/theme/theme.selectors";
 
 // data
 import { menu } from "@/data";
 
 // icons
 import { PersonOutlineOutlined } from "@mui/icons-material";
-import { themeSelector } from "@/redux/theme/theme.selectors";
 
 const Header: React.FC = () => {
   const { user } = useSelector(userSelector);

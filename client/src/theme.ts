@@ -193,6 +193,17 @@ const getTheme = (mode: "light" | "dark") => {
           },
         },
       },
+      MuiAccordion: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            "&::before": { display: "none" },
+            "--Paper-overlay": "none !important",
+            padding: 0,
+          },
+        },
+      },
     },
   } as ThemeOptions);
 };

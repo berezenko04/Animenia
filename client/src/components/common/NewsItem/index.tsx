@@ -25,16 +25,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ title, slug, genres, posterUrl, rel
   const [expanded, setExpanded] = useState<boolean>(false);
 
   return (
-    <Accordion
-      disableGutters
-      onChange={() => setExpanded((prev) => !prev)}
-      sx={{
-        boxShadow: "none",
-        overflow: "hidden",
-        backgroundColor: "transparent",
-        p: 0,
-      }}
-    >
+    <Accordion disableGutters onChange={() => setExpanded((prev) => !prev)}>
       <AccordionSummary
         expandIcon={<ExpandMore />}
         sx={{
@@ -43,12 +34,12 @@ const NewsItem: React.FC<NewsItemProps> = ({ title, slug, genres, posterUrl, rel
       >
         <Stack sx={{ gap: 0.5 }}>
           <Stack>
-            <Typography sx={expanded ? { color: "primary.main" } : {}}>{title}</Typography>
-            <Typography fontSize={12} color="text.secondary">
+            <Typography sx={{ fontSize: 15, color: expanded ? "primary.main" : null }}>{title}</Typography>
+            <Typography fontSize={13} color="text.secondary">
               {formatGenres(genres)}
             </Typography>
           </Stack>
-          <Typography fontSize={12}>{releaseYear}</Typography>
+          <Typography fontSize={13}>{releaseYear}</Typography>
         </Stack>
       </AccordionSummary>
       <AccordionDetails sx={{ p: 0 }}>

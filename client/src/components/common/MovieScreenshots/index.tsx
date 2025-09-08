@@ -1,10 +1,13 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
+
+// components
+import MovieScreenshot from "../MovieScreenshot";
 
 // types
-import type { MovieScreenshot } from "@/api/movie/movie.types";
+import type { MovieScreenshot as MovieScreenshotType } from "@/api/movie/movie.types";
 
 type MovieScreenshotsProps = {
-  screenshots: MovieScreenshot[];
+  screenshots: MovieScreenshotType[];
 };
 
 const MovieScreenshots: React.FC<MovieScreenshotsProps> = ({ screenshots }) => {
@@ -12,18 +15,9 @@ const MovieScreenshots: React.FC<MovieScreenshotsProps> = ({ screenshots }) => {
     <Stack sx={{ gap: 1.5 }}>
       <Typography variant="h3">Screenshots</Typography>
       <Grid container sx={{ alignItems: "center" }} spacing={4}>
-        {screenshots.map((screenshot) => (
-          <Grid key={screenshot.id} size={{ xs: 4 }}>
-            <Box
-              component="img"
-              src={screenshot.url}
-              sx={{
-                borderRadius: "10px",
-                boxShadow: "0 4px 4px 0 rgba(229, 229, 229, 0.25)",
-                height: 150,
-                width: "100%",
-              }}
-            />
+        {screenshots.map(({ id, url }) => (
+          <Grid key={id} size={{ xs: 4 }}>
+            <MovieScreenshot url={url} />
           </Grid>
         ))}
       </Grid>

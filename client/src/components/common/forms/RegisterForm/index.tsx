@@ -1,4 +1,4 @@
-import { alpha, Button, InputAdornment, Stack, TextField, Typography } from "@mui/material";
+import { alpha, Button, InputAdornment, Stack, TextField, Typography, useTheme } from "@mui/material";
 import toast from "react-hot-toast";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -13,12 +13,8 @@ import AuthService from "@/api/auth/auth.service";
 // icons
 import { BadgeOutlined, PersonOutlineOutlined } from "@mui/icons-material";
 
-// theme
-import theme from "@/theme";
-
 // utils
 import { catchError } from "@/utils/catchError";
-
 
 type RegisterFormFields = {
   email: string;
@@ -29,6 +25,7 @@ type RegisterFormFields = {
 };
 
 const RegisterForm: React.FC = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const {
     handleSubmit,

@@ -55,7 +55,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ movieId }) => {
           "& .MuiInputBase-root": {
             borderRadius: "12px",
             height: "100%",
-            backgroundColor: "#fff",
+            backgroundColor: "backgroundPrimary.main",
             padding: "10px",
           },
         }}

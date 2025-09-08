@@ -15,6 +15,7 @@ import MoviePage from "./pages/Movie";
 import { refresh } from "./redux/auth/auth.actions";
 import { fetchMe } from "./redux/user/user.actions";
 import { authSelector } from "./redux/auth/auth.selectors";
+import Loader from "./components/ui/loaders/Loader";
 
 const RegisterPage = lazy(() => import("@/pages/Register"));
 const LoginPage = lazy(() => import("@/pages/Login"));
@@ -39,7 +40,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<PrimaryLayout />}>
             <Route path="/" element={<HomePage />} />

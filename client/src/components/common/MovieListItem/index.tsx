@@ -47,7 +47,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
           position: "relative",
           overflow: "hidden",
           minWidth: 270,
-          minHeight: 350,
+          maxHeight: 350,
           width: "100%",
           borderRadius: "10px",
         }}
@@ -74,7 +74,10 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
         <Stack sx={{ gap: 1 }}>
           <Typography variant="h1">{title}</Typography>
           <Typography color="text.secondary">{formatGenres(genres)}</Typography>
-          <Rating sx={{ backgroundColor: isListItem ? "background.default" : "backgroundPrimary.main" }} rating={rating} />
+          <Rating
+            sx={{ backgroundColor: isListItem ? "background.default" : "backgroundPrimary.main" }}
+            rating={rating}
+          />
         </Stack>
         <Typography
           sx={{
