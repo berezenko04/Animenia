@@ -29,6 +29,11 @@ export class MovieController {
     return this.movieService.all(query);
   }
 
+  @Get('random')
+  async getRandom() {
+    return this.movieService.getRandomMovie()
+  }
+
   @Get('news')
   async getNews() {
     return this.movieService.getNews();

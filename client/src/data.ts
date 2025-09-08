@@ -3,7 +3,7 @@ import { Facebook, Instagram, Telegram, Twitter, YouTube } from "@mui/icons-mate
 export const menu = [
   { title: "All Movies", href: "/all" },
   { title: "By Genres", href: "/genres" },
-  { title: "Random Movie", href: "#" },
+  { title: "Random Movie", href: null },
 ];
 
 export const profileMenu = [

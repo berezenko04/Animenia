@@ -69,6 +69,16 @@ export class MovieService {
     return movie;
   }
 
+  async getRandomMovie() {
+    const count = await this.prisma.movie.count();
+    const skip = Math.floor(Math.random() * count);
+
+    return this.prisma.movie.findFirst({
+      skip,
+      select: {slug: true}
+    });
+  }
+
   // News Emulation
   async getNews() {
     return this.prisma.movie.findMany({
