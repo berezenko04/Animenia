@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import MoviesBlockHead from "../../MoviesBlockHead";
 import LogoutAllButton from "../../LogoutAllButton";
 import ProfileSessionsItem from "../ProfileSessionsItem";
+import ProfileSessionItemSkeleton from "@/components/ui/loaders/ProfileSessionItemSkeleton";
 
 // api
 import AuthService from "@/api/auth/auth.service";
@@ -20,6 +21,7 @@ import { FolderOutlined } from "@mui/icons-material";
 
 const ProfileSessions: React.FC = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
@@ -28,17 +30,21 @@ const ProfileSessions: React.FC = () => {
         setSessions(result);
       } catch (err) {
         catchError(err);
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, []);
 
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <MoviesBlockHead title="Sessions" icon={FolderOutlined} additionalContent={<LogoutAllButton />} />
+      <MoviesBlockHead title="Sessions" icon={FolderOutlined} additionalContent={!isLoading && <LogoutAllButton />} />
       <Stack sx={{ gap: 1.5 }}>
-        {sessions.map((session) => (
-          <ProfileSessionsItem key={session.id} session={session} setSessions={setSessions} />
-        ))}
+        {isLoading
+          ? [...Array(3)].map((_, idx) => <ProfileSessionItemSkeleton key={idx} />)
+          : sessions.map((session) => (
+              <ProfileSessionsItem key={session.id} session={session} setSessions={setSessions} />
+            ))}
       </Stack>
     </Stack>
   );

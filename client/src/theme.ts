@@ -204,6 +204,15 @@ const getTheme = (mode: "light" | "dark") => {
           },
         },
       },
+      MuiAccordionSummary: {
+        styleOverrides: {
+          root: {
+            "& .MuiAccordionSummary-content": {
+              marginTop: 0
+            },
+          },
+        },
+      }
     },
   } as ThemeOptions);
 };

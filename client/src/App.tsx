@@ -9,13 +9,14 @@ import PublicRoute from "./components/providers/PublicRoute";
 import PrivateRoute from "./components/providers/PrivateRoute";
 import PrimaryLayout from "./components/layouts/PrimaryLayout";
 import ProfileLayout from "./components/layouts/ProfileLayout";
+import NotFoundLayout from "./components/layouts/NotFoundLayout";
+import Loader from "./components/ui/loaders/Loader";
 import MoviePage from "./pages/Movie";
 
 // redux
 import { refresh } from "./redux/auth/auth.actions";
 import { fetchMe } from "./redux/user/user.actions";
 import { authSelector } from "./redux/auth/auth.selectors";
-import Loader from "./components/ui/loaders/Loader";
 
 const RegisterPage = lazy(() => import("@/pages/Register"));
 const LoginPage = lazy(() => import("@/pages/Login"));
@@ -23,6 +24,7 @@ const HomePage = lazy(() => import("@/pages/Home"));
 const AllAnimePage = lazy(() => import("@/pages/All"));
 const ProfilePage = lazy(() => import("@/pages/Profile"));
 const NotificationsPage = lazy(() => import("@/pages/Notifications"));
+const NotFoundPage = lazy(() => import("@/pages/NotFound"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -49,6 +51,10 @@ function App() {
             <Route path="/movies/:slug" element={<MoviePage />} />
           </Route>
 
+          <Route element={<NotFoundLayout />}>
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+
           <Route element={<ProfileLayout />}>
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<ProfilePage />} />
@@ -62,8 +68,6 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
             </Route>
           </Route>
-
-          <Route path="*" />
         </Routes>
       </Suspense>
     </BrowserRouter>

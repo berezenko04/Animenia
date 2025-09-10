@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material";
 
 // components
-import LatestNews from "@/components/common/LatestNews";
-import SidebarReviews from "@/components/common/SidebarReviews";
+import News from "@/components/common/News";
+import Reviews from "@/components/common/Reviews";
 import InstagramButton from "@/components/ui/buttons/InstagramButton";
 import TelegramButton from "@/components/ui/buttons/TelegramButton";
 import YoutubeButton from "@/components/ui/buttons/YoutubeButton";
@@ -10,8 +10,8 @@ import YoutubeButton from "@/components/ui/buttons/YoutubeButton";
 const Sidebar: React.FC = () => {
   return (
     <Stack sx={{ gap: 6 }}>
-      <LatestNews />
-      <SidebarReviews />
+      <News />
+      <Reviews />
       <Stack sx={{ gap: 1.5 }}>
         <InstagramButton />
         <TelegramButton />

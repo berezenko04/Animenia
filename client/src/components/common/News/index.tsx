@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 // components
 import MoviesBlockHead from "@/components/common/MoviesBlockHead";
+import NewsItemSkeleton from "@/components/ui/loaders/NewsItemSkeleton";
 import NewsItem from "../NewsItem";
 
 // api
@@ -17,7 +18,8 @@ import { ArticleOutlined } from "@mui/icons-material";
 // types
 import type { MovieNewsItem } from "@/api/movie/movie.types";
 
-const LatestNews: React.FC = () => {
+const News: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [news, setNews] = useState<MovieNewsItem[]>([]);
 
   useEffect(() => {
@@ -27,6 +29,8 @@ const LatestNews: React.FC = () => {
         setNews(result);
       } catch (err) {
         catchError(err);
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, []);
@@ -34,13 +38,13 @@ const LatestNews: React.FC = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
       <MoviesBlockHead title="Latest News" icon={ArticleOutlined} />
-      <Stack sx={{ px: 2.5 }}>
-        {news.map((item) => (
-          <NewsItem key={item.id} {...item} />
-        ))}
+      <Stack sx={{ px: 2.5, gap: 1 }}>
+        {isLoading
+          ? [...Array(5)].map((_, idx) => <NewsItemSkeleton key={idx} />)
+          : news.map((item) => <NewsItem key={item.id} {...item} />)}
       </Stack>
     </Stack>
   );
 };
 
-export default LatestNews;
+export default News;

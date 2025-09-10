@@ -7,7 +7,7 @@ import CustomLink from "../CustomLink";
 // icons
 import { ReviewsOutlined } from "@mui/icons-material";
 
-const SidebarReviews: React.FC = () => {
+const Reviews: React.FC = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
       <MoviesBlockHead title="Reviews" icon={ReviewsOutlined} />
@@ -17,7 +17,7 @@ const SidebarReviews: React.FC = () => {
             <Box
               key={idx}
               component="img"
-              src={`/review${idx + 1}.png`}
+              src={`/review${idx + 1}.webp`}
               sx={{
                 borderRadius: "10px",
                 height: 120,
@@ -37,4 +37,4 @@ const SidebarReviews: React.FC = () => {
   );
 };
 
-export default SidebarReviews;
+export default Reviews;
