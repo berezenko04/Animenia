@@ -32,6 +32,12 @@ const MovieService = {
     const { data } = await instance.post(`/movies/${movieId}/comments`, { text });
     return data;
   },
+  async addLike(movieId: string){
+    await instance.post(`/movies/${movieId}/like`);
+  },
+  async removeLike(movieId: string){
+    await instance.delete(`/movies/${movieId}/like`);
+  }
 };
 
 export default MovieService;

@@ -32,7 +32,6 @@ model User {
   updatedAt         DateTime    @map("updated_at")         @default(now())
   session           Session[]
   likes             MovieLike[]
-  wishes            WishList[]
   comments          Comment[]
 
   @@map("users")
@@ -56,21 +55,6 @@ model Session {
   @@map("sessions")
 }
 
-model WishList {
-  id        String                      @id @default(uuid()) @db.Uuid
-  userId    String   @map("user_id" )   @db.Uuid
-  movieId   String   @map("movie_id")   @db.Uuid
-
-  user      User     @relation(fields: [userId], references: [id])
-  movie     Movie    @relation(fields: [movieId], references: [id])
-
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @default(now())
-
-  @@map("wish_list")
-  @@unique([userId, movieId])
-}
-
 model Movie {
   id          String                            @id @default(uuid()) @db.Uuid()
   posterUrl   String       @map("poster_url")
@@ -86,7 +70,6 @@ model Movie {
   screenshots Screenshot[]
   comments    Comment[]
   likes       MovieLike[]
-  wishes      WishList[]
 
   @@map("movies")
 }

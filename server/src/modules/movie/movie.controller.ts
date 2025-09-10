@@ -67,13 +67,15 @@ export class MovieController {
   @Auth()
   @Post(':id/like')
   async addLike(@User() userId: string, @Param('id') movieId: string) {
-    return this.movieService.addLike(userId, movieId);
+    await this.movieService.addLike(userId, movieId);
+    return {message: "Movie was successfully liked"}
   }
 
   @Auth()
   @Delete(':id/like')
   async deleteLike(@User() userId: string, @Param('id') movieId: string) {
-    return this.movieService.deleteLike(userId, movieId);
+    await this.movieService.deleteLike(userId, movieId);
+    return {message: "Movie was successfully removed like"}
   }
 
   @Auth()

@@ -13,6 +13,7 @@ import { formatGenres } from "@/utils/formatGenres";
 
 // types
 import type { MovieCard } from "@/api/movie/movie.types";
+import { useState } from "react";
 
 interface MovieListItemProps extends MovieCard {
   isListItem?: boolean;
@@ -27,8 +28,10 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
   rating,
   description,
   isListItem = true,
-  isLiked,
+  isLiked: isInitialLiked,
 }) => {
+  const [isLiked, setIsLiked] = useState<boolean>(isInitialLiked);
+
   const { mode } = useSelector(themeSelector);
 
   const isShadow = mode === "light" && isListItem;
@@ -70,7 +73,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
             },
           }}
         />
-        <LikeButton isLiked={isLiked} />
+        <LikeButton movieId={id} isLiked={isLiked} onChange={setIsLiked} />
       </Box>
       <Stack sx={{ gap: 2.5, alignItems: "flex-start" }}>
         <Stack sx={{ gap: 1 }}>

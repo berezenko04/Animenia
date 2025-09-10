@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 
 // service
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -112,7 +112,7 @@ export class MovieService {
       select: { slug: true },
     });
   }
-
+  
   // News Emulation
   async getNews() {
     return this.prisma.movie.findMany({
@@ -149,6 +149,14 @@ export class MovieService {
   async addLike(userId: string, movieId: string) {
     await this.get(movieId);
 
+    const existingLike = await this.prisma.movieLike.findUnique({
+      where: { movieId_userId: { movieId, userId } },
+    });
+
+    if(existingLike){
+      throw new ConflictException('You already liked this movie');
+    }
+
     await this.prisma.movieLike.create({
       data: { movieId, userId },
     });
@@ -157,7 +165,7 @@ export class MovieService {
       where: { movieId },
     });
 
-    return await this.prisma.movie.update({
+    await this.prisma.movie.update({
       where: { id: movieId },
       data: { rating: likeCount },
     });
@@ -182,7 +190,7 @@ export class MovieService {
       where: { movieId },
     });
 
-    return await this.prisma.movie.update({
+    await this.prisma.movie.update({
       where: { id: movieId },
       data: { rating: likeCount },
     });
