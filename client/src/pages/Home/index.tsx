@@ -17,7 +17,7 @@ import { catchError } from "@/utils/catchError";
 import { LeaderboardOutlined, LocalFireDepartmentOutlined } from "@mui/icons-material";
 
 const HomePage: React.FC = () => {
-  const [movies, setMovies] = useState<MovieCardType[]>();
+  const [movies, setMovies] = useState<MovieCardType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -37,18 +37,8 @@ const HomePage: React.FC = () => {
 
   return (
     <Stack sx={{ gap: 6 }}>
-      {movies && (
-        <>
-          <MoviesBlock
-            title="Popular"
-            icon={LocalFireDepartmentOutlined}
-            movies={movies}
-            isSwipe
-            isLoading={isLoading}
-          />
-          <MoviesBlock title="Top 100" icon={LeaderboardOutlined} movies={movies} isLazyLoad isLoading={isLoading} />
-        </>
-      )}
+      <MoviesBlock title="Popular" icon={LocalFireDepartmentOutlined} movies={movies} isSwipe isLoading={isLoading} />
+      <MoviesBlock title="Top 100" icon={LeaderboardOutlined} movies={movies} isLazyLoad isLoading={isLoading} />
     </Stack>
   );
 };

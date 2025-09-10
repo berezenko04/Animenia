@@ -26,11 +26,17 @@ const MoviesSwiper: React.FC<MoviesSwiperProps> = ({ swiperRef, isLoading, data 
       }}
       style={{ width: "100%" }}
     >
-      {data?.map((i, idx) => (
-        <SwiperSlide style={{ width: "100%", height: "100%" }} key={idx}>
-          {isLoading ? <MovieCardSkeleton /> : <MovieCard {...i} />}
-        </SwiperSlide>
-      ))}
+      {isLoading
+        ? [...Array(3)].map((_, idx) => (
+            <SwiperSlide key={idx}>
+              <MovieCardSkeleton />
+            </SwiperSlide>
+          ))
+        : data?.map((i, idx) => (
+            <SwiperSlide style={{ width: "100%", height: "100%" }} key={idx}>
+              <MovieCard {...i} />
+            </SwiperSlide>
+          ))}
     </SwiperInitial>
   );
 };
