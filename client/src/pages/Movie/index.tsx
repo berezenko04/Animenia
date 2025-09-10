@@ -1,7 +1,6 @@
 import { Stack } from "@mui/material";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 
 // components
 import MovieListItem from "@/components/common/MovieListItem";
@@ -13,25 +12,29 @@ import MovieComments from "@/components/common/MovieComments";
 // api
 import MovieService from "@/api/movie/movie.service";
 
+// hooks
+import { useMovies } from "@/hooks/useMovies";
+
 // utils
 import { catchError } from "@/utils/catchError";
 
 // types
-import { type MovieCard as MovieCardType, type MovieFullInfo } from "@/api/movie/movie.types";
+import { type MovieFullInfo } from "@/api/movie/movie.types";
 
 // icons
 import { GroupOutlined, VideocamOutlined } from "@mui/icons-material";
+import MovieListItemSkeleton from "@/components/ui/loaders/MovieListItemSkeleton";
+import Player from "@/components/common/Player";
 
 const MoviePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { movies: similarMovies, isLoading: similarMoviesLoading } = useMovies({ limit: 10 });
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [movie, setMovie] = useState<MovieFullInfo | null>(null);
-  const [similarMovies, setSimilarMovies] = useState<MovieCardType[]>([]);
 
   useEffect(() => {
-    setIsLoading(true);
-
     if (!slug) {
       return;
     }
@@ -48,17 +51,6 @@ const MoviePage: React.FC = () => {
     })();
   }, [slug]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const result = await MovieService.all({ page: 1, limit: 10 });
-        setSimilarMovies(result.data);
-      } catch (err) {
-        catchError(err);
-      }
-    })();
-  }, []);
-
   if (!movie) {
     return null;
   }
@@ -67,15 +59,17 @@ const MoviePage: React.FC = () => {
     <Stack sx={{ gap: 6 }}>
       <Stack sx={{ gap: 4 }}>
         <MoviesBlockHead title="Anime" icon={VideocamOutlined} />
-        <MovieListItem isListItem={false} {...movie} />
+        {isLoading ? <MovieListItemSkeleton /> : <MovieListItem isListItem={false} {...movie} />}
         <MovieScreenshots screenshots={movie.screenshots} />
-        <ReactPlayer
-          src={movie.trailerUrl}
-          controls
-          style={{ width: "100%", height: 450, borderRadius: "10px", overflow: "hidden" }}
-        />
+        <Player src={movie.trailerUrl} controls playsInline />
       </Stack>
-      <MoviesBlock movies={similarMovies} title="Similar Anime" icon={GroupOutlined} isSwipe />
+      <MoviesBlock
+        isLoading={similarMoviesLoading}
+        movies={similarMovies}
+        title="Similar Anime"
+        icon={GroupOutlined}
+        isSwipe
+      />
       <MovieComments movieId={movie.id} />
     </Stack>
   );
