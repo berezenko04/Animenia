@@ -86,12 +86,12 @@ export class MovieController {
     @Param('id') movieId: string,
     @Body('text') text: string,
   ) {
-    await this.movieService.createComment({ userId, movieId, text });
+    await this.movieService.createComment(userId, { movieId, text });
     return { message: 'Comment has been created' };
   }
 
   @Get(':id/comments')
-  async getMovieComments(movieId: string) {
-    return this.movieService.getMovieComments(movieId);
+  async getComments(movieId: string) {
+    return this.movieService.getComments(movieId);
   }
 }

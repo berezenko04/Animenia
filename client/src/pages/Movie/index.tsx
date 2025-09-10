@@ -7,6 +7,8 @@ import MovieListItem from "@/components/common/MovieListItem";
 import MovieScreenshots from "@/components/common/MovieScreenshots";
 import MoviesBlockHead from "@/components/common/MoviesBlockHead";
 import MoviesBlock from "@/components/common/MoviesBlock";
+import MovieListItemSkeleton from "@/components/ui/loaders/MovieListItemSkeleton";
+import Player from "@/components/common/Player";
 import MovieComments from "@/components/common/MovieComments";
 
 // api
@@ -23,8 +25,6 @@ import { type MovieFullInfo } from "@/api/movie/movie.types";
 
 // icons
 import { GroupOutlined, VideocamOutlined } from "@mui/icons-material";
-import MovieListItemSkeleton from "@/components/ui/loaders/MovieListItemSkeleton";
-import Player from "@/components/common/Player";
 
 const MoviePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -51,17 +51,19 @@ const MoviePage: React.FC = () => {
     })();
   }, [slug]);
 
-  if (!movie) {
-    return null;
-  }
-
   return (
     <Stack sx={{ gap: 6 }}>
       <Stack sx={{ gap: 4 }}>
         <MoviesBlockHead title="Anime" icon={VideocamOutlined} />
-        {isLoading ? <MovieListItemSkeleton /> : <MovieListItem isListItem={false} {...movie} />}
-        <MovieScreenshots screenshots={movie.screenshots} />
-        <Player src={movie.trailerUrl} controls playsInline />
+        {!isLoading && movie ? (
+          <>
+            <MovieListItem isListItem={false} {...movie} />
+            <MovieScreenshots screenshots={movie?.screenshots} />
+            <Player src={movie?.trailerUrl} controls playsInline />
+          </>
+        ) : (
+          <MovieListItemSkeleton />
+        )}
       </Stack>
       <MoviesBlock
         isLoading={similarMoviesLoading}
@@ -70,7 +72,7 @@ const MoviePage: React.FC = () => {
         icon={GroupOutlined}
         isSwipe
       />
-      <MovieComments movieId={movie.id} />
+      {!isLoading && movie && <MovieComments movieId={movie.id} />}
     </Stack>
   );
 };

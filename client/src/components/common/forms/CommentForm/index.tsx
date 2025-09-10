@@ -20,6 +20,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ movieId }) => {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<CommentFormFields>();
 
@@ -27,18 +28,14 @@ const CommentForm: React.FC<CommentFormProps> = ({ movieId }) => {
     try {
       const result = await MovieService.createComment(movieId, comment);
       toast.success(result.message);
+      reset();
     } catch (err) {
       catchError(err);
     }
   };
 
   return (
-    <Stack
-      component="form"
-      noValidate
-      onSubmit={handleSubmit(onSubmit)}
-      sx={{ gap: 1.5, px: 2.5, alignItems: "flex-end" }}
-    >
+    <Stack component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ gap: 1.5, alignItems: "flex-end" }}>
       <TextField
         label="Write a comment"
         {...register("comment", {

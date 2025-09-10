@@ -196,12 +196,32 @@ export class MovieService {
     });
   }
 
-  async createComment(dto: CreateCommentDto) {
+  async createComment(userId: string, dto: CreateCommentDto) {
     await this.get(dto.movieId);
-    return this.prisma.comment.create({ data: dto });
+
+    const isExist = await this.prisma.comment.findUnique({where: {"movieId_userId": {movieId: dto.movieId, userId}}});
+
+    if(isExist){
+      throw new ConflictException("Comment is already exist")
+    }
+
+    return this.prisma.comment.create({ data: {...dto, userId} });
   }
 
-  async getMovieComments(movieId: string) {
-    return this.prisma.comment.findMany({ where: { id: movieId } });
-  }
+  async getComments(movieId: string) {
+    return this.prisma.comment.findMany({ 
+      where: { movieId },
+      select: {
+      id: true,
+      text: true,
+      createdAt: true,
+      user: {
+        select: {
+          firstName: true,
+          lastName: true,
+          avatarUrl: true,
+        },
+      },
+    }
+  })}
 }
