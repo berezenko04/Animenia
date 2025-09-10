@@ -1,5 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 // components
 import Rating from "@/components/ui/Rating";
@@ -13,7 +14,6 @@ import { formatGenres } from "@/utils/formatGenres";
 
 // types
 import type { MovieCard } from "@/api/movie/movie.types";
-import { useState } from "react";
 
 interface MovieListItemProps extends MovieCard {
   isListItem?: boolean;
