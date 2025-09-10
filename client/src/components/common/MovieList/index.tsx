@@ -25,6 +25,8 @@ const MovieList: React.FC = () => {
     })();
   }, [page]);
 
+  console.log("qq", movies);
+
   return (
     <Stack sx={{ gap: 4, alignItems: "center" }}>
       <Stack sx={{ gap: 4 }}>

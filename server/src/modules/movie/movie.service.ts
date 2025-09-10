@@ -15,7 +15,10 @@ import { createSlug } from 'src/utils/createSlug';
 export class MovieService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async all({ page, limit, genre, year }: GetAllMoviesDto) {
+  async all(
+    userId: string | null,
+    { page, limit, genre, year }: GetAllMoviesDto,
+  ) {
     const where: any = {};
 
     if (genre) {
@@ -39,34 +42,65 @@ export class MovieService {
           description: true,
           rating: true,
           genres: true,
+          _count: userId
+            ? {
+                select: {
+                  likes: {
+                    where: { userId },
+                  },
+                },
+              }
+            : false,
         },
       }),
       this.prisma.movie.count({ where }),
     ]);
 
-    return { data: movies, total };
+    const data = movies.map((movie: any) => ({
+      id: movie.id,
+      posterUrl: movie.posterUrl,
+      slug: movie.slug,
+      title: movie.title,
+      description: movie.description,
+      rating: movie.rating,
+      genres: movie.genres,
+      isLiked: userId ? movie._count.likes > 0 : false,
+    }));
+
+    return { data, total };
   }
 
-  async get(id: string) {
+  async get(movieId: string) {
     const movie = await this.prisma.movie.findUnique({
-      where: { id },
-      include: { screenshots: { take: 3 } },
+      where: { id: movieId },
     });
-
     if (!movie) throw new NotFoundException('Movie is not found');
-
     return movie;
   }
 
-  async getBySlug(slug: string) {
+  async getBySlug(userId: string | null, slug: string) {
     const movie = await this.prisma.movie.findUnique({
       where: { slug },
-      include: { screenshots: { take: 3 } },
+      include: {
+        screenshots: { take: 3 },
+        _count: userId
+          ? {
+              select: {
+                likes: {
+                  where: { userId },
+                },
+              },
+            }
+          : false,
+      },
     });
 
     if (!movie) throw new NotFoundException('Movie is not found');
 
-    return movie;
+    return {
+      ...movie,
+      isLiked: userId ? movie._count.likes > 0 : false,
+    };
   }
 
   async getRandomMovie() {
@@ -75,7 +109,7 @@ export class MovieService {
 
     return this.prisma.movie.findFirst({
       skip,
-      select: {slug: true}
+      select: { slug: true },
     });
   }
 

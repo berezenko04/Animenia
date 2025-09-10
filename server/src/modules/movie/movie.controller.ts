@@ -7,10 +7,14 @@ import {
   Param,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 
 // services
 import { MovieService } from './movie.service';
+
+// guards
+import { OptionalJwtAuthGuard } from '../auth/guards/jwt-optional.guard';
 
 // dto
 import { CreateMovieDto } from './dto/create-movie.dto';
@@ -20,13 +24,15 @@ import { GetAllMoviesDto } from './dto/get-all-movies.dto';
 import { User } from 'src/common/decorators/user.decorator';
 import { Auth } from '../auth/decorators/auth.decorator';
 
+
 @Controller('movies')
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
+  @UseGuards(OptionalJwtAuthGuard)
   @Get()
-  async all(@Query() query: GetAllMoviesDto) {
-    return this.movieService.all(query);
+  async all(@User() userId: string | null, @Query() query: GetAllMoviesDto) {
+    return this.movieService.all(userId, query);
   }
 
   @Get('random')
@@ -39,9 +45,10 @@ export class MovieController {
     return this.movieService.getNews();
   }
 
+  @UseGuards(OptionalJwtAuthGuard)
   @Get('by-slug/:slug')
-  async getBySlug(@Param('slug') slug: string) {
-    return this.movieService.getBySlug(slug);
+  async getBySlug(@User() userId: string | null, @Param('slug') slug: string) {
+    return this.movieService.getBySlug(userId, slug);
   }
 
   @Get(':id')

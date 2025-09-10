@@ -1,4 +1,9 @@
 import { alpha, Button, useTheme } from "@mui/material";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+
+// redux
+import { authSelector } from "@/redux/auth/auth.selectors";
 
 // icons
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
@@ -7,8 +12,15 @@ type LikeButtonProps = {
   isLiked?: boolean;
 };
 
-const LikeButton: React.FC<LikeButtonProps> = ({ isLiked = false }) => {
+const LikeButton: React.FC<LikeButtonProps> = ({ isLiked }) => {
   const theme = useTheme();
+  const { isAuth } = useSelector(authSelector);
+
+  const handleClick = async () => {
+    if (!isAuth) {
+      return toast.error("Please login first");
+    }
+  };
 
   return (
     <Button

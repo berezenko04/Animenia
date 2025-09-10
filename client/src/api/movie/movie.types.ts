@@ -22,6 +22,7 @@ export type MovieCard = {
   title: string;
   description: string;
   rating: number;
+  isLiked: boolean;
   genres: Genre[];
 };
 

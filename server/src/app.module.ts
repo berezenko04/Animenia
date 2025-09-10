@@ -4,7 +4,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { MovieModule } from './modules/movie/movie.module';
 import { UserModule } from './modules/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { WishlistModule } from './modules/wishlist/wishlist.module';
 
 @Module({
   imports: [
@@ -12,8 +11,7 @@ import { WishlistModule } from './modules/wishlist/wishlist.module';
     PrismaModule,
     AuthModule,
     UserModule,
-    MovieModule,
-    WishlistModule,
+    MovieModule
   ],
   controllers: [],
   providers: [],

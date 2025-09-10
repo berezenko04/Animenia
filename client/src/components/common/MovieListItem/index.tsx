@@ -12,18 +12,11 @@ import { themeSelector } from "@/redux/theme/theme.selectors";
 import { formatGenres } from "@/utils/formatGenres";
 
 // types
-import type { Genre } from "@/types/enums.types";
+import type { MovieCard } from "@/api/movie/movie.types";
 
-type MovieListItemProps = {
-  id: string;
-  slug: string;
-  posterUrl: string;
-  title: string;
-  genres: Genre[];
-  rating: number;
-  description: string;
+interface MovieListItemProps extends MovieCard {
   isListItem?: boolean;
-};
+}
 
 const MovieListItem: React.FC<MovieListItemProps> = ({
   id,
@@ -34,6 +27,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
   rating,
   description,
   isListItem = true,
+  isLiked,
 }) => {
   const { mode } = useSelector(themeSelector);
 
@@ -76,7 +70,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
             },
           }}
         />
-        <LikeButton />
+        <LikeButton isLiked={isLiked} />
       </Box>
       <Stack sx={{ gap: 2.5, alignItems: "flex-start" }}>
         <Stack sx={{ gap: 1 }}>
