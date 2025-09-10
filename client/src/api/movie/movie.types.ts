@@ -37,3 +37,14 @@ export type MovieScreenshot = {
   movieId: string;
   url: string;
 };
+
+export type MovieComment = {
+    id: string,
+    text: string,
+    createdAt: Date,
+    user: {
+        firstName: string,
+        lastName: string,
+        avatarUrl: string
+    }
+}
