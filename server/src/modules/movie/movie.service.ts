@@ -212,16 +212,16 @@ export class MovieService {
     return this.prisma.comment.findMany({ 
       where: { movieId },
       select: {
-      id: true,
-      text: true,
-      createdAt: true,
-      user: {
-        select: {
-          firstName: true,
-          lastName: true,
-          avatarUrl: true,
+        id: true,
+        text: true,
+        createdAt: true,
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+            avatarUrl: true,
+          },
         },
-      },
     }
   })
   }

@@ -91,7 +91,7 @@ export class MovieController {
   }
 
   @Get(':id/comments')
-  async getComments(movieId: string) {
+  async getComments(@Param('id') movieId: string) {
     return this.movieService.getComments(movieId);
   }
 }
