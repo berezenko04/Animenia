@@ -72,7 +72,7 @@ const MoviePage: React.FC = () => {
         icon={GroupOutlined}
         isSwipe
       />
-      {!isLoading && movie && <MovieComments movieId={movie.id} />}
+      {!isLoading && movie && <MovieComments isCommented={movie.isCommented} movieId={movie.id} />}
     </Stack>
   );
 };

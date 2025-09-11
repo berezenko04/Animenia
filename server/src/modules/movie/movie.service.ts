@@ -86,9 +86,8 @@ export class MovieService {
         _count: userId
           ? {
               select: {
-                likes: {
-                  where: { userId },
-                },
+                likes: { where: { userId } },
+                comments: { where: { userId } },
               },
             }
           : false,
@@ -100,6 +99,7 @@ export class MovieService {
     return {
       ...movie,
       isLiked: userId ? movie._count.likes > 0 : false,
+      isCommented: userId ? movie._count.comments > 0 : false,
     };
   }
 
@@ -223,5 +223,6 @@ export class MovieService {
         },
       },
     }
-  })}
+  })
+  }
 }

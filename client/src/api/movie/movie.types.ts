@@ -29,6 +29,7 @@ export type MovieCard = {
 export interface MovieFullInfo extends MovieCard {
   releaseYear: number;
   trailerUrl: string;
+  isCommented: boolean;
   screenshots: MovieScreenshot[];
 }
 

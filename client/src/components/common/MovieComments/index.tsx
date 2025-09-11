@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 //  components
 import MoviesBlockHead from "../MoviesBlockHead";
 import CommentForm from "../forms/CommentForm";
+import AlreadyCommented from "../AlreadyCommented";
 import Comment from "../Comment";
 
 // api
@@ -17,9 +18,10 @@ import { EmailOutlined } from "@mui/icons-material";
 
 type MovieCommentsProps = {
   movieId: string;
+  isCommented: boolean;
 };
 
-const MovieComments: React.FC<MovieCommentsProps> = ({ movieId }) => {
+const MovieComments: React.FC<MovieCommentsProps> = ({ movieId, isCommented }) => {
   const [comments, setComments] = useState<MovieComment[]>([]);
 
   useEffect(() => {
@@ -32,11 +34,13 @@ const MovieComments: React.FC<MovieCommentsProps> = ({ movieId }) => {
   return (
     <Stack sx={{ gap: 4 }}>
       <MoviesBlockHead title="Comments" icon={EmailOutlined} />
-      <Stack sx={{ gap: 2.5, px: 2.5 }}>
-        <CommentForm movieId={movieId} />
-        {comments.map((comment) => (
-          <Comment key={comment.id} {...comment} />
-        ))}
+      <Stack sx={{ gap: 4, px: 2.5 }}>
+        {isCommented ? <AlreadyCommented /> : <CommentForm movieId={movieId} />}
+        <Stack sx={{ gap: 2.5 }}>
+          {comments.map((comment) => (
+            <Comment key={comment.id} {...comment} />
+          ))}
+        </Stack>
       </Stack>
     </Stack>
   );

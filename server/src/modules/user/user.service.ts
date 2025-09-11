@@ -3,25 +3,21 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import axios from 'axios';
 
 // services
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UploadService } from '../upload/upload.service';
 
 // dto
 import { UpdateUserDto } from './dto/update-user.dto';
 
+
 @Injectable()
 export class UserService {
-  private readonly imgbbKey: string;
-
   constructor(
     private readonly prisma: PrismaService,
-    private readonly configService: ConfigService,
-  ) {
-    this.imgbbKey = this.configService.get<string>('IMGBB_API_KEY')!;
-  }
+    private readonly uploadService: UploadService
+  ) {}
 
   async get(id: string) {
     const user = await this.prisma.user.findUnique({
@@ -54,24 +50,8 @@ export class UserService {
     });
   }
 
-  private async uploadImageToImgBB(fileBase64: string) {
-    if (!this.imgbbKey) throw new Error('API Key is not set');
-
-    if (fileBase64.startsWith('data:')) {
-      fileBase64 = fileBase64.split(',')[1];
-    }
-
-    const { data } = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${this.imgbbKey}`,
-      new URLSearchParams({ image: fileBase64 }),
-      { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } },
-    );
-
-    return data.data.url;
-  }
-
   async setAvatar(userId: string, fileBase64: string): Promise<void> {
-    const url = await this.uploadImageToImgBB(fileBase64);
+    const url = await this.uploadService.uploadImage(fileBase64);
 
     if (!url)
       throw new InternalServerErrorException(

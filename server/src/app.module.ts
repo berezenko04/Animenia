@@ -4,6 +4,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { MovieModule } from './modules/movie/movie.module';
 import { UserModule } from './modules/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { PrismaModule } from './prisma/prisma.module';
     PrismaModule,
     AuthModule,
     UserModule,
-    MovieModule
+    MovieModule,
+    UploadModule
   ],
   controllers: [],
   providers: [],
