@@ -24,6 +24,7 @@ const HomePage = lazy(() => import("@/pages/Home"));
 const AllAnimePage = lazy(() => import("@/pages/All"));
 const ProfilePage = lazy(() => import("@/pages/Profile"));
 const NotificationsPage = lazy(() => import("@/pages/Notifications"));
+const GenresPage = lazy(() => import("@/pages/Genres"));
 const NotFoundPage = lazy(() => import("@/pages/NotFound"));
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
           <Route element={<PrimaryLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/all" element={<AllAnimePage />} />
-            <Route path="/by-genres" />
+            <Route path="/genres" element={<GenresPage />} />
             <Route path="/movies/:slug" element={<MoviePage />} />
           </Route>
 

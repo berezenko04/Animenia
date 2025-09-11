@@ -5,12 +5,12 @@ export enum Statuses {
 }
 
 export enum Genre {
-  COMEDY = "Comedy",
-  ROMANCE = "Romance",
-  FANTASY = "Fantasy",
-  ADVENTURE = "Adventure",
-  ACTION = "Action",
-  MAGIC = "Magic",
-  SCHOOL_LIFE = "School Life",
-  PARANORMAL = "Paranormal",
+  COMEDY = "COMEDY",
+  ROMANCE = "ROMANCE",
+  FANTASY = "FANTASY",
+  ADVENTURE = "ADVENTURE",
+  ACTION = "ACTION",
+  MAGIC = "MAGIC",
+  SCHOOL_LIFE = "SCHOOL_LIFE",
+  PARANORMAL = "PARANORMAL",
 }

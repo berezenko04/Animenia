@@ -51,6 +51,12 @@ const MoviePage: React.FC = () => {
     })();
   }, [slug]);
 
+  useEffect(() => {
+    if (!isLoading && movie) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [isLoading, movie]);
+
   return (
     <Stack sx={{ gap: 6 }}>
       <Stack sx={{ gap: 4 }}>

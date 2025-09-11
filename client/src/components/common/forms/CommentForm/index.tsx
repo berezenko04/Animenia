@@ -1,22 +1,15 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-
-// api
-import MovieService from "@/api/movie/movie.service";
-
-// utils
-import { catchError } from "@/utils/catchError";
 
 type CommentFormProps = {
-  movieId: string;
+  onAddComment: (text: string) => void;
 };
 
 type CommentFormFields = {
   comment: string;
 };
 
-const CommentForm: React.FC<CommentFormProps> = ({ movieId }) => {
+const CommentForm: React.FC<CommentFormProps> = ({ onAddComment }) => {
   const {
     handleSubmit,
     register,
@@ -25,13 +18,8 @@ const CommentForm: React.FC<CommentFormProps> = ({ movieId }) => {
   } = useForm<CommentFormFields>();
 
   const onSubmit = async ({ comment }: CommentFormFields) => {
-    try {
-      const result = await MovieService.createComment(movieId, comment);
-      toast.success(result.message);
-      reset();
-    } catch (err) {
-      catchError(err);
-    }
+    onAddComment(comment);
+    reset();
   };
 
   return (

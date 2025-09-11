@@ -86,8 +86,7 @@ export class MovieController {
     @Param('id') movieId: string,
     @Body('text') text: string,
   ) {
-    await this.movieService.createComment(userId, { movieId, text });
-    return { message: 'Comment has been created' };
+    return this.movieService.createComment(userId, { movieId, text });
   }
 
   @Get(':id/comments')
