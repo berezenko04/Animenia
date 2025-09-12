@@ -1,7 +1,7 @@
 import { Box, Stack } from "@mui/material";
 
 // components
-import MoviesBlockHead from "@/components/common/MoviesBlockHead";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
 import CustomLink from "../CustomLink";
 
 // icons
@@ -10,7 +10,7 @@ import { ReviewsOutlined } from "@mui/icons-material";
 const Reviews: React.FC = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <MoviesBlockHead title="Reviews" icon={ReviewsOutlined} />
+      <SectionBlockHead title="Reviews" icon={ReviewsOutlined} />
       <Stack sx={{ gap: 2.5, px: 2.5 }}>
         {[...Array(3)].map((_, idx) => (
           <CustomLink key={idx} to="#">

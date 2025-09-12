@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 // components
-import MoviesBlockHead from "../../MoviesBlockHead";
+import SectionBlockHead from "../../SectionBlockHead";
 import LogoutAllButton from "../../LogoutAllButton";
 import ProfileSessionsItem from "../ProfileSessionsItem";
 import ProfileSessionItemSkeleton from "@/components/ui/loaders/ProfileSessionItemSkeleton";
@@ -38,7 +38,7 @@ const ProfileSessions: React.FC = () => {
 
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <MoviesBlockHead title="Sessions" icon={FolderOutlined} additionalContent={!isLoading && <LogoutAllButton />} />
+      <SectionBlockHead title="Sessions" icon={FolderOutlined} additionalContent={!isLoading && <LogoutAllButton />} />
       <Stack sx={{ gap: 1.5 }}>
         {isLoading
           ? [...Array(3)].map((_, idx) => <ProfileSessionItemSkeleton key={idx} />)

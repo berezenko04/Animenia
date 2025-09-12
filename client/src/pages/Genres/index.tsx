@@ -1,8 +1,8 @@
-import { capitalize, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 // components
-import MoviesBlock from "@/components/common/MoviesBlock";
+import SectionBlock from "@/components/common/MoviesBlock";
 
 // api
 import MovieService from "@/api/movie/movie.service";
@@ -11,9 +11,11 @@ import MovieService from "@/api/movie/movie.service";
 import type { MovieCard } from "@/api/movie/movie.types";
 import { Genre } from "@/types/enums.types";
 
+// utils
+import { formatGenres } from "@/utils/formatGenres";
+
 // icons
 import { AppsOutlined } from "@mui/icons-material";
-import { formatGenres } from "@/utils/formatGenres";
 
 type MoviesByGenre = {
   [genre: string]: MovieCard[];
@@ -55,7 +57,7 @@ const GenresPage: React.FC = () => {
   return (
     <Stack sx={{ gap: 4 }}>
       {genres.map((genre) => (
-        <MoviesBlock
+        <SectionBlock
           key={genre}
           icon={AppsOutlined}
           title={formatGenres([genre])}

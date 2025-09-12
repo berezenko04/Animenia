@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 //  components
-import MoviesBlockHead from "../MoviesBlockHead";
+import SectionBlockHead from "../SectionBlockHead";
 import CommentForm from "../forms/CommentForm";
 import AlreadyCommented from "../AlreadyCommented";
 import Comment from "../Comment";
@@ -74,7 +74,7 @@ const MovieComments: React.FC<MovieCommentsProps> = ({ movieId, isCommented: isI
 
   return (
     <Stack sx={{ gap: 4 }}>
-      <MoviesBlockHead title="Comments" icon={EmailOutlined} />
+      <SectionBlockHead title="Comments" icon={EmailOutlined} />
       <Stack sx={{ gap: 4, px: 2.5 }}>
         {isCommented ? <AlreadyCommented /> : <CommentForm onAddComment={handleAddComment} />}
         <Stack sx={{ gap: 2.5 }}>

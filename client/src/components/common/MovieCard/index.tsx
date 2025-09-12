@@ -22,6 +22,8 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
         borderRadius: "10px",
         overflow: "hidden",
         display: "block",
+        height: 350,
+        maxWidth: 270,
       }}
     >
       <Box
@@ -29,8 +31,8 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
           backgroundImage: `url(${posterUrl})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          minHeight: 350,
-          maxWidth: 270,
+          height: "100%",
+          width: "100%",
           transition: "transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease",
           "&:hover": {
             transform: "scale(1.06) translateY(-5px)",
@@ -47,7 +49,6 @@ const MovieCard: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, ge
           p: 2.5,
           gap: 1,
           zIndex: 10,
-          width: "100%",
           backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.9),
           backdropFilter: "blur(2.5px)",
         }}

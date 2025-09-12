@@ -2,7 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { useLocation } from "react-router";
 
 // components
-import MoviesBlockHead from "@/components/common/MoviesBlockHead";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
 import CustomLink from "@/components/common/CustomLink";
 
 // icons
@@ -16,7 +16,7 @@ const ProfileMenu: React.FC = () => {
 
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <MoviesBlockHead title="Settings" icon={SettingsOutlined} />
+      <SectionBlockHead title="Settings" icon={SettingsOutlined} />
       <Stack component="nav" sx={{ gap: 2.5, px: 2.5 }}>
         {profileMenu.map((i, idx) => {
           const isActive = location.pathname === i.href;

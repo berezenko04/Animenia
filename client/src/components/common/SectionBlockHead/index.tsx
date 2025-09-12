@@ -11,7 +11,7 @@ import { ArrowBackOutlined, ArrowForwardOutlined } from "@mui/icons-material";
 // types
 import type { Swiper } from "swiper/types";
 
-export type MoviesBlockHeadProps = {
+export type SectionBlockHeadProps = {
   title: string;
   icon: React.ElementType<SvgIconProps>;
   additionalContent?: React.ReactNode;
@@ -19,7 +19,7 @@ export type MoviesBlockHeadProps = {
   swiperRef?: React.RefObject<Swiper | null>;
 };
 
-const MoviesBlockHead: React.FC<MoviesBlockHeadProps> = ({ title, icon, additionalContent, isSwipe, swiperRef }) => {
+const SectionBlockHead: React.FC<SectionBlockHeadProps> = ({ title, icon, additionalContent, isSwipe, swiperRef }) => {
   return (
     <Box sx={{ backgroundColor: "backgroundPrimary.main", borderRadius: "10px", py: "18px", px: "20px" }}>
       <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 4 }}>
@@ -39,4 +39,4 @@ const MoviesBlockHead: React.FC<MoviesBlockHeadProps> = ({ title, icon, addition
   );
 };
 
-export default MoviesBlockHead;
+export default SectionBlockHead;

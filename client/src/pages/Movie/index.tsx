@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 // components
 import MovieListItem from "@/components/common/MovieListItem";
 import MovieScreenshots from "@/components/common/MovieScreenshots";
-import MoviesBlockHead from "@/components/common/MoviesBlockHead";
-import MoviesBlock from "@/components/common/MoviesBlock";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
+import SectionBlock from "@/components/common/MoviesBlock";
 import MovieListItemSkeleton from "@/components/ui/loaders/MovieListItemSkeleton";
 import Player from "@/components/common/Player";
 import MovieComments from "@/components/common/MovieComments";
@@ -60,7 +60,7 @@ const MoviePage: React.FC = () => {
   return (
     <Stack sx={{ gap: 6 }}>
       <Stack sx={{ gap: 4 }}>
-        <MoviesBlockHead title="Anime" icon={VideocamOutlined} />
+        <SectionBlockHead title="Anime" icon={VideocamOutlined} />
         {!isLoading && movie ? (
           <>
             <MovieListItem isListItem={false} {...movie} />
@@ -71,7 +71,7 @@ const MoviePage: React.FC = () => {
           <MovieListItemSkeleton />
         )}
       </Stack>
-      <MoviesBlock
+      <SectionBlock
         isLoading={similarMoviesLoading}
         movies={similarMovies}
         title="Similar Anime"

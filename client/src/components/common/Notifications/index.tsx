@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 
 // components
-import MoviesBlockHead from "@/components/common/MoviesBlockHead";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
 import NotificationItem from "../NotificationItem";
 
 // icons
@@ -13,7 +13,7 @@ import { notificationOptions } from "@/data";
 const Notifications = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <MoviesBlockHead title="Notifications" icon={NotificationsNoneOutlined} />
+      <SectionBlockHead title="Notifications" icon={NotificationsNoneOutlined} />
       <Stack sx={{ gap: 1.5 }}>
         {notificationOptions.map((option, idx) => (
           <NotificationItem key={idx} title={option} />

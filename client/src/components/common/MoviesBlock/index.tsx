@@ -2,7 +2,7 @@ import { Button, darken, Grid, Stack } from "@mui/material";
 import { useRef } from "react";
 
 // components
-import MoviesBlockHead, { type MoviesBlockHeadProps } from "../MoviesBlockHead";
+import SectionBlockHead, { type SectionBlockHeadProps } from "../SectionBlockHead";
 import MovieCardSkeleton from "@/components/ui/loaders/MovieCardSkeleton";
 import MoviesSwiper from "@/components/common/MoviesSwiper";
 import MovieCard from "@/components/common/MovieCard";
@@ -14,18 +14,18 @@ import type { Swiper } from "swiper/types";
 // theme
 import theme from "@/theme";
 
-interface MoviesBlockProps extends Omit<MoviesBlockHeadProps, "swiperRef"> {
+interface SectionBlockProps extends Omit<SectionBlockHeadProps, "swiperRef"> {
   movies: MovieCardType[];
   isLoading: boolean;
   isLazyLoad?: boolean;
 }
 
-const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe, isLoading = true, isLazyLoad }) => {
+const SectionBlock: React.FC<SectionBlockProps> = ({ title, icon, movies, isSwipe, isLoading = true, isLazyLoad }) => {
   const swiperRef = useRef<Swiper | null>(null);
 
   return (
-    <Stack sx={{ gap: !isSwipe ? 2.5 : 1.5 }}>
-      <MoviesBlockHead swiperRef={swiperRef} title={title} icon={icon} isSwipe={isSwipe} />
+    <Stack sx={{ gap: !isSwipe ? 2.5 : 1.5 }} component="section">
+      <SectionBlockHead swiperRef={swiperRef} title={title} icon={icon} isSwipe={isSwipe} />
       {isSwipe ? (
         <MoviesSwiper isLoading={isLoading} swiperRef={swiperRef} data={movies} />
       ) : (
@@ -66,4 +66,4 @@ const MoviesBlock: React.FC<MoviesBlockProps> = ({ title, icon, movies, isSwipe,
   );
 };
 
-export default MoviesBlock;
+export default SectionBlock;

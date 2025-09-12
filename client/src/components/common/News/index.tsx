@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 // components
-import MoviesBlockHead from "@/components/common/MoviesBlockHead";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
 import NewsItemSkeleton from "@/components/ui/loaders/NewsItemSkeleton";
 import NewsItem from "../NewsItem";
 
@@ -37,7 +37,7 @@ const News: React.FC = () => {
 
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <MoviesBlockHead title="Latest News" icon={ArticleOutlined} />
+      <SectionBlockHead title="Latest News" icon={ArticleOutlined} />
       <Stack sx={{ px: 2.5, gap: 1 }}>
         {isLoading
           ? [...Array(5)].map((_, idx) => <NewsItemSkeleton key={idx} />)

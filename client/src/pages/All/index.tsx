@@ -1,7 +1,19 @@
-import AllAnime from "@/components/common/AllAnime";
+import { Stack } from "@mui/material";
+
+// components
+import MovieList from "@/components/common/MovieList";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
+
+// icons
+import { AppsOutlined } from "@mui/icons-material";
 
 const AllAnimePage: React.FC = () => {
-  return <AllAnime />;
+  return (
+    <Stack sx={{ gap: 2.5 }}>
+      <SectionBlockHead title="All Anime" icon={AppsOutlined} />
+      <MovieList />
+    </Stack>
+  );
 };
 
 export default AllAnimePage;

@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 
 // components
-import MoviesBlock from "@/components/common/MoviesBlock";
+import SectionBlock from "@/components/common/MoviesBlock";
 
 // hooks
 import { useMovies } from "@/hooks/useMovies";
@@ -14,8 +14,8 @@ const HomePage: React.FC = () => {
 
   return (
     <Stack sx={{ gap: 6 }}>
-      <MoviesBlock title="Popular" icon={LocalFireDepartmentOutlined} movies={movies} isSwipe isLoading={isLoading} />
-      <MoviesBlock title="Top 100" icon={LeaderboardOutlined} movies={movies} isLazyLoad isLoading={isLoading} />
+      <SectionBlock title="Popular" icon={LocalFireDepartmentOutlined} movies={movies} isSwipe isLoading={isLoading} />
+      <SectionBlock title="Top 100" icon={LeaderboardOutlined} movies={movies} isLazyLoad isLoading={isLoading} />
     </Stack>
   );
 };

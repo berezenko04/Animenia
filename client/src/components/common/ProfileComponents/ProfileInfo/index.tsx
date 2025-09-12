@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 // components
-import MoviesBlockHead from "@/components/common/MoviesBlockHead";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
 import ChangeNameModal from "@/components/common/modals/ChangeNameModal";
 import ChangePasswordModal from "@/components/common/modals/ChangePasswordModal";
 import EditButton from "@/components/ui/buttons/EditButton";
@@ -23,7 +23,7 @@ const ProfileInfo = () => {
 
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <MoviesBlockHead title="Profile" icon={PersonOutlineOutlined} />
+      <SectionBlockHead title="Profile" icon={PersonOutlineOutlined} />
       <Stack sx={{ flexDirection: "row", gap: 4 }}>
         <ProfileAvatar />
         <Stack sx={{ gap: 2.5 }}>
