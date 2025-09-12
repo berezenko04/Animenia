@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import Header from "@/components/sections/Header";
 import CustomContainer from "@/components/sections/Container";
 import Footer from "@/components/sections/Footer";
-import ProfileMenu from "@/components/profile/ProfileMenu";
+import ProfileMenu from "@/components/profile/Menu";
 
 const ProfileLayout: React.FC = () => {
   return (

@@ -5,16 +5,15 @@ import { Close } from "@mui/icons-material";
 
 type TCustomModalProps = ModalProps & {
   children: React.ReactNode;
-  footer?: React.ReactNode;
   maxWidth: number;
   title: string;
 };
 
-const CustomModal: React.FC<TCustomModalProps> = ({ title, maxWidth, footer, children, ...props }) => {
+const CustomModal: React.FC<TCustomModalProps> = ({ title, maxWidth, children, ...props }) => {
   return (
     <Modal {...props}>
       <Fade in={props.open}>
-        <Box
+        <Stack
           sx={{
             maxWidth,
             width: "100%",
@@ -23,8 +22,6 @@ const CustomModal: React.FC<TCustomModalProps> = ({ title, maxWidth, footer, chi
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: { xs: 0, sm: 2 },
-            display: "flex",
-            flexDirection: "column",
             gap: 0.5,
             position: "absolute",
             top: "50%",
@@ -61,8 +58,7 @@ const CustomModal: React.FC<TCustomModalProps> = ({ title, maxWidth, footer, chi
           >
             {children}
           </Box>
-          {footer && <Box>{footer}</Box>}
-        </Box>
+        </Stack>
       </Fade>
     </Modal>
   );

@@ -3,13 +3,13 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 
 // components
-import MovieListItem from "@/components/movies/MovieListItem";
-import MovieScreenshots from "@/components/movies/MovieScreenshots";
+import MovieListItem from "@/components/movies/ListItem";
+import Screenshots from "@/components/movies/Screenshots";
 import SectionBlockHead from "@/components/common/SectionBlockHead";
 import SectionBlock from "@/components/common/SectionBlock";
 import MovieListItemSkeleton from "@/components/ui/loaders/skeletons/MovieListItemSkeleton";
-import Player from "@/components/common/VideoPlayer";
-import MovieComments from "@/components/movies/MovieComments";
+import VideoPlayer from "@/components/common/VideoPlayer";
+import MovieComments from "@/components/movies/Comments";
 
 // api
 import MovieService from "@/api/movie/movie.service";
@@ -64,8 +64,8 @@ const MoviePage: React.FC = () => {
         {!isLoading && movie ? (
           <>
             <MovieListItem isListItem={false} {...movie} />
-            <MovieScreenshots screenshots={movie?.screenshots} />
-            <Player src={movie?.trailerUrl} controls playsInline />
+            <Screenshots screenshots={movie?.screenshots} />
+            <VideoPlayer src={movie?.trailerUrl} controls playsInline />
           </>
         ) : (
           <MovieListItemSkeleton />

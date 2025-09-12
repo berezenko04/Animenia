@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material";
 
 // components
-import ProfileInfo from "@/components/profile/ProfileInfo";
-import ProfileSessions from "@/components/profile/ProfileSessions";
+import ProfileInfo from "@/components/profile/Info";
+import ProfileSessions from "@/components/profile/Sessions";
 
 const ProfilePage: React.FC = () => {
   return (

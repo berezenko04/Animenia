@@ -4,8 +4,8 @@ import { useRef } from "react";
 // components
 import SectionBlockHead, { type SectionBlockHeadProps } from "../SectionBlockHead";
 import MovieCardSkeleton from "@/components/ui/loaders/skeletons/MovieCardSkeleton";
-import MoviesSwiper from "@/components/movies/MoviesSwiper";
-import MovieCard from "@/components/movies/MovieCard";
+import MoviesSwiper from "@/components/movies/Swiper";
+import MovieCard from "@/components/movies/Card";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";

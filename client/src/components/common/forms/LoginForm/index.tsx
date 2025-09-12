@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
-import PasswordInput from "@/components/common/PasswordInput";
+import PasswordInput from "@/components/common/forms/PasswordInput";
 
 // redux
 import { login } from "@/redux/auth/auth.actions";

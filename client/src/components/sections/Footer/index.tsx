@@ -5,7 +5,7 @@ import CustomContainer from "../Container";
 import Logo from "@/components/common/Logo";
 import CustomLink from "@/components/common/CustomLink";
 import ScrollUpButton from "@/components/ui/buttons/ScrollUpButton";
-import FooterSocials from "@/components/common/FooterSocials";
+import FooterSocials from "@/components/sections/Footer/FooterSocials";
 
 // data
 import { footerMenuGenres } from "@/data";
