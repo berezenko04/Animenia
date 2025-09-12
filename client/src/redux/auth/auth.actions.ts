@@ -14,7 +14,7 @@ export const login = createAsyncThunk<boolean, LoginBody, { rejectValue: { messa
       return true;
     } catch (err: any) {
       return rejectWithValue({
-        message: err.response.data?.message || "Unknown error",
+        message: err.response.data?.message,
       });
     }
   }

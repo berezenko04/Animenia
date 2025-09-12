@@ -2,7 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Stack, Typography }
 import { useState } from "react";
 
 // components
-import CustomLink from "../CustomLink";
+import CustomLink from "@/components/common/CustomLink";
 
 // utils
 import { formatGenres } from "@/utils/formatGenres";

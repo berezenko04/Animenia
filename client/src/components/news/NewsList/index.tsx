@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 // components
 import SectionBlockHead from "@/components/common/SectionBlockHead";
-import NewsItemSkeleton from "@/components/ui/loaders/NewsItemSkeleton";
+import NewsItemSkeleton from "@/components/ui/loaders/skeletons/NewsItemSkeleton";
 import NewsItem from "../NewsItem";
 
 // api
@@ -18,7 +18,7 @@ import { ArticleOutlined } from "@mui/icons-material";
 // types
 import type { MovieNewsItem } from "@/api/movie/movie.types";
 
-const News: React.FC = () => {
+const NewsList: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [news, setNews] = useState<MovieNewsItem[]>([]);
 
@@ -47,4 +47,4 @@ const News: React.FC = () => {
   );
 };
 
-export default News;
+export default NewsList;

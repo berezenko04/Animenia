@@ -2,10 +2,10 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 // components
-import SectionBlockHead from "../../SectionBlockHead";
-import LogoutAllButton from "../../LogoutAllButton";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
+import LogoutAllButton from "@/components/common/LogoutAllButton";
 import ProfileSessionsItem from "../ProfileSessionsItem";
-import ProfileSessionItemSkeleton from "@/components/ui/loaders/ProfileSessionItemSkeleton";
+import ProfileSessionItemSkeleton from "@/components/ui/loaders/skeletons/ProfileSessionItemSkeleton";
 
 // api
 import AuthService from "@/api/auth/auth.service";

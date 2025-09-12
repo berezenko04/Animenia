@@ -2,7 +2,7 @@ import { Pagination, Stack } from "@mui/material";
 
 // components
 import MovieListItem from "../MovieListItem";
-import MovieListItemSkeleton from "@/components/ui/loaders/MovieListItemSkeleton";
+import MovieListItemSkeleton from "@/components/ui/loaders/skeletons/MovieListItemSkeleton";
 
 // hooks
 import { useMovies } from "@/hooks/useMovies";

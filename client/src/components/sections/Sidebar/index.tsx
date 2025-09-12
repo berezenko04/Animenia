@@ -1,14 +1,14 @@
 import { Stack } from "@mui/material";
 
 // components
-import News from "@/components/common/News";
+import NewsList from "@/components/news/NewsList";
 import Reviews from "@/components/common/Reviews";
 import SocialGradientFillButton from "@/components/ui/buttons/SocialGradientFillButton";
 
 const Sidebar: React.FC = () => {
   return (
     <Stack sx={{ gap: 6 }}>
-      <News />
+      <NewsList />
       <Reviews />
       <Stack sx={{ gap: 1.5 }}>
         <SocialGradientFillButton variant="instagram" href="https://instagram.com" />

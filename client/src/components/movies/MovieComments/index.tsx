@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 //  components
-import SectionBlockHead from "../SectionBlockHead";
-import CommentForm from "../forms/CommentForm";
-import AlreadyCommented from "../AlreadyCommented";
-import Comment from "../Comment";
+import SectionBlockHead from "@/components/common/SectionBlockHead";
+import CommentForm from "@/components/common/forms/CommentForm";
+import AlreadyCommented from "@/components/common/AlreadyCommented";
+import Comment from "@/components/common/Comment";
 
 // api
 import MovieService from "@/api/movie/movie.service";

@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 
 // components
-import SectionBlock from "@/components/common/MoviesBlock";
+import SectionBlock from "@/components/common/SectionBlock";
 
 // api
 import MovieService from "@/api/movie/movie.service";

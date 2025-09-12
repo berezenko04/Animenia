@@ -3,7 +3,7 @@ import { Fragment } from "react/jsx-runtime";
 
 // components
 import IconBoxWithBackground from "@/components/ui/IconBoxWithBackground";
-import IconButtonWithBackground from "@/components/ui/IconButtonWithBackground";
+import IconButtonWithBackground from "@/components/ui/buttons/IconButtonWithBackground";
 
 // icons
 import { ArrowBackOutlined, ArrowForwardOutlined } from "@mui/icons-material";

@@ -3,13 +3,13 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 
 // components
-import MovieListItem from "@/components/common/MovieListItem";
-import MovieScreenshots from "@/components/common/MovieScreenshots";
+import MovieListItem from "@/components/movies/MovieListItem";
+import MovieScreenshots from "@/components/movies/MovieScreenshots";
 import SectionBlockHead from "@/components/common/SectionBlockHead";
-import SectionBlock from "@/components/common/MoviesBlock";
-import MovieListItemSkeleton from "@/components/ui/loaders/MovieListItemSkeleton";
-import Player from "@/components/common/Player";
-import MovieComments from "@/components/common/MovieComments";
+import SectionBlock from "@/components/common/SectionBlock";
+import MovieListItemSkeleton from "@/components/ui/loaders/skeletons/MovieListItemSkeleton";
+import Player from "@/components/common/VideoPlayer";
+import MovieComments from "@/components/movies/MovieComments";
 
 // api
 import MovieService from "@/api/movie/movie.service";

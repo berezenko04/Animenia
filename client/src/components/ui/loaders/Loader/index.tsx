@@ -1,7 +1,7 @@
 import { alpha, Box, keyframes, useTheme } from "@mui/material";
 
 // components
-import Logo from "../../Logo";
+import Logo from "../../../common/Logo";
 
 const fade = keyframes`
   0%, 100% {

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 // components
-import Rating from "@/components/ui/Rating";
+import Rating from "@/components/common/Rating";
 import LikeButton from "@/components/ui/buttons/LikeButton";
 
 // redux

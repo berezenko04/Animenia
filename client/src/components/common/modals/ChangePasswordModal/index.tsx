@@ -1,5 +1,5 @@
 // components
-import CustomModal from "@/components/ui/CustomModal";
+import CustomModal from "@/components/common/CustomModal";
 import ChangePasswordForm from "@/components/common/forms/ChangePasswordForm";
 
 // types

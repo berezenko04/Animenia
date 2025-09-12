@@ -4,9 +4,9 @@ import { useNavigate } from "react-router";
 
 // components
 import CustomContainer from "../Container";
-import Logo from "@/components/ui/Logo";
+import Logo from "@/components/common/Logo";
 import ThemeSwitchButton from "@/components/ui/buttons/ThemeSwitchButton";
-import UnderlinedLink from "@/components/ui/UnderlinedLink";
+import UnderlinedLink from "@/components/ui/links/UnderlinedLink";
 import CustomLink from "@/components/common/CustomLink";
 
 // api

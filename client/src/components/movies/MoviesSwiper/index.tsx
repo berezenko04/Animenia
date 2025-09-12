@@ -2,8 +2,8 @@ import { Swiper as SwiperInitial, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
 // components
-import MovieCard from "@/components/common/MovieCard";
-import MovieCardSkeleton from "@/components/ui/loaders/MovieCardSkeleton";
+import MovieCard from "@/components/movies/MovieCard";
+import MovieCardSkeleton from "@/components/ui/loaders/skeletons/MovieCardSkeleton";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";

@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
     const result = await dispatch(login(data));
 
     if (login.rejected.match(result)) {
-      return toast.error(result?.payload?.message?.message);
+      return toast.error(result?.payload?.message || "Unknown Error");
     }
 
     navigate("/");

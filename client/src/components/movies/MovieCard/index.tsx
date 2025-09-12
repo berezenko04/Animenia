@@ -2,7 +2,7 @@ import { alpha, Box, Stack, Typography, useTheme } from "@mui/material";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
-import Rating from "@/components/ui/Rating";
+import Rating from "@/components/common/Rating";
 
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";

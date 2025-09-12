@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 // types
 import type { ReactPlayerProps } from "react-player/types";
 
-const Player: React.FC<ReactPlayerProps> = ({ ...props }) => {
+const VideoPlayer: React.FC<ReactPlayerProps> = ({ ...props }) => {
   return (
     <ReactPlayer
       width="100%"
@@ -14,4 +14,4 @@ const Player: React.FC<ReactPlayerProps> = ({ ...props }) => {
   );
 };
 
-export default Player;
+export default VideoPlayer;

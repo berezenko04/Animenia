@@ -2,10 +2,10 @@ import { Grid, Stack, Typography } from "@mui/material";
 
 // components
 import CustomContainer from "../Container";
-import Logo from "@/components/ui/Logo";
+import Logo from "@/components/common/Logo";
 import CustomLink from "@/components/common/CustomLink";
 import ScrollUpButton from "@/components/ui/buttons/ScrollUpButton";
-import FooterSocials from "@/components/ui/FooterSocials";
+import FooterSocials from "@/components/common/FooterSocials";
 
 // data
 import { footerMenuGenres } from "@/data";

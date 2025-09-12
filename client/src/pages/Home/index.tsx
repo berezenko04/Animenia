@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 
 // components
-import SectionBlock from "@/components/common/MoviesBlock";
+import SectionBlock from "@/components/common/SectionBlock";
 
 // hooks
 import { useMovies } from "@/hooks/useMovies";
