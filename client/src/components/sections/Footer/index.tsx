@@ -8,7 +8,7 @@ import ScrollUpButton from "@/components/ui/buttons/ScrollUpButton";
 import FooterSocials from "@/components/sections/Footer/FooterSocials";
 
 // data
-import { footerMenuGenres } from "@/data";
+import { genres } from "@/data";
 
 const Footer: React.FC = () => {
   return (
@@ -28,9 +28,9 @@ const Footer: React.FC = () => {
             <Stack sx={{ gap: 1.5 }}>
               <Typography variant="h3">Genres</Typography>
               <Stack sx={{ gap: 0.75 }}>
-                {footerMenuGenres.map(({ title, href }, idx) => (
-                  <CustomLink sx={{ fontSize: 13 }} to={href} key={idx}>
-                    {title}
+                {genres.map((genre, idx) => (
+                  <CustomLink sx={{ fontSize: 13 }} to="/genres" key={idx}>
+                    {genre}
                   </CustomLink>
                 ))}
               </Stack>

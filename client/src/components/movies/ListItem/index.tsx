@@ -63,6 +63,7 @@ const ListItem: React.FC<ListItemProps> = ({
           sx={{
             position: "relative",
             objectFit: "cover",
+            userSelect: "none",
             objectPosition: "center",
             width: "100%",
             height: "100%",
@@ -87,9 +88,10 @@ const ListItem: React.FC<ListItemProps> = ({
         <Typography
           sx={{
             display: "-webkit-box",
+            flex: 1,
             overflow: "hidden",
             WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 10,
+            WebkitLineClamp: 7,
             fontSize: 16,
           }}
         >

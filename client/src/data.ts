@@ -19,14 +19,14 @@ export const socials = [
   { icon: Telegram, href: "#" },
 ];
 
-export const footerMenuGenres = [
-  { title: "Comedy", href: "#" },
-  { title: "Romance", href: "#" },
-  { title: "Fantasy", href: "#" },
-  { title: "Adventure", href: "#" },
-  { title: "Action", href: "#" },
-  { title: "Magic", href: "#" },
-  { title: "School Life", href: "#" },
+export const genres = [
+  "Comedy",
+  "Romance",
+  "Fantasy",
+  "Adventure",
+  "Action",
+  "Magic",
+  "School Life"
 ];
 
 export const notificationOptions = ["Email Notifications", "Reviews", "News"];

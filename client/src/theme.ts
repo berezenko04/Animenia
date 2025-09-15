@@ -26,6 +26,7 @@ const getBaseTheme = (mode: "light" | "dark") =>
         main: mode === "light" ? "#404156" : "#FFFFFF",
       },
       background: mode === "light" ? { default: "#F6F6F6" } : { default: "#1E1E1E", paper: "#2A2A2A" },
+      divider: "#E5E5E5",
       text:
         mode === "light" ? { primary: "#404156", secondary: "#9F9F9F" } : { primary: "#FFFFFF", secondary: "#B3B3B3" },
     },
@@ -105,9 +106,12 @@ const getTheme = (mode: "light" | "dark") => {
               pointerEvents: "none",
             },
           },
-          select: {
-            "&:focus": { backgroundColor: baseTheme.palette.divider },
+          standard: {
+            padding: 0
           },
+          select: {
+            fontSize: 14
+          }
         },
       },
       MuiTypography: {
