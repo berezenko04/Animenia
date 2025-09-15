@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import {  useState } from "react";
+import {useQuery} from '@tanstack/react-query';
 
 // api
 import MovieService from "@/api/movie/movie.service";
@@ -12,43 +12,18 @@ type UseMoviesProps = {
 };
 
 export const useMovies = ({ limit = 10 }: UseMoviesProps = {}) => {
-  const [movies, setMovies] = useState<MovieCard[]>([]);
-  const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    let mounted = true;
+  const {data, isLoading, error} = useQuery({
+    queryKey: ["movies", page, limit],
+    queryFn: () => MovieService.all({page, limit}),
+    placeholderData: (prev) => prev
+  })
 
-    (async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const result = await MovieService.all({ page, limit });
-        if (mounted) {
-          setMovies(result.data);
-          setTotal(result.total);
-        }
-      } catch (err: any) {
-        if (mounted) {
-          setError(err.message || "Failed to fetch movies");
-          toast.error(err.message || "Failed to fetch movies");
-        }
-      } finally {
-        if (mounted) setIsLoading(false);
-      }
-    })();
-
-    return () => {
-      mounted = false;
-    };
-  }, [page, limit]);
 
   return {
-    movies,
-    total,
+    movies: data?.data as MovieCard[] || [],
+    total: data?.total || 0,
     page,
     setPage,
     isLoading,
