@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { Throttle } from '@nestjs/throttler';
 
 // services
 import { AuthService } from './auth.service';
@@ -20,6 +21,7 @@ import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 // decorators
 import { Auth } from './decorators/auth.decorator';
@@ -30,7 +32,8 @@ import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 // utils
 import { getDeviceInfo } from 'src/utils/deviceInfo';
-import { Throttle } from '@nestjs/throttler';
+
+
 
 @Controller('auth')
 export class AuthController {
@@ -108,6 +111,15 @@ export class AuthController {
     await this.authService.sendPasswordForgotLink(email);
     return { message: 'Reset password mail has been send' };
   }
+
+  @Post('reset-password')
+  @Throttle({ default: { limit: 1, ttl: 60000 } })
+  @HttpCode(200)
+  async resetPassword(@Body() dto: ResetPasswordDto) {
+    await this.authService.resetPassword(dto);
+    return { message: 'Reset is successful' };
+  }
+
 
   @Post('logout')
   @HttpCode(200)

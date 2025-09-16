@@ -18,6 +18,7 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 
 
@@ -141,6 +142,25 @@ export class AuthService {
         url
       }
     })
+  }
+
+  async resetPassword(dto: ResetPasswordDto){
+    const resetData = await this.prisma.passwordReset.findFirst({where: { hash: dto.token, expiresAt: {  gte: new Date() }, used: false }})
+
+    if(!resetData) throw new UnauthorizedException('Invalid or expired reset token')
+
+    const newPasswordHash = await bcrypt.hash(dto.password, 10);
+
+    await this.prisma.$transaction([
+      this.prisma.user.update({
+        where: { id: resetData.userId },
+        data: { hash: newPasswordHash },
+      }),
+      this.prisma.passwordReset.update({
+        where: { id: resetData.id },
+        data: { used: true },
+      }),
+    ]);
   }
 
   async logout(refreshToken: string) {

@@ -123,7 +123,7 @@ model Comment {
 model PasswordReset { 
   id String @id @default(uuid()) @db.Uuid
   userId String @map("user_id") @db.Uuid()
-  hash String
+  hash String  @unique()
   used Boolean @default(false)
 
   user User @relation(fields: [userId], references: [id])
