@@ -30,6 +30,7 @@ import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 // utils
 import { getDeviceInfo } from 'src/utils/deviceInfo';
+import { Throttle } from '@nestjs/throttler';
 
 @Controller('auth')
 export class AuthController {
@@ -44,6 +45,7 @@ export class AuthController {
   }
 
   @Post('login')
+  @Throttle({ default: { limit: 3, ttl: 120000 } })
   async login(
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) res: Response,
@@ -100,6 +102,7 @@ export class AuthController {
   }
 
   @Post('forgot-password')
+  @Throttle({ default: { limit: 3, ttl: 300000 } })
   @HttpCode(200)
   async forgotPassword(@Body('email') email: string) {
     await this.authService.sendPasswordForgotLink(email);
