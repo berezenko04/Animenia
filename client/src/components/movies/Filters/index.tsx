@@ -1,21 +1,30 @@
 import { ButtonBase, Divider, Stack, Typography } from "@mui/material";
-import { useState } from "react";
 
 // components
 import FilterSelect from "@/components/common/forms/FilterSelect";
 
+// utils
+import { formatGenres } from "@/utils/formatGenres";
+
 // data
-import { genres } from "@/data";
+import { filterGenres } from "@/data";
+
+// types
+import type { Genre } from "@/types/enums.types";
 
 // icons
 import { Clear, TuneOutlined } from "@mui/icons-material";
 
+type FiltersProps = {
+  year: string;
+  genre: Genre | "all";
+  setYear: (i: string) => void;
+  setGenre: (i: Genre | "all") => void;
+};
+
 const VerticalDivider = () => <Divider orientation="vertical" flexItem sx={{ height: 16, alignSelf: "center" }} />;
 
-const Filters: React.FC = () => {
-  const [year, setYear] = useState<string>("all");
-  const [genre, setGenre] = useState<string>("all");
-
+const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => {
   const years = Array.from({ length: new Date().getFullYear() - 2000 + 1 }, (_, i) => {
     const year = 2000 + i;
     return { value: year.toString(), label: year.toString() };
@@ -41,7 +50,7 @@ const Filters: React.FC = () => {
         label="Genre"
         value={genre}
         onChangeValue={setGenre}
-        options={genres.map((genre) => ({ label: genre, value: genre.toLowerCase() }))}
+        options={filterGenres.map((genre) => ({ label: formatGenres([genre]), value: genre }))}
       />
 
       <VerticalDivider />

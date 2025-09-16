@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Telegram, Twitter, YouTube } from "@mui/icons-material";
+import { Genre } from "./types/enums.types";
 
 export const menu = [
   { title: "All Movies", href: "/all" },
@@ -26,7 +27,19 @@ export const genres = [
   "Adventure",
   "Action",
   "Magic",
+  "Paranormal",
   "School Life"
 ];
+
+export const filterGenres = [
+  Genre.COMEDY,
+  Genre.ROMANCE,
+  Genre.FANTASY,
+  Genre.ADVENTURE,
+  Genre.ACTION,
+  Genre.MAGIC,
+  Genre.PARANORMAL,
+  Genre.SCHOOL_LIFE
+]
 
 export const notificationOptions = ["Email Notifications", "Reviews", "News"];

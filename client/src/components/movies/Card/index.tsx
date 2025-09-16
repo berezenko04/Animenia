@@ -49,6 +49,7 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
           p: 2.5,
           gap: 1,
           zIndex: 10,
+          userSelect: "none",
           backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.9),
           backdropFilter: "blur(2.5px)",
         }}
