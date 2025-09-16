@@ -17,7 +17,7 @@ export class UserController {
 
   @Get()
   async get(@User() userId: string) {
-    return this.userService.get(userId);
+    return this.userService.get({id: userId});
   }
 
   @Post('set-avatar')

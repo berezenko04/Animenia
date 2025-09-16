@@ -96,7 +96,14 @@ export class AuthController {
   @Auth()
   async changePassword(@User() userId: string, @Body() dto: ChangePasswordDto) {
     await this.authService.changePassword(userId, dto);
-    return { message: 'Password has been successfully changed', success: true };
+    return { message: 'Password has been successfully changed' };
+  }
+
+  @Post('forgot-password')
+  @HttpCode(200)
+  async forgotPassword(@Body('email') email: string) {
+    await this.authService.sendPasswordForgotLink(email);
+    return { message: 'Reset password mail has been send' };
   }
 
   @Post('logout')

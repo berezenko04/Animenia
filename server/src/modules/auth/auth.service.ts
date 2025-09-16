@@ -6,6 +6,8 @@ import {
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { randomUUID } from 'crypto';
+import { MailerService } from '@nestjs-modules/mailer';
 
 // service
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -17,6 +19,8 @@ import { LoginDto } from './dto/login.dto';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 
+
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -24,6 +28,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly userService: UserService,
+    private readonly mailerService: MailerService
   ) {}
 
   async validateUser(email: string, password: string) {
@@ -95,7 +100,7 @@ export class AuthService {
   }
 
   async changePassword(userId: string, dto: ChangePasswordDto) {
-    await this.userService.get(userId);
+    await this.userService.get({id: userId});
 
     const password = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -117,6 +122,25 @@ export class AuthService {
       where: { id: userId },
       data: { hash: newPasswordHash },
     });
+  }
+
+  async sendPasswordForgotLink(email: string){
+    const user = await this.userService.get({email})
+
+    const token = randomUUID();
+
+    await this.prisma.passwordReset.create({ data: {userId: user.id, hash: token, expiresAt: new Date(Date.now() + 1000 * 60 * 30) }})
+
+    const url = `${this.configService.get<string>("FRONTEND_URL")}/reset-password?token=${token}`;
+
+    await this.mailerService.sendMail({
+      to: user.email,
+      subject: 'Reset password',
+      template: 'forgot-password',
+      context: {
+        url
+      }
+    })
   }
 
   async logout(refreshToken: string) {

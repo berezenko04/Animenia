@@ -8,15 +8,18 @@ import { AuthController } from './auth.controller';
 
 // modules
 import { UserModule } from '../user/user.module';
+import { MailModule } from '../mailer/mailer.module';
 
 // service
 import { AuthService } from './auth.service';
+
 
 @Global()
 @Module({
   imports: [
     PassportModule,
     UserModule,
+    MailModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
