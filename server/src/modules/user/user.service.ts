@@ -19,9 +19,9 @@ export class UserService {
     private readonly uploadService: UploadService
   ) {}
 
-  async get(where: {id?: string, email?: string}) {
+  async get(id: string) {
     const user = await this.prisma.user.findFirst({
-      where,
+      where: {id},
       select: {
         id: true,
         email: true,
@@ -42,7 +42,7 @@ export class UserService {
   }
 
   async update(id: string, dto: UpdateUserDto): Promise<void> {
-    await this.get({id});
+    await this.get(id);
 
     await this.prisma.user.update({
       where: { id },

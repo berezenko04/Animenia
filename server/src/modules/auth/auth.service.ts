@@ -101,7 +101,7 @@ export class AuthService {
   }
 
   async changePassword(userId: string, dto: ChangePasswordDto) {
-    await this.userService.get({id: userId});
+    await this.userService.get(userId);
 
     const password = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -126,7 +126,9 @@ export class AuthService {
   }
 
   async sendPasswordForgotLink(email: string){
-    const user = await this.userService.get({email})
+    const user = await this.prisma.user.findUnique({ where: { email }})
+
+    if(!user) return;
 
     const token = randomUUID();
 

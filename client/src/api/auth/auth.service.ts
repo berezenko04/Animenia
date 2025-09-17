@@ -20,6 +20,10 @@ const AuthService = {
     const { data } = await instance.post("/auth/refresh");
     return data;
   },
+  async sendForgotPasswordLink(email: string){
+    const { data } = await instance.post("/auth/forgot-password", {email})
+    return data;
+  },
   async logout() {
     const { data } = await instance.post("/auth/logout");
     return data;

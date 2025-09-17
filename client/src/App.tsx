@@ -26,6 +26,7 @@ const ProfilePage = lazy(() => import("@/pages/Profile"));
 const NotificationsPage = lazy(() => import("@/pages/Notifications"));
 const GenresPage = lazy(() => import("@/pages/Genres"));
 const NotFoundPage = lazy(() => import("@/pages/NotFound"));
+const ForgotPasswordPage = lazy(() => import("@/pages/ForgotPassword"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -67,6 +68,7 @@ function App() {
             <Route element={<PublicRoute />}>
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             </Route>
           </Route>
         </Routes>
