@@ -27,10 +27,7 @@ export class UserService {
         email: true,
         firstName: true,
         lastName: true,
-        avatarUrl: true,
-        twitterUsername: true,
-        telegramUsername: true,
-        instagramUsername: true,
+        avatarUrl: true
       },
     });
 

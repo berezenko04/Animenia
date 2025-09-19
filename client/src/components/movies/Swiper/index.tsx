@@ -18,13 +18,21 @@ type SwiperProps = {
 const Swiper: React.FC<SwiperProps> = ({ swiperRef, isLoading, data }) => {
   return (
     <SwiperInitial
-      spaceBetween={32}
+      spaceBetween={24}
       slidesPerView={3}
       modules={[Navigation]}
       onBeforeInit={(swiper) => {
         swiperRef.current = swiper;
       }}
       style={{ width: "100%" }}
+      breakpoints={{
+        480: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+      }}
     >
       {isLoading
         ? [...Array(3)].map((_, idx) => (

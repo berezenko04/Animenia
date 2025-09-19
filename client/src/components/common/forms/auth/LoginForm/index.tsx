@@ -1,4 +1,12 @@
-import { alpha, Button, InputAdornment, Stack, TextField, Typography, useTheme } from "@mui/material";
+import {
+  alpha,
+  Button,
+  InputAdornment,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { useAppDispatch } from "@/redux/store";
 import toast from "react-hot-toast";
@@ -6,10 +14,11 @@ import { useNavigate } from "react-router";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
-import PasswordInput from "@/components/common/forms/PasswordInput";
+import PasswordInput from "@/components/common/forms/common/PasswordInput";
 
 // redux
 import { login } from "@/redux/auth/auth.actions";
+import { fetchMe } from "@/redux/user/user.actions";
 
 // icons
 import { PersonOutlineOutlined } from "@mui/icons-material";
@@ -38,6 +47,7 @@ const LoginForm: React.FC = () => {
       return toast.error(result?.payload?.message || "Unknown Error");
     }
 
+    await dispatch(fetchMe());
     navigate("/");
   };
 

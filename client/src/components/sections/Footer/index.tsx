@@ -19,7 +19,9 @@ const Footer: React.FC = () => {
             <Stack sx={{ gap: 2.5 }}>
               <Stack>
                 <Logo disableLink />
-                <Typography color="text.secondary">Copyright © Animenia All rights reserved</Typography>
+                <Typography color="text.secondary">
+                  Copyright © Animenia All rights reserved
+                </Typography>
               </Stack>
               <FooterSocials />
             </Stack>
@@ -27,7 +29,7 @@ const Footer: React.FC = () => {
           <Grid size={{ xs: 2 }}>
             <Stack sx={{ gap: 1.5 }}>
               <Typography variant="h3">Genres</Typography>
-              <Stack sx={{ gap: 0.75 }}>
+              <Stack component="nav" sx={{ gap: 0.75 }}>
                 {genres.map((genre, idx) => (
                   <CustomLink sx={{ fontSize: 13 }} to="/genres" key={idx}>
                     {genre}
@@ -40,11 +42,15 @@ const Footer: React.FC = () => {
             <Stack sx={{ gap: 1.5 }}>
               <Typography variant="h3">About Us</Typography>
               <Typography>
-                All videos on the site are provided for information only and do not involve downloading.
+                All videos on the site are provided for information only and do not involve
+                downloading.
               </Typography>
-              <Typography>Technical support and assistance to users: example@animenia.com</Typography>
               <Typography>
-                This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
+                Technical support and assistance to users: example@animenia.com
+              </Typography>
+              <Typography>
+                This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of
+                Service apply.
               </Typography>
             </Stack>
           </Grid>

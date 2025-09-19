@@ -1,7 +1,7 @@
 import { ButtonBase, Divider, Stack, Typography } from "@mui/material";
 
 // components
-import FilterSelect from "@/components/common/forms/FilterSelect";
+import FilterSelect from "@/components/common/forms/common/FilterSelect";
 
 // utils
 import { formatGenres } from "@/utils/formatGenres";

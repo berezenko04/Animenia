@@ -1,4 +1,4 @@
-import { ButtonBase, Stack, Typography } from "@mui/material";
+import { Button, ButtonBase, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
@@ -6,14 +6,18 @@ import { useState } from "react";
 import SectionBlockHead from "@/components/common/SectionBlockHead";
 import ChangeNameModal from "@/components/common/modals/ChangeNameModal";
 import ChangePasswordModal from "@/components/common/modals/ChangePasswordModal";
-import EditButton from "@/components/ui/buttons/EditButton";
 import ProfileAvatar from "../Avatar";
 
 // redux
 import { userSelector } from "@/redux/user/user.selectors";
 
 // icons
-import { LockOutlined, MailOutlined, PersonOutlineOutlined } from "@mui/icons-material";
+import {
+  EditOutlined,
+  LockOutlined,
+  MailOutlined,
+  PersonOutlineOutlined,
+} from "@mui/icons-material";
 
 const Info = () => {
   const [isChangeNameModalOpened, setIsChangeNameModalOpened] = useState<boolean>(false);
@@ -31,7 +35,16 @@ const Info = () => {
             <Typography variant="h1">
               {user?.firstName} {user?.lastName}
             </Typography>
-            <EditButton onClick={() => setIsChangeNameModalOpened(true)} />
+            <Button
+              onClick={() => setIsChangeNameModalOpened(true)}
+              variant="iconary"
+              sx={{ backgroundColor: "primary.light" }}
+            >
+              <EditOutlined
+                fontSize="small"
+                sx={{ color: "primary.main", width: 16, height: 16 }}
+              />
+            </Button>
           </Stack>
           <Stack sx={{ gap: 2, svg: { width: 20, height: 20, color: "primary.main" } }}>
             <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
@@ -42,7 +55,11 @@ const Info = () => {
               <LockOutlined />
               <ButtonBase
                 onClick={() => setIsChangePasswordModalOpened(true)}
-                sx={{ color: "text.main", transition: "all .3s ease-in-out", "&:hover": { color: "primary.main" } }}
+                sx={{
+                  color: "text.main",
+                  transition: "all .3s ease-in-out",
+                  "&:hover": { color: "primary.main" },
+                }}
               >
                 Change Password
               </ButtonBase>
@@ -50,7 +67,10 @@ const Info = () => {
           </Stack>
         </Stack>
       </Stack>
-      <ChangeNameModal isOpened={isChangeNameModalOpened} handleClose={() => setIsChangeNameModalOpened(false)} />
+      <ChangeNameModal
+        isOpened={isChangeNameModalOpened}
+        handleClose={() => setIsChangeNameModalOpened(false)}
+      />
       <ChangePasswordModal
         isOpened={isChangePasswordModalOpened}
         handleClose={() => setIsChangePasswordModalOpened(false)}

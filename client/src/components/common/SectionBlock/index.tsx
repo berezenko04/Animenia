@@ -20,7 +20,14 @@ interface SectionBlockProps extends Omit<SectionBlockHeadProps, "swiperRef"> {
   isLazyLoad?: boolean;
 }
 
-const SectionBlock: React.FC<SectionBlockProps> = ({ title, icon, movies, isSwipe, isLoading = true, isLazyLoad }) => {
+const SectionBlock: React.FC<SectionBlockProps> = ({
+  title,
+  icon,
+  movies,
+  isSwipe,
+  isLoading = true,
+  isLazyLoad,
+}) => {
   const swiperRef = useRef<Swiper | null>(null);
 
   return (
@@ -29,15 +36,15 @@ const SectionBlock: React.FC<SectionBlockProps> = ({ title, icon, movies, isSwip
       {isSwipe ? (
         <MoviesSwiper isLoading={isLoading} swiperRef={swiperRef} data={movies} />
       ) : (
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           {!isLoading
             ? movies?.map((card) => (
-                <Grid key={card.id} size={{ xs: 4 }}>
+                <Grid key={card.id} size={{ xs: 6, md: 4 }}>
                   <MovieCard {...card} />
                 </Grid>
               ))
             : [...Array(6)].map((_, idx) => (
-                <Grid key={idx} size={{ xs: 4 }}>
+                <Grid key={idx} size={{ xs: 6, md: 4 }}>
                   <MovieCardSkeleton />
                 </Grid>
               ))}

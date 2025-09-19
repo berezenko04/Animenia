@@ -4,7 +4,7 @@ import { useState } from "react";
 
 // components
 import Rating from "@/components/movies/Rating";
-import LikeButton from "@/components/ui/buttons/LikeButton";
+import LikeButton from "@/components/common/buttons/LikeButton";
 
 // redux
 import { themeSelector } from "@/redux/theme/theme.selectors";

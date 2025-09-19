@@ -11,7 +11,4 @@ export type User = {
   firstName: string;
   lastName: string;
   avatarUrl: string;
-  twitterUsername: string;
-  telegramUsername: string;
-  instagramUsername: string;
 };

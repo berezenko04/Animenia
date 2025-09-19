@@ -22,8 +22,7 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
         borderRadius: "10px",
         overflow: "hidden",
         display: "block",
-        height: 350,
-        maxWidth: 270,
+        height: 350
       }}
     >
       <Box
@@ -56,7 +55,12 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
       >
         <Typography
           variant="h3"
-          sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%" }}
+          sx={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxWidth: "100%",
+          }}
         >
           {title}
         </Typography>

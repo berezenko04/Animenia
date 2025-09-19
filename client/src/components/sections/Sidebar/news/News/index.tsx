@@ -38,7 +38,7 @@ const News: React.FC = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
       <SectionBlockHead title="Latest News" icon={ArticleOutlined} />
-      <Stack sx={{ px: 2.5, gap: 1 }}>
+      <Stack sx={{ px: 2.5, gap: 1.5 }}>
         {isLoading
           ? [...Array(5)].map((_, idx) => <NewsItemSkeleton key={idx} />)
           : news.map((item) => <NewsItem key={item.id} {...item} />)}

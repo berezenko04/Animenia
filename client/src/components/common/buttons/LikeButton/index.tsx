@@ -46,17 +46,11 @@ const LikeButton: React.FC<LikeButtonProps> = ({ movieId, isLiked, onChange }) =
         position: "absolute",
         top: 16,
         right: 16,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.8),
         backdropFilter: "blur(5px)",
-        borderRadius: "5px",
-        width: 32,
-        height: 32,
-        minWidth: 0,
       }}
       onClick={handleClick}
+      variant="iconary"
       size="small"
     >
       {isLiked ? (

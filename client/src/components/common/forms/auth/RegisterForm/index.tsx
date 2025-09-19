@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
-import PasswordInput from "@/components/common/forms/PasswordInput";
+import PasswordInput from "@/components/common/forms/common/PasswordInput";
 
 // api
 import AuthService from "@/api/auth/auth.service";

@@ -11,19 +11,19 @@ const Reviews: React.FC = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
       <SectionBlockHead title="Reviews" icon={ReviewsOutlined} />
-      <Stack sx={{ gap: 2.5, px: 2.5 }}>
+      <Stack sx={{ gap: 2.5, px: 2.5, flexDirection: { xs: "row", lg: "column" } }}>
         {[...Array(3)].map((_, idx) => (
-          <CustomLink key={idx} to="#">
+          <CustomLink sx={{ width: "100%" }} key={idx} to="#">
             <Box
               key={idx}
               component="img"
               src={`/review${idx + 1}.webp`}
               sx={{
                 borderRadius: "10px",
-                height: 120,
+                height: { xs: 160, lg: 120 },
                 objectFit: "cover",
-                width: "100%",
                 objectPosition: "center",
+                width: "100%",
                 transition: "all 0.3s ease",
                 "&:hover": {
                   transform: "scale(1.03)",

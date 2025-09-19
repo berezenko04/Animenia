@@ -1,6 +1,6 @@
 // components
 import CustomModal from "@/components/common/CustomModal";
-import ChangeNameForm from "@/components/common/forms/ChangeNameForm";
+import ChangeNameForm from "@/components/common/forms/profile/ChangeNameForm";
 
 // types
 import type { ModalProps } from "@/types/base.types";

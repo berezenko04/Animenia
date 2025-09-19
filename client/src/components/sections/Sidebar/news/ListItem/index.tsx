@@ -1,4 +1,11 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Stack, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 
 // components
@@ -34,7 +41,9 @@ const ListItem: React.FC<ListItemProps> = ({ title, slug, genres, posterUrl, rel
       >
         <Stack sx={{ gap: 0.5 }}>
           <Stack>
-            <Typography sx={{ fontSize: 15, color: expanded ? "primary.main" : null }}>{title}</Typography>
+            <Typography sx={{ fontSize: 15, color: expanded ? "primary.main" : null }}>
+              {title}
+            </Typography>
             <Typography fontSize={13} color="text.secondary">
               {formatGenres(genres)}
             </Typography>
@@ -44,13 +53,18 @@ const ListItem: React.FC<ListItemProps> = ({ title, slug, genres, posterUrl, rel
       </AccordionSummary>
       <AccordionDetails sx={{ p: 0 }}>
         <CustomLink to={`/movies/${slug}`} style={{ color: "inherit" }}>
-          <Stack sx={{ gap: 1 }}>
-            <Box
-              component="img"
-              src={posterUrl}
-              sx={{ height: 300, borderRadius: "10px", objectFit: "cover", objectPosition: "center" }}
-            />
-          </Stack>
+          <Box
+            component="img"
+            src={posterUrl}
+            sx={{
+              height: "100%",
+              width: "100%",
+              maxWidth: 270,
+              borderRadius: "10px",
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+          />
         </CustomLink>
       </AccordionDetails>
     </Accordion>

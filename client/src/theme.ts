@@ -12,6 +12,12 @@ declare module "@mui/material/styles" {
   }
 }
 
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides  {
+    iconary: true;
+  }
+}
+
 const breakpoints = { values: { xs: 0, sm: 480, md: 768, lg: 1024, xl: 1440 } };
 
 const getBaseTheme = (mode: "light" | "dark") =>
@@ -91,8 +97,26 @@ const getTheme = (mode: "light" | "dark") => {
         },
       },
       MuiButton: {
+        variants: [
+              {
+                props: { variant: 'iconary' },
+                style: {
+                  width: 32, 
+                  height: 32,
+                  minWidth: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '5px'
+                }
+              },
+        ] ,
         styleOverrides: {
-          root: { textTransform: "none", fontWeight: 400, fontSize: 16 },
+          root: {
+            textTransform: "none", 
+            fontWeight: 400, 
+            fontSize: 16,
+          },
           contained: { borderRadius: "10px" },
           sizeMedium: { padding: "8px 32px" },
           sizeLarge: { padding: "12px inherit" },
@@ -218,7 +242,7 @@ const getTheme = (mode: "light" | "dark") => {
         },
       }
     },
-  } as ThemeOptions);
+  } as unknown as ThemeOptions);
 };
 
 const theme = getTheme("light");

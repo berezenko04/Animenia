@@ -1,11 +1,13 @@
-import { Box, Stack } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 // components
 import CustomContainer from "../Container";
 import Logo from "@/components/common/Logo";
-import ThemeSwitchButton from "@/components/ui/buttons/ThemeSwitchButton";
+import MobileMenu from "@/components/common/MobileMenu";
+import ThemeSwitchButton from "@/components/common/buttons/ThemeSwitchButton";
 import UnderlinedLink from "@/components/ui/links/UnderlinedLink";
 import CustomLink from "@/components/common/CustomLink";
 
@@ -24,9 +26,11 @@ import { catchError } from "@/utils/catchError";
 import { menu } from "@/data";
 
 // icons
-import { PersonOutlineOutlined } from "@mui/icons-material";
+import { MenuOpenOutlined, PersonOutlineOutlined } from "@mui/icons-material";
 
 const Header: React.FC = () => {
+  const [isMobileMenuOpened, setIsMobileMenuOpened] = useState<boolean>(false);
+
   const { user } = useSelector(userSelector);
   const { mode } = useSelector(themeSelector);
   const { isAuth } = useSelector(authSelector);
@@ -54,16 +58,36 @@ const Header: React.FC = () => {
       }}
     >
       <CustomContainer>
-        <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 4 }}>
+        <Stack
+          sx={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 4,
+          }}
+        >
           <Logo />
-          <Stack component="nav" sx={{ flexDirection: "row", alignItems: "center", gap: 2 }}>
+          <Stack
+            component="nav"
+            sx={{
+              display: { xs: "none", md: "flex" },
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
             {menu.map(({ title, href }, idx) =>
               href ? (
                 <UnderlinedLink sx={{ fontWeight: 500 }} key={idx} to={href}>
                   {title}
                 </UnderlinedLink>
               ) : (
-                <UnderlinedLink sx={{ fontWeight: 500 }} key={idx} to="#" onClick={handleRandomMovie}>
+                <UnderlinedLink
+                  sx={{ fontWeight: 500 }}
+                  key={idx}
+                  to="#"
+                  onClick={handleRandomMovie}
+                >
                   {title}
                 </UnderlinedLink>
               )
@@ -92,14 +116,26 @@ const Header: React.FC = () => {
                 <Box
                   component="img"
                   src={user?.avatarUrl}
-                  sx={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                  }}
                 />
               ) : (
                 <PersonOutlineOutlined />
               )}
             </CustomLink>
+            <IconButton
+              onClick={() => setIsMobileMenuOpened(true)}
+              sx={{ display: { xs: "flex", md: "none" } }}
+            >
+              <MenuOpenOutlined />
+            </IconButton>
           </Stack>
         </Stack>
+        <MobileMenu open={isMobileMenuOpened} onClose={() => setIsMobileMenuOpened(false)} />
       </CustomContainer>
     </Stack>
   );

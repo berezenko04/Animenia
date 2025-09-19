@@ -25,9 +25,6 @@ model User {
   firstName         String      @map("first_name")
   lastName          String      @map("last_name")
   avatarUrl         String                                 @default("https://pub-5472145afdde47758f88673dd3608768.r2.dev/default-avatar.webp")
-  twitterUsername   String?     @map("twitter_username")
-  telegramUsername  String?     @map("telegram_username")
-  instagramUsername String?     @map("instagram_username")
   createdAt         DateTime    @map("created_at")         @default(now())
   updatedAt         DateTime    @map("updated_at")         @default(now())
   session           Session[]
