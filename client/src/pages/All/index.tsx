@@ -25,11 +25,13 @@ const AllAnimePage: React.FC = () => {
   const pages = Math.ceil(total / limit);
 
   return (
-    <Stack sx={{ gap: 2.5 }}>
+    <Stack sx={{ gap: 2.5, alignItems: "center" }}>
       <SectionBlockHead
         title="All Anime"
         icon={AppsOutlined}
-        additionalContent={<Filters year={year} genre={genre} setYear={setYear} setGenre={setGenre} />}
+        additionalContent={
+          <Filters year={year} genre={genre} setYear={setYear} setGenre={setGenre} />
+        }
       />
       <MovieList isLoading={isLoading} movies={movies} />
       {pages > 1 && <Pagination page={page} onChange={(_, val) => setPage(val)} count={pages} />}

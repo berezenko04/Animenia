@@ -26,6 +26,9 @@ const Swiper: React.FC<SwiperProps> = ({ swiperRef, isLoading, data }) => {
       }}
       style={{ width: "100%" }}
       breakpoints={{
+        0: {
+          slidesPerView: 1,
+        },
         480: {
           slidesPerView: 2,
         },

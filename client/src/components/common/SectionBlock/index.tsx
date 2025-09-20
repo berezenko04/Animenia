@@ -39,12 +39,12 @@ const SectionBlock: React.FC<SectionBlockProps> = ({
         <Grid container spacing={3}>
           {!isLoading
             ? movies?.map((card) => (
-                <Grid key={card.id} size={{ xs: 6, md: 4 }}>
+                <Grid key={card.id} size={{ xs: 12, sm: 6, md: 4 }}>
                   <MovieCard {...card} />
                 </Grid>
               ))
             : [...Array(6)].map((_, idx) => (
-                <Grid key={idx} size={{ xs: 6, md: 4 }}>
+                <Grid key={idx} size={{ xs: 12, sm: 6, md: 4 }}>
                   <MovieCardSkeleton />
                 </Grid>
               ))}

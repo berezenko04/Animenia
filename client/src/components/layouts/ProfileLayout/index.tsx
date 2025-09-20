@@ -13,10 +13,10 @@ const ProfileLayout: React.FC = () => {
       <Header />
       <CustomContainer sx={{ flex: 1, display: "flex", flexDirection: "column", py: 6 }}>
         <Grid container spacing={4}>
-          <Grid size={{ xs: 3 }}>
+          <Grid size={{ xs: 12, lg: 3 }}>
             <ProfileMenu />
           </Grid>
-          <Grid size={{ xs: 9 }}>
+          <Grid size={{ xs: 12, lg: 9 }}>
             <Outlet />
           </Grid>
         </Grid>

@@ -22,13 +22,14 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
         borderRadius: "10px",
         overflow: "hidden",
         display: "block",
-        height: 350
+        height: { xs: 400, md: 340 },
       }}
     >
       <Box
         sx={{
           backgroundImage: `url(${posterUrl})`,
           backgroundSize: "cover",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           height: "100%",
           width: "100%",

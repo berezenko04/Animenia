@@ -11,7 +11,7 @@ const Reviews: React.FC = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
       <SectionBlockHead title="Reviews" icon={ReviewsOutlined} />
-      <Stack sx={{ gap: 2.5, px: 2.5, flexDirection: { xs: "row", lg: "column" } }}>
+      <Stack sx={{ gap: 2.5, px: 2.5, flexDirection: { xs: "column", sm: "row", lg: "column" } }}>
         {[...Array(3)].map((_, idx) => (
           <CustomLink sx={{ width: "100%" }} key={idx} to="#">
             <Box

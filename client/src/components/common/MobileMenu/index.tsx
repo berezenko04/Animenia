@@ -30,7 +30,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose }) => {
         },
         paper: {
           sx: {
-            backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.7),
+            backgroundColor: alpha(theme.palette.background.default, 0.95),
           },
         },
       }}

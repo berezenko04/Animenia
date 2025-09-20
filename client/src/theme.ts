@@ -147,7 +147,7 @@ const getTheme = (mode: "light" | "dark") => {
                 fontWeight: 500,
               },
           },
-          h1: { fontSize: 24 },
+          h1: { fontSize: {xs: 18, sm: 24} },
           h2: { fontSize: 18 },
           h3: { fontSize: 16 },
           body1: { fontSize: 14, lineHeight: "135%" },

@@ -1,10 +1,10 @@
-import { alpha, Button, InputAdornment, Stack, TextField, Typography, useTheme } from "@mui/material";
+import { Button, InputAdornment, Stack, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 // components
-import CustomLink from "@/components/common/CustomLink";
+import AuthFormLayout from "@/components/common/forms/auth/FormLayout";
 
 // api
 import AuthService from "@/api/auth/auth.service";
@@ -20,7 +20,6 @@ type ForgotPasswordFormFields = {
 };
 
 const ForgotPasswordForm: React.FC = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
 
   const {
@@ -40,63 +39,40 @@ const ForgotPasswordForm: React.FC = () => {
   };
 
   return (
-    <Stack
-      sx={{
-        p: "40px 60px 60px",
-        backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.7),
-        backdropFilter: "blur(10px)",
-        borderRadius: "10px",
-        maxWidth: 540,
-        width: "100%",
-      }}
+    <AuthFormLayout
+      title="Forgot Password"
+      footerText="Already have an account?"
+      footerLinkText="Login"
+      footerLinkHref="/login"
     >
-      <Stack sx={{ gap: 2.5 }}>
-        <Typography variant="h1" sx={{ fontSize: 38, textAlign: "center" }}>
-          Forgot Password
-        </Typography>
-        <Stack component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ gap: 1.5 }}>
-          <TextField
-            placeholder="Email"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            })}
-            error={!!errors.email}
-            helperText={errors.email?.message}
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonOutlineOutlined />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
-
-          <Button type="submit" variant="contained" size="large" disabled={isSubmitting}>
-            Send link
-          </Button>
-        </Stack>
-        <Stack
-          sx={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 1.25,
-            "*": { fontSize: 14 },
+      <Stack component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ gap: 1.5 }}>
+        <TextField
+          placeholder="Email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            },
+          })}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonOutlineOutlined />
+                </InputAdornment>
+              ),
+            },
           }}
-        >
-          <Typography>Already have an account?</Typography>
-          <CustomLink to="/login" sx={{ color: "primary.main", textDecoration: "underline" }}>
-            Login
-          </CustomLink>
-        </Stack>
+        />
+
+        <Button type="submit" variant="contained" size="large" disabled={isSubmitting}>
+          Send link
+        </Button>
       </Stack>
-    </Stack>
+    </AuthFormLayout>
   );
 };
 

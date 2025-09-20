@@ -12,10 +12,10 @@ import { genres } from "@/data";
 
 const Footer: React.FC = () => {
   return (
-    <Stack sx={{ backgroundColor: "backgroundPrimary.main", py: "50px" }}>
+    <Stack sx={{ backgroundColor: "backgroundPrimary.main", py: { xs: 3, lg: 6 } }}>
       <CustomContainer>
         <Grid container spacing={5} sx={{ alignItems: "flex-start" }}>
-          <Grid size={{ xs: 4 }}>
+          <Grid size={{ xs: 12, sm: 8, lg: 4 }}>
             <Stack sx={{ gap: 2.5 }}>
               <Stack>
                 <Logo disableLink />
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
               <FooterSocials />
             </Stack>
           </Grid>
-          <Grid size={{ xs: 2 }}>
+          <Grid size={{ xs: 12, sm: 4, lg: 2 }}>
             <Stack sx={{ gap: 1.5 }}>
               <Typography variant="h3">Genres</Typography>
               <Stack component="nav" sx={{ gap: 0.75 }}>
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
               </Stack>
             </Stack>
           </Grid>
-          <Grid size={{ xs: 5 }}>
+          <Grid size={{ xs: 12, lg: 5 }}>
             <Stack sx={{ gap: 1.5 }}>
               <Typography variant="h3">About Us</Typography>
               <Typography>
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
               </Typography>
             </Stack>
           </Grid>
-          <Grid size={{ xs: "auto" }} sx={{ ml: "auto" }}>
+          <Grid size={{ xs: "auto" }} sx={{ display: { xs: "none", lg: "grid" }, ml: "auto" }}>
             <ScrollUpButton />
           </Grid>
         </Grid>
