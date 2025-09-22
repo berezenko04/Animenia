@@ -1,64 +1,41 @@
 import { createTheme, type ThemeOptions } from "@mui/material";
 
-declare module "@mui/material/styles" {
-  interface Palette {
-    backgroundPrimary: Palette["primary"];
-    backgroundSecondary: Palette["primary"];
-  }
+const breakpoints = {
+  values: { xs: 0, sm: 480, md: 768, lg: 1024, xl: 1440 },
+};
 
-  interface PaletteOptions {
-    backgroundPrimary?: PaletteOptions["primary"];
-    backgroundSecondary?: PaletteOptions["primary"];
-  }
-}
+const basePalette = (mode: "light" | "dark") => ({
+  mode,
+  primary: {
+    main: mode === "light" ? "#DA1414" : "#DEDEDE",
+    light: mode === "light" ? "#FBD0D0" : "#121212",
+  },
+  secondary: {
+    main: mode === "light" ? "#404156" : "#FFFFFF",
+  },
+  background:
+    mode === "light"
+      ? { default: "#F6F6F6" }
+      : { default: "#1E1E1E", paper: "#2A2A2A" },
+  divider: "#E5E5E5",
+  text:
+    mode === "light"
+      ? { primary: "#404156", secondary: "#9F9F9F" }
+      : { primary: "#FFFFFF", secondary: "#B3B3B3" },
+});
 
-declare module "@mui/material/Button" {
-  interface ButtonPropsVariantOverrides  {
-    iconary: true;
-  }
-}
-
-const breakpoints = { values: { xs: 0, sm: 480, md: 768, lg: 1024, xl: 1440 } };
-
-const getBaseTheme = (mode: "light" | "dark") =>
-  createTheme({
-    palette: {
-      mode,
-      primary: {
-        main: mode === "light" ? "#DA1414" : "#DEDEDE",
-        light: mode === "light" ? "#FBD0D0" : "#121212",
-      },
-      secondary: {
-        main: mode === "light" ? "#404156" : "#FFFFFF",
-      },
-      background: mode === "light" ? { default: "#F6F6F6" } : { default: "#1E1E1E", paper: "#2A2A2A" },
-      divider: "#E5E5E5",
-      text:
-        mode === "light" ? { primary: "#404156", secondary: "#9F9F9F" } : { primary: "#FFFFFF", secondary: "#B3B3B3" },
-    },
-    breakpoints,
-  });
-
-const getExtendedPalette = (mode: "light" | "dark", baseTheme: ReturnType<typeof getBaseTheme>) => ({
-  backgroundPrimary: baseTheme.palette.augmentColor({
+const extendedPalette = (mode: "light" | "dark", theme: any) => ({
+  backgroundPrimary: theme.palette.augmentColor({
     color: { main: mode === "light" ? "#FFFFFF" : "#262626" },
     name: "backgroundPrimary",
   }),
-  backgroundSecondary: baseTheme.palette.augmentColor({
+  backgroundSecondary: theme.palette.augmentColor({
     color: { main: "#D9D9D9" },
     name: "backgroundSecondary",
   }),
 });
 
-const getTheme = (mode: "light" | "dark") => {
-  const baseTheme = getBaseTheme(mode);
-  const extended = getExtendedPalette(mode, baseTheme);
-
-  return createTheme(baseTheme, {
-    palette: {
-      ...extended,
-    },
-    components: {
+const components: ThemeOptions["components"] = {
       MuiTextField: {
         defaultProps: {
           inputProps: { autoComplete: "new-password" },
@@ -74,15 +51,15 @@ const getTheme = (mode: "light" | "dark") => {
       },
       MuiOutlinedInput: {
         styleOverrides: {
-          root: {
+          root: ({theme}) => ({
             height: 52,
-            backgroundColor: baseTheme.palette.background.default,
+            backgroundColor: theme.palette.background.default,
             borderRadius: "10px",
             "& .MuiOutlinedInput-notchedOutline": { borderWidth: 0 },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               borderWidth: 0,
             },
-          },
+          }),
           input: {
             padding: "15px",
           },
@@ -140,14 +117,19 @@ const getTheme = (mode: "light" | "dark") => {
       },
       MuiTypography: {
         styleOverrides: {
-          root: {
+          root: ({theme}) =>  ({
             "&.MuiTypography-h1, &.MuiTypography-h2, &.MuiTypography-h3, &.MuiTypography-h4, &.MuiTypography-h5, &.MuiTypography-h6":
               {
-                color: baseTheme.palette.primary.main,
+                color: theme.palette.primary.main,
                 fontWeight: 500,
               },
-          },
-          h1: { fontSize: {xs: 18, sm: 24} },
+          }),
+          h1: ({ theme }) => ({  
+            fontSize: "18px",
+            [theme.breakpoints.up("sm")]: {
+              fontSize: "24px",
+            },
+          }),
           h2: { fontSize: 18 },
           h3: { fontSize: 16 },
           body1: { fontSize: 14, lineHeight: "135%" },
@@ -156,52 +138,52 @@ const getTheme = (mode: "light" | "dark") => {
       },
       MuiLink: {
         styleOverrides: {
-          root: {
+          root: ({ theme }) => ({
             textDecoration: "none",
-            color: baseTheme.palette.text.primary,
+            color: theme.palette.text.primary,
             "&:hover": {
-              color: baseTheme.palette.primary.main,
+              color: theme.palette.primary.main,
               transition: "all 0.2s ease-in-out",
             },
-          },
+          }),
         },
       },
       MuiSvgIcon: {
         styleOverrides: {
-          root: { color: baseTheme.palette.secondary.main },
+          root: ({ theme }) => ({ color: theme.palette.secondary.main }),
         },
       },
       MuiPaginationItem: {
         styleOverrides: {
-          root: {
+          root:  ({theme}) => ({
             width: 40,
             height: 40,
             borderRadius: "10px",
-            backgroundColor: extended.backgroundPrimary.main,
+            backgroundColor: theme.palette.backgroundPrimary.main,
             fontSize: 16,
 
             "&.Mui-selected": {
-              backgroundColor: extended.backgroundPrimary.main,
-              color: baseTheme.palette.primary.main,
+              backgroundColor: theme.palette.backgroundPrimary.main,
+              color: theme.palette.primary.main,
             },
 
             "&:hover": {
-              backgroundColor: `${extended.backgroundPrimary.main} !important`,
+              backgroundColor: `${theme.palette.backgroundPrimary.main} !important`,
             },
-          },
+          }),
         },
       },
       MuiModal: {
         styleOverrides: {
-          root: {
+          root: ({ theme }) => ({
             "&.MuiModal-root": {
               margin: "24px",
 
-              [baseTheme.breakpoints.down("md")]: {
+              [theme.breakpoints.down("md")]: {
                 margin: "16px",
               },
 
-              [baseTheme.breakpoints.down("sm")]: {
+              [theme.breakpoints.down("sm")]: {
                 margin: 0,
               },
             },
@@ -211,7 +193,7 @@ const getTheme = (mode: "light" | "dark") => {
             "& *": {
               outline: "none !important",
             },
-          },
+          }),
         },
       },
       MuiSkeleton: {
@@ -241,11 +223,22 @@ const getTheme = (mode: "light" | "dark") => {
           },
         },
       }
-    },
-  } as unknown as ThemeOptions);
+}
+
+const getTheme = (mode: "light" | "dark") => {
+  const base = createTheme({
+    palette: basePalette(mode),
+    breakpoints
+  })
+
+  const extended = extendedPalette(mode, base)
+
+  return createTheme(base, {
+    palette: {...extended},
+    components
+  })
 };
 
-const theme = getTheme("light");
+export const theme = getTheme("light");
 
-export default theme;
-export { getTheme };
+export default getTheme;

@@ -21,7 +21,7 @@ import { themeSelector } from "./redux/theme/theme.selectors.ts";
 import { store } from "./redux/store.ts";
 
 // theme
-import { getTheme } from "./theme.ts";
+import getTheme from "./theme.ts";
 
 const queryClient = new QueryClient();
 
