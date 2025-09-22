@@ -30,17 +30,17 @@ const ForgotPasswordPage = lazy(() => import("@/pages/ForgotPassword"));
 
 function App() {
   const dispatch = useAppDispatch();
-  const { initialized, isAuth } = useSelector(authSelector);
+  const { isAuth } = useSelector(authSelector);
 
   useEffect(() => {
     dispatch(refresh());
   }, [dispatch]);
 
   useEffect(() => {
-    if (initialized && isAuth) {
+    if (isAuth) {
       dispatch(fetchMe());
     }
-  }, [initialized, isAuth, dispatch]);
+  }, [isAuth, dispatch]);
 
   return (
     <BrowserRouter>

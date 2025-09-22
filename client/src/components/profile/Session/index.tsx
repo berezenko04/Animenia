@@ -11,7 +11,12 @@ import type { Session } from "@/api/auth/auth.types";
 import { catchError } from "@/utils/catchError";
 
 // icons
-import { DeleteOutlined, DesktopWindowsOutlined, PhoneAndroidOutlined, TabletMacOutlined } from "@mui/icons-material";
+import {
+  DeleteOutlined,
+  DesktopWindowsOutlined,
+  PhoneAndroidOutlined,
+  TabletMacOutlined,
+} from "@mui/icons-material";
 
 type SessionProps = {
   session: Session;
@@ -25,8 +30,8 @@ const Session: React.FC<SessionProps> = ({ session, setSessions }) => {
     tablet: TabletMacOutlined,
   };
 
-  const getIcon = (deviceType?: string) => {
-    const Icon = iconsMap[deviceType ?? "desktop"] ?? DesktopWindowsOutlined;
+  const getIcon = () => {
+    const Icon = iconsMap[session.deviceType ?? "desktop"] ?? DesktopWindowsOutlined;
     return <Icon sx={{ width: 60, height: 60, color: "text.secondary" }} />;
   };
 

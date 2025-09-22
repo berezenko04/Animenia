@@ -1,4 +1,4 @@
-import { alpha, Avatar as MuiAvatar, Box } from "@mui/material";
+import { alpha, Avatar as MuiAvatar, Box, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useRef, useState, type ChangeEvent } from "react";
 import toast from "react-hot-toast";
@@ -12,13 +12,11 @@ import { userSelector } from "@/redux/user/user.selectors";
 // utils
 import { catchError } from "@/utils/catchError";
 
-// theme
-import theme from "@/theme";
-
 // icons
 import { CameraAltOutlined } from "@mui/icons-material";
 
 const Avatar: React.FC = () => {
+  const theme = useTheme();
   const { user } = useSelector(userSelector);
 
   const [preview, setPreview] = useState<string | null>(null);

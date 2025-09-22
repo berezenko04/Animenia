@@ -7,10 +7,13 @@ import Loader from "@/components/ui/loaders/Loader";
 // redux
 import { authSelector } from "@/redux/auth/auth.selectors";
 
-const PrivateRoute: React.FC = () => {
-  const { isAuth, initialized } = useSelector(authSelector);
+// types
+import { Statuses } from "@/types/enums.types";
 
-  if (!initialized) return <Loader />;
+const PrivateRoute: React.FC = () => {
+  const { isAuth, status } = useSelector(authSelector);
+
+  if (status === Statuses.LOADING) return <Loader />;
 
   return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };

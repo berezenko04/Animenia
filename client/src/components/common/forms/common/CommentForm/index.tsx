@@ -1,7 +1,6 @@
 import { authSelector } from "@/redux/auth/auth.selectors";
 import { Button, Stack, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 type CommentFormProps = {
@@ -23,16 +22,21 @@ const CommentForm: React.FC<CommentFormProps> = ({ onAddComment }) => {
   const { isAuth } = useSelector(authSelector);
 
   const onSubmit = async ({ comment }: CommentFormFields) => {
-    if (!isAuth) {
-      return toast.error("Please login first");
-    }
-
     onAddComment(comment);
     reset();
   };
 
+  if (!isAuth) {
+    return null;
+  }
+
   return (
-    <Stack component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ gap: 1.5, alignItems: "flex-end" }}>
+    <Stack
+      component="form"
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{ gap: 1.5, alignItems: "flex-end" }}
+    >
       <TextField
         label="Write a comment"
         {...register("comment", {

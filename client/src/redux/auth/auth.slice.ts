@@ -9,7 +9,6 @@ import type { AuthInitialState } from "./auth.types";
 
 const initialState: AuthInitialState = {
   isAuth: false,
-  initialized: false,
   status: Statuses.LOADING,
 };
 
@@ -36,7 +35,6 @@ const authSlice = createSlice({
       .addCase(refresh.fulfilled, (state, action) => {
         state.isAuth = action.payload;
         state.status = Statuses.SUCCESS;
-        state.initialized = true;
       })
       .addCase(refresh.rejected, (state) => {
         state.status = Statuses.ERROR;
