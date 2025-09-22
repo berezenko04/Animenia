@@ -14,7 +14,7 @@ export const login = createAsyncThunk<boolean, LoginBody, { rejectValue: { messa
       return true;
     } catch (err: any) {
       return rejectWithValue({
-        message: err.response.data?.message,
+        message: err.message || "Unknown error",
       });
     }
   }
@@ -28,7 +28,7 @@ export const refresh = createAsyncThunk<boolean, void, { rejectValue: { message:
       return true;
     } catch (err: any) {
       return rejectWithValue({
-        message: err.response.data?.message || "Unknown error",
+        message: err.message || "Unknown error",
       });
     }
   }
@@ -42,7 +42,7 @@ export const logout = createAsyncThunk<boolean, { rejectValue: { message: string
       return false;
     } catch (err: any) {
       return rejectWithValue({
-        message: err.response.data?.message || "Unknown error",
+        message: err.message || "Unknown error",
       });
     }
   }

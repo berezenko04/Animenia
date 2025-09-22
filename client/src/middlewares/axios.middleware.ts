@@ -1,5 +1,9 @@
 import axios from "axios";
+
+// api
 import AuthService from "@/api/auth/auth.service";
+
+// utils
 import { normalizeAxiosError } from "@/utils/normalizeAxiosError";
 
 export const instance = axios.create({
@@ -32,7 +36,7 @@ instance.interceptors.response.use(
         return Promise.reject(normalizeAxiosError(err));
       }
     }
-
+    
     return Promise.reject(normalizeAxiosError(error));
   }
 );
