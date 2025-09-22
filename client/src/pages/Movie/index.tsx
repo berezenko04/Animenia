@@ -43,8 +43,6 @@ const MoviePage: React.FC = () => {
       try {
         const result = await MovieService.getBySlug(slug);
         setMovie(result);
-      } catch (err) {
-        catchError(err);
       } finally {
         setIsLoading(false);
       }

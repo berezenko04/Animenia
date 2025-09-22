@@ -9,9 +9,6 @@ import UserService from "@/api/user/user.service";
 // redux
 import { userSelector } from "@/redux/user/user.selectors";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // icons
 import { CameraAltOutlined } from "@mui/icons-material";
 
@@ -32,12 +29,8 @@ const Avatar: React.FC = () => {
       const base64 = reader.result as string;
       setPreview(base64);
 
-      try {
-        const result = await UserService.setAvatar(base64);
-        toast.success(result.message);
-      } catch (err) {
-        catchError(err);
-      }
+      const result = await UserService.setAvatar(base64);
+      toast.success(result.message);
     };
 
     reader.readAsDataURL(file);
@@ -55,11 +48,7 @@ const Avatar: React.FC = () => {
         cursor: "pointer",
       }}
     >
-      <MuiAvatar
-        src={preview || user?.avatarUrl}
-        alt="avatar"
-        sx={{ width: "100%", height: "100%", flexShrink: 0 }}
-      />
+      <MuiAvatar src={preview || user?.avatarUrl} alt="avatar" sx={{ width: "100%", height: "100%", flexShrink: 0 }} />
       <Box
         sx={{
           position: "absolute",
@@ -76,13 +65,7 @@ const Avatar: React.FC = () => {
       >
         <CameraAltOutlined sx={{ width: 48, height: 48, color: "backgroundPrimary.main" }} />
       </Box>
-      <input
-        ref={inputRef}
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        onChange={handleFileChange}
-      />
+      <input ref={inputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
     </Box>
   );
 };

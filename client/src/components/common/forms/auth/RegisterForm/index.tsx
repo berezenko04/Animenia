@@ -13,9 +13,6 @@ import AuthService from "@/api/auth/auth.service";
 // icons
 import { BadgeOutlined, PersonOutlineOutlined } from "@mui/icons-material";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 type RegisterFormFields = {
   email: string;
   firstName: string;
@@ -40,13 +37,9 @@ const RegisterForm: React.FC = () => {
     const { repeatPassword, ...data } = formData;
     void repeatPassword;
 
-    try {
-      await AuthService.register(data);
-      toast.success("Registration successful");
-      navigate("/login");
-    } catch (err) {
-      catchError(err);
-    }
+    await AuthService.register(data);
+    toast.success("Registration successful");
+    navigate("/login");
   };
 
   return (

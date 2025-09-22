@@ -4,14 +4,11 @@ import { useEffect, useState } from "react";
 // components
 import SectionBlockHead from "@/components/common/SectionBlockHead";
 import LogoutAllButton from "@/components/common/Buttons/LogoutAllButton";
-import Session from "../Session";
+import Session from "@/components/profile/Session";
 import ProfileSessionItemSkeleton from "@/components/ui/loaders/skeletons/ProfileSessionItemSkeleton";
 
 // api
 import AuthService from "@/api/auth/auth.service";
-
-// utils
-import { catchError } from "@/utils/catchError";
 
 // types
 import type { Session as SessionType } from "@/api/auth/auth.types";
@@ -28,8 +25,6 @@ const Sessions: React.FC = () => {
       try {
         const result = await AuthService.getSessions();
         setSessions(result);
-      } catch (err) {
-        catchError(err);
       } finally {
         setIsLoading(false);
       }

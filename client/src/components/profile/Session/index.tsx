@@ -7,16 +7,8 @@ import AuthService from "@/api/auth/auth.service";
 // types
 import type { Session } from "@/api/auth/auth.types";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // icons
-import {
-  DeleteOutlined,
-  DesktopWindowsOutlined,
-  PhoneAndroidOutlined,
-  TabletMacOutlined,
-} from "@mui/icons-material";
+import { DeleteOutlined, DesktopWindowsOutlined, PhoneAndroidOutlined, TabletMacOutlined } from "@mui/icons-material";
 
 type SessionProps = {
   session: Session;
@@ -41,17 +33,13 @@ const Session: React.FC<SessionProps> = ({ session, setSessions }) => {
 
     const { id: sessionId, isCurrent } = session;
 
-    try {
-      const result = await AuthService.deleteSession(sessionId);
-      toast.success(result.message);
+    const result = await AuthService.deleteSession(sessionId);
+    toast.success(result.message);
 
-      if (isCurrent) {
-        window.location.href = "/login";
-      } else {
-        setSessions((prev) => prev.filter((s) => s.id !== sessionId));
-      }
-    } catch (err) {
-      catchError(err);
+    if (isCurrent) {
+      window.location.href = "/login";
+    } else {
+      setSessions((prev) => prev.filter((s) => s.id !== sessionId));
     }
   };
 
@@ -75,9 +63,7 @@ const Session: React.FC<SessionProps> = ({ session, setSessions }) => {
             {getIcon()}
             <Stack sx={{ width: "100%" }}>
               <Typography variant="h3">{capitalize(session.os)}</Typography>
-              <Typography sx={{ color: "text.secondary" }}>
-                {capitalize(session.browser)}
-              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>{capitalize(session.browser)}</Typography>
             </Stack>
           </Stack>
         </Grid>

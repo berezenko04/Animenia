@@ -40,12 +40,8 @@ const Header: React.FC = () => {
   const handleRandomMovie = async (e: React.MouseEvent) => {
     e.preventDefault();
 
-    try {
-      const { slug } = await MovieService.random();
-      navigate(`/movies/${slug}`);
-    } catch (err) {
-      catchError(err);
-    }
+    const { slug } = await MovieService.random();
+    navigate(`/movies/${slug}`);
   };
 
   return (
@@ -86,12 +82,7 @@ const Header: React.FC = () => {
                   {title}
                 </UnderlinedLink>
               ) : (
-                <UnderlinedLink
-                  sx={{ fontWeight: 500 }}
-                  key={idx}
-                  to="#"
-                  onClick={handleRandomMovie}
-                >
+                <UnderlinedLink sx={{ fontWeight: 500 }} key={idx} to="#" onClick={handleRandomMovie}>
                   {title}
                 </UnderlinedLink>
               )
@@ -131,10 +122,7 @@ const Header: React.FC = () => {
                 <PersonOutlineOutlined />
               )}
             </CustomLink>
-            <IconButton
-              onClick={() => setIsMobileMenuOpened(true)}
-              sx={{ display: { xs: "flex", md: "none" } }}
-            >
+            <IconButton onClick={() => setIsMobileMenuOpened(true)} sx={{ display: { xs: "flex", md: "none" } }}>
               <MenuOpenOutlined />
             </IconButton>
           </Stack>

@@ -8,9 +8,6 @@ import PasswordInput from "@/components/common/Forms/common/PasswordInput";
 // api
 import AuthService from "@/api/auth/auth.service";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 type ChangePasswordFormProps = {
   onSuccess: () => void;
 };
@@ -29,13 +26,9 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ onSuccess }) =>
   } = useForm<ChangePasswordFormFields>();
 
   const onSubmit = async (data: ChangePasswordFormFields) => {
-    try {
-      const result = await AuthService.changePassword(data);
-      toast.success(result.message);
-      onSuccess();
-    } catch (err) {
-      catchError(err);
-    }
+    const result = await AuthService.changePassword(data);
+    toast.success(result.message);
+    onSuccess();
   };
 
   return (

@@ -9,9 +9,6 @@ import NewsItem from "../ListItem";
 // api
 import MovieService from "@/api/movie/movie.service";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // icons
 import { ArticleOutlined } from "@mui/icons-material";
 
@@ -27,8 +24,6 @@ const News: React.FC = () => {
       try {
         const result = await MovieService.getNews();
         setNews(result);
-      } catch (err) {
-        catchError(err);
       } finally {
         setIsLoading(false);
       }

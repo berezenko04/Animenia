@@ -8,9 +8,6 @@ import MovieService from "@/api/movie/movie.service";
 // redux
 import { authSelector } from "@/redux/auth/auth.selectors";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // icons
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
@@ -33,10 +30,9 @@ const LikeButton: React.FC<LikeButtonProps> = ({ movieId, isLiked, onChange }) =
     onChange(nextValue);
 
     try {
-      nextValue ? await MovieService.addLike(movieId) : await MovieService.removeLike(movieId);
-    } catch (err) {
+      await (nextValue ? MovieService.addLike(movieId) : MovieService.removeLike(movieId));
+    } catch {
       onChange(isLiked);
-      catchError(err);
     }
   };
 

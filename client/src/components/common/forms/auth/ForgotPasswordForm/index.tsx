@@ -9,9 +9,6 @@ import AuthFormLayout from "@/components/common/Forms/auth/FormLayout";
 // api
 import AuthService from "@/api/auth/auth.service";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // icons
 import { PersonOutlineOutlined } from "@mui/icons-material";
 
@@ -29,13 +26,9 @@ const ForgotPasswordForm: React.FC = () => {
   } = useForm<ForgotPasswordFormFields>();
 
   const onSubmit = async ({ email }: ForgotPasswordFormFields) => {
-    try {
-      const result = await AuthService.sendForgotPasswordLink(email);
-      toast.success(result.message);
-      navigate("/login");
-    } catch (err) {
-      catchError(err);
-    }
+    const result = await AuthService.sendForgotPasswordLink(email);
+    toast.success(result.message);
+    navigate("/login");
   };
 
   return (

@@ -11,9 +11,6 @@ import UserService from "@/api/user/user.service";
 import { userSelector } from "@/redux/user/user.selectors";
 import { fetchMe } from "@/redux/user/user.actions";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // icons
 import { BadgeOutlined } from "@mui/icons-material";
 
@@ -42,14 +39,10 @@ const ChangeNameForm: React.FC<ChangeNameFormProps> = ({ onSuccess }) => {
   });
 
   const onSubmit = async (data: ChangeNameFormFields) => {
-    try {
-      const result = await UserService.update(data);
-      await dispatch(fetchMe());
-      toast.success(result.message);
-      onSuccess();
-    } catch (err) {
-      catchError(err);
-    }
+    const result = await UserService.update(data);
+    await dispatch(fetchMe());
+    toast.success(result.message);
+    onSuccess();
   };
 
   return (

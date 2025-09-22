@@ -21,36 +21,32 @@ type MoviesByGenre = {
   [genre: string]: MovieCard[];
 };
 
-const GenresPage: React.FC = () => {
-  const genres = [
-    Genre.ACTION,
-    Genre.ADVENTURE,
-    Genre.COMEDY,
-    Genre.FANTASY,
-    Genre.MAGIC,
-    Genre.PARANORMAL,
-    Genre.ROMANCE,
-    Genre.SCHOOL_LIFE,
-  ];
+const genres = [
+  Genre.ACTION,
+  Genre.ADVENTURE,
+  Genre.COMEDY,
+  Genre.FANTASY,
+  Genre.MAGIC,
+  Genre.PARANORMAL,
+  Genre.ROMANCE,
+  Genre.SCHOOL_LIFE,
+];
 
+const GenresPage: React.FC = () => {
   const [moviesByGenre, setMoviesByGenre] = useState<MoviesByGenre>({});
 
   useEffect(() => {
     (async () => {
-      try {
-        const results = await Promise.all(
-          genres.map((genre) => MovieService.all({ genre, limit: 9 }).then((result) => result.data))
-        );
+      const results = await Promise.all(
+        genres.map((genre) => MovieService.all({ genre, limit: 9 }).then((result) => result.data))
+      );
 
-        const mapped = results.reduce((acc, movies, idx) => {
-          acc[genres[idx]] = movies;
-          return acc;
-        }, {} as Record<string, MovieCard[]>);
+      const mapped = results.reduce((acc, movies, idx) => {
+        acc[genres[idx]] = movies;
+        return acc;
+      }, {} as Record<string, MovieCard[]>);
 
-        setMoviesByGenre(mapped);
-      } catch (err) {
-        console.error(err);
-      }
+      setMoviesByGenre(mapped);
     })();
   }, []);
 

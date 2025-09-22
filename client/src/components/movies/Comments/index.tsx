@@ -14,9 +14,6 @@ import MovieService from "@/api/movie/movie.service";
 // redux
 import { userSelector } from "@/redux/user/user.selectors";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // types
 import type { MovieComment } from "@/api/movie/movie.types";
 
@@ -58,10 +55,9 @@ const Comments: React.FC<CommentsProps> = ({ movieId, isCommented: isInititalCom
 
       setComments((prev) => prev.map((c) => (c.id === tempComment.id ? resultWithUser : c)));
       setIsCommented(true);
-    } catch (err) {
+    } catch {
       setComments((prev) => prev.filter((c) => c.id !== tempComment.id));
       setIsCommented(false);
-      catchError(err);
     }
   };
 
