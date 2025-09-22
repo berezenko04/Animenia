@@ -9,7 +9,14 @@ const CustomContainer: React.FC<ContainerProps> = ({ sx, children }) => {
   return (
     <Container
       disableGutters
-      sx={{ maxWidth: "1200px !important", height: "100%", display: "flex", flexDirection: "column", px: 4, ...sx }}
+      sx={{
+        maxWidth: "1200px !important",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        px: { xs: 2, md: 4 },
+        ...sx,
+      }}
     >
       {children}
     </Container>

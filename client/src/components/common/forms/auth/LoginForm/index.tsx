@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 
 // components
 import CustomLink from "@/components/common/CustomLink";
-import AuthFormLayout from "@/components/common/forms/auth/FormLayout";
-import PasswordInput from "@/components/common/forms/common/PasswordInput";
+import AuthFormLayout from "@/components/common/Forms/auth/FormLayout";
+import PasswordInput from "@/components/common/Forms/common/PasswordInput";
 
 // redux
 import { login } from "@/redux/auth/auth.actions";

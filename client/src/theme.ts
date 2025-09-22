@@ -22,17 +22,15 @@ const basePalette = (mode: "light" | "dark") => ({
     mode === "light"
       ? { primary: "#404156", secondary: "#9F9F9F" }
       : { primary: "#FFFFFF", secondary: "#B3B3B3" },
+    error: {
+      main: "#DA1414",
+      light: mode === "light" ? "#FBD0D0" : "#DA1414"
+    },
 });
 
-const extendedPalette = (mode: "light" | "dark", theme: any) => ({
-  backgroundPrimary: theme.palette.augmentColor({
-    color: { main: mode === "light" ? "#FFFFFF" : "#262626" },
-    name: "backgroundPrimary",
-  }),
-  backgroundSecondary: theme.palette.augmentColor({
-    color: { main: "#D9D9D9" },
-    name: "backgroundSecondary",
-  }),
+const extendedPalette = (mode: "light" | "dark") => ({
+  backgroundPrimary: { main: mode === "light" ? "#FFFFFF" : "#262626" },
+  backgroundSecondary: { main: "#D9D9D9" },
 });
 
 const components: ThemeOptions["components"] = {
@@ -74,7 +72,9 @@ const components: ThemeOptions["components"] = {
         },
       },
       MuiButton: {
-        variants: [
+        styleOverrides: {
+          root: {
+            variants: [
               {
                 props: { variant: 'iconary' },
                 style: {
@@ -87,9 +87,7 @@ const components: ThemeOptions["components"] = {
                   borderRadius: '5px'
                 }
               },
-        ] ,
-        styleOverrides: {
-          root: {
+            ],
             textTransform: "none", 
             fontWeight: 400, 
             fontSize: 16,
@@ -226,19 +224,17 @@ const components: ThemeOptions["components"] = {
 }
 
 const getTheme = (mode: "light" | "dark") => {
-  const base = createTheme({
-    palette: basePalette(mode),
-    breakpoints
-  })
+  const theme = createTheme({
+    palette: {
+      ...basePalette(mode),
+      ...extendedPalette(mode),
+    },
+    breakpoints,
+    components,
+  });
 
-  const extended = extendedPalette(mode, base)
-
-  return createTheme(base, {
-    palette: {...extended},
-    components
-  })
+  return theme;
 };
 
-export const theme = getTheme("light");
 
 export default getTheme;

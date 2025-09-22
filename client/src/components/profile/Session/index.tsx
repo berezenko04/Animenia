@@ -32,7 +32,7 @@ const Session: React.FC<SessionProps> = ({ session, setSessions }) => {
 
   const getIcon = () => {
     const Icon = iconsMap[session.deviceType ?? "desktop"] ?? DesktopWindowsOutlined;
-    return <Icon sx={{ width: 60, height: 60, color: "text.secondary" }} />;
+    return <Icon sx={{ width: { xs: 40, md: 60 }, height: "auto", color: "text.secondary" }} />;
   };
 
   const handleDeleteSession = async () => {
@@ -65,22 +65,29 @@ const Session: React.FC<SessionProps> = ({ session, setSessions }) => {
         alignItems: "stretch",
       }}
     >
-      <Grid container sx={{ px: 4, py: 4.5, alignItems: "center", flex: 1 }} spacing={3}>
-        <Grid size={{ xs: 6 }}>
-          <Stack sx={{ flexDirection: "row", gap: 4, alignItems: "center" }}>
+      <Grid
+        container
+        sx={{ p: { xs: 2, md: 4 }, alignItems: { xs: "flex-start", md: "center" }, flex: 1 }}
+        spacing={{ xs: 1, md: 3 }}
+      >
+        <Grid size={{ xs: 12, sm: 6 }}>
+          <Stack sx={{ flexDirection: "row", gap: { xs: 2, md: 4 }, alignItems: "center" }}>
             {getIcon()}
-            <Stack>
-              <Typography variant="h3">OS: {capitalize(session.os)}</Typography>
-              <Typography>Browser: {capitalize(session.browser)}</Typography>
+            <Stack sx={{ width: "100%" }}>
+              <Typography variant="h3">{capitalize(session.os)}</Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                {capitalize(session.browser)}
+              </Typography>
             </Stack>
           </Stack>
         </Grid>
-        <Grid size={{ xs: 3 }}>
-          <Typography sx={{ color: "text.secondary" }}>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }} sx={{ marginLeft: "auto" }}>
+          <Typography sx={{ color: "text.secondary", textAlign: { xs: "start", sm: "end" } }}>
             Date: {new Date(session.createdAt).toLocaleDateString("en-GB")}
           </Typography>
         </Grid>
-        <Grid size={{ xs: 3 }}>
+
+        <Grid size={{ xs: 12, md: 3 }}>
           {session.isCurrent ? (
             <Typography color="primary.main">Current Session</Typography>
           ) : (
@@ -92,7 +99,7 @@ const Session: React.FC<SessionProps> = ({ session, setSessions }) => {
         onClick={handleDeleteSession}
         sx={{
           backgroundColor: "primary.light",
-          px: 3,
+          px: { xs: 1.5, md: 3 },
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

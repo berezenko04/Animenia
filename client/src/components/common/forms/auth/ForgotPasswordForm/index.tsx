@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 // components
-import AuthFormLayout from "@/components/common/forms/auth/FormLayout";
+import AuthFormLayout from "@/components/common/Forms/auth/FormLayout";
 
 // api
 import AuthService from "@/api/auth/auth.service";

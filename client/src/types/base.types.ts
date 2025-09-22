@@ -7,3 +7,7 @@ export type ModalProps = {
   isOpened: boolean;
   handleClose: () => void;
 };
+
+export type BaseResponseData = {
+  message: string;
+};

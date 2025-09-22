@@ -24,9 +24,9 @@ const Screenshots: React.FC<ScreenshotsProps> = ({ screenshots }) => {
   return (
     <Stack sx={{ gap: 1.5 }}>
       <Typography variant="h3">Screenshots</Typography>
-      <Grid container sx={{ alignItems: "center" }} spacing={4}>
+      <Grid container sx={{ alignItems: "center" }} spacing={{ xs: 2, md: 4 }}>
         {screenshots.map(({ id, url }, idx) => (
-          <Grid key={id} size={{ xs: 4 }}>
+          <Grid key={id} size={{ xs: 12, sm: 6, md: 4 }}>
             <MovieScreenshot url={url} onClick={() => handleClick(idx)} />
           </Grid>
         ))}

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 // components
-import PasswordInput from "@/components/common/forms/common/PasswordInput";
-import AuthFormLayout from "@/components/common/forms/auth/FormLayout";
+import PasswordInput from "@/components/common/Forms/common/PasswordInput";
+import AuthFormLayout from "@/components/common/Forms/auth/FormLayout";
 
 // api
 import AuthService from "@/api/auth/auth.service";

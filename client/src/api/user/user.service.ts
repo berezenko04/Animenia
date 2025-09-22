@@ -1,24 +1,24 @@
-import { instance } from "@/middlewares/axios.middleware";
+import { httpGet, httpPatch, httpPost } from "@/middlewares/axios.middleware";
 
 // types
 import type { UpdateUser } from "./user.types";
+import type { User } from "@/redux/user/user.types";
+import type { BaseResponseData } from "@/types/base.types";
+
+const R = {
+  users: "/users",
+  setAvatar: "/users/set-avatar",
+} as const;
 
 const UserService = {
   async get() {
-    const { data } = await instance.get("/users");
-    return data;
+    return httpGet<User>(R.users);
   },
   async update(body: UpdateUser) {
-    const { data } = await instance.patch("/users", body);
-    return data;
-  },
-  async getSessions() {
-    const { data } = await instance.get("/users/sessions");
-    return data;
+    return httpPatch<BaseResponseData>(R.users, body);
   },
   async setAvatar(imageBase64: string) {
-    const { data } = await instance.post("/users/set-avatar", { image: imageBase64 });
-    return data;
+    return httpPost<BaseResponseData>(R.setAvatar, { image: imageBase64 });
   },
 };
 

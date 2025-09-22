@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 // components
-import PasswordInput from "@/components/common/forms/common/PasswordInput";
+import PasswordInput from "@/components/common/Forms/common/PasswordInput";
 
 // api
 import AuthService from "@/api/auth/auth.service";

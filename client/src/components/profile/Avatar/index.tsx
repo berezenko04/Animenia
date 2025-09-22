@@ -49,8 +49,8 @@ const Avatar: React.FC = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        width: { xs: 80, sm: 120, lg: 160 },
-        height: { xs: 80, sm: 120, lg: 160 },
+        width: { xs: 80, md: 120, lg: 160 },
+        height: { xs: 80, md: 120, lg: 160 },
         borderRadius: "100%",
         cursor: "pointer",
       }}
@@ -58,7 +58,7 @@ const Avatar: React.FC = () => {
       <MuiAvatar
         src={preview || user?.avatarUrl}
         alt="avatar"
-        sx={{ width: "100%", height: "100%" }}
+        sx={{ width: "100%", height: "100%", flexShrink: 0 }}
       />
       <Box
         sx={{

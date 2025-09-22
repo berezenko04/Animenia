@@ -178,29 +178,34 @@ export class AuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { accessToken, refreshToken } = await this.authService.refreshTokens(
-      userId,
-      req.cookies?.refreshToken,
-    );
+    try {
+      const { accessToken, refreshToken } = await this.authService.refreshTokens(
+        userId,
+        req.cookies?.refreshToken,
+      );
 
-    res.cookie('accessToken', accessToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-      maxAge:
-        this.configService.get<string>('NODE_ENV') === 'production'
+      const isProd = this.configService.get<string>('NODE_ENV') === 'production';
+
+      res.cookie('accessToken', accessToken, {
+        httpOnly: true,
+        secure: isProd,
+        sameSite: isProd ? 'strict' : 'lax',
+        maxAge: isProd
           ? parseInt(this.configService.get<string>('JWT_ACCESS_EXPIRY')!)
           : 30 * 24 * 60 * 60 * 1000,
-    });
+      });
 
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-      maxAge: parseInt(this.configService.get<string>('JWT_REFRESH_EXPIRY')!),
-    });
+      res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: isProd,
+        sameSite: isProd ? 'strict' : 'lax',
+        maxAge: parseInt(this.configService.get<string>('JWT_REFRESH_EXPIRY')!),
+      });
 
-    return { message: 'Refresh successful' };
+      return { message: 'Refresh successful' };
+    } catch (err) {
+      throw err;
+    }
   }
 
   @Get('sessions')

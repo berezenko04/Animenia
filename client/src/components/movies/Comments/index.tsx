@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 //  components
 import SectionBlockHead from "@/components/common/SectionBlockHead";
-import CommentForm from "@/components/common/forms/common/CommentForm";
-import AlreadyCommented from "@/components/movies/AlreadyCommented";
+import CommentForm from "@/components/common/Forms/common/CommentForm";
+import AlreadyCommented from "@/components/movies/AlreadyCommentedNotice";
 import Comment from "@/components/movies/Comment";
 
 // api

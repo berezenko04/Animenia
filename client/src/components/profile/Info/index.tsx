@@ -4,8 +4,8 @@ import { useState } from "react";
 
 // components
 import SectionBlockHead from "@/components/common/SectionBlockHead";
-import ChangeNameModal from "@/components/common/modals/ChangeNameModal";
-import ChangePasswordModal from "@/components/common/modals/ChangePasswordModal";
+import ChangeNameModal from "@/components/common/Modals/ChangeNameModal";
+import ChangePasswordModal from "@/components/common/Modals/ChangePasswordModal";
 import ProfileAvatar from "../Avatar";
 
 // redux
@@ -28,9 +28,9 @@ const Info = () => {
   return (
     <Stack sx={{ gap: 2.5 }}>
       <SectionBlockHead title="Profile" icon={PersonOutlineOutlined} />
-      <Stack sx={{ flexDirection: "row", gap: 4 }}>
+      <Stack sx={{ flexDirection: "row", gap: { xs: 2, md: 4 } }}>
         <ProfileAvatar />
-        <Stack sx={{ gap: 2.5 }}>
+        <Stack sx={{ gap: { xs: 1, md: 2.5 } }}>
           <Stack sx={{ flexDirection: "row", gap: 1, alignItems: "center" }}>
             <Typography variant="h1">
               {user?.firstName} {user?.lastName}
@@ -46,7 +46,9 @@ const Info = () => {
               />
             </Button>
           </Stack>
-          <Stack sx={{ gap: 2, svg: { width: 20, height: 20, color: "primary.main" } }}>
+          <Stack
+            sx={{ gap: { xs: 1, md: 2 }, svg: { width: 20, height: 20, color: "primary.main" } }}
+          >
             <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
               <MailOutlined />
               <Typography color="primary.main">{user?.email}</Typography>

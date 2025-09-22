@@ -14,8 +14,9 @@ const PrivateRoute: React.FC = () => {
   const { isAuth, status } = useSelector(authSelector);
 
   if (status === Statuses.LOADING) return <Loader />;
+  if (status === Statuses.ERROR || !isAuth) return <Navigate to="/login" />;
 
-  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  return <Outlet />;
 };
 
 export default PrivateRoute;

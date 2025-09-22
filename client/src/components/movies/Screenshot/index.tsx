@@ -20,7 +20,7 @@ const Screenshot: React.FC<ScreenshotProps> = ({ url, onClick }) => {
       sx={{
         borderRadius: "10px",
         boxShadow: mode === "light" ? "0 4px 4px 0 rgba(229, 229, 229, 0.25)" : null,
-        height: 150,
+        height: { xs: 180, md: 150 },
         width: "100%",
         cursor: "pointer",
       }}

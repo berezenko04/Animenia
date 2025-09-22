@@ -8,38 +8,38 @@ datasource db {
 }
 
 enum Genre {
-  COMEDY  @map("Comedy")
-  ROMANCE @map("Romance")
-  FANTASY @map("Fantasy")
-  ADVENTURE @map("Adventure")
-  ACTION @map("Action")
-  MAGIC @map("Magic")
+  COMEDY      @map("Comedy")
+  ROMANCE     @map("Romance")
+  FANTASY     @map("Fantasy")
+  ADVENTURE   @map("Adventure")
+  ACTION      @map("Action")
+  MAGIC       @map("Magic")
   SCHOOL_LIFE @map("School life")
-  PARANORMAL @map("Paranormal")
+  PARANORMAL  @map("Paranormal")
 }
 
 model User {
-  id                String                                 @id @default(uuid()) @db.Uuid
-  email             String                                 @unique
-  hash              String      @map("password_hash")
-  firstName         String      @map("first_name")
-  lastName          String      @map("last_name")
-  avatarUrl         String                                 @default("https://pub-5472145afdde47758f88673dd3608768.r2.dev/default-avatar.webp")
-  createdAt         DateTime    @map("created_at")         @default(now())
-  updatedAt         DateTime    @map("updated_at")         @default(now())
-  session           Session[]
-  likes             MovieLike[]
-  comments          Comment[]
+  id             String          @id @default(uuid()) @db.Uuid
+  email          String          @unique
+  hash           String          @map("password_hash")
+  firstName      String          @map("first_name")
+  lastName       String          @map("last_name")
+  avatarUrl      String          @default("https://pub-5472145afdde47758f88673dd3608768.r2.dev/default-avatar.webp")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @default(now()) @map("updated_at")
+  session        Session[]
+  likes          MovieLike[]
+  comments       Comment[]
   passwordResets PasswordReset[]
 
   @@map("users")
 }
 
 model Session {
-  id           String                         @id @default(uuid()) @db.Uuid
-  userId       String   @map("user_id")       @db.Uuid
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
   user         User     @relation(fields: [userId], references: [id])
-  refreshToken String   @map("refresh_token") @unique
+  refreshToken String   @unique @map("refresh_token")
   ipAddress    String?  @map("ip_address")
   userAgent    String?  @map("user_agent")
   deviceType   String?  @map("device_type")
@@ -47,23 +47,23 @@ model Session {
   browser      String?
   expiresAt    DateTime @map("expires_at")
 
-  createdAt    DateTime @map("created_at")    @default(now())
-  updatedAt    DateTime @map("updated_at")    @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
 
   @@map("sessions")
 }
 
 model Movie {
-  id          String                            @id @default(uuid()) @db.Uuid()
+  id          String       @id @default(uuid()) @db.Uuid()
   posterUrl   String       @map("poster_url")
   title       String
   description String
-  rating      Int                               @default(0)
-  slug        String                            @unique
+  rating      Int          @default(0)
+  slug        String       @unique
   releaseYear Int          @map("release_year")
   trailerUrl  String       @map("trailer_url")
-  createdAt   DateTime     @map("created_at")   @default(now())
-  updatedAt   DateTime     @map("updated_at")   @default(now())
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @default(now()) @map("updated_at")
   genres      Genre[]
   screenshots Screenshot[]
   comments    Comment[]
@@ -73,60 +73,59 @@ model Movie {
 }
 
 model MovieLike {
-  id        String                      @id @default(uuid()) @db.Uuid
-  userId    String   @map("user_id")    @db.Uuid
-  movieId   String   @map("movie_id")   @db.Uuid
+  id      String @id @default(uuid()) @db.Uuid
+  userId  String @map("user_id") @db.Uuid
+  movieId String @map("movie_id") @db.Uuid
 
-  user      User     @relation(fields: [userId], references: [id])
-  movie     Movie    @relation(fields: [movieId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+  movie Movie @relation(fields: [movieId], references: [id])
 
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
 
   @@unique([movieId, userId])
   @@map("movies_likes")
 }
 
 model Screenshot {
-  id        String                      @id @default(uuid()) @db.Uuid
-  url       String
-  movieId   String   @map("movie_id")   @db.Uuid()
+  id      String @id @default(uuid()) @db.Uuid
+  url     String
+  movieId String @map("movie_id") @db.Uuid()
 
-  movie     Movie    @relation(fields: [movieId], references: [id])
+  movie Movie @relation(fields: [movieId], references: [id])
 
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
 
   @@map("screenshots")
 }
 
 model Comment {
-  id        String                      @id @default(uuid()) @db.Uuid
-  text      String
-  movieId   String   @map("movie_id")   @db.Uuid()
-  userId    String   @map("user_id")    @db.Uuid()
+  id      String @id @default(uuid()) @db.Uuid
+  text    String
+  movieId String @map("movie_id") @db.Uuid()
+  userId  String @map("user_id") @db.Uuid()
 
-  movie     Movie    @relation(fields: [movieId], references: [id])
-  user      User     @relation(fields:[userId], references: [id])
+  movie Movie @relation(fields: [movieId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
 
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
 
-  @@map("comments")
   @@unique([movieId, userId])
+  @@map("comments")
 }
 
-
-model PasswordReset { 
-  id String @id @default(uuid()) @db.Uuid
-  userId String @map("user_id") @db.Uuid()
-  hash String  @unique()
-  used Boolean @default(false)
+model PasswordReset {
+  id     String  @id @default(uuid()) @db.Uuid
+  userId String  @map("user_id") @db.Uuid()
+  hash   String  @unique()
+  used   Boolean @default(false)
 
   user User @relation(fields: [userId], references: [id])
 
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
   expiresAt DateTime @map("expires_at")
 
   @@map("password_resets")

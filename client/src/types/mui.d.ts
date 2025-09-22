@@ -1,4 +1,5 @@
 import "@mui/material/styles";
+import "@mui/material/Button";
 import type { PaletteColor, PaletteColorOptions } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {

@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material";
 
 // components
-import NewsList from "@/components/sections/Sidebar/news/News";
-import Reviews from "@/components/sections/Sidebar/Reviews";
+import NewsList from "@/components/sections/Sidebar/news/List";
+import Reviews from "@/components/sections/Sidebar/reviews/List";
 import SocialGradientFillButton from "@/components/ui/buttons/SocialGradientFillButton";
 
 const Sidebar: React.FC = () => {

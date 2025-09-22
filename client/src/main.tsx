@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import "yet-another-react-lightbox/styles.css";
 
 // app
-import App from "./App.tsx";
+import App from "./App";
 
 // redux
 import { themeSelector } from "./redux/theme/theme.selectors.ts";
@@ -25,7 +25,7 @@ import getTheme from "./theme.ts";
 
 const queryClient = new QueryClient();
 
-const RootApp = () => {
+export const RootApp: React.FC = () => {
   const { mode } = useSelector(themeSelector);
   const theme = useMemo(() => getTheme(mode), [mode]);
 

@@ -1,44 +1,47 @@
-import { instance } from "@/middlewares/axios.middleware";
+import { httpPost, httpGet, httpDelete } from "@/middlewares/axios.middleware";
 
 // types
-import type { ChangePasswordBody, LoginBody, RegisterBody } from "./auth.types";
+import type { Session, ChangePasswordBody, LoginBody, RegisterBody } from "./auth.types";
+import type { BaseResponseData } from "@/types/base.types";
+
+const R = {
+  register: "/auth/register",
+  login: "/auth/login",
+  changePassword: "/auth/change-password",
+  refresh: "/auth/refresh",
+  forgotPassword: "/auth/forgot-password",
+  logout: "/auth/logout",
+  logoutAll: "/auth/logout-all",
+  sessions: "/auth/sessions",
+} as const;
 
 const AuthService = {
   async register(body: RegisterBody) {
-    const { data } = await instance.post("/auth/register", body);
-    return data;
+    return httpPost<BaseResponseData>(R.register, body);
   },
   async login(body: LoginBody) {
-    const { data } = await instance.post("/auth/login", body);
-    return data;
+    return httpPost<BaseResponseData>(R.login, body);
   },
   async changePassword(body: ChangePasswordBody) {
-    const { data } = await instance.post("/auth/change-password", body);
-    return data;
+    return httpPost<BaseResponseData>(R.changePassword, body);
   },
   async refresh() {
-    const { data } = await instance.post("/auth/refresh");
-    return data;
+    return httpPost<void>(R.refresh);
   },
-  async sendForgotPasswordLink(email: string){
-    const { data } = await instance.post("/auth/forgot-password", {email})
-    return data;
+  async sendForgotPasswordLink(email: string) {
+    return httpPost<BaseResponseData>(R.forgotPassword, { email });
   },
   async logout() {
-    const { data } = await instance.post("/auth/logout");
-    return data;
+    return httpPost<BaseResponseData>(R.logout);
   },
   async logoutAll() {
-    const { data } = await instance.post("/auth/logout-all");
-    return data;
+    return httpPost<BaseResponseData>(R.logoutAll);
   },
   async getSessions() {
-    const { data } = await instance.get("/auth/sessions");
-    return data;
+    return httpGet<Session[]>(R.sessions);
   },
   async deleteSession(sessionId: string) {
-    const { data } = await instance.delete(`/auth/sessions/${sessionId}`);
-    return data;
+    return httpDelete<BaseResponseData>(`${R.sessions}/${sessionId}`);
   },
 };
 

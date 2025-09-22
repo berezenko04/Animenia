@@ -7,7 +7,7 @@ import { useState } from "react";
 import CustomContainer from "../Container";
 import Logo from "@/components/common/Logo";
 import MobileMenu from "@/components/common/MobileMenu";
-import ThemeSwitchButton from "@/components/common/buttons/ThemeSwitchButton";
+import ThemeSwitchButton from "@/components/common/Buttons/ThemeSwitchButton";
 import UnderlinedLink from "@/components/ui/links/UnderlinedLink";
 import CustomLink from "@/components/common/CustomLink";
 
@@ -52,7 +52,11 @@ const Header: React.FC = () => {
     <Stack
       component="header"
       sx={{
+        position: "sticky",
+        top: 0,
+        left: 0,
         py: 2.5,
+        zIndex: 100,
         backgroundColor: "backgroundPrimary.main",
         boxShadow: mode === "light" ? "0 4px 4px 0 rgba(229, 229, 229, 0.25)" : null,
       }}

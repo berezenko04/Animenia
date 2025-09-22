@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 // icons
 import { InfoOutline } from "@mui/icons-material";
 
-const AlreadyCommented: React.FC = () => {
+const AlreadyCommentedNotice: React.FC = () => {
   return (
     <Stack
       sx={{
@@ -21,4 +21,4 @@ const AlreadyCommented: React.FC = () => {
   );
 };
 
-export default AlreadyCommented;
+export default AlreadyCommentedNotice;

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 // components
 import SectionBlockHead from "@/components/common/SectionBlockHead";
-import LogoutAllButton from "@/components/common/buttons/LogoutAllButton";
+import LogoutAllButton from "@/components/common/Buttons/LogoutAllButton";
 import Session from "../Session";
 import ProfileSessionItemSkeleton from "@/components/ui/loaders/skeletons/ProfileSessionItemSkeleton";
 

@@ -1,5 +1,5 @@
 // components
-import ForgotPasswordForm from "@/components/common/forms/auth/ForgotPasswordForm";
+import ForgotPasswordForm from "@/components/common/Forms/auth/ForgotPasswordForm";
 
 const ForgotPassword: React.FC = () => {
   return <ForgotPasswordForm />;

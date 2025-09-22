@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 // service
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -112,7 +116,7 @@ export class MovieService {
       select: { slug: true },
     });
   }
-  
+
   // News Emulation
   async getNews() {
     return this.prisma.movie.findMany({
@@ -153,7 +157,7 @@ export class MovieService {
       where: { movieId_userId: { movieId, userId } },
     });
 
-    if(existingLike){
+    if (existingLike) {
       throw new ConflictException('You already liked this movie');
     }
 
@@ -199,17 +203,19 @@ export class MovieService {
   async createComment(userId: string, dto: CreateCommentDto) {
     await this.get(dto.movieId);
 
-    const isExist = await this.prisma.comment.findUnique({where: {"movieId_userId": {movieId: dto.movieId, userId}}});
+    const isExist = await this.prisma.comment.findUnique({
+      where: { movieId_userId: { movieId: dto.movieId, userId } },
+    });
 
-    if(isExist){
-      throw new ConflictException("Comment is already exist")
+    if (isExist) {
+      throw new ConflictException('Comment is already exist');
     }
 
-    return this.prisma.comment.create({ data: {...dto, userId} });
+    return this.prisma.comment.create({ data: { ...dto, userId } });
   }
 
   async getComments(movieId: string) {
-    return this.prisma.comment.findMany({ 
+    return this.prisma.comment.findMany({
       where: { movieId },
       select: {
         id: true,
@@ -222,7 +228,7 @@ export class MovieService {
             avatarUrl: true,
           },
         },
-    }
-  })
+      },
+    });
   }
 }

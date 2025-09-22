@@ -24,7 +24,6 @@ import { GetAllMoviesDto } from './dto/get-all-movies.dto';
 import { User } from 'src/common/decorators/user.decorator';
 import { Auth } from '../auth/decorators/auth.decorator';
 
-
 @Controller('movies')
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
@@ -37,7 +36,7 @@ export class MovieController {
 
   @Get('random')
   async getRandom() {
-    return this.movieService.getRandomMovie()
+    return this.movieService.getRandomMovie();
   }
 
   @Get('news')
@@ -68,14 +67,14 @@ export class MovieController {
   @Post(':id/like')
   async addLike(@User() userId: string, @Param('id') movieId: string) {
     await this.movieService.addLike(userId, movieId);
-    return {message: "Movie was successfully liked"}
+    return { message: 'Movie was successfully liked' };
   }
 
   @Auth()
   @Delete(':id/like')
   async deleteLike(@User() userId: string, @Param('id') movieId: string) {
     await this.movieService.deleteLike(userId, movieId);
-    return {message: "Movie was successfully removed like"}
+    return { message: 'Movie was successfully removed like' };
   }
 
   @Auth()

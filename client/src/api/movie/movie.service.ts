@@ -1,43 +1,46 @@
-import { instance } from "@/middlewares/axios.middleware";
+import { httpDelete, httpGet, httpPost } from "@/middlewares/axios.middleware";
 
 // types
-import type { GetAllMoviesParams } from "./movie.types";
+import type { MovieCard, MovieComment, GetAllMoviesParams, MovieFullInfo, MovieNewsItem } from "./movie.types";
+
+const R = {
+  movies: "/movies",
+  byId: (id: string) => `/movies/${id}`,
+  bySlug: (slug: string) => `/movies/by-slug/${slug}`,
+  random: "/movies/random",
+  news: "/movies/news",
+  comments: (id: string) => `/movies/${id}/comments`,
+  like: (id: string) => `/movies/${id}/like`,
+} as const;
 
 const MovieService = {
   async all(params: GetAllMoviesParams) {
-    const { data } = await instance.get("/movies", { params });
-    return data;
+    return httpGet<MovieCard[]>(R.movies, { params });
   },
   async get(movieId: string) {
-    const { data } = await instance.get(`/movies/${movieId}`);
-    return data;
+    return httpGet<MovieFullInfo>(R.byId(movieId));
   },
   async random() {
-    const { data } = await instance.get(`/movies/random`);
-    return data;
+    return httpGet<{ slug: string }>(R.random);
   },
   async getBySlug(slug: string) {
-    const { data } = await instance.get(`/movies/by-slug/${slug}`);
-    return data;
+    return httpGet<MovieFullInfo>(R.bySlug(slug));
   },
   async getNews() {
-    const { data } = await instance.get(`/movies/news`);
-    return data;
+    return httpGet<MovieNewsItem[]>(R.news);
   },
   async getComments(movieId: string) {
-    const { data } = await instance.get(`/movies/${movieId}/comments`);
-    return data;
+    return httpGet<MovieComment[]>(R.comments(movieId));
   },
   async createComment(movieId: string, text: string) {
-    const { data } = await instance.post(`/movies/${movieId}/comments`, { text });
-    return data;
+    return httpPost<MovieComment>(R.comments(movieId), { text });
   },
-  async addLike(movieId: string){
-    await instance.post(`/movies/${movieId}/like`);
+  async addLike(movieId: string) {
+    return httpPost<void>(R.like(movieId));
   },
-  async removeLike(movieId: string){
-    await instance.delete(`/movies/${movieId}/like`);
-  }
+  async removeLike(movieId: string) {
+    return httpDelete<void>(R.like(movieId));
+  },
 };
 
 export default MovieService;
