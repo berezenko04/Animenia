@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 // components
 import SectionBlockHead from "@/components/common/SectionBlockHead";
@@ -9,6 +9,9 @@ import NewsItem from "../ListItem";
 // api
 import MovieService from "@/api/movie/movie.service";
 
+// utils
+import { repeat } from "@/utils/repeat";
+
 // icons
 import { ArticleOutlined } from "@mui/icons-material";
 
@@ -16,27 +19,18 @@ import { ArticleOutlined } from "@mui/icons-material";
 import type { MovieNewsItem } from "@/api/movie/movie.types";
 
 const News: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [news, setNews] = useState<MovieNewsItem[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const result = await MovieService.getNews();
-        setNews(result);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
+  const { data: news, isLoading } = useQuery<MovieNewsItem[]>({
+    queryKey: ["news"],
+    queryFn: async () => await MovieService.getNews(),
+  });
 
   return (
     <Stack sx={{ gap: 2.5 }}>
       <SectionBlockHead title="Latest News" icon={ArticleOutlined} />
       <Stack sx={{ px: 2.5, gap: 1.5 }}>
         {isLoading
-          ? [...Array(5)].map((_, idx) => <NewsItemSkeleton key={idx} />)
-          : news.map((item) => <NewsItem key={item.id} {...item} />)}
+          ? repeat(5, (idx) => <NewsItemSkeleton key={idx} />)
+          : news?.map((item) => <NewsItem key={item.id} {...item} />)}
       </Stack>
     </Stack>
   );

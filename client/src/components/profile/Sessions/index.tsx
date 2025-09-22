@@ -1,5 +1,6 @@
 import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 // components
 import SectionBlockHead from "@/components/common/SectionBlockHead";
@@ -10,6 +11,9 @@ import ProfileSessionItemSkeleton from "@/components/ui/loaders/skeletons/Profil
 // api
 import AuthService from "@/api/auth/auth.service";
 
+// utils
+import { repeat } from "@/utils/repeat";
+
 // types
 import type { Session as SessionType } from "@/api/auth/auth.types";
 
@@ -17,27 +21,24 @@ import type { Session as SessionType } from "@/api/auth/auth.types";
 import { FolderOutlined } from "@mui/icons-material";
 
 const Sessions: React.FC = () => {
+  const { data, isLoading } = useQuery<SessionType[]>({
+    queryKey: ["sessions"],
+    queryFn: async () => await AuthService.getSessions(),
+  });
+
   const [sessions, setSessions] = useState<SessionType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const result = await AuthService.getSessions();
-        setSessions(result);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
+    if (data) setSessions(data);
+  }, [data]);
 
   return (
     <Stack sx={{ gap: 2.5 }}>
       <SectionBlockHead title="Sessions" icon={FolderOutlined} additionalContent={!isLoading && <LogoutAllButton />} />
       <Stack sx={{ gap: 1.5 }}>
         {isLoading
-          ? [...Array(3)].map((_, idx) => <ProfileSessionItemSkeleton key={idx} />)
-          : sessions.map((session) => <Session key={session.id} session={session} setSessions={setSessions} />)}
+          ? repeat(3, (idx) => <ProfileSessionItemSkeleton key={idx} />)
+          : sessions?.map((session) => <Session key={session.id} session={session} setSessions={setSessions} />)}
       </Stack>
     </Stack>
   );

@@ -5,6 +5,9 @@ import { Navigation } from "swiper/modules";
 import MovieCard from "@/components/movies/Card";
 import MovieCardSkeleton from "@/components/ui/loaders/skeletons/MovieCardSkeleton";
 
+// utils
+import { repeat } from "@/utils/repeat";
+
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 import type { Swiper as SwiperType } from "swiper/types";
@@ -38,7 +41,7 @@ const Swiper: React.FC<SwiperProps> = ({ swiperRef, isLoading, data }) => {
       }}
     >
       {isLoading
-        ? [...Array(3)].map((_, idx) => (
+        ? repeat(3, (idx) => (
             <SwiperSlide key={idx}>
               <MovieCardSkeleton />
             </SwiperSlide>

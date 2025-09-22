@@ -1,6 +1,7 @@
 import { Stack } from "@mui/material";
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 // components
 import MovieListItem from "@/components/movies/ListItem";
@@ -17,9 +18,6 @@ import MovieService from "@/api/movie/movie.service";
 // hooks
 import { useMovies } from "@/hooks/useMovies";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // types
 import { type MovieFullInfo } from "@/api/movie/movie.types";
 
@@ -31,35 +29,22 @@ const MoviePage: React.FC = () => {
 
   const { movies: similarMovies, isLoading: similarMoviesLoading } = useMovies({ limit: 10 });
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [movie, setMovie] = useState<MovieFullInfo | null>(null);
+  const { data: movie, isLoading: isMovieLoading } = useQuery<MovieFullInfo>({
+    queryKey: ["movie"],
+    queryFn: async () => await MovieService.getBySlug(slug),
+  });
 
   useEffect(() => {
-    if (!slug) {
-      return;
-    }
-
-    (async () => {
-      try {
-        const result = await MovieService.getBySlug(slug);
-        setMovie(result);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [slug]);
-
-  useEffect(() => {
-    if (!isLoading && movie) {
+    if (!isMovieLoading && movie) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [isLoading, movie]);
+  }, [isMovieLoading, movie]);
 
   return (
     <Stack sx={{ gap: 6 }}>
       <Stack sx={{ gap: 4 }}>
         <SectionBlockHead title="Anime" icon={VideocamOutlined} />
-        {!isLoading && movie ? (
+        {!isMovieLoading && movie ? (
           <>
             <MovieListItem isListItem={false} {...movie} />
             <Screenshots screenshots={movie?.screenshots} />
@@ -76,7 +61,7 @@ const MoviePage: React.FC = () => {
         icon={GroupOutlined}
         isSwipe
       />
-      {!isLoading && movie && <MovieComments isCommented={movie.isCommented} movieId={movie.id} />}
+      {!isMovieLoading && movie && <MovieComments isCommented={movie.isCommented} movieId={movie.id} />}
     </Stack>
   );
 };

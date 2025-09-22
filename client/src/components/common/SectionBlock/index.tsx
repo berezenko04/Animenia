@@ -1,4 +1,4 @@
-import { Button, darken, Grid, Stack } from "@mui/material";
+import { Button, darken, Grid, Stack, useTheme } from "@mui/material";
 import { useRef } from "react";
 
 // components
@@ -7,12 +7,12 @@ import MovieCardSkeleton from "@/components/ui/loaders/skeletons/MovieCardSkelet
 import MoviesSwiper from "@/components/movies/Swiper";
 import MovieCard from "@/components/movies/Card";
 
+// utils
+import { repeat } from "@/utils/repeat";
+
 // types
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 import type { Swiper } from "swiper/types";
-
-// theme
-import theme from "@/theme";
 
 interface SectionBlockProps extends Omit<SectionBlockHeadProps, "swiperRef"> {
   movies: MovieCardType[];
@@ -20,14 +20,8 @@ interface SectionBlockProps extends Omit<SectionBlockHeadProps, "swiperRef"> {
   isLazyLoad?: boolean;
 }
 
-const SectionBlock: React.FC<SectionBlockProps> = ({
-  title,
-  icon,
-  movies,
-  isSwipe,
-  isLoading = true,
-  isLazyLoad,
-}) => {
+const SectionBlock: React.FC<SectionBlockProps> = ({ title, icon, movies, isSwipe, isLoading = true, isLazyLoad }) => {
+  const theme = useTheme();
   const swiperRef = useRef<Swiper | null>(null);
 
   return (
@@ -43,7 +37,7 @@ const SectionBlock: React.FC<SectionBlockProps> = ({
                   <MovieCard {...card} />
                 </Grid>
               ))
-            : [...Array(6)].map((_, idx) => (
+            : repeat(6, (idx) => (
                 <Grid key={idx} size={{ xs: 12, sm: 6, md: 4 }}>
                   <MovieCardSkeleton />
                 </Grid>

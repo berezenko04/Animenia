@@ -19,9 +19,6 @@ import { userSelector } from "@/redux/user/user.selectors";
 import { authSelector } from "@/redux/auth/auth.selectors";
 import { themeSelector } from "@/redux/theme/theme.selectors";
 
-// utils
-import { catchError } from "@/utils/catchError";
-
 // data
 import { menu } from "@/data";
 
