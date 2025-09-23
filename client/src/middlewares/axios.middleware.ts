@@ -37,6 +37,10 @@ instance.interceptors.response.use(
       }
     }
     
+    if (originalRequest?.url?.includes("/auth/refresh")) {
+      return Promise.reject(error);
+    }
+
     return Promise.reject(normalizeAxiosError(error));
   }
 );

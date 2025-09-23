@@ -39,7 +39,7 @@ const ListItem: React.FC<ListItemProps> = ({
   return (
     <Stack
       sx={{
-        flexDirection: "row",
+        flexDirection: { xs: "column", md: "row" },
         gap: 4,
         padding: isListItem ? 2.5 : 0,
         backgroundColor: isListItem ? "backgroundPrimary.main" : "transparent",
