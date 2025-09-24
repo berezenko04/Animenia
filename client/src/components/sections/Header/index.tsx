@@ -51,7 +51,7 @@ const Header: React.FC = () => {
         py: 2.5,
         zIndex: 100,
         backgroundColor: "backgroundPrimary.main",
-        boxShadow: mode === "light" ? "0 4px 4px 0 rgba(229, 229, 229, 0.25)" : null,
+        boxShadow: mode === "light" ? 1 : null,
       }}
     >
       <CustomContainer>

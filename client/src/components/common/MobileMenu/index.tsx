@@ -1,4 +1,4 @@
-import { Box, Drawer, Stack, IconButton, useTheme, alpha } from "@mui/material";
+import { Box, Drawer, Stack, IconButton } from "@mui/material";
 
 // components
 import UnderlinedLink from "@/components/ui/links/UnderlinedLink";
@@ -15,8 +15,6 @@ type MobileMenuProps = {
 };
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose }) => {
-  const theme = useTheme();
-
   return (
     <Drawer
       anchor="top"
@@ -26,11 +24,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose }) => {
         backdrop: {
           sx: {
             backdropFilter: "blur(8px)",
-          },
-        },
-        paper: {
-          sx: {
-            backgroundColor: alpha(theme.palette.background.default, 0.95),
           },
         },
       }}

@@ -30,7 +30,7 @@ const MoviePage: React.FC = () => {
   const { movies: similarMovies, isLoading: similarMoviesLoading } = useMovies({ limit: 10 });
 
   const { data: movie, isLoading: isMovieLoading } = useQuery<MovieFullInfo>({
-    queryKey: ["movie"],
+    queryKey: ["movie", slug],
     queryFn: async () => await MovieService.getBySlug(slug),
   });
 

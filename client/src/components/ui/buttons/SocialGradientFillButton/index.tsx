@@ -24,7 +24,7 @@ const SocialGradientFillButton: React.FC<SocialGradientFillButtonProps> = ({ hre
       target="_blank"
       sx={{
         background: getGradientFill(),
-        boxShadow: "box-shadow: 0 4px 4px 0 rgba(229, 229, 229, 0.25)",
+        boxShadow: 1,
         color: "#FFFFFF",
         borderRadius: "10px",
         py: 2,

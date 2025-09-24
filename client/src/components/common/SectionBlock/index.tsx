@@ -53,7 +53,7 @@ const SectionBlock: React.FC<SectionBlockProps> = ({ title, icon, movies, isSwip
             fontSize: 18,
             fontWeight: 500,
             borderRadius: "10px",
-            boxShadow: "0 4px 4px 0 rgba(229, 229, 229, 0.25)",
+            boxShadow: 1,
             "&:hover": {
               backgroundColor: darken(theme.palette.backgroundPrimary.main, 0.07),
             },

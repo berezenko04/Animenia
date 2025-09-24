@@ -44,7 +44,7 @@ const ListItem: React.FC<ListItemProps> = ({
         padding: isListItem ? 2.5 : 0,
         backgroundColor: isListItem ? "backgroundPrimary.main" : "transparent",
         borderRadius: isListItem ? "10px" : 0,
-        boxShadow: isShadow ? "0 4px 4px 0 rgba(229, 229, 229, 0.25)" : "none",
+        boxShadow: isShadow ? 1 : null,
       }}
     >
       <Box
