@@ -1,16 +1,32 @@
-import ReactPlayer from "react-player";
+import { Box } from "@mui/material";
+import YouTube, { type YouTubeProps } from "react-youtube";
 
-// types
-import type { ReactPlayerProps } from "react-player/types";
-
-const VideoPlayer: React.FC<ReactPlayerProps> = ({ ...props }) => {
+const VideoPlayer: React.FC<YouTubeProps> = (props) => {
   return (
-    <ReactPlayer
-      width="100%"
-      height="100%"
-      style={{ minHeight: 450, borderRadius: "10px", overflow: "hidden" }}
-      {...props}
-    />
+    <Box
+      sx={{
+        position: "relative",
+        paddingBottom: "56.25%",
+        height: 0,
+        borderRadius: "10px",
+        overflow: "hidden",
+      }}
+    >
+      <YouTube
+        {...props}
+        opts={{
+          width: "100%",
+          height: "100%",
+        }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    </Box>
   );
 };
 

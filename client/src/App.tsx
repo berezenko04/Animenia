@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import { useAppDispatch } from "./redux/store";
 import { useSelector } from "react-redux";

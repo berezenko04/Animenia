@@ -8,14 +8,16 @@ datasource db {
 }
 
 enum Genre {
-  COMEDY      @map("Comedy")
-  ROMANCE     @map("Romance")
-  FANTASY     @map("Fantasy")
-  ADVENTURE   @map("Adventure")
-  ACTION      @map("Action")
-  MAGIC       @map("Magic")
-  SCHOOL_LIFE @map("School life")
-  PARANORMAL  @map("Paranormal")
+  COMEDY       @map("Comedy")
+  ROMANCE      @map("Romance")
+  DRAMA        @map("Drama")
+  FANTASY      @map("Fantasy")
+  ADVENTURE    @map("Adventure")
+  ACTION       @map("Action")
+  SUSPENSE     @map("Suspense")
+  SCI_FI       @map("Sci-Fi")
+  MYSTERY      @map("Mystery")
+  SUPERNATURAL @map("Supernatural")
 }
 
 model User {

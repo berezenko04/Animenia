@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
             <Stack sx={{ gap: 1.5 }}>
               <Typography variant="h3">Genres</Typography>
               <Stack component="nav" sx={{ gap: 0.75 }}>
-                {genres.map((genre, idx) => (
+                {genres.slice(0, 6).map((genre, idx) => (
                   <CustomLink sx={{ fontSize: 13 }} to="/genres" key={idx}>
                     {genre}
                   </CustomLink>

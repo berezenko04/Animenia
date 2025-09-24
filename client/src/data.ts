@@ -20,17 +20,18 @@ export const socials = [
   { icon: Telegram, href: "#" },
 ];
 
-export const genres = ["Comedy", "Romance", "Fantasy", "Adventure", "Action", "Magic", "Paranormal", "School Life"];
-
-export const filterGenres = [
+export const genres = [
   Genre.COMEDY,
   Genre.ROMANCE,
   Genre.FANTASY,
   Genre.ADVENTURE,
   Genre.ACTION,
-  Genre.MAGIC,
-  Genre.PARANORMAL,
-  Genre.SCHOOL_LIFE,
+  Genre.DRAMA,
+  Genre.MYSTERY,
+  Genre.SUPERNATURAL,
+  Genre.SUSPENSE,
+  Genre.SCI_FI
 ];
+
 
 export const notificationOptions = ["Email Notifications", "Reviews", "News"];

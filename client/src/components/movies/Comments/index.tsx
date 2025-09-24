@@ -13,6 +13,7 @@ import MovieService from "@/api/movie/movie.service";
 
 // redux
 import { userSelector } from "@/redux/user/user.selectors";
+import { authSelector } from "@/redux/auth/auth.selectors";
 
 // types
 import type { MovieComment } from "@/api/movie/movie.types";
@@ -26,6 +27,7 @@ type CommentsProps = {
 };
 
 const Comments: React.FC<CommentsProps> = ({ movieId, isCommented: isInititalCommented }) => {
+  const { isAuth } = useSelector(authSelector);
   const { user } = useSelector(userSelector);
 
   const [isCommented, setIsCommented] = useState<boolean>(isInititalCommented);
@@ -67,6 +69,10 @@ const Comments: React.FC<CommentsProps> = ({ movieId, isCommented: isInititalCom
       setComments(result);
     })();
   }, [movieId]);
+
+  if (comments.length === 0 && !isAuth) {
+    return null;
+  }
 
   return (
     <Stack sx={{ gap: 4 }}>

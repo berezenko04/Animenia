@@ -17,7 +17,7 @@ import FilterSelect from "@/components/common/Forms/common/FilterSelect";
 import { formatGenres } from "@/utils/formatGenres";
 
 // data
-import { filterGenres } from "@/data";
+import { genres } from "@/data";
 
 // types
 import type { Genre } from "@/types/enums.types";
@@ -59,7 +59,7 @@ const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => 
         label="Genre"
         value={genre}
         onChangeValue={(val: string) => setGenre(val as Genre | "all")}
-        options={filterGenres.map((genre) => ({
+        options={genres.map((genre) => ({
           label: formatGenres([genre]),
           value: genre,
         }))}

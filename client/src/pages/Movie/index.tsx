@@ -23,6 +23,7 @@ import { type MovieFullInfo } from "@/api/movie/movie.types";
 
 // icons
 import { GroupOutlined, VideocamOutlined } from "@mui/icons-material";
+import { getYoutubeVideoId } from "@/utils/getYoutubeVideoId";
 
 const MoviePage: React.FC = () => {
   const params = useParams<{ slug: string }>();
@@ -49,7 +50,7 @@ const MoviePage: React.FC = () => {
           <>
             <MovieListItem isListItem={false} {...movie} />
             <Screenshots screenshots={movie?.screenshots} />
-            <VideoPlayer src={movie?.trailerUrl} controls playsInline />
+            <VideoPlayer videoId={getYoutubeVideoId(movie.trailerUrl)} />
           </>
         ) : (
           <MovieListItemSkeleton />
