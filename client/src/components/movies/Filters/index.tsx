@@ -1,6 +1,5 @@
 import {
   ButtonBase,
-  Collapse,
   Divider,
   Drawer,
   IconButton,
@@ -9,6 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { useState } from "react";
 
 // components
 import FilterSelect from "@/components/common/Forms/common/FilterSelect";
@@ -24,7 +24,6 @@ import type { Genre } from "@/types/enums.types";
 
 // icons
 import { Clear, Close, TuneOutlined } from "@mui/icons-material";
-import { useState } from "react";
 
 type FiltersProps = {
   year: string;
@@ -59,7 +58,7 @@ const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => 
       <FilterSelect
         label="Genre"
         value={genre}
-        onChangeValue={setGenre}
+        onChangeValue={(val: string) => setGenre(val as Genre | "all")}
         options={filterGenres.map((genre) => ({
           label: formatGenres([genre]),
           value: genre,

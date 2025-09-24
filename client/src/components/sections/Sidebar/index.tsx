@@ -7,7 +7,7 @@ import SocialGradientFillButton from "@/components/ui/buttons/SocialGradientFill
 
 const Sidebar: React.FC = () => {
   return (
-    <Stack sx={{ gap: 6 }}>
+    <Stack sx={{ gap: 4 }}>
       <NewsList />
       <Reviews />
       <Stack sx={{ gap: 1.5 }}>

@@ -25,7 +25,8 @@ import { type MovieFullInfo } from "@/api/movie/movie.types";
 import { GroupOutlined, VideocamOutlined } from "@mui/icons-material";
 
 const MoviePage: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const params = useParams<{ slug: string }>();
+  const slug = params.slug!;
 
   const { movies: similarMovies, isLoading: similarMoviesLoading } = useMovies({ limit: 10 });
 
@@ -61,7 +62,9 @@ const MoviePage: React.FC = () => {
         icon={GroupOutlined}
         isSwipe
       />
-      {!isMovieLoading && movie && <MovieComments isCommented={movie.isCommented} movieId={movie.id} />}
+      {!isMovieLoading && movie && (
+        <MovieComments isCommented={movie.isCommented} movieId={movie.id} />
+      )}
     </Stack>
   );
 };

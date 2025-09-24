@@ -1,7 +1,7 @@
 import { httpDelete, httpGet, httpPost } from "@/middlewares/axios.middleware";
 
 // types
-import type { MovieCard, MovieComment, GetAllMoviesParams, MovieFullInfo, MovieNewsItem } from "./movie.types";
+import type { MovieComment, GetAllMoviesParams, MovieFullInfo, MovieNewsItem, AllMoviesResponse } from "./movie.types";
 
 const R = {
   movies: "/movies",
@@ -15,7 +15,7 @@ const R = {
 
 const MovieService = {
   async all(params: GetAllMoviesParams) {
-    return httpGet<MovieCard[]>(R.movies, { params });
+    return httpGet<AllMoviesResponse>(R.movies, { params });
   },
   async get(movieId: string) {
     return httpGet<MovieFullInfo>(R.byId(movieId));

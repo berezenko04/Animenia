@@ -122,7 +122,12 @@ const components: ThemeOptions["components"] = {
           fontSize: "24px",
         },
       }),
-      h2: { fontSize: 18 },
+      h2: ({ theme }) => ({ 
+        fontSize: "16px",   
+        [theme.breakpoints.up("sm")]: {
+          fontSize: "18px",
+        }, 
+      }),
       h3: { fontSize: 16 },
       body1: { fontSize: 14, lineHeight: "135%" },
       body2: { fontSize: 13, lineHeight: "130%" },
@@ -215,13 +220,6 @@ const components: ThemeOptions["components"] = {
       },
     },
   },
-  MuiDrawer: {
-    styleOverrides: {
-      paper:  ({theme}) => ({
-        // backgroundColor: theme.palette.secondary.main,
-      }),
-    }
-  }
 };
 
 const getTheme = (mode: "light" | "dark") => {

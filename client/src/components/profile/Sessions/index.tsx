@@ -34,11 +34,17 @@ const Sessions: React.FC = () => {
 
   return (
     <Stack sx={{ gap: 2.5 }}>
-      <SectionBlockHead title="Sessions" icon={FolderOutlined} additionalContent={!isLoading && <LogoutAllButton />} />
+      <SectionBlockHead
+        title="Sessions"
+        icon={FolderOutlined}
+        additionalContent={!isLoading && <LogoutAllButton />}
+      />
       <Stack sx={{ gap: 1.5 }}>
         {isLoading
           ? repeat(3, (idx) => <ProfileSessionItemSkeleton key={idx} />)
-          : sessions?.map((session) => <Session key={session.id} session={session} setSessions={setSessions} />)}
+          : sessions?.map((session) => (
+              <Session key={session.id} session={session} setSessions={setSessions} />
+            ))}
       </Stack>
     </Stack>
   );

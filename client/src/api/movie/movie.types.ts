@@ -6,6 +6,11 @@ export interface GetAllMoviesParams extends Pagination {
   genre?: Genre;
 }
 
+export type AllMoviesResponse = {
+  data: MovieCard[];
+  total: number;
+}
+
 export type MovieNewsItem = {
   id: string;
   slug: string;
