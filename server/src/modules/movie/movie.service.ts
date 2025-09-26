@@ -165,13 +165,9 @@ export class MovieService {
       data: { movieId, userId },
     });
 
-    const likeCount = await this.prisma.movieLike.count({
-      where: { movieId },
-    });
-
     await this.prisma.movie.update({
       where: { id: movieId },
-      data: { rating: likeCount },
+      data: { rating: { increment: 1 } },
     });
   }
 
@@ -190,13 +186,9 @@ export class MovieService {
       throw new NotFoundException('Like is not found');
     }
 
-    const likeCount = await this.prisma.movieLike.count({
-      where: { movieId },
-    });
-
     await this.prisma.movie.update({
       where: { id: movieId },
-      data: { rating: likeCount },
+      data: { rating: { decrement: 1 } },
     });
   }
 
