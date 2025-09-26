@@ -1,4 +1,5 @@
 import {
+  Box,
   ButtonBase,
   Divider,
   Drawer,
@@ -53,8 +54,9 @@ const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => 
   };
 
   const filterControls = (
-    <Stack direction="row" alignItems="center" spacing={1.5} flexWrap="wrap" p={2}>
+    <Stack direction="row" alignItems="center" spacing={1.5} flexWrap="wrap">
       <FilterSelect label="Year" value={year} onChangeValue={setYear} options={years} />
+      <VerticalDivider />
       <FilterSelect
         label="Genre"
         value={genre}
@@ -64,6 +66,7 @@ const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => 
           value: genre,
         }))}
       />
+      <VerticalDivider />
       <ButtonBase sx={{ color: "primary.main" }} onClick={handleClear}>
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <Clear fontSize="small" sx={{ width: 18, height: 18, color: "primary.main" }} />
@@ -79,7 +82,7 @@ const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => 
         direction="row"
         alignItems="center"
         spacing={0.8}
-        sx={{ cursor: "pointer", ml: isDesktop ? 0 : "auto" }}
+        sx={{ cursor: { xs: "pointer", md: "default" }, ml: isDesktop ? 0 : "auto" }}
         onClick={() => setIsOpened((prev) => !prev)}
       >
         <TuneOutlined sx={{ color: "primary.main", width: 18, height: 18 }} fontSize="small" />
@@ -101,7 +104,7 @@ const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => 
               <Close />
             </IconButton>
           </Stack>
-          {filterControls}
+          <Box p={2}>{filterControls}</Box>
         </Drawer>
       )}
     </Stack>

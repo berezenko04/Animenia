@@ -25,11 +25,13 @@ const genres = [
   Genre.ACTION,
   Genre.ADVENTURE,
   Genre.COMEDY,
+  Genre.DRAMA,
   Genre.FANTASY,
-  Genre.MAGIC,
-  Genre.PARANORMAL,
+  Genre.MYSTERY,
   Genre.ROMANCE,
-  Genre.SCHOOL_LIFE,
+  Genre.SUPERNATURAL,
+  Genre.SCI_FI,
+  Genre.SUSPENSE,
 ];
 
 const GenresPage: React.FC = () => {

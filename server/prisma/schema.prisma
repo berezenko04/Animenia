@@ -52,11 +52,12 @@ model Session {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 
+  @@index([userId])
   @@map("sessions")
 }
 
 model Movie {
-  id          String       @id @default(uuid()) @db.Uuid()
+  id          String       @id @default(uuid()) @db.Uuid
   posterUrl   String       @map("poster_url")
   title       String
   description String
@@ -71,6 +72,8 @@ model Movie {
   comments    Comment[]
   likes       MovieLike[]
 
+  @@index([releaseYear])
+  @@index([genres], type: Gin)
   @@map("movies")
 }
 
@@ -86,27 +89,29 @@ model MovieLike {
   updatedAt DateTime @default(now()) @map("updated_at")
 
   @@unique([movieId, userId])
+  @@index([movieId])
   @@map("movies_likes")
 }
 
 model Screenshot {
   id      String @id @default(uuid()) @db.Uuid
   url     String
-  movieId String @map("movie_id") @db.Uuid()
+  movieId String @map("movie_id") @db.Uuid
 
   movie Movie @relation(fields: [movieId], references: [id])
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 
+  @@index([movieId])
   @@map("screenshots")
 }
 
 model Comment {
   id      String @id @default(uuid()) @db.Uuid
   text    String
-  movieId String @map("movie_id") @db.Uuid()
-  userId  String @map("user_id") @db.Uuid()
+  movieId String @map("movie_id") @db.Uuid
+  userId  String @map("user_id") @db.Uuid
 
   movie Movie @relation(fields: [movieId], references: [id])
   user  User  @relation(fields: [userId], references: [id])
@@ -115,12 +120,13 @@ model Comment {
   updatedAt DateTime @default(now()) @map("updated_at")
 
   @@unique([movieId, userId])
+  @@index([movieId])
   @@map("comments")
 }
 
 model PasswordReset {
   id     String  @id @default(uuid()) @db.Uuid
-  userId String  @map("user_id") @db.Uuid()
+  userId String  @map("user_id") @db.Uuid
   hash   String  @unique()
   used   Boolean @default(false)
 
@@ -130,5 +136,6 @@ model PasswordReset {
   updatedAt DateTime @default(now()) @map("updated_at")
   expiresAt DateTime @map("expires_at")
 
+  @@index([userId])
   @@map("password_resets")
 }

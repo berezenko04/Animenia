@@ -16,11 +16,18 @@ import type { Swiper } from "swiper/types";
 
 interface SectionBlockProps extends Omit<SectionBlockHeadProps, "swiperRef"> {
   movies: MovieCardType[];
+  total?: number;
   isLoading: boolean;
-  isLazyLoad?: boolean;
 }
 
-const SectionBlock: React.FC<SectionBlockProps> = ({ title, icon, movies, isSwipe, isLoading = true, isLazyLoad }) => {
+const SectionBlock: React.FC<SectionBlockProps> = ({
+  title,
+  icon,
+  movies,
+  isSwipe,
+  isLoading = true,
+  total,
+}) => {
   const theme = useTheme();
   const swiperRef = useRef<Swiper | null>(null);
 
@@ -44,7 +51,7 @@ const SectionBlock: React.FC<SectionBlockProps> = ({ title, icon, movies, isSwip
               ))}
         </Grid>
       )}
-      {isLazyLoad && movies.length > 9 && (
+      {!isSwipe && total && total > movies.length && (
         <Button
           sx={{
             backgroundColor: "backgroundPrimary.main",

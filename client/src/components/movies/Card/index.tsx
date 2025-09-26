@@ -54,18 +54,12 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
           backdropFilter: "blur(2.5px)",
         }}
       >
-        <Typography
-          variant="h3"
-          sx={{
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            maxWidth: "100%",
-          }}
-        >
+        <Typography variant="h3" noWrap>
           {title}
         </Typography>
-        <Typography fontSize={12}>{formatGenres(genres)}</Typography>
+        <Typography fontSize={12} noWrap>
+          {formatGenres(genres)}
+        </Typography>
       </Stack>
       <Rating
         sx={{

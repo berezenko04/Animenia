@@ -1,4 +1,4 @@
-import { Grid, Stack, Typography } from "@mui/material";
+import { capitalize, Grid, Stack, Typography } from "@mui/material";
 
 // components
 import CustomContainer from "../Container";
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
               <Stack component="nav" sx={{ gap: 0.75 }}>
                 {genres.slice(0, 6).map((genre, idx) => (
                   <CustomLink sx={{ fontSize: 13 }} to="/genres" key={idx}>
-                    {genre}
+                    {capitalize(genre.toLowerCase())}
                   </CustomLink>
                 ))}
               </Stack>

@@ -10,7 +10,7 @@ import { useMovies } from "@/hooks/useMovies";
 import { LeaderboardOutlined, LocalFireDepartmentOutlined } from "@mui/icons-material";
 
 const HomePage: React.FC = () => {
-  const { movies, isLoading } = useMovies({ limit: 10 });
+  const { movies, total, isLoading } = useMovies({ limit: 9 });
 
   return (
     <Stack sx={{ gap: 4 }}>
@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
         title="Top 100"
         icon={LeaderboardOutlined}
         movies={movies}
-        isLazyLoad
+        total={total}
         isLoading={isLoading}
       />
     </Stack>

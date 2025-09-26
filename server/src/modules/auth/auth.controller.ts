@@ -33,8 +33,6 @@ import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 // utils
 import { getDeviceInfo } from 'src/utils/deviceInfo';
 
-
-
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -43,12 +41,13 @@ export class AuthController {
   ) {}
 
   @Post('register')
+  @Throttle({ default: { limit: 3, ttl: 60000 } })
   async register(@Body() dto: RegisterDto) {
     return this.authService.register(dto);
   }
 
   @Post('login')
-  @Throttle({ default: { limit: 3, ttl: 120000 } })
+  @Throttle({ default: { limit: 3, ttl: 60000 } })
   async login(
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) res: Response,
@@ -120,7 +119,6 @@ export class AuthController {
     return { message: 'Reset is successful' };
   }
 
-
   @Post('logout')
   @HttpCode(200)
   async logout(@Res({ passthrough: true }) res: Response, @Req() req: Request) {
@@ -179,12 +177,11 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     try {
-      const { accessToken, refreshToken } = await this.authService.refreshTokens(
-        userId,
-        req.cookies?.refreshToken,
-      );
+      const { accessToken, refreshToken } =
+        await this.authService.refreshTokens(userId, req.cookies?.refreshToken);
 
-      const isProd = this.configService.get<string>('NODE_ENV') === 'production';
+      const isProd =
+        this.configService.get<string>('NODE_ENV') === 'production';
 
       res.cookie('accessToken', accessToken, {
         httpOnly: true,

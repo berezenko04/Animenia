@@ -9,13 +9,16 @@ import { MailModule } from './modules/mailer/mailer.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath:[`.env.${process.env.NODE_ENV}`, '.env']}),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
+    }),
     PrismaModule,
     AuthModule,
     UserModule,
     MovieModule,
     UploadModule,
-    MailModule
+    MailModule,
   ],
   controllers: [],
   providers: [],
