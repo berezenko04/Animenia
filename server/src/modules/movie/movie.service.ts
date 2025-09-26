@@ -153,42 +153,46 @@ export class MovieService {
   async addLike(userId: string, movieId: string) {
     await this.get(movieId);
 
-    const existingLike = await this.prisma.movieLike.findUnique({
-      where: { movieId_userId: { movieId, userId } },
-    });
+    await this.prisma.$transaction(async prisma => {
+      const existingLike = await prisma.movieLike.findUnique({
+        where: { movieId_userId: { movieId, userId } },
+      });
 
-    if (existingLike) {
-      throw new ConflictException('You already liked this movie');
-    }
+      if (existingLike) {
+        throw new ConflictException('You already liked this movie');
+      }
 
-    await this.prisma.movieLike.create({
-      data: { movieId, userId },
-    });
+      await prisma.movieLike.create({
+        data: { movieId, userId },
+      });
 
-    await this.prisma.movie.update({
-      where: { id: movieId },
-      data: { rating: { increment: 1 } },
+      await prisma.movie.update({
+        where: { id: movieId },
+        data: { rating: { increment: 1 } },
+      });
     });
   }
 
   async deleteLike(userId: string, movieId: string) {
     await this.get(movieId);
 
-    const existingLike = await this.prisma.movieLike.findUnique({
-      where: { movieId_userId: { movieId, userId } },
-    });
-
-    if (existingLike) {
-      await this.prisma.movieLike.delete({
+    await this.prisma.$transaction(async prisma => {
+      const existingLike = await prisma.movieLike.findUnique({
         where: { movieId_userId: { movieId, userId } },
       });
-    } else {
-      throw new NotFoundException('Like is not found');
-    }
 
-    await this.prisma.movie.update({
-      where: { id: movieId },
-      data: { rating: { decrement: 1 } },
+      if (existingLike) {
+        await prisma.movieLike.delete({
+          where: { movieId_userId: { movieId, userId } },
+        });
+      } else {
+        throw new NotFoundException('Nothing to unlike');
+      }
+
+      await prisma.movie.update({
+        where: { id: movieId },
+        data: { rating: { decrement: 1 } },
+      });
     });
   }
 

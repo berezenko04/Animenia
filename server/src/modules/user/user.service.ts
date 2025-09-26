@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -11,23 +12,22 @@ import { UploadService } from '../upload/upload.service';
 // dto
 import { UpdateUserDto } from './dto/update-user.dto';
 
-
 @Injectable()
 export class UserService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly uploadService: UploadService
+    private readonly uploadService: UploadService,
   ) {}
 
   async get(id: string) {
     const user = await this.prisma.user.findFirst({
-      where: {id},
+      where: { id },
       select: {
         id: true,
         email: true,
         firstName: true,
         lastName: true,
-        avatarUrl: true
+        avatarUrl: true,
       },
     });
 
@@ -48,12 +48,13 @@ export class UserService {
   }
 
   async setAvatar(userId: string, fileBase64: string): Promise<void> {
+    if (fileBase64.length > 0.5 * 1024 * 1024) {
+      throw new BadRequestException('File too large (Max 500kb)');
+    }
+
     const url = await this.uploadService.uploadImage(fileBase64);
 
-    if (!url)
-      throw new InternalServerErrorException(
-        'Failed to upload avatar to Imgbb',
-      );
+    if (!url) throw new InternalServerErrorException('Failed to upload avatar');
 
     await this.prisma.user.update({
       where: { id: userId },
