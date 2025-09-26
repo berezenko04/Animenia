@@ -5,12 +5,10 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class UploadService {
   private readonly imgbbKey: string;
-  
-    constructor(
-      private readonly configService: ConfigService,
-    ) {
-        this.imgbbKey = this.configService.get<string>('IMGBB_API_KEY')!;
-    }
+
+  constructor(private readonly configService: ConfigService) {
+    this.imgbbKey = this.configService.get<string>('IMGBB_API_KEY')!;
+  }
 
   async uploadImage(fileBase64: string) {
     if (!this.imgbbKey) throw new Error('API Key is not set');

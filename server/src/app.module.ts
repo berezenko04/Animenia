@@ -6,6 +6,7 @@ import { UserModule } from './modules/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { MailModule } from './modules/mailer/mailer.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { MailModule } from './modules/mailer/mailer.module';
       isGlobal: true,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
     }),
+    ThrottlerModule.forRoot({ throttlers: [{ ttl: 60000, limit: 100 }] }),
     PrismaModule,
     AuthModule,
     UserModule,

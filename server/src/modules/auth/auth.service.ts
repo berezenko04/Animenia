@@ -20,8 +20,6 @@ import { CreateSessionDto } from './dto/create-session.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 
-
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -29,7 +27,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly userService: UserService,
-    private readonly mailerService: MailerService
+    private readonly mailerService: MailerService,
   ) {}
 
   async validateUser(email: string, password: string) {
@@ -125,31 +123,44 @@ export class AuthService {
     });
   }
 
-  async sendPasswordForgotLink(email: string){
-    const user = await this.prisma.user.findUnique({ where: { email }})
+  async sendPasswordForgotLink(email: string) {
+    const user = await this.prisma.user.findUnique({ where: { email } });
 
-    if(!user) return;
+    if (!user) return;
 
     const token = randomUUID();
 
-    await this.prisma.passwordReset.create({ data: {userId: user.id, hash: token, expiresAt: new Date(Date.now() + 1000 * 60 * 30) }})
+    await this.prisma.passwordReset.deleteMany({
+      where: { userId: user.id, used: false },
+    });
 
-    const url = `${this.configService.get<string>("FRONTEND_URL")}/reset-password?token=${token}`;
+    await this.prisma.passwordReset.create({
+      data: {
+        userId: user.id,
+        hash: token,
+        expiresAt: new Date(Date.now() + 1000 * 60 * 30),
+      },
+    });
+
+    const url = `${this.configService.get<string>('FRONTEND_URL')}/reset-password?token=${token}`;
 
     await this.mailerService.sendMail({
       to: user.email,
       subject: 'Reset password',
       template: 'forgot-password',
       context: {
-        url
-      }
-    })
+        url,
+      },
+    });
   }
 
-  async resetPassword(dto: ResetPasswordDto){
-    const resetData = await this.prisma.passwordReset.findFirst({where: { hash: dto.token, expiresAt: {  gte: new Date() }, used: false }})
+  async resetPassword(dto: ResetPasswordDto) {
+    const resetData = await this.prisma.passwordReset.findFirst({
+      where: { hash: dto.token, expiresAt: { gte: new Date() }, used: false },
+    });
 
-    if(!resetData) throw new UnauthorizedException('Invalid or expired reset token')
+    if (!resetData)
+      throw new UnauthorizedException('Invalid or expired reset token');
 
     const newPasswordHash = await bcrypt.hash(dto.password, 10);
 

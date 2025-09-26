@@ -56,7 +56,12 @@ export class AuthController {
     const { accessToken, refreshToken, userId } =
       await this.authService.login(dto);
 
-    const ip = req.ip || req.headers['x-forwarded-for'];
+    const xff = req.headers['x-forwarded-for'];
+    const ipRaw = Array.isArray(xff) ? xff[0] : xff || req.ip || '';
+    const ip =
+      (typeof ipRaw === 'string'
+        ? ipRaw.split(',')[0].trim()
+        : String(ipRaw)) || 'unknown';
     const userAgent = req.headers['user-agent'] || 'unknown';
 
     const { os, deviceType, browser } = getDeviceInfo(userAgent);
@@ -75,20 +80,21 @@ export class AuthController {
       ),
     });
 
+    const isProd = this.configService.get<string>('NODE_ENV') === 'production';
+
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-      maxAge:
-        this.configService.get<string>('NODE_ENV') === 'production'
-          ? parseInt(this.configService.get<string>('JWT_ACCESS_EXPIRY')!)
-          : 30 * 24 * 60 * 60 * 1000,
+      secure: isProd,
+      sameSite: isProd ? 'strict' : 'lax',
+      maxAge: isProd
+        ? parseInt(this.configService.get<string>('JWT_ACCESS_EXPIRY')!)
+        : 30 * 24 * 60 * 60 * 1000,
     });
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
+      secure: isProd,
+      sameSite: isProd ? 'strict' : 'lax',
       maxAge: parseInt(this.configService.get<string>('JWT_REFRESH_EXPIRY')!),
     });
 
@@ -120,6 +126,7 @@ export class AuthController {
   }
 
   @Post('logout')
+  @Throttle({ default: { limit: 5, ttl: 60000 } })
   @HttpCode(200)
   async logout(@Res({ passthrough: true }) res: Response, @Req() req: Request) {
     const refreshToken = req.cookies['refreshToken'];
@@ -144,6 +151,7 @@ export class AuthController {
   }
 
   @Post('logout-all')
+  @Throttle({ default: { limit: 5, ttl: 60000 } })
   @HttpCode(200)
   @Auth()
   async logoutAll(

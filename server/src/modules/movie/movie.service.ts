@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -128,7 +129,7 @@ export class MovieService {
         genres: true,
         slug: true,
       },
-      orderBy: {},
+      orderBy: { createdAt: 'desc' },
       take: 5,
     });
   }
@@ -152,6 +153,14 @@ export class MovieService {
 
   async addLike(userId: string, movieId: string) {
     await this.get(movieId);
+
+    const userLikesCount = await this.prisma.movieLike.count({
+      where: { userId },
+    });
+
+    if (userLikesCount > 200) {
+      throw new BadRequestException('Like limit exceeded');
+    }
 
     await this.prisma.$transaction(async prisma => {
       const existingLike = await prisma.movieLike.findUnique({
