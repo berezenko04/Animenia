@@ -6,6 +6,7 @@ import {
   IsInt,
   IsString,
   IsUrl,
+  Length,
   Max,
   Min,
 } from 'class-validator';
@@ -15,9 +16,11 @@ export class CreateMovieDto {
   posterUrl: string;
 
   @IsString()
+  @Length(2, 64)
   title: string;
 
   @IsString()
+  @Length(10, 256)
   description: string;
 
   @IsArray()
@@ -34,6 +37,6 @@ export class CreateMovieDto {
 
   @IsArray()
   @ArrayNotEmpty()
-  @IsString({ each: true })
+  @IsUrl({}, { each: true })
   screenshots: string[];
 }

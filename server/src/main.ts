@@ -14,12 +14,18 @@ async function bootstrap() {
 
   app.use(helmet());
 
-  app.setGlobalPrefix('api/v1');
+  const corsEnv = configService.get<string>('FRONTEND_URL');
+  const origins = corsEnv
+    ? corsEnv.split(',').map(s => s.trim())
+    : ['http://localhost:5173'];
+
   app.enableCors({
-    origin: configService.get<string>('FRONTEND_URL'),
+    origin: origins,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
+
+  app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
