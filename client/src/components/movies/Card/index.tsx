@@ -21,22 +21,25 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
         position: "relative",
         borderRadius: "10px",
         overflow: "hidden",
-        display: "block",
+        display: "flex",
+        "overflow-clip": "auto",
         height: { xs: 400, md: 340 },
       }}
     >
       <Box
+        component="img"
+        src={posterUrl}
+        alt={title}
         sx={{
-          backgroundImage: `url(${posterUrl})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
           width: "100%",
+          height: "100%",
+          objectFit: "cover",
           transition: "transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease",
           "&:hover": {
             transform: "scale(1.06) translateY(-5px)",
-            boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
           },
         }}
       />

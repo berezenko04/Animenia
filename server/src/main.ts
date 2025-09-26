@@ -4,7 +4,6 @@ import { ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
 import helmet from 'helmet';
-import { AllExceptionsFilter } from './common/filters/all-exception.filter';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
 
@@ -32,7 +31,6 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  app.useGlobalFilters(new AllExceptionsFilter());
   app.use(cookieParser());
 
   app.use(express.json({ limit: '500kb' }));

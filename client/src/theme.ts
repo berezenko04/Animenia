@@ -68,20 +68,6 @@ const components: ThemeOptions["components"] = {
   MuiButton: {
     styleOverrides: {
       root: {
-        variants: [
-          {
-            props: { variant: "iconary" },
-            style: {
-              width: 32,
-              height: 32,
-              minWidth: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "5px",
-            },
-          },
-        ],
         textTransform: "none",
         fontWeight: 400,
         fontSize: 16,
@@ -90,6 +76,40 @@ const components: ThemeOptions["components"] = {
       sizeMedium: { padding: "8px 32px" },
       sizeLarge: { padding: "12px inherit" },
     },
+    variants: [
+      {
+        props: { variant: "iconary" },
+        style: {
+          width: 28,
+          height: 28,
+          minWidth: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "5px",
+          padding: 0,
+
+          svg: {
+            width: 20,
+            height: 20,
+          },
+
+          "&.MuiButtonBase-root": {
+            disableRipple: true,
+          },
+        },
+      },
+      {
+        props: { variant: "iconary", color: "primary" },
+        style: ({ theme }) => ({
+          backgroundColor: theme.palette.primary.light,
+
+          svg: {
+            color: theme.palette.primary.main,
+          },
+        }),
+      },
+    ],
   },
   MuiSelect: {
     styleOverrides: {
@@ -122,11 +142,11 @@ const components: ThemeOptions["components"] = {
           fontSize: "24px",
         },
       }),
-      h2: ({ theme }) => ({ 
-        fontSize: "16px",   
+      h2: ({ theme }) => ({
+        fontSize: "16px",
         [theme.breakpoints.up("sm")]: {
           fontSize: "18px",
-        }, 
+        },
       }),
       h3: { fontSize: 16 },
       body1: { fontSize: 14, lineHeight: "135%" },

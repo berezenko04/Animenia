@@ -7,6 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum LogLevel {
+  INFO     @map("Info")
+  WARN     @map("Warn")
+  ERROR    @map("Error")
+  SECURITY @map("Security")
+}
+
 enum Genre {
   COMEDY       @map("Comedy")
   ROMANCE      @map("Romance")
@@ -138,4 +145,24 @@ model PasswordReset {
 
   @@index([userId])
   @@map("password_resets")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  timestamp DateTime @default(now())
+  level     LogLevel
+  action    String
+  entity    String?
+  entityId  String?  @map("entity_id")
+  userId    String?  @map("user_id") @db.Uuid
+  ip        String?
+  userAgent String?  @map("user_agent")
+  status    String?
+  message   String?
+  metadata  Json?
+
+  @@index([timestamp])
+  @@index([level])
+  @@index([userId])
+  @@map("audit_logs")
 }

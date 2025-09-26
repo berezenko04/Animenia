@@ -12,7 +12,7 @@ import { MailModule } from '../mailer/mailer.module';
 
 // service
 import { AuthService } from './auth.service';
-
+import { LogService } from 'src/common/logging/log.service';
 
 @Global()
 @Module({
@@ -29,7 +29,7 @@ import { AuthService } from './auth.service';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, LogService],
   exports: [JwtModule],
 })
 export class AuthModule {}

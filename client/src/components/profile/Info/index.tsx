@@ -12,12 +12,7 @@ import ProfileAvatar from "../Avatar";
 import { userSelector } from "@/redux/user/user.selectors";
 
 // icons
-import {
-  EditOutlined,
-  LockOutlined,
-  MailOutlined,
-  PersonOutlineOutlined,
-} from "@mui/icons-material";
+import { EditOutlined, LockOutlined, MailOutlined, PersonOutlineOutlined } from "@mui/icons-material";
 
 const Info = () => {
   const [isChangeNameModalOpened, setIsChangeNameModalOpened] = useState<boolean>(false);
@@ -35,20 +30,11 @@ const Info = () => {
             <Typography variant="h1">
               {user?.firstName} {user?.lastName}
             </Typography>
-            <Button
-              onClick={() => setIsChangeNameModalOpened(true)}
-              variant="iconary"
-              sx={{ backgroundColor: "primary.light" }}
-            >
-              <EditOutlined
-                fontSize="small"
-                sx={{ color: "primary.main", width: 16, height: 16 }}
-              />
+            <Button onClick={() => setIsChangeNameModalOpened(true)} variant="iconary" color="primary">
+              <EditOutlined fontSize="small" sx={{ color: "primary.main", width: 16, height: 16 }} />
             </Button>
           </Stack>
-          <Stack
-            sx={{ gap: { xs: 1, md: 2 }, svg: { width: 20, height: 20, color: "primary.main" } }}
-          >
+          <Stack sx={{ gap: { xs: 1, md: 2 }, svg: { width: 20, height: 20, color: "primary.main" } }}>
             <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
               <MailOutlined />
               <Typography color="primary.main">{user?.email}</Typography>
@@ -69,10 +55,7 @@ const Info = () => {
           </Stack>
         </Stack>
       </Stack>
-      <ChangeNameModal
-        isOpened={isChangeNameModalOpened}
-        handleClose={() => setIsChangeNameModalOpened(false)}
-      />
+      <ChangeNameModal isOpened={isChangeNameModalOpened} handleClose={() => setIsChangeNameModalOpened(false)} />
       <ChangePasswordModal
         isOpened={isChangePasswordModalOpened}
         handleClose={() => setIsChangePasswordModalOpened(false)}

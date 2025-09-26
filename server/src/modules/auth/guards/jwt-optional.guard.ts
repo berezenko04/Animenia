@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  CanActivate,
-  ExecutionContext,
-} from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 // interfaces
@@ -17,15 +13,15 @@ export class OptionalJwtAuthGuard implements CanActivate {
     const token = request.cookies?.accessToken;
 
     if (!token) {
-        request.user = null;
-        return true;
+      request.user = null;
+      return true;
     }
 
     try {
       const payload = this.jwtService.verify(token);
-      request.user = payload; 
+      request.user = payload;
     } catch {
-      request.user = null;  
+      request.user = null;
     }
 
     return true;

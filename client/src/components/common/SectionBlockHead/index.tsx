@@ -1,9 +1,8 @@
-import { Box, Stack, Typography, type SvgIconProps } from "@mui/material";
+import { Box, Button, Stack, Typography, type SvgIconProps } from "@mui/material";
 import { Fragment } from "react/jsx-runtime";
 
 // components
 import IconBoxWithBackground from "@/components/ui/IconBoxWithBackground";
-import IconButtonWithBackground from "@/components/ui/buttons/IconButtonWithBackground";
 
 // icons
 import { ArrowBackOutlined, ArrowForwardOutlined } from "@mui/icons-material";
@@ -19,13 +18,7 @@ export type SectionBlockHeadProps = {
   swiperRef?: React.RefObject<Swiper | null>;
 };
 
-const SectionBlockHead: React.FC<SectionBlockHeadProps> = ({
-  title,
-  icon,
-  additionalContent,
-  isSwipe,
-  swiperRef,
-}) => {
+const SectionBlockHead: React.FC<SectionBlockHeadProps> = ({ title, icon, additionalContent, isSwipe, swiperRef }) => {
   return (
     <Box
       sx={{
@@ -36,9 +29,7 @@ const SectionBlockHead: React.FC<SectionBlockHeadProps> = ({
         px: 2.5,
       }}
     >
-      <Stack
-        sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 4 }}
-      >
+      <Stack sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 4 }}>
         <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
           <IconBoxWithBackground icon={icon} />
           <Typography variant="h2">{title}</Typography>
@@ -46,14 +37,12 @@ const SectionBlockHead: React.FC<SectionBlockHeadProps> = ({
         <Fragment>{additionalContent}</Fragment>
         {isSwipe && (
           <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 1.5 }}>
-            <IconButtonWithBackground
-              onClick={() => swiperRef!.current?.slidePrev()}
-              icon={ArrowBackOutlined}
-            />
-            <IconButtonWithBackground
-              onClick={() => swiperRef!.current?.slideNext()}
-              icon={ArrowForwardOutlined}
-            />
+            <Button variant="iconary" color="primary" onClick={() => swiperRef!.current?.slidePrev()}>
+              <ArrowBackOutlined />
+            </Button>
+            <Button variant="iconary" color="primary" onClick={() => swiperRef!.current?.slideNext()}>
+              <ArrowForwardOutlined />
+            </Button>
           </Stack>
         )}
       </Stack>

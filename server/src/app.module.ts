@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_FILTER } from '@nestjs/core';
 import { AuthModule } from './modules/auth/auth.module';
 import { MovieModule } from './modules/movie/movie.module';
 import { UserModule } from './modules/user/user.module';
@@ -7,6 +8,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { MailModule } from './modules/mailer/mailer.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { LogService } from './common/logging/log.service';
+import { AllExceptionsFilter } from './common/filters/all-exception.filter';
 
 @Module({
   imports: [
@@ -23,6 +26,12 @@ import { ThrottlerModule } from '@nestjs/throttler';
     MailModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    LogService,
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+  ],
 })
 export class AppModule {}
