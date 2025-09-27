@@ -23,7 +23,16 @@ import { store } from "./redux/store.ts";
 // theme
 import getTheme from "./theme.ts";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      staleTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: true,
+    },
+  },
+});
 
 export const RootApp: React.FC = () => {
   const { mode } = useSelector(themeSelector);
