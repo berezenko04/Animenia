@@ -8,6 +8,7 @@ import {
   Post,
   Req,
   Res,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
@@ -208,8 +209,8 @@ export class AuthController {
       });
 
       return { message: 'Refresh successful' };
-    } catch (err) {
-      throw err;
+    } catch {
+      throw new UnauthorizedException('Token refresh failed');
     }
   }
 

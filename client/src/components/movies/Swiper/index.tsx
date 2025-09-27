@@ -46,9 +46,9 @@ const Swiper: React.FC<SwiperProps> = ({ swiperRef, isLoading, data }) => {
               <MovieCardSkeleton />
             </SwiperSlide>
           ))
-        : data?.map((i, idx) => (
-            <SwiperSlide style={{ height: "100%" }} key={idx}>
-              <MovieCard {...i} />
+        : data?.map((movie) => (
+            <SwiperSlide style={{ height: "100%" }} key={movie.id}>
+              <MovieCard {...movie} />
             </SwiperSlide>
           ))}
     </SwiperInitial>
