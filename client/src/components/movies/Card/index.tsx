@@ -22,7 +22,6 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
         borderRadius: "10px",
         overflow: "hidden",
         display: "flex",
-        "overflow-clip": "auto",
         height: { xs: 400, md: 340 },
       }}
     >
@@ -54,7 +53,6 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
           zIndex: 10,
           userSelect: "none",
           backgroundColor: alpha(theme.palette.backgroundPrimary.main, 0.9),
-          backdropFilter: "blur(2.5px)",
         }}
       >
         <Typography variant="h3" noWrap>

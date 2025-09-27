@@ -33,9 +33,7 @@ type FiltersProps = {
   setGenre: (i: Genre | "all") => void;
 };
 
-const VerticalDivider = () => (
-  <Divider orientation="vertical" flexItem sx={{ height: 16, alignSelf: "center" }} />
-);
+const VerticalDivider = () => <Divider orientation="vertical" flexItem sx={{ height: 16, alignSelf: "center" }} />;
 
 const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -51,6 +49,7 @@ const Filters: React.FC<FiltersProps> = ({ year, genre, setYear, setGenre }) => 
   const handleClear = () => {
     setYear("all");
     setGenre("all");
+    setIsOpened(false);
   };
 
   const filterControls = (
