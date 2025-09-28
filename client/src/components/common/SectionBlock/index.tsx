@@ -14,6 +14,9 @@ import { repeat } from "@/utils/repeat";
 import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 import type { Swiper } from "swiper/types";
 
+// constants
+import { MOVIES_LIMIT } from "@/constants";
+
 interface SectionBlockProps extends Omit<SectionBlockHeadProps, "swiperRef"> {
   movies: MovieCardType[];
   page?: number;
@@ -32,7 +35,7 @@ const SectionBlock: React.FC<SectionBlockProps> = ({
   isLoading = true,
   total,
 }) => {
-  const limit = 9;
+  const limit = MOVIES_LIMIT;
   const pages = total ? Math.ceil(total / limit) : 0;
   const swiperRef = useRef<Swiper | null>(null);
 

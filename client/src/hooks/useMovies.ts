@@ -8,13 +8,16 @@ import MovieService from "@/api/movie/movie.service";
 import type { MovieCard } from "@/api/movie/movie.types";
 import type { Genre } from "@/types/enums.types";
 
+// constants
+import { MOVIES_LIMIT } from "@/constants";
+
 type UseMoviesProps = {
   limit?: number;
   genre?: Genre | "all";
   year?: string;
 };
 
-export const useMovies = ({ limit = 9, genre, year }: UseMoviesProps = {}) => {
+export const useMovies = ({ limit = MOVIES_LIMIT, genre, year }: UseMoviesProps = {}) => {
   const [page, setPage] = useState<number>(1);
 
   const genreFilter = genre === "all" ? undefined : genre;
