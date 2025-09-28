@@ -14,7 +14,7 @@ type UseMoviesProps = {
   year?: string;
 };
 
-export const useMovies = ({ limit = 10, genre, year }: UseMoviesProps = {}) => {
+export const useMovies = ({ limit = 9, genre, year }: UseMoviesProps = {}) => {
   const [page, setPage] = useState<number>(1);
 
   const genreFilter = genre === "all" ? undefined : genre;

@@ -1,4 +1,4 @@
-import { Button, darken, Grid, Stack, useTheme } from "@mui/material";
+import { Grid, Pagination, Stack } from "@mui/material";
 import { useRef } from "react";
 
 // components
@@ -16,6 +16,8 @@ import type { Swiper } from "swiper/types";
 
 interface SectionBlockProps extends Omit<SectionBlockHeadProps, "swiperRef"> {
   movies: MovieCardType[];
+  page?: number;
+  setPage?: (p: number) => void;
   total?: number;
   isLoading: boolean;
 }
@@ -25,10 +27,13 @@ const SectionBlock: React.FC<SectionBlockProps> = ({
   icon,
   movies,
   isSwipe,
+  page,
+  setPage,
   isLoading = true,
   total,
 }) => {
-  const theme = useTheme();
+  const limit = 9;
+  const pages = total ? Math.ceil(total / limit) : 0;
   const swiperRef = useRef<Swiper | null>(null);
 
   return (
@@ -51,24 +56,8 @@ const SectionBlock: React.FC<SectionBlockProps> = ({
               ))}
         </Grid>
       )}
-      {!isSwipe && total && total > movies.length && (
-        <Button
-          sx={{
-            backgroundColor: "backgroundPrimary.main",
-            py: 1.5,
-            color: "primary.main",
-            fontSize: 18,
-            fontWeight: 500,
-            borderRadius: "10px",
-            boxShadow: 1,
-            "&:hover": {
-              backgroundColor: darken(theme.palette.backgroundPrimary.main, 0.07),
-            },
-          }}
-          fullWidth
-        >
-          Load More
-        </Button>
+      {!isSwipe && page !== undefined && setPage && total !== undefined && pages > 1 && (
+        <Pagination page={page} onChange={(_, val) => setPage(val)} count={pages} />
       )}
     </Stack>
   );

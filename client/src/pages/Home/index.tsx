@@ -10,21 +10,17 @@ import { useMovies } from "@/hooks/useMovies";
 import { LeaderboardOutlined, LocalFireDepartmentOutlined } from "@mui/icons-material";
 
 const HomePage: React.FC = () => {
-  const { movies, total, isLoading } = useMovies({ limit: 9 });
+  const { movies, total, page, setPage, isLoading } = useMovies();
 
   return (
     <Stack sx={{ gap: 4 }}>
-      <SectionBlock
-        title="Popular"
-        icon={LocalFireDepartmentOutlined}
-        movies={movies}
-        isSwipe
-        isLoading={isLoading}
-      />
+      <SectionBlock title="Popular" icon={LocalFireDepartmentOutlined} movies={movies} isSwipe isLoading={isLoading} />
       <SectionBlock
         title="Top 100"
         icon={LeaderboardOutlined}
         movies={movies}
+        page={page}
+        setPage={setPage}
         total={total}
         isLoading={isLoading}
       />

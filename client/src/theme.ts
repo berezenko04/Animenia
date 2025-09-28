@@ -170,17 +170,26 @@ const components: ThemeOptions["components"] = {
       root: ({ theme }) => ({ color: theme.palette.secondary.main }),
     },
   },
+  MuiPagination: {
+    styleOverrides: {
+      root: {
+        alignSelf: "center",
+      },
+    },
+  },
   MuiPaginationItem: {
     styleOverrides: {
       root: ({ theme }) => ({
         width: 40,
         height: 40,
         borderRadius: "10px",
+        color: theme.palette.text.secondary,
         backgroundColor: theme.palette.backgroundPrimary.main,
         fontSize: 16,
 
         "&.Mui-selected": {
           backgroundColor: theme.palette.backgroundPrimary.main,
+          fontWeight: 500,
           color: theme.palette.primary.main,
         },
 
@@ -188,6 +197,11 @@ const components: ThemeOptions["components"] = {
           backgroundColor: `${theme.palette.backgroundPrimary.main} !important`,
         },
       }),
+      ellipsis: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      },
     },
   },
   MuiModal: {

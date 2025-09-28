@@ -28,7 +28,7 @@ const AllAnimePage: React.FC = () => {
     <Stack sx={{ gap: 2.5, alignItems: "center" }}>
       <SectionBlockHead
         title="All Anime"
-        icon={AppsOutlined}
+        icon={AppsOutlined} 
         additionalContent={
           <Filters year={year} genre={genre} setYear={setYear} setGenre={setGenre} />
         }
