@@ -27,6 +27,7 @@ const NotificationsPage = lazy(() => import("@/pages/Notifications"));
 const GenresPage = lazy(() => import("@/pages/Genres"));
 const NotFoundPage = lazy(() => import("@/pages/NotFound"));
 const ForgotPasswordPage = lazy(() => import("@/pages/ForgotPassword"));
+const ResetPasswordPage = lazy(() => import("@/pages/ResetPassword"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -70,6 +71,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             </Route>
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
           </Route>
         </Routes>
       </Suspense>

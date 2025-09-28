@@ -1,7 +1,7 @@
 import { httpPost, httpGet, httpDelete } from "@/middlewares/axios.middleware";
 
 // types
-import type { Session, ChangePasswordBody, LoginBody, RegisterBody } from "./auth.types";
+import type { Session, ChangePasswordBody, LoginBody, RegisterBody, ResetPasswordBody } from "./auth.types";
 import type { BaseResponseData } from "@/types/base.types";
 
 const R = {
@@ -10,6 +10,7 @@ const R = {
   changePassword: "/auth/change-password",
   refresh: "/auth/refresh",
   forgotPassword: "/auth/forgot-password",
+  resetPassword: "/auth/reset-password",
   logout: "/auth/logout",
   logoutAll: "/auth/logout-all",
   sessions: "/auth/sessions",
@@ -24,6 +25,9 @@ const AuthService = {
   },
   async changePassword(body: ChangePasswordBody) {
     return httpPost<BaseResponseData>(R.changePassword, body);
+  },
+  async resetPassword(body: ResetPasswordBody) {
+    return httpPost<BaseResponseData>(R.resetPassword, body);
   },
   async refresh() {
     return httpPost<void>(R.refresh);

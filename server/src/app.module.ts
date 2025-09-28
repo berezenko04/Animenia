@@ -15,7 +15,11 @@ import { AllExceptionsFilter } from './common/filters/all-exception.filter';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
+      envFilePath: [
+        `.env.${process.env.NODE_ENV || 'development'}`,
+        '.env.development',
+        '.env'
+      ],
     }),
     ThrottlerModule.forRoot({ throttlers: [{ ttl: 60000, limit: 100 }] }),
     PrismaModule,

@@ -15,6 +15,11 @@ export type ChangePasswordBody = {
   newPassword: string;
 };
 
+export type ResetPasswordBody = {
+  token: string;
+  password: string;
+};
+
 export type Session = {
   id: string;
   ipAddress: string;
