@@ -18,7 +18,7 @@ import { AllExceptionsFilter } from './common/filters/all-exception.filter';
       envFilePath: [
         `.env.${process.env.NODE_ENV || 'development'}`,
         '.env.development',
-        '.env'
+        '.env',
       ],
     }),
     ThrottlerModule.forRoot({ throttlers: [{ ttl: 60000, limit: 100 }] }),

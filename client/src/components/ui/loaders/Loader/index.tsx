@@ -1,7 +1,7 @@
 import { alpha, Box, keyframes, useTheme } from "@mui/material";
 
 // components
-import Logo from "../../../common/Logo";
+import Logo from "@/components/common/Logo";
 
 const fade = keyframes`
   0%, 100% {
@@ -12,11 +12,7 @@ const fade = keyframes`
   }
 `;
 
-type LoaderProps = {
-  size?: number;
-};
-
-const Loader: React.FC<LoaderProps> = ({ size = 160 }) => {
+const Loader: React.FC = () => {
   const theme = useTheme();
 
   return (
@@ -48,8 +44,7 @@ const Loader: React.FC<LoaderProps> = ({ size = 160 }) => {
       <Box
         sx={{
           position: "relative",
-          width: size,
-          height: size,
+          width: "max-content",
           animation: `${fade} 2s infinite ease-in-out`,
           userSelect: "none",
         }}
