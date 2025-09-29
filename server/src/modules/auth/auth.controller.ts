@@ -33,6 +33,7 @@ import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 // utils
 import { getDeviceInfo } from 'src/utils/deviceInfo';
+import { IpAddress } from './decorators/ip.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -53,16 +54,11 @@ export class AuthController {
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) res: Response,
     @Req() req: Request,
+    @IpAddress() ip: string,
   ) {
     const { accessToken, refreshToken, userId } =
       await this.authService.login(dto);
 
-    const xff = req.headers['x-forwarded-for'];
-    const ipRaw = Array.isArray(xff) ? xff[0] : xff || req.ip || '';
-    const ip =
-      (typeof ipRaw === 'string'
-        ? ipRaw.split(',')[0].trim()
-        : String(ipRaw)) || 'unknown';
     const userAgent = req.headers['user-agent'] || 'unknown';
 
     const { os, deviceType, browser } = getDeviceInfo(userAgent);

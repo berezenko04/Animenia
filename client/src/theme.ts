@@ -109,6 +109,18 @@ const components: ThemeOptions["components"] = {
           },
         }),
       },
+      {
+        props: { variant: "iconary", size: "small" },
+        style: {
+          width: 24,
+          height: 24,
+
+          svg: {
+            width: 18,
+            height: 18,
+          },
+        },
+      },
     ],
   },
   MuiSelect: {

@@ -6,6 +6,7 @@ import * as express from 'express';
 import helmet from 'helmet';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
+import * as requestIp from 'request-ip';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -32,6 +33,7 @@ async function bootstrap() {
     }),
   );
   app.use(cookieParser());
+  app.use(requestIp.mw());
 
   app.use(express.json({ limit: '500kb' }));
   app.use(express.urlencoded({ limit: '500kb', extended: true }));

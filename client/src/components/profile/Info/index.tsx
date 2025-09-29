@@ -30,8 +30,8 @@ const Info = () => {
             <Typography variant="h1">
               {user?.firstName} {user?.lastName}
             </Typography>
-            <Button onClick={() => setIsChangeNameModalOpened(true)} variant="iconary" color="primary">
-              <EditOutlined fontSize="small" sx={{ color: "primary.main", width: 16, height: 16 }} />
+            <Button onClick={() => setIsChangeNameModalOpened(true)} variant="iconary" color="primary" size="small">
+              <EditOutlined />
             </Button>
           </Stack>
           <Stack sx={{ gap: { xs: 1, md: 2 }, svg: { width: 20, height: 20, color: "primary.main" } }}>
@@ -44,6 +44,7 @@ const Info = () => {
               <ButtonBase
                 onClick={() => setIsChangePasswordModalOpened(true)}
                 sx={{
+                  fontSize: 14,
                   color: "text.main",
                   transition: "all .3s ease-in-out",
                   "&:hover": { color: "primary.main" },

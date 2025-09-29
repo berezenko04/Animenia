@@ -42,8 +42,8 @@ const Avatar: React.FC = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        width: { xs: 80, md: 120, lg: 160 },
-        height: { xs: 80, md: 120, lg: 160 },
+        width: { xs: 96, md: 120, lg: 160 },
+        height: { xs: 96, md: 120, lg: 160 },
         borderRadius: "100%",
         cursor: "pointer",
       }}
@@ -63,7 +63,7 @@ const Avatar: React.FC = () => {
           justifyContent: "center",
         }}
       >
-        <CameraAltOutlined sx={{ width: 48, height: 48, color: "backgroundPrimary.main" }} />
+        <CameraAltOutlined sx={{ width: { xs: 32, md: 48 }, height: "auto", color: "backgroundPrimary.main" }} />
       </Box>
       <input ref={inputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
     </Box>
