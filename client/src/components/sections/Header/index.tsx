@@ -1,7 +1,7 @@
 import { Box, IconButton, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 // components
 import CustomContainer from "../Container";
@@ -11,13 +11,13 @@ import ThemeSwitchButton from "@/components/common/Buttons/ThemeSwitchButton";
 import UnderlinedLink from "@/components/ui/links/UnderlinedLink";
 import CustomLink from "@/components/common/CustomLink";
 
-// api
-import MovieService from "@/api/movie/movie.service";
-
 // redux
 import { userSelector } from "@/redux/user/user.selectors";
 import { authSelector } from "@/redux/auth/auth.selectors";
 import { themeSelector } from "@/redux/theme/theme.selectors";
+
+// utils
+import { handleRandomMovie } from "@/utils/handleRandomMovie";
 
 // data
 import { menu } from "@/data";
@@ -26,20 +26,13 @@ import { menu } from "@/data";
 import { MenuOpenOutlined, PersonOutlineOutlined } from "@mui/icons-material";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState<boolean>(false);
 
   const { user } = useSelector(userSelector);
   const { mode } = useSelector(themeSelector);
   const { isAuth } = useSelector(authSelector);
-
-  const navigate = useNavigate();
-
-  const handleRandomMovie = async (e: React.MouseEvent) => {
-    e.preventDefault();
-
-    const { slug } = await MovieService.random();
-    navigate(`/movies/${slug}`);
-  };
 
   return (
     <Stack
@@ -79,7 +72,7 @@ const Header: React.FC = () => {
                   {title}
                 </UnderlinedLink>
               ) : (
-                <UnderlinedLink sx={{ fontWeight: 500 }} key={idx} to="#" onClick={handleRandomMovie}>
+                <UnderlinedLink sx={{ fontWeight: 500 }} key={idx} to="#" onClick={handleRandomMovie(navigate)}>
                   {title}
                 </UnderlinedLink>
               )

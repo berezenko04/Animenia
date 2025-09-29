@@ -1,7 +1,11 @@
 import { Box, Drawer, Stack, IconButton } from "@mui/material";
+import { useNavigate } from "react-router";
 
 // components
 import UnderlinedLink from "@/components/ui/links/UnderlinedLink";
+
+// utils
+import { handleRandomMovie } from "@/utils/handleRandomMovie";
 
 // icons
 import { Close } from "@mui/icons-material";
@@ -15,6 +19,7 @@ type MobileMenuProps = {
 };
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose }) => {
+  const navigate = useNavigate();
   return (
     <Drawer
       anchor="top"
@@ -39,22 +44,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose }) => {
           justifyContent: "flex-start",
         }}
       >
-        <IconButton
-          onClick={onClose}
-          sx={{ display: "flex", alignSelf: "flex-end", flexShrink: 0 }}
-        >
+        <IconButton onClick={onClose} sx={{ display: "flex", alignSelf: "flex-end", flexShrink: 0 }}>
           <Close />
         </IconButton>
 
         <Stack component="nav" alignItems="center" justifyContent="center" flex={1} spacing={3}>
           {menu.map(({ title, href }, idx) =>
             href ? (
-              <UnderlinedLink
-                sx={{ fontWeight: 500, fontSize: 24 }}
-                key={idx}
-                to={href}
-                onClick={onClose}
-              >
+              <UnderlinedLink sx={{ fontWeight: 500, fontSize: 24 }} key={idx} to={href} onClick={onClose}>
                 {title}
               </UnderlinedLink>
             ) : (
@@ -62,7 +59,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose }) => {
                 sx={{ fontWeight: 500, fontSize: 24 }}
                 key={idx}
                 to="#"
-                // onClick={handleRandomMovie}
+                onClick={handleRandomMovie(navigate)}
               >
                 {title}
               </UnderlinedLink>
