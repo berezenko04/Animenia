@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 
 // components
-import GenreSection from "@/components/common/GenreSection";
+import GenreSection from "@/components/features/movies/GenreSection";
 
 // data
 import { genres } from "@/data";

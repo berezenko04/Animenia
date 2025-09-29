@@ -4,13 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 // components
-import MovieListItem from "@/components/movies/ListItem";
-import Screenshots from "@/components/movies/Screenshots";
-import SectionBlockHead from "@/components/common/SectionBlockHead";
-import SectionBlock from "@/components/common/SectionBlock";
+import MovieListItem from "@/components/features/movies/ListItem";
+import Screenshots from "@/components/features/movies/Screenshots";
+import SectionBlockHead from "@/components/ui/layout/SectionBlockHead";
+import SectionBlock from "@/components/ui/layout/SectionBlock";
 import MovieListItemSkeleton from "@/components/ui/loaders/skeletons/MovieListItemSkeleton";
-import VideoPlayer from "@/components/common/VideoPlayer";
-import MovieComments from "@/components/movies/Comments";
+import VideoPlayer from "@/components/features/movies/VideoPlayer";
+import MovieComments from "@/components/features/movies/Comments";
 
 // api
 import MovieService from "@/api/movie/movie.service";
@@ -63,9 +63,7 @@ const MoviePage: React.FC = () => {
         icon={GroupOutlined}
         isSwipe
       />
-      {!isMovieLoading && movie && (
-        <MovieComments isCommented={movie.isCommented} movieId={movie.id} />
-      )}
+      {!isMovieLoading && movie && <MovieComments isCommented={movie.isCommented} movieId={movie.id} />}
     </Stack>
   );
 };

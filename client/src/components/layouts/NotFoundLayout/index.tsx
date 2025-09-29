@@ -2,9 +2,9 @@ import { Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 // components
-import Header from "@/components/sections/Header";
-import CustomContainer from "@/components/sections/Container";
-import Footer from "@/components/sections/Footer";
+import Header from "@/components/navigation/Header";
+import CustomContainer from "@/components/ui/layout/Container";
+import Footer from "@/components/navigation/Footer";
 
 const NotFoundLayout: React.FC = () => {
   return (

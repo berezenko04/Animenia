@@ -2,9 +2,9 @@ import { Stack } from "@mui/material";
 import { useState } from "react";
 
 // components
-import MovieList from "@/components/movies/List";
-import Filters from "@/components/movies/Filters";
-import SectionBlockHead from "@/components/common/SectionBlockHead";
+import MovieList from "@/components/features/movies/List";
+import Filters from "@/components/features/movies/Filters";
+import SectionBlockHead from "@/components/ui/layout/SectionBlockHead";
 
 // hooks
 import { useMovies } from "@/hooks/useMovies";
@@ -14,7 +14,7 @@ import { Genre } from "@/types/enums.types";
 
 // icons
 import { AppsOutlined } from "@mui/icons-material";
-import ResponsivePagination from "@/components/common/ResponsivePagination";
+import ResponsivePagination from "@/components/ui/layout/ResponsivePagination";
 
 const AllAnimePage: React.FC = () => {
   const [year, setYear] = useState<string>("all");

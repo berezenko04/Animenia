@@ -2,8 +2,8 @@ import { Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 // components
-import Header from "@/components/sections/Header";
-import CustomContainer from "@/components/sections/Container";
+import Header from "@/components/navigation/Header";
+import CustomContainer from "@/components/ui/layout/Container";
 
 const AuthLayout: React.FC = () => {
   return (

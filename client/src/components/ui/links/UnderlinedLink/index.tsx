@@ -1,7 +1,7 @@
 import { useTheme, type LinkProps } from "@mui/material";
 
 // components
-import CustomLink from "@/components/common/CustomLink";
+import CustomLink from "@/components/ui/links/CustomLink";
 
 const UnderlinedLink: React.FC<LinkProps<typeof CustomLink>> = ({ sx, ...props }) => {
   const theme = useTheme();

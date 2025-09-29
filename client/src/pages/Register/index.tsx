@@ -1,5 +1,5 @@
 // components
-import RegisterForm from "@/components/common/Forms/auth/RegisterForm";
+import RegisterForm from "@/components/forms/auth/RegisterForm";
 
 const RegisterPage: React.FC = () => {
   return <RegisterForm />;
