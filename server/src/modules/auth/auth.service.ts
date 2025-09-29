@@ -212,8 +212,6 @@ export class AuthService {
       },
     });
 
-    console.log(this.configService.get('FRONTEND_URL'));
-
     const url = `${this.configService.get<string>('FRONTEND_URL')}/reset-password?token=${token}`;
 
     await this.mailerService.sendMail({

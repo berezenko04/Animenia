@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 // components
 import Rating from "@/components/features/movies/Rating";
@@ -34,7 +34,7 @@ const ListItem: React.FC<ListItemProps> = ({
 
   const { mode } = useSelector(themeSelector);
 
-  const isShadow = mode === "light" && isListItem;
+  const isShadow = useMemo(() => mode === "light" && isListItem, [mode, isListItem]);
 
   return (
     <Stack

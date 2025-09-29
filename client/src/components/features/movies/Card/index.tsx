@@ -1,4 +1,5 @@
 import { alpha, Box, Stack, Typography, useTheme } from "@mui/material";
+import { memo } from "react";
 
 // components
 import CustomLink from "@/components/ui/links/CustomLink";
@@ -10,7 +11,7 @@ import type { MovieCard as MovieCardType } from "@/api/movie/movie.types";
 // utils
 import { formatGenres } from "@/utils/formatGenres";
 
-const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres }) => {
+const Card: React.FC<MovieCardType> = memo(({ posterUrl, title, slug, rating, genres }) => {
   const theme = useTheme();
 
   return (
@@ -74,6 +75,6 @@ const Card: React.FC<MovieCardType> = ({ posterUrl, title, slug, rating, genres 
       />
     </Box>
   );
-};
+});
 
 export default Card;

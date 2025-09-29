@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
+  Logger,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { LogService } from '../logging/log.service';
@@ -12,6 +13,8 @@ import { LogService } from '../logging/log.service';
 @Catch()
 @Injectable()
 export class AllExceptionsFilter implements ExceptionFilter {
+  private readonly logger = new Logger(AllExceptionsFilter.name);
+
   constructor(private readonly logService: LogService) {}
 
   async catch(exception: unknown, host: ArgumentsHost) {
@@ -72,7 +75,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         },
       });
     } catch (logError) {
-      console.error('Failed to log exception:', logError);
+      this.logger.error(logError);
     }
 
     response.status(status).json(responseBody);

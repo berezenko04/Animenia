@@ -47,7 +47,6 @@ const LikeButton: React.FC<LikeButtonProps> = ({ movieId, isLiked, onChange }) =
       }}
       onClick={handleClick}
       variant="iconary"
-      size="small"
     >
       {isLiked ? (
         <Favorite fontSize="small" sx={{ color: "primary.main" }} />

@@ -13,6 +13,7 @@ const ListItem: React.FC<ListItemProps> = ({ imgSrc }) => {
       <Box
         component="img"
         src={imgSrc}
+        alt="review"
         sx={{
           borderRadius: "10px",
           height: { xs: 160, lg: 120 },

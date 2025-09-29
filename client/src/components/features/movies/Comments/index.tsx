@@ -1,12 +1,13 @@
 import { Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //  components
 import SectionBlockHead from "@/components/ui/layout/SectionBlockHead";
 import CommentForm from "@/components/forms/common/CommentForm";
 import AlreadyCommented from "@/components/features/movies/AlreadyCommentedNotice";
+import CommentSkeleton from "@/components/ui/loaders/skeletons/CommentSkeleton";
 import Comment from "@/components/features/movies/Comment";
 
 // api
@@ -14,6 +15,9 @@ import MovieService from "@/api/movie/movie.service";
 
 // redux
 import { authSelector } from "@/redux/auth/auth.selectors";
+
+// utils
+import { repeat } from "@/utils/repeat";
 
 // icons
 import { EmailOutlined } from "@mui/icons-material";
@@ -23,7 +27,7 @@ type CommentsProps = {
   isCommented: boolean;
 };
 
-const Comments: React.FC<CommentsProps> = ({ movieId, isCommented: isInititalCommented }) => {
+const Comments: React.FC<CommentsProps> = memo(({ movieId, isCommented: isInititalCommented }) => {
   const { isAuth } = useSelector(authSelector);
   const queryClient = useQueryClient();
 
@@ -57,13 +61,13 @@ const Comments: React.FC<CommentsProps> = ({ movieId, isCommented: isInititalCom
       <Stack sx={{ gap: 4, px: 2.5 }}>
         {isCommented ? <AlreadyCommented /> : <CommentForm onAddComment={handleAddComment} />}
         <Stack sx={{ gap: 2.5 }}>
-          {comments.map((comment) => (
-            <Comment key={comment.id} {...comment} />
-          ))}
+          {isLoading
+            ? repeat(4, (idx) => <CommentSkeleton key={idx} />)
+            : comments.map((comment) => <Comment key={comment.id} {...comment} />)}
         </Stack>
       </Stack>
     </Stack>
   );
-};
+});
 
 export default Comments;

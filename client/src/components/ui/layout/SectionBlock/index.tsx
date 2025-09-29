@@ -1,5 +1,5 @@
 import { Grid, Stack } from "@mui/material";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 // components
 import SectionBlockHead, { type SectionBlockHeadProps } from "../SectionBlockHead";
@@ -36,8 +36,7 @@ const SectionBlock: React.FC<SectionBlockProps> = ({
   isLoading = true,
   total,
 }) => {
-  const limit = MOVIES_LIMIT;
-  const pages = total ? Math.ceil(total / limit) : 0;
+  const pages = useMemo(() => (total ? Math.ceil(total / MOVIES_LIMIT) : 0), [total]);
   const swiperRef = useRef<Swiper | null>(null);
 
   return (
