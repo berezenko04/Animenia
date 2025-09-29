@@ -1,4 +1,4 @@
-import { Pagination, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useState } from "react";
 
 // components
@@ -14,6 +14,7 @@ import { Genre } from "@/types/enums.types";
 
 // icons
 import { AppsOutlined } from "@mui/icons-material";
+import ResponsivePagination from "@/components/common/ResponsivePagination";
 
 const AllAnimePage: React.FC = () => {
   const [year, setYear] = useState<string>("all");
@@ -28,13 +29,11 @@ const AllAnimePage: React.FC = () => {
     <Stack sx={{ gap: 2.5, alignItems: "center" }}>
       <SectionBlockHead
         title="All Anime"
-        icon={AppsOutlined} 
-        additionalContent={
-          <Filters year={year} genre={genre} setYear={setYear} setGenre={setGenre} />
-        }
+        icon={AppsOutlined}
+        additionalContent={<Filters year={year} genre={genre} setYear={setYear} setGenre={setGenre} />}
       />
       <MovieList isLoading={isLoading} movies={movies} />
-      {pages > 1 && <Pagination page={page} onChange={(_, val) => setPage(val)} count={pages} />}
+      {pages > 1 && <ResponsivePagination page={page} onChange={(_, val) => setPage(val)} count={pages} />}
     </Stack>
   );
 };

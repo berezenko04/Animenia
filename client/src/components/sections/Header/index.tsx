@@ -81,7 +81,7 @@ const Header: React.FC = () => {
           <Stack sx={{ flexDirection: "row", gap: 1 }}>
             <ThemeSwitchButton />
             <CustomLink
-              to={isAuth ? "profile" : "/login"}
+              to={isAuth ? "/profile" : "/login"}
               sx={{
                 backgroundColor: "background.default",
                 width: 40,

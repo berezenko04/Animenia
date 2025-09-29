@@ -1,8 +1,9 @@
-import { Grid, Pagination, Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { useRef } from "react";
 
 // components
 import SectionBlockHead, { type SectionBlockHeadProps } from "../SectionBlockHead";
+import ResponsivePagination from "../ResponsivePagination";
 import MovieCardSkeleton from "@/components/ui/loaders/skeletons/MovieCardSkeleton";
 import MoviesSwiper from "@/components/movies/Swiper";
 import MovieCard from "@/components/movies/Card";
@@ -60,7 +61,7 @@ const SectionBlock: React.FC<SectionBlockProps> = ({
         </Grid>
       )}
       {!isSwipe && page !== undefined && setPage && total !== undefined && pages > 1 && (
-        <Pagination page={page} onChange={(_, val) => setPage(val)} count={pages} />
+        <ResponsivePagination page={page} onChange={(_, val) => setPage(val)} count={pages} />
       )}
     </Stack>
   );
