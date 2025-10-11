@@ -27,14 +27,6 @@
 
 ---
 
-## 🚀 Tech Stack
-
-**Frontend:** React 18 + TypeScript + Material-UI + React Query + Redux Toolkit  
-**Backend:** NestJS + Prisma + PostgreSQL + JWT  
-**Tools:** Vite, React Router, React Hook Form  
-
----
-
 ## 🎨 Features
 
 - **Modern Design** – Beautiful and responsive interface  
