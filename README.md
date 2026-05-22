@@ -1,7 +1,7 @@
 # 🎬 Animenia
 
 <a href="https://animenia.xyz" target="_blank">
-<img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/4e4137141816895.625b357cb954b.png" alt="Animenia Banner" width="1400" style="border-radius: 10px"/>
+<img src="https://i.ibb.co/YT3qyM7v/a44f31141816895-69f3ef579f7a0.png" alt="Animenia Banner" width="1400" style="border-radius: 10px"/>
 </a>
 
 > Modern platform for watching and discussing anime movies
